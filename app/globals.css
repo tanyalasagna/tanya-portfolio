@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
+/* === Dreamer TM — place font files in /public/fonts/ === */
+@font-face {
+  font-family: 'Dreamer TM';
+  src: url('/fonts/DreamerTM-Regular.woff2') format('woff2'),
+       url('/fonts/DreamerTM-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Dreamer TM';
+  src: url('/fonts/DreamerTM-Bold.woff2') format('woff2'),
+       url('/fonts/DreamerTM-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* === Theme tokens (paper = default) === */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #F5F0EB;
+  --text: #1A1A1A;
+  --text-muted: #7A7470;
+  --accent: #BF3325;
+  --divider: #D8D0C6;
+  --bg-hover: rgba(0, 0, 0, 0.04);
 }
 
+[data-theme="light"] {
+  --bg: #FFFFFF;
+  --text: #1A1A1A;
+  --text-muted: #727272;
+  --accent: #BF3325;
+  --divider: #E2DDD8;
+  --bg-hover: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] {
+  --bg: #111111;
+  --text: #F0EDE8;
+  --text-muted: #9A9590;
+  --accent: #E07060;
+  --divider: #2C2C2C;
+  --bg-hover: rgba(255, 255, 255, 0.06);
+}
+
+/* === Tailwind theme tokens === */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-dm-mono);
+  --font-dreamer: 'Dreamer TM', serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* === Base === */
+html {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-dm-sans, 'DM Sans', sans-serif);
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+* {
+  transition: border-color 0.35s ease;
 }
