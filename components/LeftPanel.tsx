@@ -29,7 +29,7 @@ export default function LeftPanel() {
       <Link href="/">
         <h1
           className="leading-none"
-          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '48px', marginBottom: '20px' }}
+          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss01"' : '"ss02"', fontSize: '56px', marginBottom: '20px', }}
           onMouseEnter={() => setNameHovered(true)}
           onMouseLeave={() => setNameHovered(false)}
         >
@@ -38,11 +38,11 @@ export default function LeftPanel() {
       </Link>
 
       {/* Bio */}
-      <p className="leading-relaxed mb-3" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
+      <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
         Hello! I&rsquo;m a designer, rooted in content strategy. I consider myself a creative
         generalist, having moved between content and design roles, and translating across disciplines.
       </p>
-      <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '16px' }}>
+      <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '16px' }}>
         Currently designing at daily journals, and previously in miscellaneous content and design
         roles at Toss the Coin, Purdue UX Studios and more.
       </p>
@@ -84,12 +84,15 @@ export default function LeftPanel() {
         <LiveClock />
         <div className="flex items-center">
           {themes.map((t) => (
-            <button
+            <motion.button
               key={t.value}
               onClick={() => setTheme(t.value)}
               aria-label={t.label}
-              className="transition-opacity hover:opacity-70 border cursor-pointer"
-              style={{ opacity: theme === t.value ? 1 : 0.35, borderColor: 'var(--divider)', padding: '4px' }}
+              className="border cursor-pointer"
+              style={{ opacity: theme === t.value ? 1 : 0.35, borderColor: 'var(--divider)', padding: '4px', transition: 'opacity 200ms' }}
+              whileHover={{ y: -2, boxShadow: '0 4px 10px rgba(0,0,0,0.18), 0 1px 3px rgba(0,0,0,0.1)' }}
+              whileTap={{ y: 1, boxShadow: 'none' }}
+              transition={{ type: 'spring', stiffness: 400, damping: 22 }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -99,7 +102,7 @@ export default function LeftPanel() {
                 height={28}
                 style={{ filter: 'var(--icon-filter)' }}
               />
-            </button>
+            </motion.button>
           ))}
         </div>
       </div>

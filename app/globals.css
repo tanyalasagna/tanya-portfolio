@@ -12,31 +12,34 @@
 /* === Theme tokens (paper = default) === */
 :root {
   --bg: #F5F0EB;
+  --sidebar-bg: #F2EAD8;
   --text: #1A1A1A;
   --text-muted: #3D3835;
   --accent: #3D3835;
-  --divider: #8A7E74;
+  --divider: #1A1A1A;
   --bg-hover: rgba(0, 0, 0, 0.04);
   --icon-filter: none;
 }
 
 [data-theme="light"] {
-  --bg: #FBF6E9;
+  --bg: #F4E8CA;
+  --sidebar-bg: #F2EAD8;
   --text: #1A1A1A;
   --text-muted: #4A4A4A;
   --accent: #3D3835;
-  --divider: #B8B0A8;
+  --divider: #1A1A1A;
   --bg-hover: #F5F0E4;
   --icon-filter: none;
 }
 
 [data-theme="dark"] {
-  --bg: #1C1C1C;
+  --bg: #060F22;
+  --sidebar-bg: #060F22;
   --text: #F0EDE8;
   --text-muted: #C0BDBA;
-  --accent: #E07060;
-  --divider: #444444;
-  --bg-hover: #141414;
+  --accent: #F0EDE8;
+  --divider: #F0EDE8;
+  --bg-hover: #050A14;
   --icon-filter: invert(1);
 }
 

@@ -6,7 +6,7 @@ const linkStyle = {
   fontSize: '18px',
   fontFamily: 'var(--font-dm-sans)',
   fontStyle: 'italic' as const,
-  fontWeight: 700,
+  fontWeight: 800,
 };
 
 export default function ContactLinks() {
@@ -23,13 +23,13 @@ export default function ContactLinks() {
     <>
       <button
         onClick={handleCopy}
-        className="underline underline-offset-2 cursor-pointer hover:no-underline"
+        className={`underline-offset-2 cursor-pointer ${copied ? '' : 'underline hover:no-underline'}`}
         style={linkStyle}
       >
-        {copied ? 'Copied!' : 'Copy email'}
+        {copied ? 'Copied. Say Hi!' : 'Copy Email'}
       </button>
       <a
-        href="https://linkedin.com/in/tanyasingh-03"
+        href="https://www.linkedin.com/in/tanya-singh2735/"
         target="_blank"
         rel="noopener noreferrer"
         className="underline underline-offset-2 hover:no-underline"

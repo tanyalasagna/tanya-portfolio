@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import LeftPanel from '@/components/LeftPanel';
 import MobileNav from '@/components/MobileNav';
 import PageTransition from '@/components/PageTransition';
+import ThemeTransition from '@/components/ThemeTransition';
 
 const cormorantSerif = Cormorant_Garamond({
   variable: '--font-dm-sans',
@@ -35,6 +36,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="h-full antialiased">
         <ThemeProvider>
+          {/* Canvas background transition — sits at z-index 0, behind all content */}
+          <ThemeTransition />
+
           {/* === Mobile nav (header + overlay menu) === */}
           <MobileNav />
 
@@ -52,12 +56,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
               {/* Mobile-only bio — always visible above page content */}
               <div className="md:hidden pt-8 pb-2" style={{ paddingLeft: '24px', paddingRight: '24px' }}>
-                <p className="leading-relaxed mb-3" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
+                <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
                   Hello! I&rsquo;m a designer, rooted in content strategy. I consider myself a creative
                   generalist, having moved between content and design roles, and translating across
                   disciplines.
                 </p>
-                <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
+                <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
                   Currently designing at daily journals, and previously in miscellaneous content and
                   design roles at Toss the Coin, Purdue UX Studios and more.
                 </p>

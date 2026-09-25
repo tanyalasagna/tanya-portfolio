@@ -75,7 +75,7 @@ export default function CaseStudyCard({ project }: { project: Project }) {
         </div>
 
         <div className="flex-shrink-0 @[900px]:p-0 py-5 pr-5" style={{ width: '55%', alignSelf: 'flex-start' }}>
-          {thumbnailWrapper({ width: '100%', aspectRatio: '4/3', background: 'var(--divider)', borderLeft: '1px solid var(--divider)' })}
+          {thumbnailWrapper({ width: '100%', aspectRatio: '4/3', background: 'var(--divider)', border: '0.25px solid color-mix(in srgb, var(--text) 18%, transparent)' })}
         </div>
       </div>
 
