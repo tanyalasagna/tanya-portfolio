@@ -5,106 +5,58 @@ import { motion, AnimatePresence } from 'framer-motion';
 import LiveClock from './LiveClock';
 import { useTheme, type Theme } from './ThemeProvider';
 import CaseStudyNav from './CaseStudyNav';
+import ContactLinks from './ContactLinks';
+import NavLinks from './NavLinks';
 import { useState } from 'react';
 
-const navItems = [
-  { label: 'Work', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Resume', href: '/resume' },
-] as const;
-
-const themes: Theme[] = ['paper', 'light', 'dark'];
-
-function getActiveHref(pathname: string) {
-  if (pathname === '/' || pathname.startsWith('/work')) return '/';
-  if (pathname.startsWith('/about')) return '/about';
-  if (pathname.startsWith('/resume')) return '/resume';
-  return '/';
-}
+const themes: { value: Theme; icon: string; label: string }[] = [
+  { value: 'light', icon: '/images/sun.svg', label: 'Light mode' },
+  { value: 'dark',  icon: '/images/moon.svg', label: 'Dark mode' },
+];
 
 export default function LeftPanel() {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
-  const [copied, setCopied] = useState(false);
-  const activeHref = getActiveHref(pathname);
+  const [nameHovered, setNameHovered] = useState(false);
   const isCaseStudy = pathname.startsWith('/work/');
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText('tanyabsingh25@gmail.com').then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
-    });
-  };
 
   return (
     <aside
-      className="fixed left-0 top-0 h-full w-[280px] flex flex-col px-8 py-9 border-r z-50"
-      style={{ borderColor: 'var(--divider)', background: 'var(--bg)', containerType: 'inline-size' }}
+      className="fixed left-0 top-0 h-full w-[340px] flex flex-col border-r z-50"
+      style={{ padding: '48px', borderColor: 'var(--divider)', background: 'var(--bg)', containerType: 'inline-size' }}
     >
       {/* Name */}
-      <h1 className="mb-5 leading-none" style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', fontSize: '48px' }}>
-        Tanya Singh
-      </h1>
+      <Link href="/">
+        <h1
+          className="leading-none"
+          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '48px', marginBottom: '20px' }}
+          onMouseEnter={() => setNameHovered(true)}
+          onMouseLeave={() => setNameHovered(false)}
+        >
+          Tanya Singh
+        </h1>
+      </Link>
 
       {/* Bio */}
-      <p className="leading-relaxed mb-3" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
+      <p className="leading-relaxed mb-3" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
         Hello! I&rsquo;m a designer, rooted in content strategy. I consider myself a creative
         generalist, having moved between content and design roles, and translating across disciplines.
       </p>
-      <p className="leading-relaxed mb-5" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
+      <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '16px' }}>
         Currently designing at daily journals, and previously in miscellaneous content and design
         roles at Toss the Coin, Purdue UX Studios and more.
       </p>
 
       {/* Contact */}
-      <div className="flex gap-5 mb-6">
-        <button
-          onClick={handleCopyEmail}
-          className="font-mono underline underline-offset-2 cursor-pointer transition-opacity hover:opacity-70"
-          style={{ color: 'var(--accent)', fontSize: '16px' }}
-        >
-          {copied ? 'Copied!' : 'Copy email'}
-        </button>
-        <a
-          href="https://linkedin.com/in/tanyasingh-03"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-mono underline underline-offset-2 transition-opacity hover:opacity-70"
-          style={{ color: 'var(--accent)', fontSize: '16px' }}
-        >
-          LinkedIn
-        </a>
+      <div className="flex gap-5" style={{ marginBottom: '32px' }}>
+        <ContactLinks />
       </div>
 
-      <div className="h-px mb-6" style={{ background: 'var(--divider)' }} />
+      <div className="h-px" style={{ background: 'var(--divider)', marginBottom: '32px' }} />
 
       {/* Main nav */}
       <nav className="flex flex-col gap-3 mb-2">
-        {navItems.map((item) => {
-          const isActive = activeHref === item.href;
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="flex items-center gap-1.5 font-mono transition-opacity"
-              style={{
-                color: 'var(--text)',
-                opacity: isActive ? 1 : 0.45,
-                fontSize: '16px',
-              }}
-            >
-              {item.label}
-              {isActive && (
-                <motion.span
-                  layoutId="nav-star"
-                  transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                >
-                  ☆
-                </motion.span>
-              )}
-            </Link>
-          );
-        })}
+        <NavLinks starLayoutId="nav-star" />
       </nav>
 
       {/* Case study sub-nav */}
@@ -127,24 +79,30 @@ export default function LeftPanel() {
       {/* Spacer */}
       <div className="flex-1" />
 
-      {/* Theme dots */}
-      <div className="flex items-center gap-3 mb-5">
-        {themes.map((t) => (
-          <button
-            key={t}
-            onClick={() => setTheme(t)}
-            aria-label={`${t} theme`}
-            className="w-3.5 h-3.5 rounded-full border-[1.5px] transition-all hover:scale-125"
-            style={{
-              borderColor: 'var(--text)',
-              background: theme === t ? 'var(--text)' : 'transparent',
-            }}
-          />
-        ))}
+      {/* Theme icons + clock */}
+      <div className="flex items-center mb-5" style={{ gap: '32px' }}>
+        <LiveClock />
+        <div className="flex items-center">
+          {themes.map((t) => (
+            <button
+              key={t.value}
+              onClick={() => setTheme(t.value)}
+              aria-label={t.label}
+              className="transition-opacity hover:opacity-70 border cursor-pointer"
+              style={{ opacity: theme === t.value ? 1 : 0.35, borderColor: 'var(--divider)', padding: '4px' }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={t.icon}
+                alt={t.label}
+                width={28}
+                height={28}
+                style={{ filter: 'var(--icon-filter)' }}
+              />
+            </button>
+          ))}
+        </div>
       </div>
-
-      {/* Clock */}
-      <LiveClock />
     </aside>
   );
 }

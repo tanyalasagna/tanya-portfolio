@@ -14,11 +14,10 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: 'sift',
-    title: 'Sift',
-    tags: ['Product Design', 'UX Research'],
-    description:
-      'A tool for managing and surfacing relevant information across knowledge bases — reducing context switching and enabling end-to-end domain setup.',
-    thumbnail: '',
+    title: 'Designing a Pause Before Checkout for Online Shoppers (0→1)',
+    tags: ['Graduate Capstone, 2026'],
+    description: 'Chrome Extension \\ Behavior Design \\ E-commerce \\ Claude Code + Figma MCP',
+    thumbnail: '/images/Coded Portfolio Thumbnails (1).mp4',
     role: ['Product Designer', 'UX Researcher'],
     tools: ['Figma', 'Figma Make', 'Claude', 'Cursor', 'Notebook LM'],
     duration: '4 weeks',
@@ -30,11 +29,10 @@ export const projects: Project[] = [
   },
   {
     slug: 'capstone',
-    title: 'Capstone',
-    tags: ['Product Design', 'Content Strategy'],
-    description:
-      'An end-to-end redesign exploring content hierarchy and navigation patterns across a complex information architecture.',
-    thumbnail: '',
+    title: 'Rethinking Touchscreen UX for Large Public Kiosks at Frogslayer',
+    tags: ['Sponsored Project, 2025'],
+    description: 'Design Research \\ Rapid Prototyping \\ Usability Testing',
+    thumbnail: '/images/Coded Portfolio Thumbnails (1).png',
     role: ['Product Designer'],
     tools: ['Figma', 'Miro', 'Maze'],
     duration: '8 weeks',
@@ -43,5 +41,17 @@ export const projects: Project[] = [
       'Improved information architecture, reducing task completion time by 30%.',
       'Established a reusable design system used across 4 product areas.',
     ],
+  },
+  {
+    slug: 'project-three',
+    title: 'Building a One Stop Marketplace for Fiber Artists (0→1)',
+    tags: ['Personal Project, 2024'],
+    description: 'Web Platform \\ Marketplace \\ Craft Community\nParticipatory Design',
+    thumbnail: '/images/Coded Portfolio Thumbnails 640x480.mp4',
+    role: [],
+    tools: [],
+    duration: '',
+    team: '',
+    impact: [],
   },
 ];

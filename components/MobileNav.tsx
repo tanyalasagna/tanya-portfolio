@@ -1,33 +1,23 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme, type Theme } from './ThemeProvider';
 import LiveClock from './LiveClock';
-import { useEffect } from 'react';
+import ContactLinks from './ContactLinks';
+import NavLinks from './NavLinks';
 
-const navItems = [
-  { label: 'Work', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Resume', href: '/resume' },
-] as const;
-
-const themes: Theme[] = ['paper', 'light', 'dark'];
-
-function getActiveHref(pathname: string) {
-  if (pathname === '/' || pathname.startsWith('/work')) return '/';
-  if (pathname.startsWith('/about')) return '/about';
-  if (pathname.startsWith('/resume')) return '/resume';
-  return '/';
-}
+const themes: { value: Theme; icon: string; label: string }[] = [
+  { value: 'light', icon: '/images/sun.svg', label: 'Light mode' },
+  { value: 'dark',  icon: '/images/moon.svg', label: 'Dark mode' },
+];
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
+  const [nameHovered, setNameHovered] = useState(false);
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
-  const [copied, setCopied] = useState(false);
-  const activeHref = getActiveHref(pathname);
 
   // Close menu on route change
   useEffect(() => { setIsOpen(false); }, [pathname]);
@@ -38,13 +28,6 @@ export default function MobileNav() {
     return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText('tanyabsingh25@gmail.com').then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
-    });
-  };
-
   return (
     <>
       {/* Top bar */}
@@ -52,16 +35,32 @@ export default function MobileNav() {
         className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 h-14 border-b"
         style={{ background: 'var(--bg)', borderColor: 'var(--divider)' }}
       >
-        <Link href="/" className="text-sm" style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"' }}>
+        <Link
+          href="/"
+          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '32px' }}
+          onMouseEnter={() => setNameHovered(true)}
+          onMouseLeave={() => setNameHovered(false)}
+        >
           Tanya Singh
         </Link>
         <button
           onClick={() => setIsOpen((v) => !v)}
-          className="font-mono text-xl leading-none"
-          style={{ color: 'var(--text)' }}
+          className="flex flex-col justify-center items-center gap-[5px]"
+          style={{ color: 'var(--text)', width: '28px', height: '28px' }}
           aria-label="Toggle menu"
         >
-          {isOpen ? '×' : '☰'}
+          {isOpen ? (
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <line x1="3" y1="3" x2="17" y2="17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="17" y1="3" x2="3" y2="17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          ) : (
+            <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
+              <line x1="0" y1="1" x2="22" y2="1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="0" y1="8" x2="22" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              <line x1="0" y1="15" x2="22" y2="15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          )}
         </button>
       </div>
 
@@ -78,60 +77,38 @@ export default function MobileNav() {
           >
             {/* Contact */}
             <div className="flex gap-6 mb-8">
-              <button
-                onClick={handleCopy}
-                className="font-mono underline underline-offset-2"
-                style={{ color: 'var(--accent)', fontSize: '16px' }}
-              >
-                {copied ? 'Copied!' : 'Copy email'}
-              </button>
-              <a
-                href="https://linkedin.com/in/tanyasingh-03"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-mono underline underline-offset-2"
-                style={{ color: 'var(--accent)', fontSize: '16px' }}
-              >
-                LinkedIn
-              </a>
+              <ContactLinks />
             </div>
 
             <div className="h-px mb-8" style={{ background: 'var(--divider)' }} />
 
             {/* Nav */}
             <nav className="flex flex-col gap-5 mb-8">
-              {navItems.map((item) => {
-                const isActive = activeHref === item.href;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="flex items-center gap-2 font-mono"
-                    style={{ color: 'var(--text)', opacity: isActive ? 1 : 0.45, fontSize: '16px' }}
-                  >
-                    {item.label}
-                    {isActive && <span>☆</span>}
-                  </Link>
-                );
-              })}
+              <NavLinks starLayoutId="mobile-nav-star" />
             </nav>
 
             {/* Spacer */}
             <div className="flex-1" />
 
-            {/* Theme dots */}
-            <div className="flex items-center gap-4 mb-6">
+            {/* Theme icons */}
+            <div className="flex items-center mb-6">
               {themes.map((t) => (
                 <button
-                  key={t}
-                  onClick={() => setTheme(t)}
-                  aria-label={`${t} theme`}
-                  className="w-4 h-4 rounded-full border-[1.5px] transition-all"
-                  style={{
-                    borderColor: 'var(--text)',
-                    background: theme === t ? 'var(--text)' : 'transparent',
-                  }}
-                />
+                  key={t.value}
+                  onClick={() => setTheme(t.value)}
+                  aria-label={t.label}
+                  className="transition-opacity hover:opacity-70 border cursor-pointer"
+                  style={{ opacity: theme === t.value ? 1 : 0.35, borderColor: 'var(--divider)', padding: '4px' }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={t.icon}
+                    alt={t.label}
+                    width={28}
+                    height={28}
+                    style={{ filter: 'var(--icon-filter)' }}
+                  />
+                </button>
               ))}
             </div>
 

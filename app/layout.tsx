@@ -47,17 +47,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             {/* Right / main content */}
             <main
-              className="flex-1 h-full overflow-y-auto md:ml-[280px] pt-14 md:pt-0"
+              className="flex-1 h-full overflow-y-auto md:ml-[340px] pt-14 md:pt-0"
               id="main-scroll"
             >
               {/* Mobile-only bio — always visible above page content */}
-              <div className="md:hidden px-6 pt-8 pb-2">
-                <p className="leading-relaxed mb-3" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
+              <div className="md:hidden pt-8 pb-2" style={{ paddingLeft: '24px', paddingRight: '24px' }}>
+                <p className="leading-relaxed mb-3" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
                   Hello! I&rsquo;m a designer, rooted in content strategy. I consider myself a creative
                   generalist, having moved between content and design roles, and translating across
                   disciplines.
                 </p>
-                <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
+                <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
                   Currently designing at daily journals, and previously in miscellaneous content and
                   design roles at Toss the Coin, Purdue UX Studios and more.
                 </p>

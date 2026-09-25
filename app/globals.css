@@ -15,26 +15,29 @@
   --text: #1A1A1A;
   --text-muted: #3D3835;
   --accent: #3D3835;
-  --divider: #A89E94;
+  --divider: #8A7E74;
   --bg-hover: rgba(0, 0, 0, 0.04);
+  --icon-filter: none;
 }
 
 [data-theme="light"] {
-  --bg: #FFFFFF;
+  --bg: #FBF6E9;
   --text: #1A1A1A;
-  --text-muted: #727272;
+  --text-muted: #4A4A4A;
   --accent: #3D3835;
-  --divider: #E2DDD8;
-  --bg-hover: rgba(0, 0, 0, 0.04);
+  --divider: #B8B0A8;
+  --bg-hover: #F5F0E4;
+  --icon-filter: none;
 }
 
 [data-theme="dark"] {
-  --bg: #111111;
+  --bg: #1C1C1C;
   --text: #F0EDE8;
-  --text-muted: #9A9590;
+  --text-muted: #C0BDBA;
   --accent: #E07060;
-  --divider: #2C2C2C;
-  --bg-hover: rgba(255, 255, 255, 0.06);
+  --divider: #444444;
+  --bg-hover: #141414;
+  --icon-filter: invert(1);
 }
 
 /* === Tailwind theme tokens === */

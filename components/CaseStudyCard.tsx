@@ -1,81 +1,105 @@
+'use client';
 import Link from 'next/link';
+import { useState } from 'react';
 import type { Project } from '@/data/projects';
 
 export default function CaseStudyCard({ project }: { project: Project }) {
-  const thumbnail = project.thumbnail ? (
-    /* eslint-disable-next-line @next/next/no-img-element */
-    <img src={project.thumbnail} alt={project.title} className="w-full h-full object-cover" />
+  const [hovered, setHovered] = useState(false);
+  const isVideo = /\.(mp4|webm|mov)$/i.test(project.thumbnail ?? '');
+  const href = `/work/${project.slug}`;
+
+  const mediaStyle: React.CSSProperties = {
+    transition: 'transform 3000ms cubic-bezier(0.19, 1, 0.22, 1), opacity 600ms ease',
+    transform: hovered ? 'scale(1.025)' : 'scale(1)',
+    opacity: hovered ? 0.75 : 1,
+  };
+
+  const thumbnailMedia = project.thumbnail ? (
+    isVideo ? (
+      <video src={project.thumbnail} autoPlay muted loop playsInline className="w-full h-full object-cover origin-center" style={mediaStyle} />
+    ) : (
+      /* eslint-disable-next-line @next/next/no-img-element */
+      <img src={project.thumbnail} alt={project.title} className="w-full h-full object-cover origin-center" style={mediaStyle} />
+    )
   ) : (
-    <div
-      className="w-full h-full flex items-center justify-center font-mono text-xs"
-      style={{ color: 'var(--text-muted)' }}
-    >
+    <div className="w-full h-full flex items-center justify-center font-mono text-xs" style={{ color: 'var(--text-muted)' }}>
       project thumbnail
     </div>
   );
 
-  return (
-    <Link href={`/work/${project.slug}`} className="group block">
-      <div
-        className="overflow-hidden border transition-opacity group-hover:opacity-80"
-        style={{ borderColor: 'var(--divider)', background: 'var(--bg-hover)' }}
-      >
-        {/* Desktop: 60% text | 40% thumbnail */}
-        <div className="hidden md:flex">
-          <div className="flex flex-col justify-center px-10 py-10" style={{ width: '60%' }}>
-            <div className="flex flex-wrap gap-x-3 gap-y-1 mb-3">
-              {project.tags.map((tag) => (
-                <span key={tag} className="font-mono" style={{ color: 'var(--accent)', fontSize: '18px' }}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <h2
-              className="mb-3 leading-tight"
-              style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontWeight: 600, fontSize: '34px' }}
-            >
-              {project.title}
-            </h2>
-            <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
-              {project.description}
-            </p>
-          </div>
-          <div
-            className="flex-shrink-0"
-            style={{ width: '40%', aspectRatio: '4/3', background: 'var(--divider)' }}
-          >
-            {thumbnail}
-          </div>
-        </div>
+  const overlayStyle: React.CSSProperties = {
+    transition: 'opacity 1800ms cubic-bezier(0.19, 1, 0.22, 1)',
+    opacity: hovered ? 1 : 0,
+  };
 
-        {/* Tablet / Mobile: stacked — content 70%, thumbnail strip 30% */}
-        <div className="md:hidden flex flex-col" style={{ minHeight: '340px' }}>
-          <div className="px-6 py-7" style={{ flex: 7 }}>
-            <div className="flex flex-wrap gap-x-3 gap-y-1 mb-3">
-              {project.tags.map((tag) => (
-                <span key={tag} className="font-mono" style={{ color: 'var(--accent)', fontSize: '18px' }}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <h2
-              className="mb-3 leading-tight"
-              style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontWeight: 600, fontSize: '34px' }}
-            >
-              {project.title}
-            </h2>
-            <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
-              {project.description}
-            </p>
-          </div>
-          <div
-            className="w-full flex-shrink-0"
-            style={{ flex: 3, minHeight: '120px', background: 'var(--divider)' }}
-          >
-            {thumbnail}
-          </div>
-        </div>
+  const thumbnailWrapper = (extraStyle: React.CSSProperties) => (
+    <Link href={href} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ color: 'inherit' }}>
+      <div style={{ position: 'relative', overflow: 'hidden', cursor: 'pointer', ...extraStyle }}>
+        {thumbnailMedia}
+        <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: '80%', background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 50%, transparent 100%)', ...overlayStyle }} />
+        <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: '40%', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', maskImage: 'linear-gradient(to top, black 0%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to top, black 0%, transparent 100%)', ...overlayStyle }} />
       </div>
     </Link>
+  );
+
+  const titleStyle: React.CSSProperties = {
+    color: 'var(--text)',
+    fontFamily: "'Dreamer TM', serif",
+    fontFeatureSettings: '"ss01"',
+    letterSpacing: '0.05em',
+    opacity: hovered ? 0.6 : 1,
+    transition: 'opacity 500ms ease',
+    cursor: 'pointer',
+  };
+
+  return (
+    <div className="@container">
+      {/* Horizontal layout */}
+      <div className="hidden @[700px]:flex items-stretch">
+        <div className="flex flex-col justify-start pr-8" style={{ width: '45%', paddingLeft: '37px' }}>
+          <div className="flex flex-wrap gap-x-3 gap-y-1 mb-1.5">
+            {project.tags.map((tag) => (
+              <span key={tag} className="font-mono" style={{ color: 'var(--accent)', fontSize: '18px' }}>
+                {tag}
+              </span>
+            ))}
+          </div>
+          <Link href={href} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+            <h2 className="leading-tight" style={{ ...titleStyle, fontSize: '32px', marginBottom: '12px' }}>
+              {project.title}
+            </h2>
+          </Link>
+          <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '18px', whiteSpace: 'pre-line' }}>
+            {project.description}
+          </p>
+        </div>
+
+        <div className="flex-shrink-0 @[900px]:p-0 py-5 pr-5" style={{ width: '55%', alignSelf: 'flex-start' }}>
+          {thumbnailWrapper({ width: '100%', aspectRatio: '4/3', background: 'var(--divider)', borderLeft: '1px solid var(--divider)' })}
+        </div>
+      </div>
+
+      {/* Vertical layout */}
+      <div className="flex flex-col @[700px]:hidden">
+        {thumbnailWrapper({ width: 'calc(100% + 48px)', aspectRatio: '4/3', background: 'var(--divider)', marginLeft: '-24px', marginRight: '-24px' })}
+        <div className="py-7" style={{ marginLeft: '-24px' }}>
+          <div className="flex flex-wrap gap-x-3 gap-y-1 mb-1.5">
+            {project.tags.map((tag) => (
+              <span key={tag} className="font-mono" style={{ color: 'var(--accent)', fontSize: '16px' }}>
+                {tag}
+              </span>
+            ))}
+          </div>
+          <Link href={href} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+            <h2 className="leading-tight" style={{ ...titleStyle, fontSize: '24px', marginBottom: '12px' }}>
+              {project.title}
+            </h2>
+          </Link>
+          <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '16px', whiteSpace: 'pre-line' }}>
+            {project.description}
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
