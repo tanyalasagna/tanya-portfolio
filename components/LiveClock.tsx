@@ -20,8 +20,8 @@ export default function LiveClock() {
   }, []);
 
   return (
-    <div className="font-mono text-[10px] leading-relaxed tracking-wide" style={{ color: 'var(--text-muted)' }}>
-      <div>CHICAGO, IL.</div>
+    <div className="font-mono leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
+      <div>Chicago, IL.</div>
       <div suppressHydrationWarning>{time}</div>
     </div>
   );

@@ -3,17 +3,8 @@
 /* === Dreamer TM — place font files in /public/fonts/ === */
 @font-face {
   font-family: 'Dreamer TM';
-  src: url('/fonts/DreamerTM-Regular.woff2') format('woff2'),
-       url('/fonts/DreamerTM-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Dreamer TM';
-  src: url('/fonts/DreamerTM-Bold.woff2') format('woff2'),
-       url('/fonts/DreamerTM-Bold.woff') format('woff');
-  font-weight: 700;
+  src: url('/fonts/Dreamer TM.woff2') format('woff2');
+  font-weight: 400 700;
   font-style: normal;
   font-display: swap;
 }
@@ -22,9 +13,9 @@
 :root {
   --bg: #F5F0EB;
   --text: #1A1A1A;
-  --text-muted: #7A7470;
-  --accent: #BF3325;
-  --divider: #D8D0C6;
+  --text-muted: #3D3835;
+  --accent: #3D3835;
+  --divider: #A89E94;
   --bg-hover: rgba(0, 0, 0, 0.04);
 }
 
@@ -32,7 +23,7 @@
   --bg: #FFFFFF;
   --text: #1A1A1A;
   --text-muted: #727272;
-  --accent: #BF3325;
+  --accent: #3D3835;
   --divider: #E2DDD8;
   --bg-hover: rgba(0, 0, 0, 0.04);
 }
@@ -53,6 +44,12 @@
   --font-dreamer: 'Dreamer TM', serif;
 }
 
+@utility font-mono {
+  font-family: var(--font-dm-mono);
+  font-style: italic;
+  font-weight: 400;
+}
+
 /* === Base === */
 html {
   height: 100%;
@@ -62,7 +59,8 @@ body {
   height: 100%;
   background-color: var(--bg);
   color: var(--text);
-  font-family: var(--font-dm-sans, 'DM Sans', sans-serif);
+  font-family: var(--font-dm-sans, 'Cormorant Garamond', serif);
+  font-weight: 600;
   transition: background-color 0.35s ease, color 0.35s ease;
 }
 

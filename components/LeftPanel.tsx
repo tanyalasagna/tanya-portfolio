@@ -8,9 +8,9 @@ import CaseStudyNav from './CaseStudyNav';
 import { useState } from 'react';
 
 const navItems = [
-  { label: 'WORK', href: '/' },
-  { label: 'ABOUT', href: '/about' },
-  { label: 'RESUME', href: '/resume' },
+  { label: 'Work', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Resume', href: '/resume' },
 ] as const;
 
 const themes: Theme[] = ['paper', 'light', 'dark'];
@@ -39,19 +39,19 @@ export default function LeftPanel() {
   return (
     <aside
       className="fixed left-0 top-0 h-full w-[280px] flex flex-col px-8 py-9 border-r z-50"
-      style={{ borderColor: 'var(--divider)', background: 'var(--bg)' }}
+      style={{ borderColor: 'var(--divider)', background: 'var(--bg)', containerType: 'inline-size' }}
     >
       {/* Name */}
-      <h1 className="text-2xl font-bold mb-5 leading-none" style={{ color: 'var(--text)' }}>
+      <h1 className="mb-5 leading-none" style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', fontSize: '48px' }}>
         Tanya Singh
       </h1>
 
       {/* Bio */}
-      <p className="text-[13px] leading-relaxed mb-3" style={{ color: 'var(--text-muted)' }}>
+      <p className="leading-relaxed mb-3" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
         Hello! I&rsquo;m a designer, rooted in content strategy. I consider myself a creative
         generalist, having moved between content and design roles, and translating across disciplines.
       </p>
-      <p className="text-[13px] leading-relaxed mb-5" style={{ color: 'var(--text-muted)' }}>
+      <p className="leading-relaxed mb-5" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
         Currently designing at daily journals, and previously in miscellaneous content and design
         roles at Toss the Coin, Purdue UX Studios and more.
       </p>
@@ -60,8 +60,8 @@ export default function LeftPanel() {
       <div className="flex gap-5 mb-6">
         <button
           onClick={handleCopyEmail}
-          className="font-mono text-xs underline underline-offset-2 cursor-pointer transition-opacity hover:opacity-70"
-          style={{ color: 'var(--accent)' }}
+          className="font-mono underline underline-offset-2 cursor-pointer transition-opacity hover:opacity-70"
+          style={{ color: 'var(--accent)', fontSize: '16px' }}
         >
           {copied ? 'Copied!' : 'Copy email'}
         </button>
@@ -69,8 +69,8 @@ export default function LeftPanel() {
           href="https://linkedin.com/in/tanyasingh-03"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-mono text-xs underline underline-offset-2 transition-opacity hover:opacity-70"
-          style={{ color: 'var(--accent)' }}
+          className="font-mono underline underline-offset-2 transition-opacity hover:opacity-70"
+          style={{ color: 'var(--accent)', fontSize: '16px' }}
         >
           LinkedIn
         </a>
@@ -86,10 +86,11 @@ export default function LeftPanel() {
             <Link
               key={item.href}
               href={item.href}
-              className="flex items-center gap-1.5 font-mono text-xs tracking-widest transition-opacity"
+              className="flex items-center gap-1.5 font-mono transition-opacity"
               style={{
                 color: 'var(--text)',
                 opacity: isActive ? 1 : 0.45,
+                fontSize: '16px',
               }}
             >
               {item.label}

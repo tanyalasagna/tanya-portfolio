@@ -1,20 +1,23 @@
 import type { Metadata } from 'next';
-import { DM_Sans, DM_Mono } from 'next/font/google';
+import { Cormorant_Garamond } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import LeftPanel from '@/components/LeftPanel';
+import MobileNav from '@/components/MobileNav';
 import PageTransition from '@/components/PageTransition';
 
-const dmSans = DM_Sans({
+const cormorantSerif = Cormorant_Garamond({
   variable: '--font-dm-sans',
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
 });
 
-const dmMono = DM_Mono({
+const cormorantLight = Cormorant_Garamond({
   variable: '--font-dm-mono',
   subsets: ['latin'],
-  weight: ['400', '500'],
+  weight: ['300', '400'],
+  style: ['italic'],
 });
 
 export const metadata: Metadata = {
@@ -27,36 +30,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${dmMono.variable} h-full`}
+      className={`${cormorantSerif.variable} ${cormorantLight.variable} h-full`}
       suppressHydrationWarning
     >
       <body className="h-full antialiased">
         <ThemeProvider>
-          {/* === Mobile header === */}
-          <div
-            className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 border-b"
-            style={{ background: 'var(--bg)', borderColor: 'var(--divider)' }}
-          >
-            <span className="font-bold text-base" style={{ color: 'var(--text)' }}>
-              Tanya Singh
-            </span>
-            <nav className="flex gap-5">
-              {[
-                { label: 'WORK', href: '/' },
-                { label: 'ABOUT', href: '/about' },
-                { label: 'RESUME', href: '/resume' },
-              ].map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="font-mono text-[10px] tracking-widest transition-opacity hover:opacity-60"
-                  style={{ color: 'var(--text)' }}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
-          </div>
+          {/* === Mobile nav (header + overlay menu) === */}
+          <MobileNav />
 
           {/* === Desktop sidecar layout === */}
           <div className="flex h-full">
@@ -67,9 +47,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             {/* Right / main content */}
             <main
-              className="flex-1 h-full overflow-y-auto md:ml-[280px] pt-[60px] md:pt-0"
+              className="flex-1 h-full overflow-y-auto md:ml-[280px] pt-14 md:pt-0"
               id="main-scroll"
             >
+              {/* Mobile-only bio — always visible above page content */}
+              <div className="md:hidden px-6 pt-8 pb-2">
+                <p className="leading-relaxed mb-3" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
+                  Hello! I&rsquo;m a designer, rooted in content strategy. I consider myself a creative
+                  generalist, having moved between content and design roles, and translating across
+                  disciplines.
+                </p>
+                <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
+                  Currently designing at daily journals, and previously in miscellaneous content and
+                  design roles at Toss the Coin, Purdue UX Studios and more.
+                </p>
+              </div>
+
               <PageTransition>{children}</PageTransition>
             </main>
           </div>

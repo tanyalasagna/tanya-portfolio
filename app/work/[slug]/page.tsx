@@ -34,7 +34,7 @@ export default async function CaseStudyPage({ params }: Props) {
       </div>
 
       {/* Title */}
-      <h1 className="text-5xl font-bold mb-10 leading-tight" style={{ color: 'var(--text)' }}>
+      <h1 className="mb-10 leading-tight" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontWeight: 600, fontSize: '26px' }}>
         {project.title}
       </h1>
 
