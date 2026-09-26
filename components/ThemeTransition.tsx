@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { useTheme, type Theme } from './ThemeProvider';
 
 const THEME_BG: Record<Theme, string> = {
-  light: '#F4E8CA',
+  light: '#EEE9DF',
   dark: '#060F22',
 };
 

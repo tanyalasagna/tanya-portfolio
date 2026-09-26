@@ -68,11 +68,12 @@ export default function NavLinks({ starLayoutId = 'nav-star' }: { starLayoutId?:
               fontStyle: 'italic',
               fontWeight: 800,
               transition: 'opacity 150ms ease',
+              cursor: 'inherit',
             }}
             onMouseEnter={() => !isActive && setHoveredHref(item.href)}
             onMouseLeave={() => setHoveredHref(null)}
           >
-            {item.label}
+            <span style={{ cursor: "url('/cursors/pixel-pointer.png') 9 1, pointer" }}>{item.label}</span>
             {isActive ? (
               <StarIndicator layoutId={starLayoutId} />
             ) : (

@@ -34,7 +34,7 @@ export default function CaseStudyCard({ project }: { project: Project }) {
 
   const thumbnailWrapper = (extraStyle: React.CSSProperties) => (
     <Link href={href} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ color: 'inherit' }}>
-      <div style={{ position: 'relative', overflow: 'hidden', cursor: 'pointer', ...extraStyle }}>
+      <div style={{ position: 'relative', overflow: 'hidden', ...extraStyle }}>
         {thumbnailMedia}
         <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: '80%', background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 50%, transparent 100%)', ...overlayStyle }} />
         <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: '40%', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', maskImage: 'linear-gradient(to top, black 0%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to top, black 0%, transparent 100%)', ...overlayStyle }} />
@@ -49,7 +49,6 @@ export default function CaseStudyCard({ project }: { project: Project }) {
     letterSpacing: '0.05em',
     opacity: hovered ? 0.6 : 1,
     transition: 'opacity 500ms ease',
-    cursor: 'pointer',
   };
 
   return (

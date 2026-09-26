@@ -22,7 +22,7 @@
 }
 
 [data-theme="light"] {
-  --bg: #F4E8CA;
+  --bg: #EEE9DF;
   --sidebar-bg: #F2EAD8;
   --text: #1A1A1A;
   --text-muted: #4A4A4A;
@@ -36,7 +36,7 @@
   --bg: #060F22;
   --sidebar-bg: #060F22;
   --text: #F0EDE8;
-  --text-muted: #C0BDBA;
+  --text-muted: #D4D0CB;
   --accent: #F0EDE8;
   --divider: #F0EDE8;
   --bg-hover: #050A14;
@@ -55,6 +55,28 @@
   font-style: italic;
   font-weight: 400;
 }
+
+/* === Custom pixel cursors === */
+html {
+  cursor: url('/cursors/pixel-arrow.png') 2 1, auto !important;
+}
+
+html * {
+  cursor: inherit;
+}
+
+html a,
+html button,
+html [role="button"] {
+  cursor: url('/cursors/pixel-pointer.png') 9 1, pointer;
+}
+
+/* === Badge swipe-in animation === */
+@keyframes badge-swipe {
+  from { clip-path: inset(0 100% 0 0 round 4px); }
+  to   { clip-path: inset(0 0%   0 0 round 4px); }
+}
+
 
 /* === Base === */
 html {
