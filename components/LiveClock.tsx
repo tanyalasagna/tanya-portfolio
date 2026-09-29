@@ -20,7 +20,7 @@ export default function LiveClock() {
   }, []);
 
   return (
-    <div className="leading-tight" style={{ color: 'var(--text)', fontSize: '18px', opacity: 1, fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 600 }}>
+    <div className="leading-tight" style={{ color: 'var(--text)', fontSize: '17px', opacity: 1, fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 600 }}>
       <div>Chicago, IL</div>
       <div suppressHydrationWarning>{time}</div>
     </div>

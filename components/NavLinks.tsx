@@ -62,18 +62,17 @@ export default function NavLinks({ starLayoutId = 'nav-star' }: { starLayoutId?:
             className="flex items-center gap-1.5"
             style={{
               color: 'var(--text)',
-              opacity: isActive ? 1 : 0.8,
+              opacity: isActive ? 1 : 0.9,
               fontSize: '18px',
               fontFamily: 'var(--font-dm-sans)',
               fontStyle: 'italic',
-              fontWeight: 800,
-              transition: 'opacity 150ms ease',
-              cursor: 'inherit',
+              fontWeight: isActive ? 900 : isHovered ? 800 : 600,
+              transition: 'opacity 150ms ease, font-weight 150ms ease',
             }}
             onMouseEnter={() => !isActive && setHoveredHref(item.href)}
             onMouseLeave={() => setHoveredHref(null)}
           >
-            <span style={{ cursor: "url('/cursors/pixel-pointer.png') 9 1, pointer" }}>{item.label}</span>
+            {item.label}
             {isActive ? (
               <StarIndicator layoutId={starLayoutId} />
             ) : (

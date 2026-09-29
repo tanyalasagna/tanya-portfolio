@@ -6,7 +6,7 @@ const linkStyle = {
   fontSize: '18px',
   fontFamily: 'var(--font-dm-sans)',
   fontStyle: 'italic' as const,
-  fontWeight: 800,
+  fontWeight: 900,
 };
 
 export default function ContactLinks() {

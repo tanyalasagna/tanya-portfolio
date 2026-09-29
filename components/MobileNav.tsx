@@ -37,7 +37,7 @@ export default function MobileNav() {
       >
         <Link
           href="/"
-          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss01"' : '"ss02"', fontSize: '40px', }}
+          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '40px', letterSpacing: '0.025em' }}
           onMouseEnter={() => setNameHovered(true)}
           onMouseLeave={() => setNameHovered(false)}
         >
@@ -46,7 +46,7 @@ export default function MobileNav() {
         <button
           onClick={() => setIsOpen((v) => !v)}
           className="flex flex-col justify-center items-center gap-[5px]"
-          style={{ color: 'var(--text)', width: '28px', height: '28px' }}
+          style={{ color: 'var(--text)', width: '28px', height: '28px', cursor: 'pointer' }}
           aria-label="Toggle menu"
         >
           {isOpen ? (
