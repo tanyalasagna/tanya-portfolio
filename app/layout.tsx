@@ -31,10 +31,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${cormorantSerif.variable} ${cormorantLight.variable} h-full`}
+      className={`${cormorantSerif.variable} ${cormorantLight.variable}`}
       suppressHydrationWarning
     >
-      <body className="h-full antialiased">
+      <body className="min-h-screen antialiased">
         <ThemeProvider>
           {/* Canvas background transition — sits at z-index 0, behind all content */}
           <ThemeTransition />
@@ -42,18 +42,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* === Mobile nav (header + overlay menu) === */}
           <MobileNav />
 
-          {/* === Desktop sidecar layout === */}
-          <div className="flex h-full">
-            {/* Left panel — hidden on mobile */}
-            <div className="hidden md:block">
-              <LeftPanel />
-            </div>
+          {/* Left panel — fixed, hidden on mobile */}
+          <div className="hidden md:block">
+            <LeftPanel />
+          </div>
 
-            {/* Right / main content */}
-            <main
-              className="flex-1 h-full overflow-y-auto md:ml-[340px] pt-14 md:pt-0"
-              id="main-scroll"
-            >
+          {/* Right / main content — document scrolls, left panel is fixed */}
+          <main
+            className="md:ml-[340px] pt-14 md:pt-0"
+            id="main-scroll"
+          >
               {/* Mobile-only bio — always visible above page content */}
               <div className="md:hidden pt-8 pb-2" style={{ paddingLeft: '24px', paddingRight: '24px' }}>
                 <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
@@ -69,7 +67,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
               <PageTransition>{children}</PageTransition>
             </main>
-          </div>
         </ThemeProvider>
       </body>
     </html>

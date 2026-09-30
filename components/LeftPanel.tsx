@@ -39,23 +39,13 @@ export default function LeftPanel() {
 
       {/* Bio */}
       <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
-        I&rsquo;m a product designer with a background in content strategy. This site is a record of my work so far, across retail and hospitality tech, plus a few things I make in my own time. I&rsquo;m looking for a team to make more with :)
+        I&rsquo;m a product designer with a background in content strategy, and I&rsquo;ve worked in content and design roles at{' '}
+        <a href="https://polytechnic.purdue.edu/academics/ux-design" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-2" style={{ color: 'inherit' }}>Purdue UX Studios</a>,{' '}
+        <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-2" style={{ color: 'inherit' }}>Toss the Coin</a>, and{' '}
+        <Link href="/resume" className="hover:underline underline-offset-2" style={{ color: 'inherit' }}>more</Link>.
       </p>
       <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '24px' }}>
-        Previously, I worked in content and design roles at{' '}
-        <a
-          href="https://polytechnic.purdue.edu/academics/ux-design"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:underline underline-offset-2"
-          style={{ color: 'inherit' }}
-        >Purdue UX Studios</a>,         <a
-          href="https://www.tossthe.co.in/company/about-us/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:underline underline-offset-2"
-          style={{ color: 'inherit' }}
-        >Toss the Coin</a>, and <Link href="/resume" className="hover:underline underline-offset-2" style={{ color: 'inherit' }}>more</Link>.
+        This site is a record of my work so far, across domains like retail and hospitality tech + a few things I make in my own time. If anything here resonates with you, I&rsquo;d love to chat :)
       </p>
 
       {/* Contact */}

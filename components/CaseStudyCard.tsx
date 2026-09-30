@@ -52,10 +52,10 @@ export default function CaseStudyCard({ project }: { project: Project }) {
   };
 
   return (
-    <div className="@container">
+    <div className="@container" style={{ border: '1px solid var(--divider)', overflow: 'hidden', background: 'var(--card-bg)' }}>
       {/* Horizontal layout */}
       <div className="hidden @[700px]:flex items-stretch">
-        <div className="flex flex-col justify-start pr-8" style={{ width: '45%', paddingLeft: '37px' }}>
+        <div className="flex flex-col justify-center pr-8" style={{ width: '45%', paddingLeft: '37px', paddingTop: '32px', paddingBottom: '32px' }}>
           <div className="flex flex-wrap gap-x-3 gap-y-1 mb-1.5">
             {project.tags.map((tag) => (
               <span key={tag} className="font-mono" style={{ color: 'var(--accent)', fontSize: '18px' }}>
@@ -73,15 +73,15 @@ export default function CaseStudyCard({ project }: { project: Project }) {
           </p>
         </div>
 
-        <div className="flex-shrink-0 @[900px]:p-0 py-5 pr-5" style={{ width: '55%', alignSelf: 'flex-start' }}>
-          {thumbnailWrapper({ width: '100%', aspectRatio: '4/3', background: 'var(--divider)', border: '0.05px solid color-mix(in srgb, var(--text) 18%, transparent)' })}
+        <div className="flex-shrink-0" style={{ width: '55%' }}>
+          {thumbnailWrapper({ width: '100%', aspectRatio: '4/3', background: 'var(--divider)' })}
         </div>
       </div>
 
       {/* Vertical layout */}
       <div className="flex flex-col @[700px]:hidden">
-        {thumbnailWrapper({ width: 'calc(100% + 48px)', aspectRatio: '4/3', background: 'var(--divider)', marginLeft: '-24px', marginRight: '-24px' })}
-        <div className="py-7" style={{ marginLeft: '-24px' }}>
+        {thumbnailWrapper({ width: '100%', aspectRatio: '4/3', background: 'var(--divider)' })}
+        <div style={{ padding: '24px' }}>
           <div className="flex flex-wrap gap-x-3 gap-y-1 mb-1.5">
             {project.tags.map((tag) => (
               <span key={tag} className="font-mono" style={{ color: 'var(--accent)', fontSize: '16px' }}>
