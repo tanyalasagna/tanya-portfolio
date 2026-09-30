@@ -29,7 +29,7 @@ export default function LeftPanel() {
       <Link href="/">
         <h1
           className="leading-none"
-          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '56px', marginBottom: '8px', letterSpacing: '0.025em' }}
+          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '56px', marginBottom: '8px', letterSpacing: nameHovered ? '0.025em' : '0.045em' }}
           onMouseEnter={() => setNameHovered(true)}
           onMouseLeave={() => setNameHovered(false)}
         >
@@ -38,14 +38,14 @@ export default function LeftPanel() {
       </Link>
 
       {/* Bio */}
-      <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
-        I&rsquo;m a product designer with a background in content strategy, and I&rsquo;ve worked in content and design roles at{' '}
-        <a href="https://polytechnic.purdue.edu/academics/ux-design" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-2" style={{ color: 'inherit' }}>Purdue UX Studios</a>,{' '}
-        <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-2" style={{ color: 'inherit' }}>Toss the Coin</a>, and{' '}
-        <Link href="/resume" className="hover:underline underline-offset-2" style={{ color: 'inherit' }}>more</Link>.
+      <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '17px' }}>
+        Hi! I&rsquo;m a product designer who started out in content strategy, and I&rsquo;ve since worked across content and design at{' '}
+        <a href="https://polytechnic.purdue.edu/academics/ux-design" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-2" style={{ color: 'inherit', fontStyle: 'italic' }}>Purdue UX Studios</a>,{' '}
+        <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-2" style={{ color: 'inherit', fontStyle: 'italic' }}>Toss the Coin</a>, and{' '}
+        <Link href="/resume" className="hover:underline underline-offset-2" style={{ color: 'inherit', fontStyle: 'italic' }}>more</Link>.
       </p>
-      <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '24px' }}>
-        This site is a record of my work so far, across domains like retail and hospitality tech + a few things I make in my own time. If anything here resonates with you, I&rsquo;d love to chat :)
+      <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '17px', marginBottom: '24px' }}>
+        This site is a record of my work, across domains like retail and hospitality tech + a few things I make in my own time :)
       </p>
 
       {/* Contact */}
@@ -56,9 +56,11 @@ export default function LeftPanel() {
       <div className="h-px" style={{ background: 'var(--divider)', marginBottom: '32px' }} />
 
       {/* Main nav */}
-      <nav className="flex flex-col gap-3 mb-2">
+      <nav className="flex flex-col gap-3" style={{ marginBottom: '32px' }}>
         <NavLinks starLayoutId="nav-star" />
       </nav>
+
+      <div className="h-px" style={{ background: 'var(--divider)', marginBottom: '32px' }} />
 
       {/* Case study sub-nav */}
       <AnimatePresence>
@@ -91,8 +93,8 @@ export default function LeftPanel() {
               aria-label={t.label}
               className="border cursor-pointer"
               style={{ opacity: theme === t.value ? 1 : 0.35, borderColor: 'var(--divider)', padding: '4px', transition: 'opacity 200ms' }}
-              whileHover={{ y: -2, boxShadow: '0 4px 10px rgba(0,0,0,0.18), 0 1px 3px rgba(0,0,0,0.1)' }}
-              whileTap={{ y: 1, boxShadow: 'none' }}
+              whileHover={{ y: -2 }}
+              whileTap={{ y: 1 }}
               transition={{ type: 'spring', stiffness: 400, damping: 22 }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}

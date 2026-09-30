@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { Cormorant_Garamond } from 'next/font/google';
+import Link from 'next/link';
+import { Alegreya } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import LeftPanel from '@/components/LeftPanel';
@@ -7,17 +8,17 @@ import MobileNav from '@/components/MobileNav';
 import PageTransition from '@/components/PageTransition';
 import ThemeTransition from '@/components/ThemeTransition';
 
-const cormorantSerif = Cormorant_Garamond({
+const cormorantSerif = Alegreya({
   variable: '--font-dm-sans',
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   style: ['normal', 'italic'],
 });
 
-const cormorantLight = Cormorant_Garamond({
+const cormorantLight = Alegreya({
   variable: '--font-dm-mono',
   subsets: ['latin'],
-  weight: ['300', '400'],
+  weight: ['400', '500'],
   style: ['italic'],
 });
 
@@ -53,15 +54,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             id="main-scroll"
           >
               {/* Mobile-only bio — always visible above page content */}
-              <div className="md:hidden pt-8 pb-2" style={{ paddingLeft: '24px', paddingRight: '24px' }}>
-                <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
-                  Hello! I&rsquo;m a designer, rooted in content strategy. I consider myself a creative
-                  generalist, having moved between content and design roles, and translating across
-                  disciplines.
+              <div className="md:hidden pt-8 pb-2" style={{ paddingLeft: '16px', paddingRight: '16px' }}>
+                <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
+                  Hi! I&rsquo;m a product designer who started out in content strategy, and I&rsquo;ve since worked across content and design at{' '}
+                  <a href="https://polytechnic.purdue.edu/academics/ux-design" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>Purdue UX Studios</a>,{' '}
+                  <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>Toss the Coin</a>, and{' '}
+                  <Link href="/resume" className="underline underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>more</Link>.
                 </p>
-                <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
-                  Currently designing at daily journals, and previously in miscellaneous content and
-                  design roles at Toss the Coin, Purdue UX Studios and more.
+                <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
+                  This site is a record of my work, across domains like retail and hospitality tech + a few things I make in my own time :)
                 </p>
               </div>
 

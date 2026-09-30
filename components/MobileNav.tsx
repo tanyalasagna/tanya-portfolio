@@ -32,12 +32,12 @@ export default function MobileNav() {
     <>
       {/* Top bar */}
       <div
-        className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 h-14 border-b"
+        className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 h-14 border-b"
         style={{ background: 'var(--bg)', borderColor: 'var(--divider)' }}
       >
         <Link
           href="/"
-          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '40px', letterSpacing: '0.025em' }}
+          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '40px', letterSpacing: nameHovered ? '0.025em' : '0.045em' }}
           onMouseEnter={() => setNameHovered(true)}
           onMouseLeave={() => setNameHovered(false)}
         >
@@ -72,9 +72,22 @@ export default function MobileNav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden fixed inset-0 z-40 flex flex-col px-8 pt-20 pb-10"
+            className="md:hidden fixed inset-0 z-40 flex flex-col px-4 pt-20 pb-10"
             style={{ background: 'var(--bg)' }}
           >
+            {/* Bio */}
+            <div className="mb-8">
+              <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
+                Hi! I&rsquo;m a product designer who started out in content strategy, and I&rsquo;ve since worked across content and design at{' '}
+                <a href="https://polytechnic.purdue.edu/academics/ux-design" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>Purdue UX Studios</a>,{' '}
+                <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>Toss the Coin</a>, and{' '}
+                <Link href="/resume" className="underline underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>more</Link>.
+              </p>
+              <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
+                This site is a record of my work, across domains like retail and hospitality tech + a few things I make in my own time :)
+              </p>
+            </div>
+
             {/* Contact */}
             <div className="flex gap-6 mb-8">
               <ContactLinks />
@@ -86,6 +99,8 @@ export default function MobileNav() {
             <nav className="flex flex-col gap-5 mb-8">
               <NavLinks starLayoutId="mobile-nav-star" />
             </nav>
+
+            <div className="h-px mb-8" style={{ background: 'var(--divider)' }} />
 
             {/* Spacer */}
             <div className="flex-1" />
@@ -99,8 +114,8 @@ export default function MobileNav() {
                   aria-label={t.label}
                   className="border cursor-pointer"
                   style={{ opacity: theme === t.value ? 1 : 0.35, borderColor: 'var(--divider)', padding: '4px', transition: 'opacity 200ms' }}
-                  whileHover={{ y: -2, boxShadow: '0 4px 10px rgba(0,0,0,0.18), 0 1px 3px rgba(0,0,0,0.1)' }}
-                  whileTap={{ y: 1, boxShadow: 'none' }}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ y: 1 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 22 }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}

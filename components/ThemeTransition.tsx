@@ -8,12 +8,12 @@ const THEME_BG: Record<Theme, string> = {
 };
 
 const PX = 7;
-const WAVE_MS = 600;
-const FILL_F = 0.22; // wider = softer wave front
+const WAVE_MS = 500;
+const FILL_F = 0.28; // wider fade zone for softer dissolve per pixel
 
-// Ease-out cubic: fast fade start, graceful soft tail
+// Ease-out quint: sharp initial reveal, long silky tail
 function easeOut(t: number) {
-  return 1 - (1 - t) ** 3;
+  return 1 - (1 - t) ** 5;
 }
 
 export default function ThemeTransition() {
@@ -54,22 +54,33 @@ export default function ThemeTransition() {
     ctx.fillRect(0, 0, W, H);
 
     // Theme committed instantly — new theme is already applied underneath.
-    // Now wipe the old-bg canvas away from bottom-left, revealing new bg + new text.
+    // Wipe old-bg canvas away from several random hotspots simultaneously.
     const cols = Math.ceil(W / PX);
     const rows = Math.ceil(H / PX);
+
+    // 3–5 random origin points scattered across the grid
+    const numHotspots = 3 + Math.floor(Math.random() * 3);
+    const hotspots = Array.from({ length: numHotspots }, () => ({
+      c: Math.random() * cols,
+      r: Math.random() * rows,
+    }));
 
     const pixels: { x: number; y: number; nd: number }[] = [];
     let maxD = 0;
     for (let c = 0; c < cols; c++) {
       for (let r = 0; r < rows; r++) {
-        const ir = rows - 1 - r; // invert: 0 = bottom
-        const d = Math.sqrt(c * c + ir * ir);
-        if (d > maxD) maxD = d;
-        pixels.push({ x: c * PX, y: r * PX, nd: d });
+        // Distance to nearest hotspot determines wave-front timing
+        let minD = Infinity;
+        for (const h of hotspots) {
+          const d = Math.sqrt((c - h.c) ** 2 + (r - h.r) ** 2);
+          if (d < minD) minD = d;
+        }
+        if (minD > maxD) maxD = minD;
+        pixels.push({ x: c * PX, y: r * PX, nd: minD });
       }
     }
     for (const p of pixels) {
-      p.nd = p.nd / maxD + (Math.random() - 0.5) * 0.015;
+      p.nd = p.nd / maxD + (Math.random() - 0.5) * 0.02;
       if (p.nd < 0) p.nd = 0;
     }
 

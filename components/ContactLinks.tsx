@@ -3,10 +3,10 @@ import { useState } from 'react';
 
 const linkStyle = {
   color: 'var(--accent)',
-  fontSize: '18px',
+  fontSize: '17px',
   fontFamily: 'var(--font-dm-sans)',
   fontStyle: 'italic' as const,
-  fontWeight: 900,
+  fontWeight: 600,
 };
 
 export default function ContactLinks() {

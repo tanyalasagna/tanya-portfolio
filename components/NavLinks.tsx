@@ -62,30 +62,17 @@ export default function NavLinks({ starLayoutId = 'nav-star' }: { starLayoutId?:
             className="flex items-center gap-1.5"
             style={{
               color: 'var(--text)',
-              opacity: isActive ? 1 : 0.9,
-              fontSize: '18px',
+              opacity: isActive || isHovered ? 1 : 0.9,
+              fontSize: '17px',
               fontFamily: 'var(--font-dm-sans)',
               fontStyle: 'italic',
-              fontWeight: isActive ? 900 : isHovered ? 800 : 600,
+              fontWeight: isActive || isHovered ? 600 : 300,
               transition: 'opacity 150ms ease, font-weight 150ms ease',
             }}
             onMouseEnter={() => !isActive && setHoveredHref(item.href)}
             onMouseLeave={() => setHoveredHref(null)}
           >
             {item.label}
-            {isActive ? (
-              <StarIndicator layoutId={starLayoutId} />
-            ) : (
-              <motion.img
-                src="/images/star-outline.svg?v=2"
-                alt=""
-                width={32}
-                height={32}
-                style={{ filter: 'var(--icon-filter)', display: 'block' }}
-                animate={{ opacity: isHovered ? 0.5 : 0 }}
-                transition={{ duration: 0.15 }}
-              />
-            )}
           </Link>
         );
       })}

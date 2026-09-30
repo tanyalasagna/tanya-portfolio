@@ -46,7 +46,7 @@ export default function CaseStudyCard({ project }: { project: Project }) {
     color: 'var(--text)',
     fontFamily: "'Dreamer TM', serif",
     fontFeatureSettings: '"ss01"',
-    letterSpacing: '0.05em',
+    letterSpacing: '0.06em',
     opacity: hovered ? 0.6 : 1,
     transition: 'opacity 500ms ease',
   };
@@ -58,7 +58,7 @@ export default function CaseStudyCard({ project }: { project: Project }) {
         <div className="flex flex-col justify-center pr-8" style={{ width: '45%', paddingLeft: '37px', paddingTop: '32px', paddingBottom: '32px' }}>
           <div className="flex flex-wrap gap-x-3 gap-y-1 mb-1.5">
             {project.tags.map((tag) => (
-              <span key={tag} className="font-mono" style={{ color: 'var(--accent)', fontSize: '18px' }}>
+              <span key={tag} className="font-mono" style={{ color: 'var(--accent)', fontSize: '17px' }}>
                 {tag}
               </span>
             ))}
@@ -68,33 +68,33 @@ export default function CaseStudyCard({ project }: { project: Project }) {
               {project.title}
             </h2>
           </Link>
-          <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '18px', whiteSpace: 'pre-line' }}>
+          <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '17px', whiteSpace: 'pre-line' }}>
             {project.description}
           </p>
         </div>
 
         <div className="flex-shrink-0" style={{ width: '55%' }}>
-          {thumbnailWrapper({ width: '100%', aspectRatio: '4/3', background: 'var(--divider)' })}
+          {thumbnailWrapper({ width: '100%', height: '100%', background: 'var(--divider)' })}
         </div>
       </div>
 
       {/* Vertical layout */}
       <div className="flex flex-col @[700px]:hidden">
         {thumbnailWrapper({ width: '100%', aspectRatio: '4/3', background: 'var(--divider)' })}
-        <div style={{ padding: '24px' }}>
+        <div style={{ padding: '16px' }}>
           <div className="flex flex-wrap gap-x-3 gap-y-1 mb-1.5">
             {project.tags.map((tag) => (
-              <span key={tag} className="font-mono" style={{ color: 'var(--accent)', fontSize: '16px' }}>
+              <span key={tag} className="font-mono" style={{ color: 'var(--accent)', fontSize: '15px' }}>
                 {tag}
               </span>
             ))}
           </div>
           <Link href={href} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-            <h2 className="leading-tight" style={{ ...titleStyle, fontSize: '24px', marginBottom: '12px' }}>
+            <h2 className="leading-tight" style={{ ...titleStyle, fontSize: '24px', marginBottom: '9px' }}>
               {project.title}
             </h2>
           </Link>
-          <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '16px', whiteSpace: 'pre-line' }}>
+          <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '15px', whiteSpace: 'pre-line' }}>
             {project.description}
           </p>
         </div>

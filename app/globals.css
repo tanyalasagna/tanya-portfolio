@@ -35,7 +35,7 @@
 }
 
 [data-theme="dark"] {
-  --bg: #060F22;
+  --bg: color-mix(in srgb, #060F22 88%, black);
   --sidebar-bg: #060F22;
   --text: #F0EDE8;
   --text-muted: #D4D0CB;
@@ -43,7 +43,7 @@
   --divider: #F0EDE8;
   --bg-hover: #050A14;
   --icon-filter: invert(1);
-  --card-bg: color-mix(in srgb, var(--bg) 88%, black);
+  --card-bg: #060F22;
 }
 
 /* === Tailwind theme tokens === */
@@ -71,10 +71,11 @@ body {
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-dm-sans, 'Cormorant Garamond', serif);
-  font-weight: 600;
-  transition: background-color 0.35s ease, color 0.35s ease;
+  font-weight: 400;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 * {
-  transition: border-color 0.35s ease;
+  transition: border-color 0.3s ease;
 }
+
