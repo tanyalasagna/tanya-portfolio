@@ -54,4 +54,16 @@ export const projects: Project[] = [
     team: '',
     impact: [],
   },
+  {
+    slug: 'project-four',
+    title: 'Turning a Hospitality Tech Ideathon into a Retrospective E-Book',
+    tags: ['Client Work, 2023'],
+    description: 'E-Book \\ Brand Positioning \\ Content Strategy',
+    thumbnail: '/images/ebook thumbnail.png',
+    role: [],
+    tools: [],
+    duration: '',
+    team: '',
+    impact: [],
+  },
 ];
