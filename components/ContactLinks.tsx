@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const linkStyle = {
   color: 'var(--accent)',
-  fontSize: '17px',
+  fontSize: '16px',
   fontFamily: 'var(--font-dm-sans)',
   fontStyle: 'italic' as const,
   fontWeight: 600,

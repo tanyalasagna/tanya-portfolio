@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, useAnimationControls } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 const navItems = [
@@ -10,7 +10,6 @@ const navItems = [
   { label: 'Resume', href: '/resume' },
 ] as const;
 
-
 function getActiveHref(pathname: string) {
   if (pathname === '/' || pathname.startsWith('/work')) return '/';
   if (pathname.startsWith('/about')) return '/about';
@@ -18,34 +17,8 @@ function getActiveHref(pathname: string) {
   return '/';
 }
 
-function StarIndicator({ layoutId }: { layoutId: string }) {
-  const controls = useAnimationControls();
-  return (
-    <motion.span
-      layoutId={layoutId}
-      transition={{ type: 'spring', stiffness: 280, damping: 16, mass: 0.7 }}
-      onLayoutAnimationStart={() => {
-        controls.start({
-          x: [0, -20, 6, 0],
-          rotate: [0, -18, 8, 0],
-          transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
-        });
-      }}
-      style={{ display: 'inline-flex', alignItems: 'center' }}
-    >
-      <motion.img
-        animate={controls}
-        src="/images/star.svg"
-        alt=""
-        width={32}
-        height={32}
-        style={{ filter: 'var(--icon-filter)', display: 'block' }}
-      />
-    </motion.span>
-  );
-}
 
-export default function NavLinks({ starLayoutId = 'nav-star' }: { starLayoutId?: string }) {
+export default function NavLinks() {
   const pathname = usePathname();
   const activeHref = getActiveHref(pathname);
   const [hoveredHref, setHoveredHref] = useState<string | null>(null);
@@ -67,12 +40,29 @@ export default function NavLinks({ starLayoutId = 'nav-star' }: { starLayoutId?:
               fontFamily: 'var(--font-dm-sans)',
               fontStyle: 'italic',
               fontWeight: isActive || isHovered ? 600 : 300,
-              transition: 'opacity 150ms ease, font-weight 150ms ease',
+              transition: 'opacity 200ms ease',
             }}
             onMouseEnter={() => !isActive && setHoveredHref(item.href)}
             onMouseLeave={() => setHoveredHref(null)}
           >
-            {item.label}
+            <span style={{ position: 'relative', display: 'inline-block' }}>
+              {item.label}
+              <motion.span
+                style={{
+                  position: 'absolute',
+                  bottom: 1,
+                  left: 0,
+                  right: 0,
+                  height: '1px',
+                  background: 'currentColor',
+                  originX: 0,
+                  display: 'block',
+                }}
+                initial={false}
+                animate={{ scaleX: isHovered ? 1 : 0 }}
+                transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+              />
+            </span>
           </Link>
         );
       })}

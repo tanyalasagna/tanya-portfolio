@@ -1,29 +1,27 @@
 'use client';
+import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 export default function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    setVisible(false);
     window.scrollTo(0, 0);
-    const raf = requestAnimationFrame(() => {
-      requestAnimationFrame(() => setVisible(true));
-    });
-    return () => cancelAnimationFrame(raf);
   }, [pathname]);
 
   return (
-    <div
-      style={{
-        opacity: visible ? 1 : 0,
-        transition: 'opacity 280ms cubic-bezier(0.22, 1, 0.36, 1)',
-        minHeight: '100vh',
-      }}
-    >
-      {children}
-    </div>
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div
+        key={pathname}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -6 }}
+        transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+        style={{ minHeight: '100vh' }}
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
   );
 }

@@ -50,24 +50,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           {/* Right / main content — document scrolls, left panel is fixed */}
           <main
-            className="md:ml-[340px] pt-14 md:pt-0"
+            className="md:ml-[280px] pt-14 md:pt-0"
             id="main-scroll"
           >
               {/* Mobile-only bio — always visible above page content */}
               <div className="md:hidden pt-8 pb-2" style={{ paddingLeft: '16px', paddingRight: '16px' }}>
-                <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
+                <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
                   Hi! I&rsquo;m a product designer who started out in content strategy, and I&rsquo;ve since worked across content and design at{' '}
                   <a href="https://polytechnic.purdue.edu/academics/ux-design" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>Purdue UX Studios</a>,{' '}
                   <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>Toss the Coin</a>, and{' '}
                   <Link href="/resume" className="underline underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>more</Link>.
                 </p>
-                <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
+                <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
                   This site is a record of my work, across domains like retail and hospitality tech + a few things I make in my own time :)
                 </p>
               </div>
 
               <PageTransition>{children}</PageTransition>
             </main>
+
         </ThemeProvider>
       </body>
     </html>

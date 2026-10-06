@@ -11,39 +11,45 @@
 
 /* === Theme tokens (paper = default) === */
 :root {
-  --bg: #F5F0EB;
-  --sidebar-bg: #F2EAD8;
+  --bg: #F4F3EF;
+  --sidebar-bg: #EFEEED;
   --text: #1A1A1A;
   --text-muted: #3D3835;
   --accent: #3D3835;
-  --divider: #1A1A1A;
+  --divider: #C8C2BB;
   --bg-hover: rgba(0, 0, 0, 0.04);
   --icon-filter: none;
   --card-bg: color-mix(in srgb, var(--bg) 93%, white);
+  --edge-tint: rgba(240, 165, 20, 0.28);
+  --thumb-border: rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="light"] {
-  --bg: #EEE9DF;
-  --sidebar-bg: #F2EAD8;
+  --bg: #F0EFEB;
+  --sidebar-bg: #EBEAE7;
   --text: #1A1A1A;
   --text-muted: #4A4A4A;
   --accent: #3D3835;
-  --divider: #1A1A1A;
+  --divider: #C8C2BB;
   --bg-hover: #F5F0E4;
   --icon-filter: none;
   --card-bg: color-mix(in srgb, var(--bg) 93%, white);
+  --edge-tint: rgba(240, 165, 20, 0.28);
+  --thumb-border: rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="dark"] {
-  --bg: color-mix(in srgb, #060F22 88%, black);
-  --sidebar-bg: #060F22;
+  --bg: #03070F;
+  --sidebar-bg: #050C1A;
   --text: #F0EDE8;
   --text-muted: #D4D0CB;
   --accent: #F0EDE8;
-  --divider: #F0EDE8;
+  --divider: #2A3448;
   --bg-hover: #050A14;
   --icon-filter: invert(1);
-  --card-bg: #060F22;
+  --card-bg: #060E1C;
+  --edge-tint: rgba(100, 210, 220, 0.12);
+  --thumb-border: rgba(255, 255, 255, 0.12);
 }
 
 /* === Tailwind theme tokens === */

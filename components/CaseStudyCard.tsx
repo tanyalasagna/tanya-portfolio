@@ -34,7 +34,7 @@ export default function CaseStudyCard({ project }: { project: Project }) {
 
   const thumbnailWrapper = (extraStyle: React.CSSProperties) => (
     <Link href={href} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} style={{ color: 'inherit' }}>
-      <div style={{ position: 'relative', overflow: 'hidden', ...extraStyle }}>
+      <div style={{ position: 'relative', overflow: 'hidden', border: '1px solid var(--thumb-border)', ...extraStyle }}>
         {thumbnailMedia}
         <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: '80%', background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 50%, transparent 100%)', ...overlayStyle }} />
         <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: '40%', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', maskImage: 'linear-gradient(to top, black 0%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to top, black 0%, transparent 100%)', ...overlayStyle }} />
@@ -52,10 +52,10 @@ export default function CaseStudyCard({ project }: { project: Project }) {
   };
 
   return (
-    <div className="@container" style={{ border: '1px solid var(--divider)', overflow: 'hidden', background: 'var(--card-bg)' }}>
+    <div className="@container" style={{ overflow: 'hidden' }}>
       {/* Horizontal layout */}
-      <div className="hidden @[700px]:flex items-stretch">
-        <div className="flex flex-col justify-center pr-8" style={{ width: '45%', paddingLeft: '37px', paddingTop: '32px', paddingBottom: '32px' }}>
+      <div className="hidden @[700px]:flex items-start gap-4">
+        <div className="flex flex-col" style={{ width: '45%' }}>
           <div className="flex flex-wrap gap-x-3 gap-y-1 mb-1.5">
             {project.tags.map((tag) => (
               <span key={tag} className="font-mono" style={{ color: 'var(--accent)', fontSize: '17px' }}>
@@ -79,10 +79,10 @@ export default function CaseStudyCard({ project }: { project: Project }) {
       </div>
 
       {/* Vertical layout */}
-      <div className="flex flex-col @[700px]:hidden">
+      <div className="flex flex-col @[700px]:hidden" style={{ paddingTop: '32px' }}>
         {thumbnailWrapper({ width: '100%', aspectRatio: '4/3', background: 'var(--divider)' })}
-        <div style={{ padding: '16px' }}>
-          <div className="flex flex-wrap gap-x-3 gap-y-1 mb-1.5">
+        <div style={{ paddingTop: '12px' }}>
+          <div className="flex flex-wrap gap-x-3 gap-y-1 mb-1">
             {project.tags.map((tag) => (
               <span key={tag} className="font-mono" style={{ color: 'var(--accent)', fontSize: '15px' }}>
                 {tag}
@@ -90,11 +90,11 @@ export default function CaseStudyCard({ project }: { project: Project }) {
             ))}
           </div>
           <Link href={href} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-            <h2 className="leading-tight" style={{ ...titleStyle, fontSize: '24px', marginBottom: '9px' }}>
+            <h2 className="leading-tight" style={{ ...titleStyle, fontSize: '24px', marginBottom: '6px' }}>
               {project.title}
             </h2>
           </Link>
-          <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '15px', whiteSpace: 'pre-line' }}>
+          <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '16px', whiteSpace: 'pre-line' }}>
             {project.description}
           </p>
         </div>

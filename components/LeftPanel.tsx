@@ -6,7 +6,7 @@ import LiveClock from './LiveClock';
 import { useTheme, type Theme } from './ThemeProvider';
 import CaseStudyNav from './CaseStudyNav';
 import ContactLinks from './ContactLinks';
-import NavLinks from './NavLinks';
+import HookSidebar from './HookSidebar';
 import { useState } from 'react';
 
 const themes: { value: Theme; icon: string; label: string }[] = [
@@ -22,14 +22,14 @@ export default function LeftPanel() {
 
   return (
     <aside
-      className="fixed left-0 top-0 h-full w-[340px] flex flex-col border-r z-50"
-      style={{ padding: '48px', borderColor: 'var(--divider)', background: 'var(--bg)', containerType: 'inline-size' }}
+      className="fixed left-0 top-0 h-full w-[280px] flex flex-col border-r z-50"
+      style={{ padding: '32px', borderColor: 'var(--divider)', background: 'var(--bg)', containerType: 'inline-size' }}
     >
       {/* Name */}
       <Link href="/">
         <h1
           className="leading-none"
-          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '56px', marginBottom: '8px', letterSpacing: nameHovered ? '0.025em' : '0.045em' }}
+          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '48px', marginBottom: '16px', letterSpacing: nameHovered ? '0.025em' : '0.045em' }}
           onMouseEnter={() => setNameHovered(true)}
           onMouseLeave={() => setNameHovered(false)}
         >
@@ -38,13 +38,13 @@ export default function LeftPanel() {
       </Link>
 
       {/* Bio */}
-      <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '17px' }}>
+      <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
         Hi! I&rsquo;m a product designer who started out in content strategy, and I&rsquo;ve since worked across content and design at{' '}
         <a href="https://polytechnic.purdue.edu/academics/ux-design" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-2" style={{ color: 'inherit', fontStyle: 'italic' }}>Purdue UX Studios</a>,{' '}
         <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-2" style={{ color: 'inherit', fontStyle: 'italic' }}>Toss the Coin</a>, and{' '}
         <Link href="/resume" className="hover:underline underline-offset-2" style={{ color: 'inherit', fontStyle: 'italic' }}>more</Link>.
       </p>
-      <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '17px', marginBottom: '24px' }}>
+      <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '16px', marginBottom: '24px' }}>
         This site is a record of my work, across domains like retail and hospitality tech + a few things I make in my own time :)
       </p>
 
@@ -56,9 +56,9 @@ export default function LeftPanel() {
       <div className="h-px" style={{ background: 'var(--divider)', marginBottom: '32px' }} />
 
       {/* Main nav */}
-      <nav className="flex flex-col gap-3" style={{ marginBottom: '32px' }}>
-        <NavLinks starLayoutId="nav-star" />
-      </nav>
+      <div style={{ marginBottom: '32px' }}>
+        <HookSidebar />
+      </div>
 
       <div className="h-px" style={{ background: 'var(--divider)', marginBottom: '32px' }} />
 
@@ -83,7 +83,7 @@ export default function LeftPanel() {
       <div className="flex-1" />
 
       {/* Theme icons + clock */}
-      <div className="flex items-center mb-5" style={{ gap: '32px' }}>
+      <div className="flex items-center" style={{ gap: '32px' }}>
         <LiveClock />
         <div className="flex items-center">
           {themes.map((t) => (

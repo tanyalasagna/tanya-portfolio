@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme, type Theme } from './ThemeProvider';
 import LiveClock from './LiveClock';
 import ContactLinks from './ContactLinks';
-import NavLinks from './NavLinks';
+import HookSidebar from './HookSidebar';
 
 const themes: { value: Theme; icon: string; label: string }[] = [
   { value: 'light', icon: '/images/sun.svg', label: 'Light mode' },
@@ -77,13 +77,13 @@ export default function MobileNav() {
           >
             {/* Bio */}
             <div className="mb-8">
-              <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
+              <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
                 Hi! I&rsquo;m a product designer who started out in content strategy, and I&rsquo;ve since worked across content and design at{' '}
                 <a href="https://polytechnic.purdue.edu/academics/ux-design" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>Purdue UX Studios</a>,{' '}
                 <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>Toss the Coin</a>, and{' '}
                 <Link href="/resume" className="underline underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>more</Link>.
               </p>
-              <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '15px' }}>
+              <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
                 This site is a record of my work, across domains like retail and hospitality tech + a few things I make in my own time :)
               </p>
             </div>
@@ -96,9 +96,9 @@ export default function MobileNav() {
             <div className="h-px mb-8" style={{ background: 'var(--divider)' }} />
 
             {/* Nav */}
-            <nav className="flex flex-col gap-5 mb-8">
-              <NavLinks starLayoutId="mobile-nav-star" />
-            </nav>
+            <div className="mb-8">
+              <HookSidebar />
+            </div>
 
             <div className="h-px mb-8" style={{ background: 'var(--divider)' }} />
 
