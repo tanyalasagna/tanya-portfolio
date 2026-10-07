@@ -53,33 +53,8 @@ export default function CaseStudyCard({ project }: { project: Project }) {
 
   return (
     <div className="@container" style={{ overflow: 'hidden' }}>
-      {/* Horizontal layout */}
-      <div className="hidden @[700px]:flex items-start gap-4">
-        <div className="flex flex-col" style={{ width: '45%' }}>
-          <div className="flex flex-wrap gap-x-3 gap-y-1 mb-1.5">
-            {project.tags.map((tag) => (
-              <span key={tag} className="font-mono" style={{ color: 'var(--accent)', fontSize: '17px' }}>
-                {tag}
-              </span>
-            ))}
-          </div>
-          <Link href={href} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-            <h2 className="leading-tight" style={{ ...titleStyle, fontSize: '32px', marginBottom: '12px' }}>
-              {project.title}
-            </h2>
-          </Link>
-          <p className="leading-relaxed" style={{ color: 'var(--text-muted)', fontSize: '17px', whiteSpace: 'pre-line' }}>
-            {project.description}
-          </p>
-        </div>
-
-        <div className="flex-shrink-0" style={{ width: '55%' }}>
-          {thumbnailWrapper({ width: '100%', height: '100%', background: 'var(--divider)' })}
-        </div>
-      </div>
-
-      {/* Vertical layout */}
-      <div className="flex flex-col @[700px]:hidden" style={{ paddingTop: '32px' }}>
+      {/* Vertical layout — thumbnail top, text below, always */}
+      <div className="flex flex-col" style={{ paddingTop: '32px' }}>
         {thumbnailWrapper({ width: '100%', aspectRatio: '4/3', background: 'var(--divider)' })}
         <div style={{ paddingTop: '12px' }}>
           <div className="flex flex-wrap gap-x-3 gap-y-1 mb-1">
