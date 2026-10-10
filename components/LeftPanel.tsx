@@ -3,20 +3,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import LiveClock from './LiveClock';
-import { useTheme, type Theme } from './ThemeProvider';
 import CaseStudyNav from './CaseStudyNav';
 import ContactLinks from './ContactLinks';
 import HookSidebar from './HookSidebar';
 import { useState } from 'react';
 
-const themes: { value: Theme; icon: string; label: string }[] = [
-  { value: 'light', icon: '/images/sun.svg', label: 'Light mode' },
-  { value: 'dark',  icon: '/images/moon.svg', label: 'Dark mode' },
-];
-
 export default function LeftPanel() {
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
   const [nameHovered, setNameHovered] = useState(false);
   const isCaseStudy = pathname.startsWith('/work/');
 
@@ -82,33 +75,8 @@ export default function LeftPanel() {
       {/* Spacer */}
       <div className="flex-1" />
 
-      {/* Theme icons + clock */}
-      <div className="flex items-center" style={{ gap: '32px' }}>
-        <LiveClock />
-        <div className="flex items-center">
-          {themes.map((t) => (
-            <motion.button
-              key={t.value}
-              onClick={() => setTheme(t.value)}
-              aria-label={t.label}
-              className="border cursor-pointer"
-              style={{ opacity: theme === t.value ? 1 : 0.35, borderColor: 'var(--divider)', padding: '4px', transition: 'opacity 200ms' }}
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 1 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={t.icon}
-                alt={t.label}
-                width={28}
-                height={28}
-                style={{ filter: 'var(--icon-filter)' }}
-              />
-            </motion.button>
-          ))}
-        </div>
-      </div>
+      {/* Clock */}
+      <LiveClock />
     </aside>
   );
 }

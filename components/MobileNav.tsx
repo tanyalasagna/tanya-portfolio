@@ -3,22 +3,14 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme, type Theme } from './ThemeProvider';
 import LiveClock from './LiveClock';
 import ContactLinks from './ContactLinks';
 import HookSidebar from './HookSidebar';
-
-const themes: { value: Theme; icon: string; label: string }[] = [
-  { value: 'light', icon: '/images/sun.svg', label: 'Light mode' },
-  { value: 'dark',  icon: '/images/moon.svg', label: 'Dark mode' },
-];
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [nameHovered, setNameHovered] = useState(false);
   const pathname = usePathname();
-  const { theme, setTheme } = useTheme();
-
   // Close menu on route change
   useEffect(() => { setIsOpen(false); }, [pathname]);
 
@@ -104,31 +96,6 @@ export default function MobileNav() {
 
             {/* Spacer */}
             <div className="flex-1" />
-
-            {/* Theme icons */}
-            <div className="flex items-center mb-6">
-              {themes.map((t) => (
-                <motion.button
-                  key={t.value}
-                  onClick={() => setTheme(t.value)}
-                  aria-label={t.label}
-                  className="border cursor-pointer"
-                  style={{ opacity: theme === t.value ? 1 : 0.35, borderColor: 'var(--divider)', padding: '4px', transition: 'opacity 200ms' }}
-                  whileHover={{ y: -2 }}
-                  whileTap={{ y: 1 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={t.icon}
-                    alt={t.label}
-                    width={28}
-                    height={28}
-                    style={{ filter: 'var(--icon-filter)' }}
-                  />
-                </motion.button>
-              ))}
-            </div>
 
             {/* Clock */}
             <LiveClock />
