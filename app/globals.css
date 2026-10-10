@@ -11,8 +11,8 @@
 
 /* === Theme tokens (paper = default) === */
 :root {
-  --bg: #F4F3EF;
-  --sidebar-bg: #EFEEED;
+  --bg: #FFFFFC;
+  --sidebar-bg: #FFFFFC;
   --text: #1A1A1A;
   --text-muted: #3D3835;
   --accent: #3D3835;

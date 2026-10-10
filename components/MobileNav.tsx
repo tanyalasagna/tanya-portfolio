@@ -29,7 +29,7 @@ export default function MobileNav() {
       >
         <Link
           href="/"
-          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '40px', letterSpacing: nameHovered ? '0.025em' : '0.045em' }}
+          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '32px', letterSpacing: nameHovered ? '0.025em' : '0.045em' }}
           onMouseEnter={() => setNameHovered(true)}
           onMouseLeave={() => setNameHovered(false)}
         >
