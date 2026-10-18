@@ -11,7 +11,7 @@ const DASH = 'repeating-linear-gradient(to top, transparent 0 2px, currentColor 
 const navItems = [
   { label: 'Work',   href: '/',        matches: (p: string) => p === '/' || p.startsWith('/work') },
   { label: 'About',  href: '/about',   matches: (p: string) => p.startsWith('/about') },
-  { label: 'Resume', href: '/resume',  matches: (p: string) => p.startsWith('/resume') },
+  { label: 'CV', href: '/resume',  matches: (p: string) => p.startsWith('/resume') },
 ];
 
 function Rail({

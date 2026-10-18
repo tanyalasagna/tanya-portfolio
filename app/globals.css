@@ -11,12 +11,12 @@
 
 /* === Theme tokens (paper = default) === */
 :root {
-  --bg: #FFFFFC;
-  --sidebar-bg: #FFFFFC;
+  --bg: #FFFFFF;
+  --sidebar-bg: #FFFFFF;
   --text: #1A1A1A;
   --text-muted: #3D3835;
   --accent: #3D3835;
-  --divider: #C8C2BB;
+  --divider: #1A1A1A;
   --bg-hover: rgba(0, 0, 0, 0.04);
   --icon-filter: none;
   --card-bg: color-mix(in srgb, var(--bg) 93%, white);

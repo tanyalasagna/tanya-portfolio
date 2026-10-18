@@ -23,7 +23,7 @@ export default function ContactLinks() {
     <>
       <button
         onClick={handleCopy}
-        className={`underline-offset-2 cursor-pointer ${copied ? '' : 'underline hover:no-underline'}`}
+        className={`underline-offset-2 cursor-pointer ${copied ? '' : 'underline decoration-dashed hover:no-underline'}`}
         style={linkStyle}
       >
         {copied ? 'Copied. Say Hi!' : 'Copy Email'}
@@ -32,7 +32,7 @@ export default function ContactLinks() {
         href="https://www.linkedin.com/in/tanya-singh2735/"
         target="_blank"
         rel="noopener noreferrer"
-        className="underline underline-offset-2 hover:no-underline"
+        className="underline decoration-dashed underline-offset-2 hover:no-underline"
         style={linkStyle}
       >
         LinkedIn

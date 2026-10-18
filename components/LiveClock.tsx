@@ -7,12 +7,15 @@ export default function LiveClock() {
   useEffect(() => {
     const tick = () => {
       const now = new Date();
-      const h = now.getHours();
-      const m = now.getMinutes().toString().padStart(2, '0');
-      const s = now.getSeconds().toString().padStart(2, '0');
-      const ampm = h >= 12 ? 'PM' : 'AM';
-      const h12 = (h % 12 || 12).toString().padStart(2, '0');
-      setTime(`${h12}:${m}:${s} ${ampm}`);
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/Chicago',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+      }).formatToParts(now);
+      const get = (type: string) => parts.find(p => p.type === type)?.value ?? '';
+      setTime(`${get('hour')}:${get('minute')}:${get('second')} ${get('dayPeriod')}`);
     };
     tick();
     const id = setInterval(tick, 1000);

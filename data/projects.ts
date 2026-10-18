@@ -4,6 +4,9 @@ export type Project = {
   tags: string[];
   description: string;
   thumbnail: string;
+  thumbnailAspect?: string;
+  videoPlayOnce?: boolean;
+  videoEndOnFirstFrame?: boolean;
   role: string[];
   tools: string[];
   duration: string;
@@ -16,8 +19,10 @@ export const projects: Project[] = [
     slug: 'sift',
     title: 'Designing a Pause Before Checkout for Online Shoppers (0→1)',
     tags: ['Graduate Capstone, 2026'],
-    description: 'Chrome Extension \\ Behavior Design \\ Claude Code + Figma MCP',
-    thumbnail: '/images/Coded Portfolio Thumbnails (1).mp4',
+    description: 'Web Extension \\ Behavior Design \\ Claude Code',
+    thumbnail: '/images/Sift TN (1).mp4',
+    thumbnailAspect: '3/2',
+    videoPlayOnce: true,
     role: ['Product Designer', 'UX Researcher'],
     tools: ['Figma', 'Figma Make', 'Claude', 'Cursor', 'Notebook LM'],
     duration: '4 weeks',
@@ -32,7 +37,7 @@ export const projects: Project[] = [
     title: 'Rethinking Touchscreen UX for Large Public Kiosks at Frogslayer',
     tags: ['Sponsored Project, 2025'],
     description: 'Design Research \\ Rapid Prototyping \\ Usability Testing',
-    thumbnail: '/images/Coded Portfolio Thumbnails (1).png',
+    thumbnail: '/images/FS TN.png',
     role: ['Product Designer'],
     tools: ['Figma', 'Miro', 'Maze'],
     duration: '8 weeks',
@@ -44,10 +49,13 @@ export const projects: Project[] = [
   },
   {
     slug: 'project-three',
-    title: 'Building a One Stop Marketplace for Fiber Artists (0→1)',
+    title: 'Building a One Stop Marketplace for Fiber Artists',
     tags: ['Personal Project, 2024'],
     description: 'Web Platform \\ Marketplace \\ Participatory Design',
-    thumbnail: '/images/Coded Portfolio Thumbnails 640x480.mp4',
+    thumbnail: '/images/loopyloop thumbnail.mp4',
+    thumbnailAspect: '3/2',
+    videoPlayOnce: true,
+    videoEndOnFirstFrame: true,
     role: [],
     tools: [],
     duration: '',
@@ -59,7 +67,7 @@ export const projects: Project[] = [
     title: 'Turning a Hospitality Tech Ideathon into a Retrospective eBook',
     tags: ['Client Work, 2023'],
     description: 'eBook \\ Brand Positioning \\ Content Strategy',
-    thumbnail: '/images/ebook thumbnail.png',
+    thumbnail: '/images/roi blue.png',
     role: [],
     tools: [],
     duration: '',
