@@ -24,12 +24,12 @@ export default function MobileNav() {
     <>
       {/* Top bar */}
       <div
-        className="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 h-14 border-b"
-        style={{ background: 'var(--bg)', borderColor: 'var(--divider)' }}
+        className="lg:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 h-14"
+        style={{ background: 'var(--bg)', borderBottom: '0.5px solid var(--divider)' }}
       >
         <Link
           href="/"
-          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '32px', letterSpacing: nameHovered ? '0.025em' : '0.045em' }}
+          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '32px', letterSpacing: nameHovered ? '0.025em' : '0.045em', paddingTop: '4px' }}
           onMouseEnter={() => setNameHovered(true)}
           onMouseLeave={() => setNameHovered(false)}
         >
@@ -64,7 +64,7 @@ export default function MobileNav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden fixed inset-0 z-40 flex flex-col px-4 pt-20 pb-10"
+            className="lg:hidden fixed inset-0 z-40 flex flex-col px-4 pt-20 pb-10"
             style={{ background: 'var(--bg)' }}
           >
             {/* Bio */}
@@ -75,7 +75,7 @@ export default function MobileNav() {
                 in-house teams at <a href="https://ankogcc.com/" target="_blank" rel="noopener noreferrer" className="underline decoration-dashed underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>Anko</a>, and <Link href="/resume" className="underline decoration-dashed underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>more</Link>.
               </p>
               <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
-                This site is a record of my product design work + a few explorations and side quests. Look around, and feel free to reach out!
+                This site is a record of my product design work + a few explorations. Thanks for stopping by!
               </p>
             </div>
 
@@ -84,14 +84,14 @@ export default function MobileNav() {
               <ContactLinks />
             </div>
 
-            <div className="h-px mb-8" style={{ background: 'var(--divider)' }} />
+            <div className="mb-8" style={{ height: '0.5px', background: 'var(--divider)' }} />
 
             {/* Nav */}
             <div className="mb-8">
               <HookSidebar />
             </div>
 
-            <div className="h-px mb-8" style={{ background: 'var(--divider)' }} />
+            <div className="mb-8" style={{ height: '0.5px', background: 'var(--divider)' }} />
 
             {/* Spacer */}
             <div className="flex-1" />

@@ -1,6 +1,7 @@
 export type Project = {
   slug: string;
   title: string;
+  mobileTitle?: string;
   tags: string[];
   description: string;
   thumbnail: string;
@@ -17,7 +18,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: 'sift',
-    title: 'Designing a Pause Before Checkout for Online Shoppers (0→1)',
+    title: 'Designing a Pause Before Checkout (0→1)',
     tags: ['Graduate Capstone, 2026'],
     description: 'Web Extension \\ Behavior Design \\ Claude Code',
     thumbnail: '/images/Sift TN (1).mp4',
@@ -34,10 +35,11 @@ export const projects: Project[] = [
   },
   {
     slug: 'capstone',
-    title: 'Rethinking Touchscreen UX for Large Public Kiosks at Frogslayer',
+    title: 'Rethinking Touchscreen UX for Self-Service Kiosks at Frogslayer',
+    mobileTitle: 'Rethinking Touchscreen UX for Self-Service Kiosks',
     tags: ['Sponsored Project, 2025'],
-    description: 'Design Research \\ Rapid Prototyping \\ Usability Testing',
-    thumbnail: '/images/FS TN.png',
+    description: 'Design Research \\ Prototyping \\ Usability Testing',
+    thumbnail: '/images/fs new pixel.png',
     role: ['Product Designer'],
     tools: ['Figma', 'Miro', 'Maze'],
     duration: '8 weeks',
@@ -49,10 +51,10 @@ export const projects: Project[] = [
   },
   {
     slug: 'project-three',
-    title: 'Building a One Stop Marketplace for Fiber Artists',
+    title: 'Building a One-Stop Marketplace for Fiber Artists',
     tags: ['Personal Project, 2024'],
     description: 'Web Platform \\ Marketplace \\ Participatory Design',
-    thumbnail: '/images/loopyloop thumbnail.mp4',
+    thumbnail: '/images/ll rounded.mp4',
     thumbnailAspect: '3/2',
     videoPlayOnce: true,
     videoEndOnFirstFrame: true,
@@ -64,10 +66,10 @@ export const projects: Project[] = [
   },
   {
     slug: 'project-four',
-    title: 'Turning a Hospitality Tech Ideathon into a Retrospective eBook',
+    title: 'Turning a Hospitality Tech Ideathon into an eBook',
     tags: ['Client Work, 2023'],
-    description: 'eBook \\ Brand Positioning \\ Content Strategy',
-    thumbnail: '/images/roi blue.png',
+    description: 'eBook \\ Brand Positioning \\ Content Writing',
+    thumbnail: '/images/roi green.png',
     role: [],
     tools: [],
     duration: '',

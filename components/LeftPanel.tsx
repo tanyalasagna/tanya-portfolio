@@ -10,14 +10,14 @@ export default function LeftPanel() {
 
   return (
     <aside
-      className="fixed left-0 top-0 h-full w-[300px] flex flex-col border-r z-50"
-      style={{ padding: '32px', borderColor: 'var(--divider)', background: 'var(--bg)', containerType: 'inline-size' }}
+      className="fixed left-0 top-0 h-full w-[300px] flex flex-col z-50"
+      style={{ padding: '32px', borderRight: '0.5px solid var(--divider)', background: 'var(--bg)', containerType: 'inline-size' }}
     >
       {/* Name */}
       <Link href="/">
         <h1
           className="leading-none"
-          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '44px', marginBottom: '14px', letterSpacing: nameHovered ? '0.025em' : '0.045em' }}
+          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '44px', marginBottom: '12px', letterSpacing: nameHovered ? '0.025em' : '0.045em' }}
           onMouseEnter={() => setNameHovered(true)}
           onMouseLeave={() => setNameHovered(false)}
         >
@@ -32,7 +32,7 @@ export default function LeftPanel() {
         in-house teams at <a href="https://ankogcc.com/" target="_blank" rel="noopener noreferrer" className="underline decoration-dashed underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>Anko</a>, and <Link href="/resume" className="underline decoration-dashed underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>more</Link>.
       </p>
       <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '16px', marginBottom: '16px' }}>
-        This site is a record of my product design work + a few explorations and side quests. Look around, and feel free to reach out!
+        This site is a record of my product design work + a few explorations. Thanks for stopping by!
       </p>
 
       {/* Contact */}
@@ -40,14 +40,14 @@ export default function LeftPanel() {
         <ContactLinks />
       </div>
 
-      <div className="h-px" style={{ background: 'var(--divider)', marginBottom: '32px' }} />
+      <div style={{ height: '0.5px', background: 'var(--divider)', marginBottom: '32px' }} />
 
       {/* Main nav */}
       <div style={{ marginBottom: '32px' }}>
         <HookSidebar />
       </div>
 
-      <div className="h-px" style={{ background: 'var(--divider)', marginBottom: '32px' }} />
+      <div style={{ height: '0.5px', background: 'var(--divider)', marginBottom: '32px' }} />
 
       {/* Spacer */}
       <div className="flex-1" />

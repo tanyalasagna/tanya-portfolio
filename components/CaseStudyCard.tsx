@@ -26,8 +26,8 @@ export default function CaseStudyCard({ project }: { project: Project }) {
 
   const mediaStyle: React.CSSProperties = {
     transition: 'transform 3000ms cubic-bezier(0.19, 1, 0.22, 1), opacity 600ms ease',
-    transform: hovered ? 'scale(1.025)' : 'scale(1)',
-    opacity: hovered ? 0.75 : 1,
+    transform: hovered ? 'scale(1.008)' : 'scale(1)',
+    opacity: hovered ? 0.93 : 1,
   };
 
   const thumbnailMedia = project.thumbnail ? (
@@ -78,17 +78,18 @@ export default function CaseStudyCard({ project }: { project: Project }) {
         style={{ position: 'relative', overflow: 'hidden', border: '0.5px solid var(--thumb-border)', ...extraStyle }}
       >
         {thumbnailMedia}
-        <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: '80%', background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 50%, transparent 100%)', ...overlayStyle }} />
-        <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: '40%', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', maskImage: 'linear-gradient(to top, black 0%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to top, black 0%, transparent 100%)', ...overlayStyle }} />
+        <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: '60%', background: 'linear-gradient(to top, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.05) 50%, transparent 100%)', ...overlayStyle }} />
+        <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: '30%', backdropFilter: 'blur(3px)', WebkitBackdropFilter: 'blur(3px)', maskImage: 'linear-gradient(to top, black 0%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to top, black 0%, transparent 100%)', ...overlayStyle }} />
       </div>
     </Link>
   );
 
   const titleStyle: React.CSSProperties = {
     color: 'var(--text)',
-    fontFamily: "'Dreamer TM', serif",
-    fontFeatureSettings: '"ss01"',
-    letterSpacing: '0.06em',
+    fontFamily: 'var(--font-dm-sans)',
+    fontWeight: 700,
+    fontStyle: 'normal',
+    letterSpacing: '0',
     opacity: hovered ? 0.6 : 1,
     transition: 'opacity 500ms ease',
   };
@@ -124,18 +125,35 @@ export default function CaseStudyCard({ project }: { project: Project }) {
       <div className="@container" style={{ overflow: 'hidden' }}>
         <div className="flex flex-col" style={{ paddingTop: '32px' }}>
           {thumbnailWrapper({ width: '100%', aspectRatio: project.thumbnailAspect ?? '4/3', background: 'var(--divider)' })}
-          <div style={{ paddingTop: '10px' }}>
+          <div style={{ paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            {/* Line 1: tag */}
+            <p className="text-[16px] lg:text-[17.5px]" style={{ fontStyle: 'italic', color: 'var(--text)', lineHeight: 1.2 }}>
+              {project.tags.join(', ')}
+            </p>
+            {/* Line 2: title */}
             <Link href={href}>
-              <h2 className="leading-tight text-[24px] lg:text-[26px]" style={{ ...titleStyle, marginBottom: '0.5px' }}>
-                {project.title}
+              <h2 className="leading-tight text-[18px] lg:text-[20px]" style={{ ...titleStyle }}>
+                {project.mobileTitle ? (
+                  <>
+                    <span className="lg:hidden">{project.mobileTitle}</span>
+                    <span className="hidden lg:inline">{project.title}</span>
+                  </>
+                ) : project.title}
               </h2>
             </Link>
-            <p className="leading-relaxed text-[14px] lg:text-[16px]" style={{}}>
-              <span style={{ fontStyle: 'italic', color: 'var(--text)' }}>{project.tags.join(', ')}</span>
-              {project.description ? (
-                <span style={{ color: 'var(--text-muted)' }}>{` \\ ${project.description}`}</span>
-              ) : null}
-            </p>
+            {/* Line 3: descriptors */}
+            {project.description ? (
+              <p className="text-[16px] lg:text-[17.5px]" style={{ lineHeight: 1.2 }}>
+                {(() => {
+                  const parts = project.description.split(' \\ ');
+                  return parts.map((part, i) => (
+                    <span key={i} style={{ color: 'var(--text-muted)' }}>
+                      {i === 0 ? part : ` \\ ${part}`}
+                    </span>
+                  ));
+                })()}
+              </p>
+            ) : null}
           </div>
         </div>
       </div>
