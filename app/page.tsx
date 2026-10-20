@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       {/* Mobile / tablet: single column */}
-      <div className="lg:hidden px-4 pt-8 pb-8 md:px-8 md:pt-0 md:pb-8">
+      <div className="lg:hidden px-4 pt-0 pb-8 md:px-8 md:pt-0 md:pb-8">
         {projects.map((project) => (
           <CaseStudyCard key={project.slug} project={project} />
         ))}

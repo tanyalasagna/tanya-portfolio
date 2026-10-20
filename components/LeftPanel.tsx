@@ -17,7 +17,7 @@ export default function LeftPanel() {
       <Link href="/">
         <h1
           className="leading-none"
-          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '44px', marginBottom: '16px', letterSpacing: nameHovered ? '0.025em' : '0.045em' }}
+          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', fontSize: '44px', marginBottom: '14px', letterSpacing: nameHovered ? '0.025em' : '0.045em' }}
           onMouseEnter={() => setNameHovered(true)}
           onMouseLeave={() => setNameHovered(false)}
         >
@@ -31,7 +31,7 @@ export default function LeftPanel() {
         <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="underline decoration-dashed underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>Toss the Coin</a>,{' '}
         in-house teams at <a href="https://ankogcc.com/" target="_blank" rel="noopener noreferrer" className="underline decoration-dashed underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>Anko</a>, and <Link href="/resume" className="underline decoration-dashed underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>more</Link>.
       </p>
-      <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '16px', marginBottom: '24px' }}>
+      <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '16px', marginBottom: '16px' }}>
         This site is a record of my product design work + a few explorations and side quests. Look around, and feel free to reach out!
       </p>
 

@@ -54,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             id="main-scroll"
           >
               {/* Mobile-only bio — always visible above page content */}
-              <div className="md:hidden pt-8 pb-2" style={{ paddingLeft: '16px', paddingRight: '16px' }}>
+              <div className="md:hidden pt-8 pb-0" style={{ paddingLeft: '16px', paddingRight: '16px' }}>
                 <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
                   Hi! I&rsquo;m a product designer with a background in content. I&rsquo;ve worked with agency clients at{' '}
                   <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>Toss the Coin</a>,{' '}
