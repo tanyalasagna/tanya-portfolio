@@ -1,5 +1,5 @@
-import AnimatedCards from '@/components/AnimatedCards';
+import StaggeredGrid from '@/components/StaggeredGrid';
 
 export default function Home() {
-  return <AnimatedCards />;
+  return <StaggeredGrid />;
 }
