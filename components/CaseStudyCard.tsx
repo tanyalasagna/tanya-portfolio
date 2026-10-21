@@ -136,7 +136,7 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setThumbActive(false); }}
     >
-      {/* Cursor-following tooltip */}
+      {/* Cursor-following tooltip — rendered outside overflow:hidden container */}
       <div style={tooltipStyle}>
         <span style={{
           background: '#1A1A1A',

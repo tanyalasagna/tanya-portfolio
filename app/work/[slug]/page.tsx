@@ -1,5 +1,7 @@
 import { projects } from '@/data/projects';
 import { notFound } from 'next/navigation';
+import CaseStudyCover from '@/components/CaseStudyCover';
+import CaseStudyContent from '@/components/CaseStudyContent';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -15,100 +17,69 @@ export default async function CaseStudyPage({ params }: Props) {
   if (!project) notFound();
 
   return (
-    <div className="px-10 md:px-14 py-10 max-w-4xl">
-      {/* Thumbnail */}
-      <div
-        className="w-full h-64 rounded-lg overflow-hidden mb-10 flex items-center justify-center font-mono text-sm"
-        style={{
-          background: 'var(--bg-hover)',
-          border: '1px solid var(--divider)',
-          color: 'var(--text-muted)',
-        }}
-      >
-        {project.thumbnail ? (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img src={project.thumbnail} alt={project.title} className="w-full h-full object-cover" />
-        ) : (
-          'project thumbnail'
-        )}
-      </div>
+    <div className="px-8 lg:w-3/4 lg:mx-auto" style={{ paddingTop: '40px', paddingBottom: '80px' }}>
+      <CaseStudyContent>
+        {/* Cover */}
+        <div><CaseStudyCover project={project} /></div>
 
-      {/* Title */}
-      <h1 className="mb-10 leading-tight" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontWeight: 400, fontSize: '25px' }}>
-        {project.title}
-      </h1>
+        {/* Title + subtitle */}
+        <div>
+          <h1 className="leading-none mb-2 text-[16px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontWeight: 400, fontStyle: 'normal' }}>
+            {project.displayTitle ?? project.title}
+          </h1>
+          {project.subtitle && (
+            <p className="mb-6 lg:mb-8 text-[32px] lg:text-[44px]" style={{ color: 'var(--text-muted)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', fontWeight: 900, letterSpacing: '0.045em', lineHeight: 1.1 }}>
+              {project.subtitle.split('-').map((part, i, arr) => (
+                <span key={i}>{part}{i < arr.length - 1 && <span style={{ fontFamily: 'var(--font-dm-sans)', fontWeight: 400, letterSpacing: 0 }}>-</span>}</span>
+              ))}
+            </p>
+          )}
+        </div>
 
-      {/* Metadata grid */}
-      <div className="grid grid-cols-2 gap-x-12 gap-y-6 mb-14">
-        <div>
-          <div className="font-mono text-[10px] tracking-widest mb-1.5" style={{ color: 'var(--accent)' }}>
-            Role
-          </div>
-          <div className="text-sm leading-relaxed" style={{ color: 'var(--text)' }}>
-            {project.role.join('\n')}
-          </div>
-        </div>
-        <div>
-          <div className="font-mono text-[10px] tracking-widest mb-1.5" style={{ color: 'var(--accent)' }}>
-            Tools
-          </div>
-          <div className="text-sm leading-relaxed font-mono" style={{ color: 'var(--text)' }}>
-            {project.tools.join(' \\ ')}
-          </div>
-        </div>
-        <div>
-          <div className="font-mono text-[10px] tracking-widest mb-1.5" style={{ color: 'var(--accent)' }}>
-            Duration
-          </div>
-          <div className="text-sm" style={{ color: 'var(--text)' }}>
-            {project.duration}
-          </div>
-        </div>
-        <div>
-          <div className="font-mono text-[10px] tracking-widest mb-1.5" style={{ color: 'var(--accent)' }}>
-            Impact
-          </div>
-          <ul className="text-sm leading-relaxed space-y-1" style={{ color: 'var(--text)' }}>
-            {project.impact.map((item, i) => (
-              <li key={i}>— {item}</li>
+        {/* Metadata */}
+        <section id="intro" className="scroll-mt-8 mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {[
+              { label: 'Role', value: project.role.join('\n') },
+              { label: 'Timeline', value: project.duration },
+              { label: project.teamLabel ?? 'Team', value: project.team },
+              { label: project.toolsLabel ?? 'Tools', value: project.tools.join('\n') },
+            ].map(({ label, value }) => (
+              <div key={label} style={{ padding: '20px 18px', background: '#F0F0EE' }}>
+                <div className="mb-3" style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '16px' }}>{label}</div>
+                <div style={{ color: 'var(--text)', fontFamily: 'Alegreya, serif', fontSize: '16px', lineHeight: 1.5, whiteSpace: 'pre-line' }}>{value}</div>
+              </div>
             ))}
-          </ul>
-        </div>
+          </div>
+        </section>
+
+        {/* Research */}
         <div>
-          <div className="font-mono text-[10px] tracking-widest mb-1.5" style={{ color: 'var(--accent)' }}>
-            Team
-          </div>
-          <div className="text-sm" style={{ color: 'var(--text)' }}>
-            {project.team}
-          </div>
+          <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
+          <section id="research" className="scroll-mt-8 mb-16">
+            <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)' }}>Research</h2>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>Research findings and process coming soon.</p>
+          </section>
         </div>
-      </div>
 
-      {/* Case study body sections */}
-      <section id="problem" className="mb-16 scroll-mt-6">
-        <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text)' }}>Problem</h2>
-        <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-          {project.description}
-        </p>
-      </section>
+        {/* Designs */}
+        <div>
+          <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
+          <section id="designs" className="scroll-mt-8 mb-16">
+            <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)' }}>Designs</h2>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>Final designs coming soon.</p>
+          </section>
+        </div>
 
-      <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
-
-      <section id="research" className="mb-16 scroll-mt-6">
-        <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text)' }}>Research</h2>
-        <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-          Research findings and process coming soon.
-        </p>
-      </section>
-
-      <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
-
-      <section id="solution" className="mb-20 scroll-mt-6">
-        <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text)' }}>Solution</h2>
-        <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-          Final designs and outcomes coming soon.
-        </p>
-      </section>
+        {/* Reflections */}
+        <div>
+          <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
+          <section id="reflections" className="scroll-mt-8 mb-16">
+            <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)' }}>Reflections</h2>
+            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>Reflections coming soon.</p>
+          </section>
+        </div>
+      </CaseStudyContent>
     </div>
   );
 }
