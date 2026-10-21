@@ -1,15 +1,36 @@
 'use client';
 import Link from 'next/link';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { Project } from '@/data/projects';
 
-export default function CaseStudyCard({ project }: { project: Project }) {
+export default function CaseStudyCard({ project, padTop = 26 }: { project: Project; padTop?: number }) {
   const [hovered, setHovered] = useState(false);
   const [thumbActive, setThumbActive] = useState(false);
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
+  const [mediaLoaded, setMediaLoaded] = useState(false);
+  const [showShimmer, setShowShimmer] = useState(false);
   const isVideo = /\.(mp4|webm|mov)$/i.test(project.thumbnail ?? '');
   const href = `/work/${project.slug}`;
   const videoRef = useRef<HTMLVideoElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  // Delay shimmer by 200ms — avoids flash for fast/cached media
+  useEffect(() => {
+    if (mediaLoaded) return;
+    const t = setTimeout(() => setShowShimmer(true), 200);
+    return () => clearTimeout(t);
+  }, [mediaLoaded]);
+
+  // Handle already-cached media (won't fire load events after mount)
+  useEffect(() => {
+    if (isVideo) {
+      if (videoRef.current && videoRef.current.readyState >= 3) setMediaLoaded(true);
+    } else {
+      if (imgRef.current && imgRef.current.complete) setMediaLoaded(true);
+    }
+  }, [isVideo]);
+
+  const handleMediaReady = () => setMediaLoaded(true);
 
   const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -41,11 +62,13 @@ export default function CaseStudyCard({ project }: { project: Project }) {
         playsInline
         className="w-full h-full object-cover origin-center"
         style={mediaStyle}
+        onCanPlay={handleMediaReady}
+        onError={handleMediaReady}
         onEnded={project.videoEndOnFirstFrame ? () => { if (videoRef.current) videoRef.current.currentTime = 0; } : undefined}
       />
     ) : (
       /* eslint-disable-next-line @next/next/no-img-element */
-      <img src={project.thumbnail} alt={project.title} className="w-full h-full object-cover origin-center" style={mediaStyle} />
+      <img ref={imgRef} src={project.thumbnail} alt={project.title} className="w-full h-full object-cover origin-center" style={mediaStyle} onLoad={handleMediaReady} onError={handleMediaReady} />
     )
   ) : (
     <div className="w-full h-full flex items-center justify-center font-mono text-xs" style={{ color: 'var(--text-muted)' }}>
@@ -71,13 +94,25 @@ export default function CaseStudyCard({ project }: { project: Project }) {
   };
 
   const thumbnailWrapper = (extraStyle: React.CSSProperties) => (
-    <Link href={href} style={{ color: 'inherit' }}>
+    <Link href={href} style={{ color: 'inherit' }} data-cuelume-open="" data-cuelume-emphasis="subtle">
       <div
         onMouseEnter={handleThumbEnter}
         onMouseLeave={() => setThumbActive(false)}
         style={{ position: 'relative', overflow: 'hidden', border: '0.5px solid var(--thumb-border)', ...extraStyle }}
       >
         {thumbnailMedia}
+        {/* Shimmer — fades out once media is ready */}
+        <div
+          className={showShimmer && !mediaLoaded ? 'media-shimmer' : ''}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            pointerEvents: 'none',
+            zIndex: 1,
+            opacity: showShimmer && !mediaLoaded ? 1 : 0,
+            transition: 'opacity 500ms ease',
+          }}
+        />
         <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: '60%', background: 'linear-gradient(to top, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.05) 50%, transparent 100%)', ...overlayStyle }} />
         <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: '30%', backdropFilter: 'blur(3px)', WebkitBackdropFilter: 'blur(3px)', maskImage: 'linear-gradient(to top, black 0%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to top, black 0%, transparent 100%)', ...overlayStyle }} />
       </div>
@@ -111,8 +146,8 @@ export default function CaseStudyCard({ project }: { project: Project }) {
           fontFamily: 'var(--font-dm-sans)',
           fontWeight: 400,
           padding: '8px 12px',
-          borderRadius: '2px',
-          border: '0.5px solid rgba(255,255,255,0.2)',
+          borderRadius: '999px',
+          border: '0.5px solid rgba(255,255,255,0.65)',
           letterSpacing: '0.02em',
           display: 'inline-flex',
           alignItems: 'center',
@@ -123,15 +158,15 @@ export default function CaseStudyCard({ project }: { project: Project }) {
       </div>
 
       <div className="@container" style={{ overflow: 'hidden' }}>
-        <div className="flex flex-col" style={{ paddingTop: '32px' }}>
+        <div className="flex flex-col" style={{ paddingTop: `${padTop}px` }}>
           {thumbnailWrapper({ width: '100%', aspectRatio: project.thumbnailAspect ?? '4/3', background: 'var(--divider)' })}
-          <div style={{ paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <div className="pt-4 md:pt-[10px]" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             {/* Line 1: tag */}
             <p className="text-[16px] lg:text-[17.5px]" style={{ fontStyle: 'italic', color: 'var(--text)', lineHeight: 1.2 }}>
               {project.tags.join(', ')}
             </p>
             {/* Line 2: title */}
-            <Link href={href}>
+            <Link href={href} data-cuelume-open="" data-cuelume-emphasis="subtle">
               <h2 className="leading-tight text-[18px] lg:text-[20px]" style={{ ...titleStyle }}>
                 {project.mobileTitle ? (
                   <>

@@ -11,7 +11,7 @@
 
 
 
-/* === Theme tokens (paper = default) === */
+/* === Theme tokens === */
 :root {
   --bg: #FFFFFF;
   --sidebar-bg: #FFFFFF;
@@ -25,6 +25,7 @@
   --edge-tint: rgba(240, 165, 20, 0.28);
   --thumb-border: rgba(0, 0, 0, 0.2);
 }
+
 
 
 /* === Tailwind theme tokens === */
@@ -41,6 +42,29 @@
 }
 
 
+
+/* === Shimmer loading effect === */
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-200%); }
+  100% { transform: translateX(200%); }
+}
+
+.media-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
+  animation: shimmer-sweep 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .media-shimmer::after { animation: none; }
+}
 
 /* === Base === */
 html {

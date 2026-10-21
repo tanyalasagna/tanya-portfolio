@@ -25,6 +25,8 @@ export default function ContactLinks() {
         onClick={handleCopy}
         className={`underline-offset-2 cursor-pointer ${copied ? '' : 'underline decoration-dashed hover:no-underline'}`}
         style={linkStyle}
+        data-cuelume-tap=""
+        data-cuelume-emphasis="subtle"
       >
         {copied ? 'Copied. Say Hi!' : 'Copy Email'}
       </button>
@@ -34,6 +36,8 @@ export default function ContactLinks() {
         rel="noopener noreferrer"
         className="underline decoration-dashed underline-offset-2 hover:no-underline"
         style={linkStyle}
+        data-cuelume-tap=""
+        data-cuelume-emphasis="subtle"
       >
         LinkedIn
       </a>

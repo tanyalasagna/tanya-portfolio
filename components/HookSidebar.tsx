@@ -131,6 +131,8 @@ export default function HookSidebar() {
               href={item.href}
               ref={(el) => { itemRefs.current[index] = el; }}
               aria-current={isActive ? 'page' : undefined}
+              data-cuelume-navigate=""
+              data-cuelume-emphasis="subtle"
               onMouseEnter={() => { setHoverIndex(index); setPointerInside(true); }}
               onFocus={() => { setHoverIndex(index); setFocusInside(true); }}
               onBlur={() => setFocusInside(false)}

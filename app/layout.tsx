@@ -14,6 +14,7 @@ import LeftPanel from '@/components/LeftPanel';
 import MobileNav from '@/components/MobileNav';
 import PageTransition from '@/components/PageTransition';
 import ThemeTransition from '@/components/ThemeTransition';
+import CuelumeProvider from '@/components/CuelumeProvider';
 
 export const metadata: Metadata = {
   title: 'Tanya Singh — Product Designer',
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-screen antialiased">
         <ThemeProvider>
+          <CuelumeProvider />
           {/* Canvas background transition — sits at z-index 0, behind all content */}
           <ThemeTransition />
 
@@ -47,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             id="main-scroll"
           >
               {/* Mobile/tablet-only bio — visible below lg */}
-              <div className="lg:hidden pt-8 pb-0 px-4">
+              <div className="lg:hidden pt-8 pb-6 px-4">
                 <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
                   Hi! I&rsquo;m a product designer with a background in content. I&rsquo;ve worked with agency clients at{' '}
                   <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="underline decoration-dashed underline-offset-2 hover:no-underline" style={{ color: 'inherit', fontStyle: 'italic' }}>Toss the Coin</a>,{' '}
