@@ -22,6 +22,7 @@ export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [colophonOpen, setColophonOpen] = useState(false);
   const [nameHovered, setNameHovered] = useState(false);
+  const [speakerHovered, setSpeakerHovered] = useState(false);
   const colophonRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   // Close menu on route change
@@ -101,8 +102,8 @@ export default function MobileNav() {
             <div className="mb-8">
               <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
                 Hi! I&rsquo;m a product designer with a background in content. I&rsquo;ve worked with agency clients at{' '}
-                <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="underline decoration-dashed underline-offset-2 hover:no-underline hover:italic" style={{ color: 'inherit' }}>Toss the Coin</a>,{' '}
-                in-house teams at <a href="https://ankogcc.com/" target="_blank" rel="noopener noreferrer" className="underline decoration-dashed underline-offset-2 hover:no-underline hover:italic" style={{ color: 'inherit' }}>Anko</a>, and <Link href="/resume" className="underline decoration-dashed underline-offset-2 hover:no-underline hover:italic" style={{ color: 'inherit' }}>more</Link>.
+                <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="underline decoration-[#8B31CC] underline-offset-2 hover:no-underline hover:text-[#8B31CC] text-inherit transition-colors duration-150">Toss the Coin</a>,{' '}
+                in-house teams at <a href="https://ankogcc.com/" target="_blank" rel="noopener noreferrer" className="underline decoration-[#8B31CC] underline-offset-2 hover:no-underline hover:text-[#8B31CC] text-inherit transition-colors duration-150">Anko</a>, and <Link href="/resume" className="underline decoration-[#8B31CC] underline-offset-2 hover:no-underline hover:text-[#8B31CC] text-inherit transition-colors duration-150">more</Link>.
               </p>
               <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
                 This site is a record of my product design work + a few explorations.
@@ -130,7 +131,7 @@ export default function MobileNav() {
             <div
               ref={colophonRef}
               onClick={e => e.stopPropagation()}
-              style={{ position: 'absolute', left: '16px', right: '16px', bottom: '40px', background: '#F0F0EE', borderRadius: '14px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none' }}
+              style={{ position: 'absolute', left: '16px', right: '16px', bottom: '40px', background: '#FFFFFF', borderRadius: '14px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none', border: '0.5px solid #888888' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
                 <span style={{ fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', fontSize: '24px', color: '#1A1A1A', letterSpacing: '0.045em', fontWeight: 700 }}>Colophon</span>
@@ -143,7 +144,7 @@ export default function MobileNav() {
                     {line.links.map((lk, j) => (
                       <span key={j}>
                         {j > 0 && (line.join ?? ' and ')}
-                        <a href={lk.href} target="_blank" rel="noopener noreferrer" className="underline decoration-dashed underline-offset-2 hover:no-underline hover:italic" style={{ color: 'inherit' }}>{lk.label}</a>
+                        <a href={lk.href} target="_blank" rel="noopener noreferrer" className="underline decoration-[#8B31CC] underline-offset-2 hover:no-underline hover:text-[#8B31CC] text-inherit transition-colors duration-150">{lk.label}</a>
                       </span>
                     ))}
                   </p>
@@ -152,26 +153,25 @@ export default function MobileNav() {
             </div>
 
             {/* Sound toggle + clock */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
               {/* Clock + colophon */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25px' }}>
                 <LiveClock />
                 <div style={{ color: 'var(--text-muted)', fontSize: '16px', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
                   <span>2027</span>
-                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden style={{ flexShrink: 0 }}>
-                    <path d="M12 2l2.09 7.26L22 12l-7.91 2.74L12 22l-2.09-7.26L2 12l7.91-2.74z" />
-                  </svg>
+                  <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="18" height="18" style={{ flexShrink: 0, opacity: 0.7 }} />
                   <button
                     onClick={e => { e.stopPropagation(); setColophonOpen(true); play('open', { theme: 'bubble', emphasis: 'subtle' }); }}
-                    className="underline decoration-dashed underline-offset-[3px] hover:no-underline hover:italic"
-                    style={{ color: 'inherit', background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
+                    className="underline decoration-[#8B31CC] underline-offset-[3px] hover:no-underline hover:text-[#8B31CC] text-inherit transition-colors duration-150"
+                    style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
                   >
                     Open Colophon
                   </button>
                 </div>
               </div>
               {/* Speaker with bg */}
-              <div style={{ background: 'rgba(0,0,0,0.06)', borderRadius: '8px', padding: '7px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <div onMouseEnter={() => setSpeakerHovered(true)} onMouseLeave={() => setSpeakerHovered(false)}
+              style={{ background: 'transparent', borderRadius: '50%', width: '34px', height: '34px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, border: `0.5px solid ${speakerHovered ? '#1A1A1A' : '#888888'}` }}>
                 <SoundToggle />
               </div>
             </div>

@@ -32,15 +32,15 @@ export default function SoundToggle() {
       }}
     >
       {on ? (
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden>
+        <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden>
           <path d="M3 8H7L12 4v14L7 14H3z" fill="currentColor" />
           <path d="M15 7.5a5 5 0 0 1 0 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       ) : (
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden>
+        <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden>
           <path d="M3 8H7L12 4v14L7 14H3z" fill="currentColor" />
-          <line x1="15" y1="7.5" x2="20" y2="14.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-          <line x1="20" y1="7.5" x2="15" y2="14.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="15.5" y1="8.5" x2="19.5" y2="13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="19.5" y1="8.5" x2="15.5" y2="13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       )}
     </button>

@@ -11,10 +11,11 @@
 
 
 
+
 /* === Theme tokens === */
 :root {
-  --bg: #FFFFFF;
-  --sidebar-bg: #FFFFFF;
+  --bg: #FAFAFA;
+  --sidebar-bg: #FAFAFA;
   --text: #1A1A1A;
   --text-muted: #3D3835;
   --accent: #3D3835;
