@@ -121,7 +121,7 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
   const titleStyle: React.CSSProperties = {
     color: 'var(--text)',
     fontFamily: 'var(--font-dm-sans)',
-    fontWeight: 700,
+    fontWeight: 600,
     fontStyle: 'normal',
     letterSpacing: '0',
     opacity: hovered ? 0.6 : 1,

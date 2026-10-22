@@ -32,7 +32,7 @@ function Rail({ from = 0, y, visible, color }: { from?: number; y: number | null
         animate={{ top: from, height: Math.max(0, (y ?? 0) - CORNER - from) }}
         transition={travel}
         style={{ backgroundImage: DASH }}
-        className="absolute left-0.5 w-[1.5px]"
+        className="absolute left-0.5 w-px"
       />
       <motion.svg
         initial={false}
@@ -44,7 +44,7 @@ function Rail({ from = 0, y, visible, color }: { from?: number; y: number | null
         fill="none"
         className="absolute left-0.5"
       >
-        <path d="M0.5 0a6 6 0 0 0 6 6H12" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M0.5 0a6 6 0 0 0 6 6H12" stroke="currentColor" strokeWidth="1" />
       </motion.svg>
     </motion.span>
   );

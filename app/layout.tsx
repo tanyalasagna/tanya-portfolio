@@ -6,7 +6,7 @@ import './globals.css';
 const alegreya = Alegreya({
   variable: '--font-dm-sans',
   subsets: ['latin'],
-  weight: ['400', '500', '700'],
+  weight: ['400', '500', '600', '700'],
   style: ['normal', 'italic'],
 });
 import { ThemeProvider } from '@/components/ThemeProvider';
