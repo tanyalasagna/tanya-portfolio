@@ -17,15 +17,18 @@ export default async function CaseStudyPage({ params }: Props) {
   if (!project) notFound();
 
   return (
-    <div className="px-8 lg:w-3/4 lg:mx-auto" style={{ paddingTop: '40px', paddingBottom: '80px' }}>
+    <div className="px-4 lg:w-3/4 lg:mx-auto" style={{ paddingTop: '40px', paddingBottom: '80px' }}>
       <CaseStudyContent>
         {/* Cover */}
         <div><CaseStudyCover project={project} /></div>
 
         {/* Title + subtitle */}
         <div>
-          <h1 className="leading-none mb-2 text-[16px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontWeight: 400, fontStyle: 'normal' }}>
+          <h1 className="leading-none mb-2 text-[18px] lg:text-[20px]" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontWeight: 500, fontStyle: 'normal' }}>
             {project.displayTitle ?? project.title}
+            {project.tags.length > 0 && (
+              <span style={{ opacity: 0.7, fontWeight: 400, fontStyle: 'italic' }}>{' '}({project.tags.join(', ')})</span>
+            )}
           </h1>
           {project.subtitle && (
             <p className="mb-6 lg:mb-8 text-[32px] lg:text-[44px]" style={{ color: 'var(--text-muted)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', fontWeight: 900, letterSpacing: '0.045em', lineHeight: 1.1 }}>
@@ -47,7 +50,7 @@ export default async function CaseStudyPage({ params }: Props) {
             ].map(({ label, value }) => (
               <div key={label} style={{ padding: '20px 18px', background: '#F0F0EE' }}>
                 <div className="mb-3" style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '16px' }}>{label}</div>
-                <div style={{ color: 'var(--text)', fontFamily: 'Alegreya, serif', fontSize: '16px', lineHeight: 1.5, whiteSpace: 'pre-line' }}>{value}</div>
+                <div style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", fontSize: '16px', lineHeight: 1.5, whiteSpace: 'pre-line' }}>{value}</div>
               </div>
             ))}
           </div>

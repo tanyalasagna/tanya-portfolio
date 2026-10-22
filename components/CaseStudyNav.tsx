@@ -105,7 +105,7 @@ export default function CaseStudyNav() {
         paddingBottom: '8px',
         paddingLeft: '2px',
       }}>
-        Navigate Case Study
+        Navigate case study
       </span>
 
       <div

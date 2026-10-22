@@ -11,7 +11,7 @@ import { gsap } from 'gsap';
 import { usePathname } from 'next/navigation';
 
 const colophonLines = [
-  { before: 'Type set in ', links: [{ label: 'Dreamer TM', href: 'https://typemania.eu/products/dreamer-tm' }, { label: 'Alegreya', href: 'https://fonts.google.com/specimen/Alegreya' }], join: ' and ' },
+  { before: 'Type set in ', links: [{ label: 'Dreamer TM', href: 'https://typemania.eu/products/dreamer-tm' }, { label: 'Alegreya Sans', href: 'https://fonts.google.com/specimen/Alegreya+Sans' }], join: ' and ' },
   { before: 'Sound by ', links: [{ label: 'Cuelume', href: 'https://cuelume.dev/' }] },
   { before: 'Hosted on ', links: [{ label: 'Vercel', href: 'https://vercel.com/' }] },
   { before: 'Source on ', links: [{ label: 'Github', href: 'https://github.com/tanyalasagna/tanya-portfolio' }] },
@@ -65,7 +65,7 @@ export default function LeftPanel() {
           {/* Back link */}
           <Link
             href="/"
-            className="hover:opacity-[0.4] transition-opacity duration-200"
+            className="hover:text-[#8B31CC] transition-colors duration-150"
             style={{
               color: 'var(--text)',
               fontSize: '24px',
@@ -73,19 +73,13 @@ export default function LeftPanel() {
               fontFeatureSettings: '"ss01"',
               fontWeight: 900,
               letterSpacing: '0.045em',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
               marginBottom: '32px',
               textDecoration: 'none',
               lineHeight: 1,
             }}
             onClick={() => play('select', { theme: 'bubble', emphasis: 'subtle' })}
           >
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden style={{ flexShrink: 0 }}>
-              <path d="M11 4L6 9L11 14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            Back to Projects
+            ← Back to projects
           </Link>
 
           <div style={{ height: '0.5px', background: 'var(--divider)', marginBottom: '32px' }} />
@@ -159,7 +153,7 @@ export default function LeftPanel() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25px' }}>
               <div style={{ opacity: 0.7 }}><LiveClock /></div>
-              <div style={{ color: 'var(--text-muted)', fontSize: '16px', fontFamily: 'var(--font-dm-sans)', fontStyle: 'normal', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <div style={{ color: 'var(--text-muted)', fontSize: '16px', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
                 <span style={{ opacity: 0.7 }}>2027</span>
                 <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="18" height="18" style={{ flexShrink: 0, opacity: 0.7 }} />
                 <button
@@ -167,7 +161,7 @@ export default function LeftPanel() {
                   className="underline decoration-[#8B31CC] underline-offset-[3px] hover:no-underline hover:text-[#8B31CC] text-inherit transition-colors duration-150"
                   style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit', opacity: 0.7 }}
                 >
-                  Open Colophon
+                  Open colophon
                 </button>
               </div>
             </div>

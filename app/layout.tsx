@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Alegreya } from 'next/font/google';
+import { Alegreya_Sans } from 'next/font/google';
 import './globals.css';
 
-const alegreya = Alegreya({
+const alegreya = Alegreya_Sans({
   variable: '--font-dm-sans',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500', '700'],
   style: ['normal', 'italic'],
 });
 import { ThemeProvider } from '@/components/ThemeProvider';

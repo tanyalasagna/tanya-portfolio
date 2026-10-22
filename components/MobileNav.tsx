@@ -11,7 +11,7 @@ import ContactLinks from './ContactLinks';
 import HookSidebar from './HookSidebar';
 
 const colophonLines = [
-  { before: 'Type set in ', links: [{ label: 'Dreamer TM', href: 'https://typemania.eu/products/dreamer-tm' }, { label: 'Alegreya', href: 'https://fonts.google.com/specimen/Alegreya' }], join: ' and ' },
+  { before: 'Type set in ', links: [{ label: 'Dreamer TM', href: 'https://typemania.eu/products/dreamer-tm' }, { label: 'Alegreya Sans', href: 'https://fonts.google.com/specimen/Alegreya+Sans' }], join: ' and ' },
   { before: 'Sound by ', links: [{ label: 'Cuelume', href: 'https://cuelume.dev/' }] },
   { before: 'Hosted on ', links: [{ label: 'Vercel', href: 'https://vercel.com/' }] },
   { before: 'Source on ', links: [{ label: 'Github', href: 'https://github.com/tanyalasagna/tanya-portfolio' }] },
@@ -165,7 +165,7 @@ export default function MobileNav() {
                     className="underline decoration-[#8B31CC] underline-offset-[3px] hover:no-underline hover:text-[#8B31CC] text-inherit transition-colors duration-150"
                     style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
                   >
-                    Open Colophon
+                    Open colophon
                   </button>
                 </div>
               </div>
