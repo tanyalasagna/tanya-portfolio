@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 
 const CORNER = 6;
-const DASH = 'repeating-linear-gradient(to top, transparent 0 2px, currentColor 2px 4px)';
+const DASH = 'linear-gradient(to top, currentColor, currentColor)';
 
 const sections = [
   { id: 'intro',       label: 'Intro' },
@@ -44,7 +44,7 @@ function Rail({ from = 0, y, visible, color }: { from?: number; y: number | null
         fill="none"
         className="absolute left-0.5"
       >
-        <path d="M0.5 0a6 6 0 0 0 6 6H12" stroke="currentColor" strokeWidth="1.5" strokeDasharray="2 2" />
+        <path d="M0.5 0a6 6 0 0 0 6 6H12" stroke="currentColor" strokeWidth="1.5" />
       </motion.svg>
     </motion.span>
   );
