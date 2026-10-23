@@ -16,7 +16,6 @@ import PageTransition from '@/components/PageTransition';
 import ThemeTransition from '@/components/ThemeTransition';
 import CuelumeProvider from '@/components/CuelumeProvider';
 import MobileBio from '@/components/MobileBio';
-
 export const metadata: Metadata = {
   title: 'Tanya Singh — Product Designer',
   description:
@@ -49,11 +48,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             className="lg:ml-[300px] pt-14 lg:pt-0"
             id="main-scroll"
           >
-              {/* Mobile/tablet-only bio — only on home page */}
-              <MobileBio />
-
-              <PageTransition>{children}</PageTransition>
-            </main>
+            <MobileBio />
+            <PageTransition>{children}</PageTransition>
+          </main>
 
         </ThemeProvider>
       </body>

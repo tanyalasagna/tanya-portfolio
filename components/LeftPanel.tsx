@@ -43,7 +43,7 @@ export default function LeftPanel() {
   return (
     <aside
       className="fixed left-0 top-0 h-full w-[300px] flex flex-col z-50"
-      style={{ padding: '32px', borderRight: '0.5px solid var(--divider)', background: 'var(--bg)', containerType: 'inline-size' }}
+      style={{ padding: '32px', paddingTop: isCaseStudy ? '40px' : '32px', borderRight: '0.5px solid var(--divider)', background: 'var(--bg)', containerType: 'inline-size' }}
       onClick={() => setColophonOpen(false)}
     >
       {/* Name — hidden on case study pages */}
@@ -65,19 +65,16 @@ export default function LeftPanel() {
           {/* Back link */}
           <Link
             href="/"
-            className="hover:text-[#8B31CC] transition-colors duration-150"
+            className="hover:opacity-70 transition-opacity duration-150"
             style={{
-              color: 'var(--text)',
-              fontSize: '24px',
-              fontFamily: "'Dreamer TM', serif",
-              fontFeatureSettings: '"ss01"',
-              fontWeight: 900,
-              letterSpacing: '0.045em',
+              fontSize: '20px',
+              fontFamily: "'Alegreya Sans', sans-serif",
+              fontWeight: 600,
               marginBottom: '32px',
               textDecoration: 'none',
               lineHeight: 1,
             }}
-            onClick={() => play('select', { theme: 'bubble', emphasis: 'subtle' })}
+            onClick={() => play('close', { theme: 'bubble', emphasis: 'subtle' })}
           >
             ← Back to projects
           </Link>

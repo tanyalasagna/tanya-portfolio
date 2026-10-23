@@ -88,8 +88,11 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
     pointerEvents: 'none',
     zIndex: 9999,
     whiteSpace: 'nowrap',
-    clipPath: hovered ? 'inset(0 0% 0 0)' : 'inset(0 100% 0 0)',
-    transition: hovered ? 'clip-path 350ms cubic-bezier(0.22, 1, 0.36, 1)' : 'none',
+    clipPath: hovered ? 'inset(0 0% 0 0 round 999px)' : 'inset(0 100% 0 0 round 999px)',
+    filter: hovered ? 'blur(0px)' : 'blur(5px)',
+    transition: hovered
+      ? 'clip-path 600ms cubic-bezier(0.16, 1, 0.3, 1), filter 500ms cubic-bezier(0.16, 1, 0.3, 1)'
+      : 'none',
   };
 
   const thumbnailWrapper = (extraStyle: React.CSSProperties) => (
@@ -124,6 +127,7 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
     fontWeight: 600,
     fontStyle: 'normal',
     letterSpacing: '0',
+    opacity: hovered ? 0.7 : 1,
     transition: 'opacity 500ms ease',
   };
 

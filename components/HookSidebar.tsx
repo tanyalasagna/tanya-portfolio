@@ -108,7 +108,6 @@ export default function HookSidebar() {
 
       <div
         ref={listRef}
-        onMouseLeave={() => setPointerInside(false)}
         className="relative flex flex-col"
       >
         <Rail
@@ -133,7 +132,6 @@ export default function HookSidebar() {
               aria-current={isActive ? 'page' : undefined}
               data-cuelume-navigate=""
               data-cuelume-emphasis="subtle"
-              onMouseEnter={() => { setHoverIndex(index); setPointerInside(true); }}
               onFocus={() => { setHoverIndex(index); setFocusInside(true); }}
               onBlur={() => setFocusInside(false)}
               style={{
@@ -142,13 +140,20 @@ export default function HookSidebar() {
                 fontFamily: 'var(--font-dm-sans)',
                 fontWeight: isActive ? 600 : 300,
                 transition: 'color 180ms ease',
+                display: 'block',
                 paddingLeft: '20px',
                 paddingTop: '5px',
                 paddingBottom: '5px',
-                display: 'block',
+                pointerEvents: 'none',
               }}
             >
-              {item.label}
+              <span
+                onMouseEnter={() => { setHoverIndex(index); setPointerInside(true); }}
+                onMouseLeave={() => setPointerInside(false)}
+                style={{ display: 'inline-block', pointerEvents: 'auto', cursor: 'pointer' }}
+              >
+                {item.label}
+              </span>
             </Link>
           );
         })}

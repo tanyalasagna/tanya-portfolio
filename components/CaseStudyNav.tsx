@@ -132,7 +132,6 @@ export default function CaseStudyNav() {
               key={id}
               href={`#${id}`}
               ref={el => { itemRefs.current[index] = el; }}
-              onMouseEnter={() => { setHoverIndex(index); setPointerInside(true); }}
               onFocus={() => { setHoverIndex(index); setFocusInside(true); }}
               onBlur={() => setFocusInside(false)}
               style={{
@@ -146,9 +145,16 @@ export default function CaseStudyNav() {
                 paddingBottom: '5px',
                 display: 'block',
                 textDecoration: 'none',
+                pointerEvents: 'none',
               }}
             >
-              {label}
+              <span
+                onMouseEnter={() => { setHoverIndex(index); setPointerInside(true); }}
+                onMouseLeave={() => setPointerInside(false)}
+                style={{ display: 'inline-block', pointerEvents: 'auto', cursor: 'pointer' }}
+              >
+                {label}
+              </span>
             </a>
           );
         })}
