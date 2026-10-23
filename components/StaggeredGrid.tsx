@@ -174,23 +174,14 @@ export default function StaggeredGrid() {
         </div>
       </div>
 
-      {/* Desktop: staggered two columns, left padding shrinks naturally with viewport */}
-      <div className="hidden lg:block pr-8 pb-20" style={{ paddingLeft: 'max(32px, 12vw)', paddingTop: '88px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', alignItems: 'start' }}>
-          <div ref={desktopL} style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
-            {leftCol.map((p) => (
-              <div key={p.slug} style={{ opacity: 0 }}>
-                <Thumbnail project={p} />
-              </div>
-            ))}
-          </div>
-          <div ref={desktopR} style={{ display: 'flex', flexDirection: 'column', gap: '64px', marginTop: '120px' }}>
-            {rightCol.map((p) => (
-              <div key={p.slug} style={{ opacity: 0 }}>
-                <Thumbnail project={p} />
-              </div>
-            ))}
-          </div>
+      {/* Desktop: single column */}
+      <div className="hidden lg:block px-12 pb-20" style={{ paddingTop: '88px' }}>
+        <div ref={desktopL} style={{ display: 'flex', flexDirection: 'column', gap: '64px', maxWidth: '680px' }}>
+          {projects.map((p) => (
+            <div key={p.slug} style={{ opacity: 0 }}>
+              <Thumbnail project={p} />
+            </div>
+          ))}
         </div>
       </div>
     </>
