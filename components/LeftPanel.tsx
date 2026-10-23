@@ -87,12 +87,12 @@ export default function LeftPanel() {
       ) : (
         <>
           {/* Bio */}
-          <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
+          <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
             Hi! I&rsquo;m a product designer with a background in content. I&rsquo;ve worked with agency clients at{' '}
             <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="underline decoration-[#8238E8] underline-offset-2 hover:no-underline hover:text-[#8238E8] text-inherit transition-colors duration-150">Toss the Coin</a>,{' '}
             in-house teams at <a href="https://ankogcc.com/" target="_blank" rel="noopener noreferrer" className="underline decoration-[#8238E8] underline-offset-2 hover:no-underline hover:text-[#8238E8] text-inherit transition-colors duration-150">Anko</a>, and <Link href="/resume" className="underline decoration-[#8238E8] underline-offset-2 hover:no-underline hover:text-[#8238E8] text-inherit transition-colors duration-150">more</Link>.
           </p>
-          <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '16px', marginBottom: '16px' }}>
+          <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '16px' }}>
             This site is a record of my product design work + a few explorations.
           </p>
 
@@ -125,7 +125,7 @@ export default function LeftPanel() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {colophonLines.map((line, i) => (
-                <p key={i} style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontSize: '16px', fontWeight: 300, fontStyle: 'normal', color: '#1A1A1A', lineHeight: 1.4 }}>
+                <p key={i} style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontSize: '18px', fontWeight: 300, fontStyle: 'normal', color: '#1A1A1A', lineHeight: 1.4 }}>
                   {line.before}
                   {line.links.map((lk, j) => (
                     <span key={j}>
@@ -142,7 +142,7 @@ export default function LeftPanel() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25px' }}>
               <div style={{ opacity: 0.7 }}><LiveClock /></div>
-              <div style={{ color: 'var(--text-muted)', fontSize: '16px', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <div style={{ color: 'var(--text-muted)', fontSize: '18px', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
                 <span style={{ opacity: 0.7 }}>2027</span>
                 <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="18" height="18" style={{ flexShrink: 0, opacity: 0.7 }} />
                 <button
