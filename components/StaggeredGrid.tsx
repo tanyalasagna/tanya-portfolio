@@ -1,5 +1,6 @@
 'use client';
 import { useRef, useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { gsap } from 'gsap';
 import Link from 'next/link';
 import { play } from 'cuelume';
@@ -13,8 +14,7 @@ function Thumbnail({ project }: { project: Project }) {
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setCursor({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    setCursor({ x: e.clientX, y: e.clientY });
   };
 
   const handleEnter = () => {
@@ -25,30 +25,42 @@ function Thumbnail({ project }: { project: Project }) {
     }
   };
 
-  return (
-    <div
-      style={{ position: 'relative', cursor: hovered ? 'none' : 'auto' }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleEnter}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {/* Cursor tooltip */}
-      <div style={{
-        position: 'absolute', left: cursor.x, top: cursor.y,
-        transform: 'translate(12px, 12px)', pointerEvents: 'none', zIndex: 10,
-        opacity: hovered ? 1 : 0, transition: 'opacity 200ms ease',
+  const tooltipEl = (
+    <div style={{
+      position: 'fixed',
+      left: cursor.x + 20,
+      top: cursor.y + 8,
+      pointerEvents: 'none',
+      zIndex: 9999,
+      whiteSpace: 'nowrap',
+      clipPath: hovered ? 'inset(0 0% 0 0 round 999px)' : 'inset(0 100% 0 0 round 999px)',
+      filter: hovered ? 'blur(0px)' : 'blur(5px)',
+      transition: hovered
+        ? 'clip-path 600ms cubic-bezier(0.16, 1, 0.3, 1), filter 500ms cubic-bezier(0.16, 1, 0.3, 1)'
+        : 'none',
+    }}>
+      <span style={{
+        background: '#1A1A1A', color: '#FFFFFF', fontSize: '15px',
+        fontFamily: 'var(--font-dm-sans)', fontWeight: 400,
+        padding: '8px 12px', borderRadius: '999px',
+        border: '0.5px solid rgba(255,255,255,0.65)',
+        letterSpacing: '0.02em', display: 'inline-flex',
+        alignItems: 'center', gap: '6px',
       }}>
-        <span style={{
-          background: '#1A1A1A', color: '#FFFFFF', fontSize: '15px',
-          fontFamily: 'var(--font-dm-sans)', fontWeight: 400,
-          padding: '8px 12px', borderRadius: '999px',
-          border: '0.5px solid rgba(255,255,255,0.65)',
-          letterSpacing: '0.02em', display: 'inline-flex',
-          alignItems: 'center', gap: '6px', whiteSpace: 'nowrap',
-        }}>
-          Read Case Study
-        </span>
-      </div>
+        Read case study
+      </span>
+    </div>
+  );
+
+  return (
+    <>
+      {typeof document !== 'undefined' && createPortal(tooltipEl, document.body)}
+      <div
+        style={{ position: 'relative', cursor: hovered ? 'none' : 'auto' }}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={handleEnter}
+        onMouseLeave={() => setHovered(false)}
+      >
 
       <Link
         href={`/work/${project.slug}`}
@@ -95,7 +107,8 @@ function Thumbnail({ project }: { project: Project }) {
           )}
         </div>
       </Link>
-    </div>
+      </div>
+    </>
   );
 }
 
