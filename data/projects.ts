@@ -22,7 +22,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: 'sift',
-    title: 'Designing a moment of reflection before online purchases (0→1)',
+    title: 'Designing a moment of reflection before online purchases',
     displayTitle: 'Sift',
     subtitle: 'Designing a moment of reflection before online purchases',
     tags: ['Graduate capstone, 2026'],
@@ -38,7 +38,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'capstone',
-    title: 'Rethinking touchscreen UX for self-service kiosks at Frogslayer',
+    title: 'Rethinking touchscreen UX for self-service kiosks',
     displayTitle: 'Frogslayer',
     subtitle: 'Rethinking touchscreen UX for self-service kiosks',
     mobileTitle: 'Rethinking touchscreen UX for self-service kiosks',
