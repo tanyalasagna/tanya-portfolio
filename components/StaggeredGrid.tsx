@@ -69,15 +69,27 @@ function Thumbnail({ project }: { project: Project }) {
             <img src={project.thumbnail} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           )}
         </div>
-        <div style={{ paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-          <p style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontSize: '16px', fontStyle: 'italic', lineHeight: 1.2 }}>
+        <div style={{ paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <p style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontSize: '16px', fontStyle: 'italic', lineHeight: 1.2, opacity: 0.7 }}>
             {project.tags.join(', ')}
           </p>
           <p style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', fontWeight: 900, fontSize: '28px', letterSpacing: '0.045em', lineHeight: 1.2 }}>
             {project.title.split('-').map((part, i, arr) => (
-              <span key={i}>{part}{i < arr.length - 1 && <span style={{ fontFamily: 'Alegreya, serif', fontWeight: 400, letterSpacing: 0 }}>-</span>}</span>
+              <span key={i}>{part}{i < arr.length - 1 && <span style={{ fontFamily: 'var(--font-dm-sans)', fontWeight: 400, letterSpacing: 0 }}>-</span>}</span>
             ))}
           </p>
+          {project.description && (
+            <p style={{ lineHeight: 1.2, fontSize: '16px', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
+              {project.description.split(' \\ ').map((part, i, arr) => (
+                <span key={i} style={{ color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                  {part}
+                  {i < arr.length - 1 && (
+                    <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="18" height="18" style={{ flexShrink: 0 }} />
+                  )}
+                </span>
+              ))}
+            </p>
+          )}
         </div>
       </Link>
     </div>
