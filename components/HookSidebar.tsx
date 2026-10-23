@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { motion, useReducedMotion } from 'framer-motion';
 
 const CORNER = 6;
-const DASH = 'repeating-linear-gradient(to top, currentColor 0, currentColor 2px, transparent 2px, transparent 6px)';
+const DASH = 'linear-gradient(to top, currentColor, currentColor)';
 
 const navItems = [
   { label: 'Work',   href: '/',        matches: (p: string) => p === '/' || p.startsWith('/work') },
@@ -56,7 +56,7 @@ function Rail({
         fill="none"
         className="absolute left-0.5"
       >
-        <path d="M0.5 0a6 6 0 0 0 6 6H12" stroke="currentColor" strokeWidth="1" strokeDasharray="2 4" />
+        <path d="M0.5 0a6 6 0 0 0 6 6H12" stroke="currentColor" strokeWidth="1" />
       </motion.svg>
     </motion.span>
   );

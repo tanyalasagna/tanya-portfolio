@@ -116,8 +116,8 @@ export default function MobileNav() {
             <div className="mb-8">
               <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
                 Hi! I&rsquo;m a product designer with a background in content. I&rsquo;ve worked with agency clients at{' '}
-                <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="underline decoration-dotted decoration-[#AC39D4] underline-offset-2 hover:no-underline hover:text-[#AC39D4] text-inherit transition-colors duration-150">Toss the Coin</a>,{' '}
-                in-house teams at <a href="https://ankogcc.com/" target="_blank" rel="noopener noreferrer" className="underline decoration-dotted decoration-[#AC39D4] underline-offset-2 hover:no-underline hover:text-[#AC39D4] text-inherit transition-colors duration-150">Anko</a>, and <Link href="/resume" className="underline decoration-dotted decoration-[#AC39D4] underline-offset-2 hover:no-underline hover:text-[#AC39D4] text-inherit transition-colors duration-150">more</Link>.
+                <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="underline decoration-[#AC39D4] underline-offset-2 hover:no-underline hover:text-[#AC39D4] text-inherit transition-colors duration-150">Toss the Coin</a>,{' '}
+                in-house teams at <a href="https://ankogcc.com/" target="_blank" rel="noopener noreferrer" className="underline decoration-[#AC39D4] underline-offset-2 hover:no-underline hover:text-[#AC39D4] text-inherit transition-colors duration-150">Anko</a>, and <Link href="/resume" className="underline decoration-[#AC39D4] underline-offset-2 hover:no-underline hover:text-[#AC39D4] text-inherit transition-colors duration-150">more</Link>.
               </p>
               <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
                 This site is a record of my product design work + a few explorations.
@@ -148,7 +148,7 @@ export default function MobileNav() {
                   <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="18" height="18" style={{ flexShrink: 0, opacity: 0.7 }} />
                   <button
                     onClick={e => { e.stopPropagation(); setColophonOpen(true); play('open', { theme: 'bubble', emphasis: 'subtle' }); }}
-                    className="underline decoration-dotted decoration-[#AC39D4] underline-offset-[3px] hover:no-underline hover:text-[#AC39D4] text-inherit transition-colors duration-150"
+                    className="underline decoration-[#AC39D4] underline-offset-[3px] hover:no-underline hover:text-[#AC39D4] text-inherit transition-colors duration-150"
                     style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
                   >
                     Open colophon
@@ -179,7 +179,7 @@ export default function MobileNav() {
                     {line.links.map((lk, j) => (
                       <span key={j}>
                         {j > 0 && (line.join ?? ' and ')}
-                        <a href={lk.href} target="_blank" rel="noopener noreferrer" className="underline decoration-dotted decoration-[#AC39D4] underline-offset-2 hover:no-underline hover:text-[#AC39D4] text-inherit transition-colors duration-150">{lk.label}</a>
+                        <a href={lk.href} target="_blank" rel="noopener noreferrer" className="underline decoration-[#AC39D4] underline-offset-2 hover:no-underline hover:text-[#AC39D4] text-inherit transition-colors duration-150">{lk.label}</a>
                       </span>
                     ))}
                   </p>

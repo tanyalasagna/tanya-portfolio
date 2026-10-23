@@ -23,7 +23,7 @@ export default function ContactLinks() {
     <>
       <button
         onClick={handleCopy}
-        className={`underline-offset-2 cursor-pointer ${baseCls} ${copied ? '' : 'underline decoration-dotted decoration-[#AC39D4] hover:no-underline'}`}
+        className={`underline-offset-2 cursor-pointer ${baseCls} ${copied ? '' : 'underline decoration-[#AC39D4] hover:no-underline'}`}
         style={linkStyle}
         data-cuelume-tap=""
         data-cuelume-emphasis="subtle"
@@ -34,7 +34,7 @@ export default function ContactLinks() {
         href="https://www.linkedin.com/in/tanya-singh2735/"
         target="_blank"
         rel="noopener noreferrer"
-        className={`underline decoration-dotted decoration-[#AC39D4] underline-offset-2 hover:no-underline ${baseCls}`}
+        className={`underline decoration-[#AC39D4] underline-offset-2 hover:no-underline ${baseCls}`}
         style={linkStyle}
         data-cuelume-tap=""
         data-cuelume-emphasis="subtle"
