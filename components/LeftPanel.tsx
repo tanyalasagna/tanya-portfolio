@@ -43,7 +43,7 @@ export default function LeftPanel() {
   return (
     <aside
       className="fixed left-0 top-0 h-full w-[300px] flex flex-col z-50"
-      style={{ padding: '32px', paddingTop: isCaseStudy ? '40px' : '32px', borderRight: '0.5px solid var(--divider)', background: 'var(--bg)', containerType: 'inline-size' }}
+      style={{ padding: '32px', paddingTop: isCaseStudy ? '40px' : '32px', background: 'var(--bg)', containerType: 'inline-size' }}
       onClick={() => setColophonOpen(false)}
     >
       {/* Name — hidden on case study pages */}
