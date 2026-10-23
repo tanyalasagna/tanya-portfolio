@@ -200,8 +200,8 @@ export default function StaggeredGrid() {
       <div className="hidden xl:block pb-20" style={{ paddingLeft: 'max(32px, 8vw)', paddingRight: '32px', paddingTop: '88px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', alignItems: 'start' }}>
           <div ref={desktopL} style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
-            {leftCol.map((p) => (
-              <div key={p.slug} style={{ opacity: 0 }}>
+            {leftCol.map((p, idx) => (
+              <div key={p.slug} style={{ opacity: 0, ...(idx === 1 ? { marginTop: '8px' } : {}) }}>
                 <Thumbnail project={p} />
               </div>
             ))}
