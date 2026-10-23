@@ -42,7 +42,7 @@ export default function LeftPanel() {
 
   return (
     <aside
-      className="fixed left-0 top-0 h-full w-[300px] flex flex-col z-50"
+      className="fixed left-0 top-0 h-full w-[360px] flex flex-col z-50"
       style={{ padding: '32px', paddingTop: isCaseStudy ? '40px' : '32px', background: 'var(--bg)', containerType: 'inline-size' }}
       onClick={() => setColophonOpen(false)}
     >
