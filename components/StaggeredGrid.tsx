@@ -186,7 +186,7 @@ export default function StaggeredGrid() {
       </div>
 
       {/* lg only: single column (thumbnails too small for two columns at this width) */}
-      <div className="hidden lg:block xl:hidden px-12 pb-20" style={{ paddingTop: '88px' }}>
+      <div className="hidden lg:block xl:hidden pb-20" style={{ paddingLeft: '48px', paddingRight: '32px', paddingTop: '88px' }}>
         <div ref={desktopSingle} style={{ display: 'flex', flexDirection: 'column', gap: '64px', maxWidth: '680px' }}>
           {projects.map((p) => (
             <div key={p.slug} style={{ opacity: 0 }}>
@@ -197,7 +197,7 @@ export default function StaggeredGrid() {
       </div>
 
       {/* xl+: staggered two columns */}
-      <div className="hidden xl:block pr-8 pb-20" style={{ paddingLeft: 'max(32px, 8vw)', paddingTop: '88px' }}>
+      <div className="hidden xl:block pb-20" style={{ paddingLeft: 'max(32px, 8vw)', paddingRight: '32px', paddingTop: '88px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', alignItems: 'start' }}>
           <div ref={desktopL} style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
             {leftCol.map((p) => (
