@@ -73,8 +73,13 @@ function Thumbnail({ project }: { project: Project }) {
           <p style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontSize: '16px', fontStyle: 'italic', lineHeight: 1.2, opacity: 0.7 }}>
             {project.tags.join(', ')}
           </p>
-          <p style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontWeight: 600, fontSize: '20px', lineHeight: 1.2 }}>
-            {project.displayTitle ?? project.title}
+          <p className="text-[18px] lg:text-[20px] leading-tight" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontWeight: 600, lineHeight: 1.2 }}>
+            {project.mobileTitle ? (
+              <>
+                <span className="lg:hidden">{project.mobileTitle}</span>
+                <span className="hidden lg:inline">{project.title}</span>
+              </>
+            ) : project.title}
           </p>
           {project.description && (
             <p style={{ lineHeight: 1.2, fontSize: '16px', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
