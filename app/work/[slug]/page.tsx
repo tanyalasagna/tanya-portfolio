@@ -49,8 +49,8 @@ export default async function CaseStudyPage({ params }: Props) {
               { label: project.toolsLabel ?? 'Tools', value: project.tools.join('\n') },
             ].map(({ label, value }) => (
               <div key={label} style={{ padding: '20px 18px', background: '#F0F0EE' }}>
-                <div className="mb-3" style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '16px' }}>{label}</div>
-                <div style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", fontSize: '16px', lineHeight: 1.5, whiteSpace: 'pre-line' }}>{value}</div>
+                <div className="mb-3" style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '18px' }}>{label}</div>
+                <div style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", fontSize: '18px', lineHeight: 1.5, whiteSpace: 'pre-line' }}>{value}</div>
               </div>
             ))}
           </div>

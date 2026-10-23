@@ -82,7 +82,7 @@ function Thumbnail({ project }: { project: Project }) {
           )}
         </div>
         <div style={{ paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <p style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontSize: '16px', fontStyle: 'italic', lineHeight: 1.2, opacity: 0.7 }}>
+          <p style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontSize: '18px', fontStyle: 'italic', lineHeight: 1.2, opacity: 0.7 }}>
             {project.tags.join(', ')}
           </p>
           <p className="text-[18px] lg:text-[20px] leading-tight" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontWeight: 600, lineHeight: 1.2 }}>
@@ -94,7 +94,7 @@ function Thumbnail({ project }: { project: Project }) {
             ) : project.title}
           </p>
           {project.description && (
-            <p style={{ lineHeight: 1.2, fontSize: '16px', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
+            <p style={{ lineHeight: 1.2, fontSize: '18px', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
               {project.description.split(' \\ ').map((part, i, arr) => (
                 <span key={i} style={{ color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
                   {part}
