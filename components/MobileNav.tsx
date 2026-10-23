@@ -12,16 +12,17 @@ import HookSidebar from './HookSidebar';
 
 const colophonLines = [
   { before: 'Type set in ', links: [{ label: 'Dreamer TM', href: 'https://typemania.eu/products/dreamer-tm' }, { label: 'Alegreya Sans', href: 'https://fonts.google.com/specimen/Alegreya+Sans' }], join: ' and ' },
-  { before: 'Sounds via ', links: [{ label: 'Cuelume', href: 'https://cuelume.dev/' }] },
+  { before: 'Sound by ', links: [{ label: 'Cuelume', href: 'https://cuelume.dev/' }] },
   { before: 'Hosted on ', links: [{ label: 'Vercel', href: 'https://vercel.com/' }] },
-  { before: 'Built with ', links: [{ label: 'Next.js', href: 'https://nextjs.org/' }, { label: 'React', href: 'https://react.dev/' }], join: ' and ' },
-  { before: 'Coded with ', links: [{ label: 'Claude Code', href: 'https://claude.ai/code' }] },
+  { before: 'Source on ', links: [{ label: 'Github', href: 'https://github.com/tanyalasagna/tanya-portfolio' }] },
+  { before: 'Created with ', links: [{ label: 'Claude Code', href: 'https://claude.ai/code' }] },
 ];
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [colophonOpen, setColophonOpen] = useState(false);
   const [nameHovered, setNameHovered] = useState(false);
+  const [speakerHovered, setSpeakerHovered] = useState(false);
   const colophonRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   // Close menu on route change
@@ -52,7 +53,7 @@ export default function MobileNav() {
       {/* Top bar */}
       <div
         className="lg:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 h-14"
-        style={{ background: 'var(--bg)' }}
+        style={{ background: 'var(--bg)', borderBottom: '0.5px solid var(--divider)' }}
       >
         <Link
           href="/"
@@ -84,8 +85,6 @@ export default function MobileNav() {
           )}
         </button>
       </div>
-      {/* Divider under top bar */}
-      <div className="lg:hidden fixed top-14 left-0 right-0 z-50" style={{ height: '0.5px', background: 'var(--divider, rgba(0,0,0,0.1))' }} />
 
       {/* Full-screen overlay */}
       <AnimatePresence>
@@ -116,10 +115,14 @@ export default function MobileNav() {
               <ContactLinks />
             </div>
 
+            <div className="mb-8" style={{ height: '0.5px', background: 'var(--divider)' }} />
+
             {/* Nav */}
             <div className="mb-8">
               <HookSidebar />
             </div>
+
+            <div className="mb-8" style={{ height: '0.5px', background: 'var(--divider)' }} />
 
             {/* Spacer */}
             <div className="flex-1" />
@@ -128,15 +131,15 @@ export default function MobileNav() {
             <div
               ref={colophonRef}
               onClick={e => e.stopPropagation()}
-              style={{ position: 'absolute', left: '16px', right: '16px', bottom: '40px', background: '#1A1A1A', borderRadius: '14px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none' }}
+              style={{ position: 'absolute', left: '16px', right: '16px', bottom: '40px', background: '#FFFFFF', borderRadius: '14px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none', border: '0.5px solid #888888' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-                <span style={{ fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', fontSize: '24px', color: '#FFFFFF', letterSpacing: '0.045em', fontWeight: 700 }}>Colophon</span>
-                <button onClick={() => { setColophonOpen(false); play('close', { theme: 'bubble', emphasis: 'subtle' }); }} aria-label="Close colophon" style={{ color: '#FFFFFF', background: 'none', border: 'none', cursor: 'pointer', fontSize: '28px', lineHeight: 1, padding: 0 }}>×</button>
+                <span style={{ fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', fontSize: '24px', color: '#1A1A1A', letterSpacing: '0.045em', fontWeight: 700 }}>Colophon</span>
+                <button onClick={() => { setColophonOpen(false); play('close', { theme: 'bubble', emphasis: 'subtle' }); }} aria-label="Close colophon" style={{ color: '#1A1A1A', background: 'none', border: 'none', cursor: 'pointer', fontSize: '28px', lineHeight: 1, padding: 0 }}>×</button>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {colophonLines.map((line, i) => (
-                  <p key={i} style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontSize: '16px', fontWeight: 300, fontStyle: 'normal', color: '#FFFFFF', lineHeight: 1.4 }}>
+                  <p key={i} style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontSize: '16px', fontWeight: 300, fontStyle: 'normal', color: '#1A1A1A', lineHeight: 1.4 }}>
                     {line.before}
                     {line.links.map((lk, j) => (
                       <span key={j}>
@@ -150,26 +153,25 @@ export default function MobileNav() {
             </div>
 
             {/* Sound toggle + clock */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
               {/* Clock + colophon */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25px' }}>
                 <LiveClock />
                 <div style={{ color: 'var(--text-muted)', fontSize: '16px', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
                   <span>2027</span>
-                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden style={{ flexShrink: 0 }}>
-                    <path d="M12 2l2.09 7.26L22 12l-7.91 2.74L12 22l-2.09-7.26L2 12l7.91-2.74z" />
-                  </svg>
+                  <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="18" height="18" style={{ flexShrink: 0, opacity: 0.7 }} />
                   <button
                     onClick={e => { e.stopPropagation(); setColophonOpen(true); play('open', { theme: 'bubble', emphasis: 'subtle' }); }}
                     className="underline decoration-[#8238E8] underline-offset-[3px] hover:no-underline hover:text-[#8238E8] text-inherit transition-colors duration-150"
-                    style={{ color: 'inherit', background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
+                    style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
                   >
-                    Open Colophon
+                    Open colophon
                   </button>
                 </div>
               </div>
               {/* Speaker with bg */}
-              <div style={{ background: 'rgba(0,0,0,0.06)', borderRadius: '8px', padding: '7px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <div onMouseEnter={() => setSpeakerHovered(true)} onMouseLeave={() => setSpeakerHovered(false)}
+              style={{ background: 'transparent', borderRadius: '50%', width: '34px', height: '34px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, border: `0.5px solid ${speakerHovered ? '#1A1A1A' : '#888888'}` }}>
                 <SoundToggle />
               </div>
             </div>
