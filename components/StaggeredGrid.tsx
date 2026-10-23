@@ -73,21 +73,19 @@ function Thumbnail({ project }: { project: Project }) {
               ref={videoRef}
               src={project.thumbnail}
               autoPlay muted loop={!project.videoPlayOnce} playsInline
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hovered ? 'scale(1.04)' : 'scale(1)', transition: 'transform 600ms cubic-bezier(0.16, 1, 0.3, 1)' }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hovered ? 'scale(1.008)' : 'scale(1)', opacity: hovered ? 0.93 : 1, transition: 'transform 3000ms cubic-bezier(0.19, 1, 0.22, 1), opacity 600ms ease' }}
               onEnded={project.videoEndOnFirstFrame ? () => { if (videoRef.current) videoRef.current.currentTime = 0; } : undefined}
             />
           ) : (
             /* eslint-disable-next-line @next/next/no-img-element */
-            <img src={project.thumbnail} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hovered ? 'scale(1.04)' : 'scale(1)', transition: 'transform 600ms cubic-bezier(0.16, 1, 0.3, 1)' }} />
+            <img src={project.thumbnail} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hovered ? 'scale(1.008)' : 'scale(1)', opacity: hovered ? 0.93 : 1, transition: 'transform 3000ms cubic-bezier(0.19, 1, 0.22, 1), opacity 600ms ease' }} />
           )}
           {/* Bottom blur overlay */}
           <div style={{
-            position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%',
-            backdropFilter: hovered ? 'blur(6px)' : 'blur(0px)',
-            WebkitBackdropFilter: hovered ? 'blur(6px)' : 'blur(0px)',
-            maskImage: 'linear-gradient(to top, black 30%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to top, black 30%, transparent 100%)',
-            transition: 'backdrop-filter 500ms ease, -webkit-backdrop-filter 500ms ease',
+            position: 'absolute', bottom: 0, left: 0, right: 0, height: '30%',
+            backdropFilter: 'blur(3px)', WebkitBackdropFilter: 'blur(3px)',
+            maskImage: 'linear-gradient(to top, black 0%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to top, black 0%, transparent 100%)',
             pointerEvents: 'none',
           }} />
         </div>
