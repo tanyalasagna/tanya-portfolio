@@ -28,7 +28,7 @@ export default function ContactLinks() {
         data-cuelume-tap=""
         data-cuelume-emphasis="subtle"
       >
-        {copied ? <span style={{ color: '#AC39D4', fontStyle: 'italic' }}>Copied. Say hi!</span> : 'Copy email'}
+        {copied ? <span style={{ color: '#47122e', fontStyle: 'italic' }}>Copied. Say hi!</span> : 'Copy email'}
       </button>
       <a
         href="https://www.linkedin.com/in/tanya-singh2735/"
