@@ -11,7 +11,7 @@ import { gsap } from 'gsap';
 import { usePathname } from 'next/navigation';
 
 const colophonLines = [
-  { before: 'Type set in ', links: [{ label: 'Dreamer TM', href: 'https://typemania.eu/products/dreamer-tm' }, { label: 'Alegreya', href: 'https://fonts.google.com/specimen/Alegreya' }], join: ' and ' },
+  { before: 'Type set in ', links: [{ label: 'Dreamer TM', href: 'https://typemania.eu/products/dreamer-tm' }, { label: 'Alegreya Sans', href: 'https://fonts.google.com/specimen/Alegreya+Sans' }], join: ' and ' },
   { before: 'Sounds via ', links: [{ label: 'Cuelume', href: 'https://cuelume.dev/' }] },
   { before: 'Hosted on ', links: [{ label: 'Vercel', href: 'https://vercel.com/' }] },
   { before: 'Built with ', links: [{ label: 'Next.js', href: 'https://nextjs.org/' }, { label: 'React', href: 'https://react.dev/' }], join: ' and ' },
@@ -64,27 +64,18 @@ export default function LeftPanel() {
           {/* Back link */}
           <Link
             href="/"
-            className="hover:opacity-[0.65] transition-opacity duration-200"
+            className="hover:opacity-70 transition-opacity duration-150"
             style={{
-              color: 'var(--text)',
-              fontSize: '24px',
-              fontFamily: "'Dreamer TM', serif",
-              fontFeatureSettings: '"ss01"',
-              fontWeight: 900,
-              letterSpacing: '0.045em',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
+              fontSize: '20px',
+              fontFamily: "'Alegreya Sans', sans-serif",
+              fontWeight: 600,
               marginBottom: '32px',
               textDecoration: 'none',
               lineHeight: 1,
             }}
-            onClick={() => play('select', { theme: 'bubble', emphasis: 'subtle' })}
+            onClick={() => play('close', { theme: 'bubble', emphasis: 'subtle' })}
           >
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden style={{ flexShrink: 0 }}>
-              <path d="M11 4L6 9L11 14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            Back to Projects
+            ← Back to projects
           </Link>
 
           {/* Case study section nav */}
@@ -97,8 +88,8 @@ export default function LeftPanel() {
           {/* Bio */}
           <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '16px' }}>
             Hi! I&rsquo;m a product designer with a background in content. I&rsquo;ve worked with agency clients at{' '}
-            <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="underline decoration-dashed underline-offset-2 hover:no-underline hover:opacity-[0.65]" style={{ color: 'inherit' }}>Toss the Coin</a>,{' '}
-            in-house teams at <a href="https://ankogcc.com/" target="_blank" rel="noopener noreferrer" className="underline decoration-dashed underline-offset-2 hover:no-underline hover:opacity-[0.65]" style={{ color: 'inherit' }}>Anko</a>, and <Link href="/resume" className="underline decoration-dashed underline-offset-2 hover:no-underline hover:opacity-[0.65]" style={{ color: 'inherit' }}>more</Link>.
+            <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="underline decoration-[#8238E8] underline-offset-2 hover:no-underline hover:text-[#8238E8] text-inherit transition-colors duration-150">Toss the Coin</a>,{' '}
+            in-house teams at <a href="https://ankogcc.com/" target="_blank" rel="noopener noreferrer" className="underline decoration-[#8238E8] underline-offset-2 hover:no-underline hover:text-[#8238E8] text-inherit transition-colors duration-150">Anko</a>, and <Link href="/resume" className="underline decoration-[#8238E8] underline-offset-2 hover:no-underline hover:text-[#8238E8] text-inherit transition-colors duration-150">more</Link>.
           </p>
           <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '16px', marginBottom: '16px' }}>
             This site is a record of my product design work + a few explorations.
@@ -138,7 +129,7 @@ export default function LeftPanel() {
                   {line.links.map((lk, j) => (
                     <span key={j}>
                       {j > 0 && (line.join ?? ' and ')}
-                      <a href={lk.href} target="_blank" rel="noopener noreferrer" className="underline decoration-dashed underline-offset-2 hover:no-underline hover:opacity-[0.65]" style={{ color: 'inherit' }}>{lk.label}</a>
+                      <a href={lk.href} target="_blank" rel="noopener noreferrer" className="underline decoration-[#8238E8] underline-offset-2 hover:no-underline hover:text-[#8238E8] text-inherit transition-colors duration-150">{lk.label}</a>
                     </span>
                   ))}
                 </p>
@@ -157,10 +148,10 @@ export default function LeftPanel() {
                 </svg>
                 <button
                   onClick={e => { e.stopPropagation(); setColophonOpen(true); play('open', { theme: 'bubble', emphasis: 'subtle' }); }}
-                  className="underline decoration-dashed underline-offset-[3px] hover:no-underline hover:opacity-[0.65]"
-                  style={{ color: 'inherit', background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
+                  className="underline decoration-[#8238E8] underline-offset-[3px] hover:no-underline hover:text-[#8238E8] text-inherit transition-colors duration-150"
+                  style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
                 >
-                  Open Colophon
+                  Open colophon
                 </button>
               </div>
             </div>
