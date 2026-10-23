@@ -119,7 +119,7 @@ export default function LeftPanel() {
             onClick={e => e.stopPropagation()}
             style={{ position: 'absolute', left: '20px', right: '20px', bottom: '28px', background: '#FFFFFF', borderRadius: '6px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none', border: '0.5px solid #888888' }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
               <span style={{ fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', fontSize: '24px', color: '#1A1A1A', letterSpacing: '0.045em', fontWeight: 700 }}>Colophon</span>
               <button onClick={() => { setColophonOpen(false); play('close', { theme: 'bubble', emphasis: 'subtle' }); }} aria-label="Close colophon" style={{ color: '#1A1A1A', background: 'none', border: 'none', cursor: 'pointer', fontSize: '34px', lineHeight: 1, padding: 0 }}>×</button>
             </div>
