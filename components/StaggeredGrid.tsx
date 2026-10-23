@@ -67,19 +67,29 @@ function Thumbnail({ project }: { project: Project }) {
         style={{ display: 'block', textDecoration: 'none' }}
         onClick={() => play('open', { theme: 'bubble', emphasis: 'subtle' })}
       >
-        <div style={{ aspectRatio: project.thumbnailAspect ?? '4/3', overflow: 'hidden', borderRadius: '6px' }}>
+        <div style={{ aspectRatio: project.thumbnailAspect ?? '4/3', overflow: 'hidden', borderRadius: '6px', position: 'relative' }}>
           {isVideo ? (
             <video
               ref={videoRef}
               src={project.thumbnail}
               autoPlay muted loop={!project.videoPlayOnce} playsInline
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hovered ? 'scale(1.04)' : 'scale(1)', transition: 'transform 600ms cubic-bezier(0.16, 1, 0.3, 1)' }}
               onEnded={project.videoEndOnFirstFrame ? () => { if (videoRef.current) videoRef.current.currentTime = 0; } : undefined}
             />
           ) : (
             /* eslint-disable-next-line @next/next/no-img-element */
-            <img src={project.thumbnail} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src={project.thumbnail} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hovered ? 'scale(1.04)' : 'scale(1)', transition: 'transform 600ms cubic-bezier(0.16, 1, 0.3, 1)' }} />
           )}
+          {/* Bottom blur overlay */}
+          <div style={{
+            position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%',
+            backdropFilter: hovered ? 'blur(6px)' : 'blur(0px)',
+            WebkitBackdropFilter: hovered ? 'blur(6px)' : 'blur(0px)',
+            maskImage: 'linear-gradient(to top, black 30%, transparent 100%)',
+            WebkitMaskImage: 'linear-gradient(to top, black 30%, transparent 100%)',
+            transition: 'backdrop-filter 500ms ease, -webkit-backdrop-filter 500ms ease',
+            pointerEvents: 'none',
+          }} />
         </div>
         <div style={{ paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
           <p style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontSize: '18px', fontStyle: 'italic', lineHeight: 1.2, opacity: 0.7 }}>
