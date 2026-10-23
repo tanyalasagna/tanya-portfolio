@@ -7,7 +7,7 @@ const linkStyle = {
   fontWeight: 600,
 };
 
-const baseCls = 'text-[var(--accent)] hover:text-[#AC39D4] transition-colors duration-150';
+const baseCls = 'text-[var(--accent)] transition-colors duration-150';
 
 export default function ContactLinks() {
   const [copied, setCopied] = useState(false);
@@ -23,7 +23,7 @@ export default function ContactLinks() {
     <>
       <button
         onClick={handleCopy}
-        className={`underline-offset-2 cursor-pointer ${baseCls} ${copied ? '' : 'underline decoration-[#AC39D4] hover:no-underline'}`}
+        className={`underline-offset-2 cursor-pointer px-[2px] -mx-[2px] rounded-[2px] ${baseCls} ${copied ? '' : 'underline decoration-[#AC39D4] hover:bg-[rgba(172,57,212,0.12)]'}`}
         style={linkStyle}
         data-cuelume-tap=""
         data-cuelume-emphasis="subtle"
@@ -34,7 +34,7 @@ export default function ContactLinks() {
         href="https://www.linkedin.com/in/tanya-singh2735/"
         target="_blank"
         rel="noopener noreferrer"
-        className={`underline decoration-[#AC39D4] underline-offset-2 hover:no-underline ${baseCls}`}
+        className={`underline decoration-[#AC39D4] underline-offset-2 hover:bg-[rgba(172,57,212,0.12)] px-[2px] -mx-[2px] rounded-[2px] ${baseCls}`}
         style={linkStyle}
         data-cuelume-tap=""
         data-cuelume-emphasis="subtle"
