@@ -97,7 +97,7 @@ export default function CaseStudyNav() {
     <nav aria-label="Case study sections" className="flex flex-col">
       <span style={{
         color: 'var(--text-muted)',
-        fontSize: '28px',
+        fontSize: '18px',
         fontFamily: 'var(--font-dm-sans)',
         fontStyle: 'italic',
         fontWeight: 400,
@@ -136,7 +136,7 @@ export default function CaseStudyNav() {
               onBlur={() => setFocusInside(false)}
               style={{
                 color: isActive ? 'var(--text)' : 'var(--text-muted)',
-                fontSize: '28px',
+                fontSize: '18px',
                 fontFamily: 'var(--font-dm-sans)',
                 fontWeight: isActive ? 600 : 300,
                 transition: 'color 180ms ease',
