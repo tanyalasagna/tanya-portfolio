@@ -26,7 +26,7 @@ export const projects: Project[] = [
     displayTitle: 'Sift',
     subtitle: 'Designing a moment of reflection before online purchases',
     tags: ['Graduate capstone, 2026'],
-    description: 'Web extension \\ Behavioral design \\ AI prototyping',
+    description: 'Web extension \\ Behavioral design \\ AI prototyping (0 → 1)',
     thumbnail: '/images/Sift TN (1).mp4',
     thumbnailAspect: '3/2',
     videoPlayOnce: true,
