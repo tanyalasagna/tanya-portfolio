@@ -40,7 +40,7 @@ function Thumbnail({ project }: { project: Project }) {
         : 'none',
     }}>
       <span style={{
-        background: '#1A1A1A', color: '#FFFFFF', fontSize: '15px',
+        background: '#383636', color: '#FFFFFF', fontSize: '15px',
         fontFamily: 'var(--font-dm-sans)', fontWeight: 400,
         padding: '8px 12px', borderRadius: '999px',
         border: '0.5px solid rgba(255,255,255,0.65)',
@@ -80,20 +80,30 @@ function Thumbnail({ project }: { project: Project }) {
             /* eslint-disable-next-line @next/next/no-img-element */
             <img src={project.thumbnail} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hovered ? 'scale(1.008)' : 'scale(1)', opacity: hovered ? 0.93 : 1, transition: 'transform 3000ms cubic-bezier(0.19, 1, 0.22, 1), opacity 600ms ease' }} />
           )}
+          {/* Dark gradient shadow overlay */}
+          <div style={{
+            position: 'absolute', bottom: 0, left: 0, right: 0, height: '60%',
+            background: 'linear-gradient(to top, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.05) 50%, transparent 100%)',
+            opacity: hovered ? 1 : 0,
+            transition: 'opacity 1800ms cubic-bezier(0.19, 1, 0.22, 1)',
+            pointerEvents: 'none',
+          }} />
           {/* Bottom blur overlay */}
           <div style={{
             position: 'absolute', bottom: 0, left: 0, right: 0, height: '30%',
             backdropFilter: 'blur(3px)', WebkitBackdropFilter: 'blur(3px)',
             maskImage: 'linear-gradient(to top, black 0%, transparent 100%)',
             WebkitMaskImage: 'linear-gradient(to top, black 0%, transparent 100%)',
+            opacity: hovered ? 1 : 0,
+            transition: 'opacity 1800ms cubic-bezier(0.19, 1, 0.22, 1)',
             pointerEvents: 'none',
           }} />
         </div>
         <div style={{ paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <p style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontSize: '18px', fontStyle: 'italic', lineHeight: 1.2, opacity: 0.7 }}>
+          <p className="text-[16px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', lineHeight: 1.2, opacity: 0.7 }}>
             {project.tags.join(', ')}
           </p>
-          <p className="text-[18px] lg:text-[20px] leading-tight" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontWeight: 600, lineHeight: 1.2 }}>
+          <p className="text-[18px] lg:text-[21px] leading-tight" style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", fontWeight: 600, lineHeight: 1.2 }}>
             {project.mobileTitle ? (
               <>
                 <span className="lg:hidden">{project.mobileTitle}</span>
@@ -102,7 +112,7 @@ function Thumbnail({ project }: { project: Project }) {
             ) : project.title}
           </p>
           {project.description && (
-            <p style={{ lineHeight: 1.2, fontSize: '18px', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
+            <p className="text-[16px] lg:text-[18px]" style={{ lineHeight: 1.2, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
               {project.description.split(' \\ ').map((part, i, arr) => (
                 <span key={i} style={{ color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
                   {part}

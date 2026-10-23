@@ -93,9 +93,8 @@ export default function HookSidebar() {
 
   return (
     <nav aria-label="Navigation" className="flex flex-col">
-      <span style={{
+      <span className="text-[16px] sm:text-[18px]" style={{
         color: 'var(--text-muted)',
-        fontSize: '18px',
         fontFamily: 'var(--font-dm-sans)',
         fontStyle: 'italic',
         fontWeight: 400,
@@ -134,9 +133,9 @@ export default function HookSidebar() {
               data-cuelume-emphasis="subtle"
               onFocus={() => { setHoverIndex(index); setFocusInside(true); }}
               onBlur={() => setFocusInside(false)}
+              className="text-[16px] sm:text-[18px]"
               style={{
                 color: isActive ? 'var(--text)' : 'var(--text-muted)',
-                fontSize: '18px',
                 fontFamily: 'var(--font-dm-sans)',
                 fontWeight: isActive ? 600 : 300,
                 transition: 'color 180ms ease',

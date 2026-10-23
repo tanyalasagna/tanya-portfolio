@@ -2,14 +2,13 @@
 import { useState } from 'react';
 
 const linkStyle = {
-  fontSize: '18px',
   fontFamily: 'var(--font-dm-sans)',
   fontWeight: 600,
 };
 
 const baseCls = 'text-[var(--accent)] transition-colors duration-150';
 
-export default function ContactLinks() {
+export default function ContactLinks({ sizeCls = 'text-[18px]' }: { sizeCls?: string }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -23,7 +22,7 @@ export default function ContactLinks() {
     <>
       <button
         onClick={handleCopy}
-        className={`underline-offset-2 cursor-pointer px-[2px] -mx-[2px] rounded-[2px] self-start ${baseCls} ${copied ? '' : 'underline decoration-[#AC39D4] hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat]'}`}
+        className={`${sizeCls} underline-offset-[4px] cursor-pointer px-[2px] -mx-[2px] rounded-[2px] self-start ${baseCls} ${copied ? '' : 'underline decoration-[#AC39D4] hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_3px)_no-repeat]'}`}
         style={linkStyle}
         data-cuelume-tap=""
         data-cuelume-emphasis="subtle"
@@ -34,7 +33,7 @@ export default function ContactLinks() {
         href="https://www.linkedin.com/in/tanya-singh2735/"
         target="_blank"
         rel="noopener noreferrer"
-        className={`underline decoration-[#AC39D4] underline-offset-2 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px] self-start ${baseCls}`}
+        className={`${sizeCls} underline decoration-[#AC39D4] underline-offset-[4px] hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_3px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px] self-start ${baseCls}`}
         style={linkStyle}
         data-cuelume-tap=""
         data-cuelume-emphasis="subtle"

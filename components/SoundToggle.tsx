@@ -20,7 +20,7 @@ export default function SoundToggle() {
       aria-label={on ? 'Mute sounds' : 'Unmute sounds'}
       title={on ? 'Mute sounds' : 'Unmute sounds'}
       style={{
-        color: hovered ? '#1A1A1A' : '#888888',
+        color: hovered ? '#383636' : '#888888',
         cursor: 'pointer',
         background: 'none',
         border: 'none',

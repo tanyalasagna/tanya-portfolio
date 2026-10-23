@@ -27,7 +27,7 @@ export default function ThemeToggle() {
         width: '52px',
         height: '28px',
         borderRadius: '6px',
-        background: isDark ? '#1A1A1A' : '#F0EFED',
+        background: isDark ? '#383636' : '#F0EFED',
         border: '0.5px solid var(--divider)',
         transition: 'background 300ms ease',
         flexShrink: 0,
@@ -39,7 +39,7 @@ export default function ThemeToggle() {
           width: '22px',
           height: '22px',
           borderRadius: '4px',
-          background: isDark ? '#F0EFED' : '#1A1A1A',
+          background: isDark ? '#F0EFED' : '#383636',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -48,15 +48,15 @@ export default function ThemeToggle() {
           {isDark ? (
             /* Sun — shown in dark mode */
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden>
-              <circle cx="6.5" cy="6.5" r="2.5" fill="currentColor" style={{ color: '#1A1A1A' }} />
-              <line x1="6.5" y1="0.5" x2="6.5" y2="2" stroke="#1A1A1A" strokeWidth="1.2" strokeLinecap="round" />
-              <line x1="6.5" y1="11" x2="6.5" y2="12.5" stroke="#1A1A1A" strokeWidth="1.2" strokeLinecap="round" />
-              <line x1="0.5" y1="6.5" x2="2" y2="6.5" stroke="#1A1A1A" strokeWidth="1.2" strokeLinecap="round" />
-              <line x1="11" y1="6.5" x2="12.5" y2="6.5" stroke="#1A1A1A" strokeWidth="1.2" strokeLinecap="round" />
-              <line x1="2" y1="2" x2="3" y2="3" stroke="#1A1A1A" strokeWidth="1.2" strokeLinecap="round" />
-              <line x1="10" y1="10" x2="11" y2="11" stroke="#1A1A1A" strokeWidth="1.2" strokeLinecap="round" />
-              <line x1="11" y1="2" x2="10" y2="3" stroke="#1A1A1A" strokeWidth="1.2" strokeLinecap="round" />
-              <line x1="3" y1="10" x2="2" y2="11" stroke="#1A1A1A" strokeWidth="1.2" strokeLinecap="round" />
+              <circle cx="6.5" cy="6.5" r="2.5" fill="currentColor" style={{ color: '#383636' }} />
+              <line x1="6.5" y1="0.5" x2="6.5" y2="2" stroke="#383636" strokeWidth="1.2" strokeLinecap="round" />
+              <line x1="6.5" y1="11" x2="6.5" y2="12.5" stroke="#383636" strokeWidth="1.2" strokeLinecap="round" />
+              <line x1="0.5" y1="6.5" x2="2" y2="6.5" stroke="#383636" strokeWidth="1.2" strokeLinecap="round" />
+              <line x1="11" y1="6.5" x2="12.5" y2="6.5" stroke="#383636" strokeWidth="1.2" strokeLinecap="round" />
+              <line x1="2" y1="2" x2="3" y2="3" stroke="#383636" strokeWidth="1.2" strokeLinecap="round" />
+              <line x1="10" y1="10" x2="11" y2="11" stroke="#383636" strokeWidth="1.2" strokeLinecap="round" />
+              <line x1="11" y1="2" x2="10" y2="3" stroke="#383636" strokeWidth="1.2" strokeLinecap="round" />
+              <line x1="3" y1="10" x2="2" y2="11" stroke="#383636" strokeWidth="1.2" strokeLinecap="round" />
             </svg>
           ) : (
             /* Moon — shown in light mode */

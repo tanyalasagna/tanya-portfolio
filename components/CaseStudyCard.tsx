@@ -134,7 +134,7 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
   const tooltipEl = (
     <div style={tooltipStyle}>
       <span style={{
-        background: '#1A1A1A',
+        background: '#383636',
         color: '#FFFFFF',
         fontSize: '15px',
         fontStyle: 'normal',

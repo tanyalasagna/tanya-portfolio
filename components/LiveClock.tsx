@@ -23,7 +23,7 @@ export default function LiveClock() {
   }, []);
 
   return (
-    <div suppressHydrationWarning style={{ color: 'var(--text)', fontSize: '18px', fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400 }}>
+    <div suppressHydrationWarning style={{ color: 'var(--text-muted)', fontSize: '18px', fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400 }}>
       Chicago, IL. {time}
     </div>
   );

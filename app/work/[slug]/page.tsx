@@ -17,7 +17,7 @@ export default async function CaseStudyPage({ params }: Props) {
   if (!project) notFound();
 
   return (
-    <div className="px-8 lg:w-3/4 lg:mx-auto" style={{ paddingTop: '40px', paddingBottom: '80px' }}>
+    <div className="px-4 lg:px-8 lg:w-3/4 lg:mx-auto" style={{ paddingTop: '40px', paddingBottom: '80px' }}>
       <CaseStudyContent>
         {/* Cover */}
         <div><CaseStudyCover project={project} /></div>
@@ -49,8 +49,8 @@ export default async function CaseStudyPage({ params }: Props) {
               { label: project.toolsLabel ?? 'Tools', value: project.tools.join('\n') },
             ].map(({ label, value }) => (
               <div key={label} style={{ padding: '20px 18px', background: '#F0F0EE' }}>
-                <div className="mb-3" style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '18px' }}>{label}</div>
-                <div style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", fontSize: '18px', lineHeight: 1.5, whiteSpace: 'pre-line' }}>{value}</div>
+                <div className="mb-3 text-[16px] lg:text-[18px]" style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>{label}</div>
+                <div className="text-[16px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", lineHeight: 1.5, whiteSpace: 'pre-line' }}>{value}</div>
               </div>
             ))}
           </div>

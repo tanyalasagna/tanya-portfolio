@@ -15,10 +15,10 @@
 :root {
   --bg: #faf9f7;
   --sidebar-bg: #faf9f7;
-  --text: #1A1A1A;
+  --text: #383636;
   --text-muted: #3D3835;
   --accent: #3D3835;
-  --divider: #1A1A1A;
+  --divider: #383636;
   --bg-hover: rgba(0, 0, 0, 0.04);
   --icon-filter: none;
   --card-bg: color-mix(in srgb, var(--bg) 93%, white);
