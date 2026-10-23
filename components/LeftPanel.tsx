@@ -80,7 +80,7 @@ export default function LeftPanel() {
           </Link>
 
           {/* Case study section nav */}
-          <div style={{ marginBottom: '32px' }}>
+          <div style={{ marginBottom: '32px', paddingLeft: '22px' }}>
             <CaseStudyNav />
           </div>
         </>
