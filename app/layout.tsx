@@ -46,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           {/* Right / main content — document scrolls, left panel is fixed */}
           <main
-            className="lg:ml-[360px] pt-14 lg:pt-0"
+            className="lg:ml-[340px] pt-14 lg:pt-0"
             id="main-scroll"
           >
               {/* Mobile/tablet-only bio — only on home page */}
