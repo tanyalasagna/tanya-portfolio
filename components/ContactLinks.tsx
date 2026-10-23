@@ -34,7 +34,7 @@ export default function ContactLinks() {
         href="https://www.linkedin.com/in/tanya-singh2735/"
         target="_blank"
         rel="noopener noreferrer"
-        className={`underline decoration-[#AC39D4] underline-offset-2 hover:bg-[rgba(172,57,212,0.12)] px-[2px] -mx-[2px] rounded-[2px] ${baseCls}`}
+        className={`underline decoration-[#AC39D4] underline-offset-2 hover:bg-[rgba(172,57,212,0.12)] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px] ${baseCls}`}
         style={linkStyle}
         data-cuelume-tap=""
         data-cuelume-emphasis="subtle"
