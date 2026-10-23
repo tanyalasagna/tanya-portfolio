@@ -149,7 +149,7 @@ export default function MobileNav() {
                   <button
                     onClick={e => { e.stopPropagation(); setColophonOpen(true); play('open', { theme: 'bubble', emphasis: 'subtle' }); }}
                     className="underline decoration-[#AC39D4] underline-offset-[3px] text-inherit transition-colors duration-150 hover:bg-[rgba(172,57,212,0.12)] px-[2px] -mx-[2px] rounded-[2px]"
-                    style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
+                    style={{ border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
                   >
                     Open colophon
                   </button>
