@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 const linkStyle = {
-  fontSize: '16px',
+  fontSize: '28px',
   fontFamily: 'var(--font-dm-sans)',
   fontWeight: 600,
 };
