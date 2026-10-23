@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { motion, useReducedMotion } from 'framer-motion';
 
 const CORNER = 6;
-const DASH = 'repeating-linear-gradient(to top, transparent 0 2px, currentColor 2px 4px)';
+const DASH = 'linear-gradient(to top, currentColor, currentColor)';
 
 const navItems = [
   { label: 'Work',   href: '/',        matches: (p: string) => p === '/' || p.startsWith('/work') },
@@ -56,7 +56,7 @@ function Rail({
         fill="none"
         className="absolute left-0.5"
       >
-        <path d="M0.5 0a6 6 0 0 0 6 6H12" stroke="currentColor" strokeDasharray="2 2" />
+        <path d="M0.5 0a6 6 0 0 0 6 6H12" stroke="currentColor" strokeWidth="1" />
       </motion.svg>
     </motion.span>
   );
@@ -108,7 +108,6 @@ export default function HookSidebar() {
 
       <div
         ref={listRef}
-        onMouseLeave={() => setPointerInside(false)}
         className="relative flex flex-col"
       >
         <Rail
@@ -133,7 +132,6 @@ export default function HookSidebar() {
               aria-current={isActive ? 'page' : undefined}
               data-cuelume-navigate=""
               data-cuelume-emphasis="subtle"
-              onMouseEnter={() => { setHoverIndex(index); setPointerInside(true); }}
               onFocus={() => { setHoverIndex(index); setFocusInside(true); }}
               onBlur={() => setFocusInside(false)}
               style={{
@@ -142,13 +140,20 @@ export default function HookSidebar() {
                 fontFamily: 'var(--font-dm-sans)',
                 fontWeight: isActive ? 600 : 300,
                 transition: 'color 180ms ease',
+                display: 'block',
                 paddingLeft: '20px',
                 paddingTop: '5px',
                 paddingBottom: '5px',
-                display: 'block',
+                pointerEvents: 'none',
               }}
             >
-              {item.label}
+              <span
+                onMouseEnter={() => { setHoverIndex(index); setPointerInside(true); }}
+                onMouseLeave={() => setPointerInside(false)}
+                style={{ display: 'inline-block', pointerEvents: 'auto', cursor: 'pointer' }}
+              >
+                {item.label}
+              </span>
             </Link>
           );
         })}

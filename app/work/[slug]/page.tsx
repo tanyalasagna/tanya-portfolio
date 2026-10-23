@@ -24,13 +24,16 @@ export default async function CaseStudyPage({ params }: Props) {
 
         {/* Title + subtitle */}
         <div>
-          <h1 className="leading-none mb-2 text-[16px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontWeight: 400, fontStyle: 'normal' }}>
+          <h1 className="leading-none mb-2 text-[18px] lg:text-[20px]" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontWeight: 500, fontStyle: 'normal' }}>
             {project.displayTitle ?? project.title}
+            {project.tags.length > 0 && (
+              <span style={{ opacity: 0.7, fontWeight: 400, fontStyle: 'italic' }}>{' '}({project.tags.join(', ')})</span>
+            )}
           </h1>
           {project.subtitle && (
             <p className="mb-6 lg:mb-8 text-[32px] lg:text-[44px]" style={{ color: 'var(--text-muted)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', fontWeight: 900, letterSpacing: '0.045em', lineHeight: 1.1 }}>
               {project.subtitle.split('-').map((part, i, arr) => (
-                <span key={i}>{part}{i < arr.length - 1 && <span style={{ fontFamily: 'Alegreya, serif', fontWeight: 400, letterSpacing: 0 }}>-</span>}</span>
+                <span key={i}>{part}{i < arr.length - 1 && <span style={{ fontFamily: 'var(--font-dm-sans)', fontWeight: 400, letterSpacing: 0 }}>-</span>}</span>
               ))}
             </p>
           )}
@@ -45,9 +48,9 @@ export default async function CaseStudyPage({ params }: Props) {
               { label: project.teamLabel ?? 'Team', value: project.team },
               { label: project.toolsLabel ?? 'Tools', value: project.tools.join('\n') },
             ].map(({ label, value }) => (
-              <div key={label} style={{ padding: '20px 18px', background: '#F0F0EE', borderRadius: '6px' }}>
+              <div key={label} style={{ padding: '20px 18px', background: '#F0F0EE' }}>
                 <div className="mb-3" style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '16px' }}>{label}</div>
-                <div style={{ color: 'var(--text)', fontFamily: 'Alegreya, serif', fontSize: '16px', lineHeight: 1.5, whiteSpace: 'pre-line' }}>{value}</div>
+                <div style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", fontSize: '16px', lineHeight: 1.5, whiteSpace: 'pre-line' }}>{value}</div>
               </div>
             ))}
           </div>
@@ -55,6 +58,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
         {/* Research */}
         <div>
+          <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
           <section id="research" className="scroll-mt-8 mb-16">
             <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)' }}>Research</h2>
             <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>Research findings and process coming soon.</p>
@@ -63,6 +67,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
         {/* Designs */}
         <div>
+          <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
           <section id="designs" className="scroll-mt-8 mb-16">
             <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)' }}>Designs</h2>
             <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>Final designs coming soon.</p>
@@ -71,6 +76,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
         {/* Reflections */}
         <div>
+          <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
           <section id="reflections" className="scroll-mt-8 mb-16">
             <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)' }}>Reflections</h2>
             <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>Reflections coming soon.</p>

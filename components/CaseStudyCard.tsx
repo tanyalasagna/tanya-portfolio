@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import type { Project } from '@/data/projects';
 
 export default function CaseStudyCard({ project, padTop = 26 }: { project: Project; padTop?: number }) {
@@ -33,8 +34,7 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
   const handleMediaReady = () => setMediaLoaded(true);
 
   const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setCursor({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    setCursor({ x: e.clientX, y: e.clientY });
   };
 
   const handleThumbEnter = () => {
@@ -82,15 +82,17 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
   };
 
   const tooltipStyle: React.CSSProperties = {
-    position: 'absolute',
-    left: cursor.x,
-    top: cursor.y,
-    transform: 'translate(20px, 8px)',
+    position: 'fixed',
+    left: cursor.x + 20,
+    top: cursor.y + 8,
     pointerEvents: 'none',
-    zIndex: 20,
+    zIndex: 9999,
     whiteSpace: 'nowrap',
-    clipPath: hovered ? 'inset(0 0% 0 0)' : 'inset(0 100% 0 0)',
-    transition: hovered ? 'clip-path 350ms cubic-bezier(0.22, 1, 0.36, 1)' : 'none',
+    clipPath: hovered ? 'inset(0 0% 0 0 round 999px)' : 'inset(0 100% 0 0 round 999px)',
+    filter: hovered ? 'blur(0px)' : 'blur(5px)',
+    transition: hovered
+      ? 'clip-path 600ms cubic-bezier(0.16, 1, 0.3, 1), filter 500ms cubic-bezier(0.16, 1, 0.3, 1)'
+      : 'none',
   };
 
   const thumbnailWrapper = (extraStyle: React.CSSProperties) => (
@@ -122,47 +124,51 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
   const titleStyle: React.CSSProperties = {
     color: 'var(--text)',
     fontFamily: 'var(--font-dm-sans)',
-    fontWeight: 700,
+    fontWeight: 600,
     fontStyle: 'normal',
     letterSpacing: '0',
-    opacity: hovered ? 0.6 : 1,
+    opacity: hovered ? 0.7 : 1,
     transition: 'opacity 500ms ease',
   };
 
+  const tooltipEl = (
+    <div style={tooltipStyle}>
+      <span style={{
+        background: '#1A1A1A',
+        color: '#FFFFFF',
+        fontSize: '15px',
+        fontStyle: 'normal',
+        fontFamily: 'var(--font-dm-sans)',
+        fontWeight: 400,
+        padding: '8px 12px',
+        borderRadius: '999px',
+        border: '0.5px solid rgba(255,255,255,0.65)',
+        letterSpacing: '0.02em',
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '6px',
+      }}>
+        Read case study
+      </span>
+    </div>
+  );
+
   return (
-    <div
-      style={{ position: 'relative', cursor: hovered ? 'none' : 'auto' }}
-      onMouseMove={handleCardMouseMove}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => { setHovered(false); setThumbActive(false); }}
-    >
-      {/* Cursor-following tooltip — rendered outside overflow:hidden container */}
-      <div style={tooltipStyle}>
-        <span style={{
-          background: '#1A1A1A',
-          color: '#FFFFFF',
-          fontSize: '15px',
-          fontStyle: 'normal',
-          fontFamily: 'var(--font-dm-sans)',
-          fontWeight: 400,
-          padding: '8px 12px',
-          borderRadius: '999px',
-          border: '0.5px solid rgba(255,255,255,0.65)',
-          letterSpacing: '0.02em',
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '6px',
-        }}>
-          Read Case Study
-        </span>
-      </div>
+    <>
+      {typeof document !== 'undefined' && createPortal(tooltipEl, document.body)}
+      <div
+        style={{ position: 'relative', cursor: hovered ? 'none' : 'auto' }}
+        onMouseMove={handleCardMouseMove}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => { setHovered(false); setThumbActive(false); }}
+      >
 
       <div className="@container" style={{ overflow: 'hidden' }}>
         <div className="flex flex-col" style={{ paddingTop: `${padTop}px` }}>
           {thumbnailWrapper({ width: '100%', aspectRatio: project.thumbnailAspect ?? '4/3', background: 'var(--divider)' })}
           <div className="pt-4 md:pt-[10px]" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             {/* Line 1: tag */}
-            <p className="text-[16px] lg:text-[17.5px]" style={{ fontStyle: 'italic', color: 'var(--text)', lineHeight: 1.2 }}>
+            <p className="text-[16px] lg:text-[17.5px]" style={{ fontStyle: 'italic', color: 'var(--text)', lineHeight: 1.2, opacity: 0.7 }}>
               {project.tags.join(', ')}
             </p>
             {/* Line 2: title */}
@@ -178,20 +184,21 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
             </Link>
             {/* Line 3: descriptors */}
             {project.description ? (
-              <p className="text-[16px] lg:text-[17.5px]" style={{ lineHeight: 1.2 }}>
-                {(() => {
-                  const parts = project.description.split(' \\ ');
-                  return parts.map((part, i) => (
-                    <span key={i} style={{ color: 'var(--text-muted)' }}>
-                      {i === 0 ? part : ` \\ ${part}`}
-                    </span>
-                  ));
-                })()}
+              <p className="text-[16px] lg:text-[17.5px]" style={{ lineHeight: 1.2, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
+                {project.description.split(' \\ ').map((part, i, arr) => (
+                  <span key={i} style={{ color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                    {part}
+                    {i < arr.length - 1 && (
+                      <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="18" height="18" style={{ flexShrink: 0 }} />
+                    )}
+                  </span>
+                ))}
               </p>
             ) : null}
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

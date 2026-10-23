@@ -69,7 +69,7 @@ export default function ColophonPage() {
         className="leading-tight mb-10"
         style={{
           fontFamily: 'var(--font-dm-sans)',
-          fontWeight: 700,
+          fontWeight: 600,
           fontSize: '2rem',
           color: 'var(--text)',
         }}
