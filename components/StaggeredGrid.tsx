@@ -122,6 +122,7 @@ export default function StaggeredGrid() {
   const mobileRef = useRef<HTMLDivElement>(null);
   const tabletL = useRef<HTMLDivElement>(null);
   const tabletR = useRef<HTMLDivElement>(null);
+  const desktopSingle = useRef<HTMLDivElement>(null);
   const desktopL = useRef<HTMLDivElement>(null);
   const desktopR = useRef<HTMLDivElement>(null);
 
@@ -133,6 +134,8 @@ export default function StaggeredGrid() {
         gsap.fromTo(tabletL.current.children, FROM, { ...TO, stagger: 0.12, delay: 0.05 });
       if (tabletR.current?.children.length)
         gsap.fromTo(tabletR.current.children, FROM, { ...TO, stagger: 0.12, delay: 0.17 });
+      if (desktopSingle.current?.children.length)
+        gsap.fromTo(desktopSingle.current.children, FROM, { ...TO, stagger: 0.12, delay: 0.05 });
       if (desktopL.current?.children.length)
         gsap.fromTo(desktopL.current.children, FROM, { ...TO, stagger: 0.12, delay: 0.05 });
       if (desktopR.current?.children.length)
@@ -174,14 +177,34 @@ export default function StaggeredGrid() {
         </div>
       </div>
 
-      {/* Desktop: single column */}
-      <div className="hidden lg:block px-12 pb-20" style={{ paddingTop: '88px' }}>
-        <div ref={desktopL} style={{ display: 'flex', flexDirection: 'column', gap: '64px', maxWidth: '680px' }}>
+      {/* lg only: single column (thumbnails too small for two columns at this width) */}
+      <div className="hidden lg:block xl:hidden px-12 pb-20" style={{ paddingTop: '88px' }}>
+        <div ref={desktopSingle} style={{ display: 'flex', flexDirection: 'column', gap: '64px', maxWidth: '680px' }}>
           {projects.map((p) => (
             <div key={p.slug} style={{ opacity: 0 }}>
               <Thumbnail project={p} />
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* xl+: staggered two columns */}
+      <div className="hidden xl:block pr-8 pb-20" style={{ paddingLeft: 'max(32px, 8vw)', paddingTop: '88px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px', alignItems: 'start' }}>
+          <div ref={desktopL} style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
+            {leftCol.map((p) => (
+              <div key={p.slug} style={{ opacity: 0 }}>
+                <Thumbnail project={p} />
+              </div>
+            ))}
+          </div>
+          <div ref={desktopR} style={{ display: 'flex', flexDirection: 'column', gap: '64px', marginTop: '120px' }}>
+            {rightCol.map((p) => (
+              <div key={p.slug} style={{ opacity: 0 }}>
+                <Thumbnail project={p} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>
