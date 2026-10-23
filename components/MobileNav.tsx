@@ -86,7 +86,21 @@ export default function MobileNav() {
         </button>
       </div>
 
-      {/* Full-screen overlay */}
+      {/* Blur backdrop */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="lg:hidden fixed inset-0 z-[39]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', pointerEvents: 'none' }}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Dropdown menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -94,8 +108,8 @@ export default function MobileNav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:hidden fixed inset-0 z-40 flex flex-col px-4 pt-20 pb-10"
-            style={{ background: 'var(--bg)' }}
+            className="lg:hidden fixed top-0 left-0 right-0 z-40 flex flex-col px-4 pt-20 pb-10"
+            style={{ background: 'var(--bg)', height: 'fit-content', borderBottom: '0.5px solid var(--divider)' }}
             onClick={() => setColophonOpen(false)}
           >
             {/* Bio */}
@@ -124,34 +138,6 @@ export default function MobileNav() {
 
             <div className="mb-8" style={{ height: '0.5px', background: 'var(--divider)' }} />
 
-            {/* Spacer */}
-            <div className="flex-1" />
-
-            {/* Colophon dialog — floats above bottom section, animated via GSAP */}
-            <div
-              ref={colophonRef}
-              onClick={e => e.stopPropagation()}
-              style={{ position: 'absolute', left: '16px', right: '16px', bottom: '40px', background: '#FFFFFF', borderRadius: '14px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none', border: '0.5px solid #888888' }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-                <span style={{ fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', fontSize: '24px', color: '#1A1A1A', letterSpacing: '0.045em', fontWeight: 700 }}>Colophon</span>
-                <button onClick={() => { setColophonOpen(false); play('close', { theme: 'bubble', emphasis: 'subtle' }); }} aria-label="Close colophon" style={{ color: '#1A1A1A', background: 'none', border: 'none', cursor: 'pointer', fontSize: '28px', lineHeight: 1, padding: 0 }}>×</button>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                {colophonLines.map((line, i) => (
-                  <p key={i} style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontSize: '16px', fontWeight: 300, fontStyle: 'normal', color: '#1A1A1A', lineHeight: 1.4 }}>
-                    {line.before}
-                    {line.links.map((lk, j) => (
-                      <span key={j}>
-                        {j > 0 && (line.join ?? ' and ')}
-                        <a href={lk.href} target="_blank" rel="noopener noreferrer" className="underline decoration-[#8238E8] underline-offset-2 hover:no-underline hover:text-[#8238E8] text-inherit transition-colors duration-150">{lk.label}</a>
-                      </span>
-                    ))}
-                  </p>
-                ))}
-              </div>
-            </div>
-
             {/* Sound toggle + clock */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
               {/* Clock + colophon */}
@@ -173,6 +159,31 @@ export default function MobileNav() {
               <div onMouseEnter={() => setSpeakerHovered(true)} onMouseLeave={() => setSpeakerHovered(false)}
               style={{ background: 'transparent', borderRadius: '50%', width: '34px', height: '34px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, border: `0.5px solid ${speakerHovered ? '#1A1A1A' : '#888888'}` }}>
                 <SoundToggle />
+              </div>
+            </div>
+
+            {/* Colophon dialog */}
+            <div
+              ref={colophonRef}
+              onClick={e => e.stopPropagation()}
+              style={{ position: 'absolute', left: '16px', right: '16px', bottom: '40px', background: '#FFFFFF', borderRadius: '14px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none', border: '0.5px solid #888888' }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+                <span style={{ fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', fontSize: '24px', color: '#1A1A1A', letterSpacing: '0.045em', fontWeight: 700 }}>Colophon</span>
+                <button onClick={() => { setColophonOpen(false); play('close', { theme: 'bubble', emphasis: 'subtle' }); }} aria-label="Close colophon" style={{ color: '#1A1A1A', background: 'none', border: 'none', cursor: 'pointer', fontSize: '28px', lineHeight: 1, padding: 0 }}>×</button>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {colophonLines.map((line, i) => (
+                  <p key={i} style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontSize: '16px', fontWeight: 300, fontStyle: 'normal', color: '#1A1A1A', lineHeight: 1.4 }}>
+                    {line.before}
+                    {line.links.map((lk, j) => (
+                      <span key={j}>
+                        {j > 0 && (line.join ?? ' and ')}
+                        <a href={lk.href} target="_blank" rel="noopener noreferrer" className="underline decoration-[#8238E8] underline-offset-2 hover:no-underline hover:text-[#8238E8] text-inherit transition-colors duration-150">{lk.label}</a>
+                      </span>
+                    ))}
+                  </p>
+                ))}
               </div>
             </div>
           </motion.div>
