@@ -7,7 +7,7 @@ const linkStyle = {
   fontWeight: 600,
 };
 
-const baseCls = 'text-[var(--accent)] hover:text-[#8B31CC] transition-colors duration-150';
+const baseCls = 'text-[var(--accent)] hover:text-[#611FB8] transition-colors duration-150';
 
 export default function ContactLinks() {
   const [copied, setCopied] = useState(false);
@@ -23,18 +23,18 @@ export default function ContactLinks() {
     <>
       <button
         onClick={handleCopy}
-        className={`underline-offset-2 cursor-pointer ${baseCls} ${copied ? '' : 'underline decoration-[#8B31CC] hover:no-underline'}`}
+        className={`underline-offset-2 cursor-pointer ${baseCls} ${copied ? '' : 'underline decoration-[#611FB8] hover:no-underline'}`}
         style={linkStyle}
         data-cuelume-tap=""
         data-cuelume-emphasis="subtle"
       >
-        {copied ? <span style={{ color: '#8B31CC', fontStyle: 'italic' }}>Copied. Say hi!</span> : 'Copy email'}
+        {copied ? <span style={{ color: '#611FB8', fontStyle: 'italic' }}>Copied. Say hi!</span> : 'Copy email'}
       </button>
       <a
         href="https://www.linkedin.com/in/tanya-singh2735/"
         target="_blank"
         rel="noopener noreferrer"
-        className={`underline decoration-[#8B31CC] underline-offset-2 hover:no-underline ${baseCls}`}
+        className={`underline decoration-[#611FB8] underline-offset-2 hover:no-underline ${baseCls}`}
         style={linkStyle}
         data-cuelume-tap=""
         data-cuelume-emphasis="subtle"
