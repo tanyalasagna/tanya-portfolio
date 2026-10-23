@@ -79,14 +79,10 @@ export default function LeftPanel() {
             ← Back to projects
           </Link>
 
-          <div style={{ height: '0.5px', background: 'var(--divider)', marginBottom: '32px' }} />
-
           {/* Case study section nav */}
           <div style={{ marginBottom: '32px' }}>
             <CaseStudyNav />
           </div>
-
-          <div style={{ height: '0.5px', background: 'var(--divider)', marginBottom: '32px' }} />
         </>
       ) : (
         <>
@@ -105,14 +101,10 @@ export default function LeftPanel() {
             <ContactLinks />
           </div>
 
-          <div style={{ height: '0.5px', background: 'var(--divider)', marginBottom: '32px' }} />
-
           {/* Main nav */}
           <div style={{ marginBottom: '32px' }}>
             <HookSidebar />
           </div>
-
-          <div style={{ height: '0.5px', background: 'var(--divider)', marginBottom: '32px' }} />
         </>
       )}
 
