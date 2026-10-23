@@ -117,7 +117,7 @@ export default function LeftPanel() {
           <div
             ref={colophonRef}
             onClick={e => e.stopPropagation()}
-            style={{ position: 'absolute', left: '20px', right: '20px', bottom: '28px', background: '#FFFFFF', borderRadius: '14px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none', border: '0.5px solid #888888' }}
+            style={{ position: 'absolute', left: '20px', right: '20px', bottom: '28px', background: '#FFFFFF', borderRadius: '6px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none', border: '0.5px solid #888888' }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
               <span style={{ fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', fontSize: '24px', color: '#1A1A1A', letterSpacing: '0.045em', fontWeight: 700 }}>Colophon</span>
