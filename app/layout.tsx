@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Alegreya_Sans } from 'next/font/google';
+import { Alegreya } from 'next/font/google';
 import './globals.css';
 
-const alegreya = Alegreya_Sans({
+const alegreya = Alegreya({
   variable: '--font-dm-sans',
   subsets: ['latin'],
   weight: ['400', '500', '700'],
