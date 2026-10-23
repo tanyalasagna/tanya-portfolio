@@ -73,10 +73,8 @@ function Thumbnail({ project }: { project: Project }) {
           <p style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontSize: '16px', fontStyle: 'italic', lineHeight: 1.2, opacity: 0.7 }}>
             {project.tags.join(', ')}
           </p>
-          <p style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', fontWeight: 900, fontSize: '28px', letterSpacing: '0.045em', lineHeight: 1.2 }}>
-            {project.title.split('-').map((part, i, arr) => (
-              <span key={i}>{part}{i < arr.length - 1 && <span style={{ fontFamily: 'var(--font-dm-sans)', fontWeight: 400, letterSpacing: 0 }}>-</span>}</span>
-            ))}
+          <p style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontWeight: 600, fontSize: '20px', lineHeight: 1.2 }}>
+            {project.displayTitle ?? project.title}
           </p>
           {project.description && (
             <p style={{ lineHeight: 1.2, fontSize: '16px', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
