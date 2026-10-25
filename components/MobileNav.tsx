@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { play } from 'cuelume';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
+import { Menu, X } from 'lucide-react';
 import LiveClock from './LiveClock';
 import ContactLinks from './ContactLinks';
 import HookSidebar from './HookSidebar';
@@ -64,22 +65,15 @@ export default function MobileNav() {
         </Link>
         <button
           onClick={() => setIsOpen((v) => !v)}
-          className="flex flex-col justify-center items-center gap-[5px]"
+          className="flex items-center justify-center"
           style={{ color: 'var(--text)', width: '28px', height: '28px', cursor: 'pointer' }}
           aria-label="Toggle menu"
           {...(isOpen ? { 'data-cuelume-close': '', 'data-cuelume-emphasis': 'subtle' } : { 'data-cuelume-open': '', 'data-cuelume-emphasis': 'subtle' })}
         >
           {isOpen ? (
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <line x1="3" y1="3" x2="17" y2="17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              <line x1="17" y1="3" x2="3" y2="17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
+            <X size={20} strokeWidth={1.5} aria-hidden />
           ) : (
-            <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
-              <line x1="0" y1="1" x2="22" y2="1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              <line x1="0" y1="8" x2="22" y2="8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              <line x1="0" y1="15" x2="22" y2="15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
+            <Menu size={22} strokeWidth={1.5} aria-hidden />
           )}
         </button>
       </div>
@@ -127,7 +121,7 @@ export default function MobileNav() {
                 {/* Row 2: year + colophon */}
                 <div className="text-[15px] sm:text-[16px]" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
                   <span>2027</span>
-                  <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="18" height="18" style={{ flexShrink: 0, opacity: 0.8 }} />
+                  <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="20" height="20" style={{ flexShrink: 0, opacity: 0.8 }} />
                   <button
                     onClick={e => { e.stopPropagation(); setColophonOpen(true); play('open', { theme: 'bubble', emphasis: 'subtle' }); }}
                     className="underline decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px]"
@@ -151,7 +145,9 @@ export default function MobileNav() {
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                 <span style={{ fontFamily: "'Alegreya Sans', sans-serif", fontSize: '16px', color: '#383636', fontWeight: 600 }}>Colophon</span>
-                <button onClick={() => { setColophonOpen(false); play('close', { theme: 'bubble', emphasis: 'subtle' }); }} aria-label="Close colophon" style={{ color: '#383636', background: 'none', border: 'none', cursor: 'pointer', fontSize: '34px', lineHeight: 1, padding: 0, position: 'relative', top: '-4px' }}>×</button>
+                <button onClick={() => { setColophonOpen(false); play('close', { theme: 'bubble', emphasis: 'subtle' }); }} aria-label="Close colophon" style={{ color: '#383636', background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center' }}>
+                  <X size={20} strokeWidth={1.5} aria-hidden />
+                </button>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {colophonLines.map((line, i) => (

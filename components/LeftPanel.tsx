@@ -9,7 +9,7 @@ import { play } from 'cuelume';
 import SoundToggle from './SoundToggle';
 import { gsap } from 'gsap';
 import { usePathname } from 'next/navigation';
-import { ArrowLeft, CornerDownLeft } from 'lucide-react';
+import { ArrowLeft, CornerDownLeft, X } from 'lucide-react';
 
 const colophonLines = [
   { before: 'Type set in ', links: [{ label: 'Dreamer TM', href: 'https://typemania.eu/products/dreamer-tm' }, { label: 'Alegreya Sans', href: 'https://fonts.google.com/specimen/Alegreya+Sans' }], join: ' and ' },
@@ -126,7 +126,9 @@ export default function LeftPanel() {
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
               <span style={{ fontFamily: "'Alegreya Sans', sans-serif", fontSize: '18px', color: '#383636', fontWeight: 600 }}>Colophon</span>
-              <button onClick={() => { setColophonOpen(false); play('close', { theme: 'bubble', emphasis: 'subtle' }); }} aria-label="Close colophon" style={{ color: '#383636', background: 'none', border: 'none', cursor: 'pointer', fontSize: '34px', lineHeight: 1, padding: 0, position: 'relative', top: '-4px' }}>×</button>
+              <button onClick={() => { setColophonOpen(false); play('close', { theme: 'bubble', emphasis: 'subtle' }); }} aria-label="Close colophon" style={{ color: '#383636', background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center' }}>
+                <X size={20} strokeWidth={1.5} aria-hidden />
+              </button>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {colophonLines.map((line, i) => (
@@ -149,7 +151,7 @@ export default function LeftPanel() {
               <div style={{ opacity: 0.8 }}><LiveClock /></div>
               <div style={{ color: 'var(--text-muted)', fontSize: '18px', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
                 <span style={{ opacity: 0.8 }}>2027</span>
-                <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="18" height="18" style={{ flexShrink: 0, opacity: 0.8 }} />
+                <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="20" height="20" style={{ flexShrink: 0, opacity: 0.8 }} />
                 <button
                   onClick={e => { e.stopPropagation(); setColophonOpen(true); play('open', { theme: 'bubble', emphasis: 'subtle' }); }}
                   className="underline decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px]"
@@ -161,7 +163,7 @@ export default function LeftPanel() {
             </div>
             <div onMouseEnter={() => setSpeakerHovered(true)} onMouseLeave={() => setSpeakerHovered(false)}
               style={{ background: '#ffffff', borderRadius: '50%', width: '34px', height: '34px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, border: `1px solid ${speakerHovered ? '#383636' : '#888888'}`, opacity: speakerHovered ? 1 : 0.8 }}>
-              <SoundToggle />
+              <SoundToggle forceHovered={speakerHovered} />
             </div>
           </div>
         </>
