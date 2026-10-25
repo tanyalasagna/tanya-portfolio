@@ -168,7 +168,7 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
           {thumbnailWrapper({ width: '100%', aspectRatio: project.thumbnailAspect ?? '4/3', background: 'var(--divider)' })}
           <div className="pt-4 md:pt-[10px]" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             {/* Line 1: tag */}
-            <p className="text-[16px] lg:text-[17.5px]" style={{ fontStyle: 'italic', color: 'var(--text)', lineHeight: 1.2, opacity: 0.7 }}>
+            <p className="text-[16px] lg:text-[17.5px]" style={{ fontStyle: 'italic', color: 'var(--text)', lineHeight: 1.2, opacity: 0.8 }}>
               {project.tags.join(', ')}
             </p>
             {/* Line 2: title */}

@@ -7,11 +7,45 @@ import { play } from 'cuelume';
 import { projects } from '@/data/projects';
 import type { Project } from '@/data/projects';
 
+function Tooltip({ x, y }: { x: number; y: number }) {
+  const [revealed, setRevealed] = useState(false);
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setRevealed(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+
+  return createPortal(
+    <div style={{
+      position: 'fixed',
+      left: x + 20,
+      top: y + 8,
+      pointerEvents: 'none',
+      zIndex: 9999,
+      whiteSpace: 'nowrap',
+      clipPath: revealed ? 'inset(0 0% 0 0 round 999px)' : 'inset(0 100% 0 0 round 999px)',
+      filter: revealed ? 'blur(0px)' : 'blur(5px)',
+      transition: 'clip-path 600ms cubic-bezier(0.16, 1, 0.3, 1), filter 500ms cubic-bezier(0.16, 1, 0.3, 1)',
+    }}>
+      <span style={{
+        background: '#383636', color: '#FFFFFF', fontSize: '15px',
+        fontFamily: 'var(--font-dm-sans)', fontWeight: 400,
+        padding: '8px 12px', borderRadius: '999px',
+        border: '0.5px solid rgba(255,255,255,0.65)',
+        letterSpacing: '0.02em', display: 'inline-flex',
+        alignItems: 'center', gap: '6px',
+      }}>
+        Read case study
+      </span>
+    </div>,
+    document.body
+  );
+}
+
 function Thumbnail({ project }: { project: Project }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isVideo = /\.(mp4|webm|mov)$/i.test(project.thumbnail ?? '');
   const [hovered, setHovered] = useState(false);
-  const [cursor, setCursor] = useState({ x: 0, y: 0 });
+  const [cursor, setCursor] = useState<{ x: number; y: number } | null>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     setCursor({ x: e.clientX, y: e.clientY });
@@ -25,36 +59,9 @@ function Thumbnail({ project }: { project: Project }) {
     }
   };
 
-  const tooltipEl = (
-    <div style={{
-      position: 'fixed',
-      left: cursor.x + 20,
-      top: cursor.y + 8,
-      pointerEvents: 'none',
-      zIndex: 9999,
-      whiteSpace: 'nowrap',
-      clipPath: hovered ? 'inset(0 0% 0 0 round 999px)' : 'inset(0 100% 0 0 round 999px)',
-      filter: hovered ? 'blur(0px)' : 'blur(5px)',
-      transition: hovered
-        ? 'clip-path 600ms cubic-bezier(0.16, 1, 0.3, 1), filter 500ms cubic-bezier(0.16, 1, 0.3, 1)'
-        : 'none',
-    }}>
-      <span style={{
-        background: '#383636', color: '#FFFFFF', fontSize: '15px',
-        fontFamily: 'var(--font-dm-sans)', fontWeight: 400,
-        padding: '8px 12px', borderRadius: '999px',
-        border: '0.5px solid rgba(255,255,255,0.65)',
-        letterSpacing: '0.02em', display: 'inline-flex',
-        alignItems: 'center', gap: '6px',
-      }}>
-        Read case study
-      </span>
-    </div>
-  );
-
   return (
     <>
-      {typeof document !== 'undefined' && createPortal(tooltipEl, document.body)}
+      {hovered && cursor && <Tooltip x={cursor.x} y={cursor.y} />}
       <div
         style={{ position: 'relative', cursor: hovered ? 'none' : 'auto' }}
         onMouseMove={handleMouseMove}
@@ -100,10 +107,10 @@ function Thumbnail({ project }: { project: Project }) {
           }} />
         </div>
         <div style={{ paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <p className="text-[16px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', lineHeight: 1.2, opacity: 0.7 }}>
+          <p className="text-[14px] sm:text-[15px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', lineHeight: 1.2, opacity: 0.8 }}>
             {project.tags.join(', ')}
           </p>
-          <p className="text-[18px] lg:text-[21px] leading-tight" style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", fontWeight: 600, lineHeight: 1.2 }}>
+          <p className="text-[17px] sm:text-[18px] lg:text-[21px] leading-tight" style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", fontWeight: 600, lineHeight: 1.2, opacity: hovered ? 0.8 : 1, transition: 'opacity 400ms ease' }}>
             {project.mobileTitle ? (
               <>
                 <span className="lg:hidden">{project.mobileTitle}</span>
@@ -112,7 +119,7 @@ function Thumbnail({ project }: { project: Project }) {
             ) : project.title}
           </p>
           {project.description && (
-            <p className="text-[16px] lg:text-[18px]" style={{ lineHeight: 1.2, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
+            <p className="text-[14px] sm:text-[15px] lg:text-[18px]" style={{ lineHeight: 1.2, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px', opacity: 0.8 }}>
               {project.description.split(' \\ ').map((part, i, arr) => (
                 <span key={i} style={{ color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
                   {part}
@@ -196,7 +203,7 @@ export default function StaggeredGrid() {
       </div>
 
       {/* lg only: single column (thumbnails too small for two columns at this width) */}
-      <div className="hidden lg:block xl:hidden pb-20" style={{ paddingLeft: '48px', paddingRight: '32px', paddingTop: '88px' }}>
+      <div className="hidden lg:block xl:hidden pb-20" style={{ paddingLeft: '24px', paddingRight: '24px', paddingTop: '88px' }}>
         <div ref={desktopSingle} style={{ display: 'flex', flexDirection: 'column', gap: '64px', maxWidth: '680px' }}>
           {projects.map((p) => (
             <div key={p.slug} style={{ opacity: 0 }}>
@@ -207,7 +214,7 @@ export default function StaggeredGrid() {
       </div>
 
       {/* xl+: staggered two columns */}
-      <div className="hidden xl:block pb-20" style={{ paddingLeft: 'max(32px, 8vw)', paddingRight: '32px', paddingTop: '88px' }}>
+      <div className="hidden xl:block pb-20" style={{ paddingLeft: 'max(24px, 3vw)', paddingRight: '32px', paddingTop: '88px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', alignItems: 'start' }}>
           <div ref={desktopL} style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
             {leftCol.map((p) => (

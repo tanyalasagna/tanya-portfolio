@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 
-export default function LiveClock() {
+export default function LiveClock({ fontSize = '18px', sizeCls }: { fontSize?: string; sizeCls?: string }) {
   const [time, setTime] = useState('');
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function LiveClock() {
   }, []);
 
   return (
-    <div suppressHydrationWarning style={{ color: 'var(--text-muted)', fontSize: '18px', fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400 }}>
+    <div suppressHydrationWarning className={sizeCls} style={{ color: 'var(--text-muted)', ...(sizeCls ? {} : { fontSize }), fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400 }}>
       Chicago, IL. {time}
     </div>
   );

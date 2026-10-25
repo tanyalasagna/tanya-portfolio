@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { setEnabled } from 'cuelume';
+import { Volume2, VolumeX } from 'lucide-react';
 
 export default function SoundToggle() {
   const [on, setOn] = useState(true);
@@ -32,16 +33,9 @@ export default function SoundToggle() {
       }}
     >
       {on ? (
-        <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden>
-          <path d="M3 8H7L12 4v14L7 14H3z" fill="currentColor" />
-          <path d="M15 7.5a5 5 0 0 1 0 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
+        <Volume2 size={18} strokeWidth={1.5} aria-hidden />
       ) : (
-        <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden>
-          <path d="M3 8H7L12 4v14L7 14H3z" fill="currentColor" />
-          <line x1="15.5" y1="8.5" x2="19.5" y2="13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-          <line x1="19.5" y1="8.5" x2="15.5" y2="13.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
+        <VolumeX size={18} strokeWidth={1.5} aria-hidden />
       )}
     </button>
   );

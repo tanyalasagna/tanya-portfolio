@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={alegreya.variable}
       suppressHydrationWarning
     >
-      <body className="min-h-screen antialiased">
+      <body className="min-h-screen antialiased" suppressHydrationWarning>
         <ThemeProvider>
           <CuelumeProvider />
           {/* Canvas background transition — sits at z-index 0, behind all content */}

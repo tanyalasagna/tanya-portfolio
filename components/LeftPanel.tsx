@@ -9,6 +9,7 @@ import { play } from 'cuelume';
 import SoundToggle from './SoundToggle';
 import { gsap } from 'gsap';
 import { usePathname } from 'next/navigation';
+import { ArrowLeft, CornerDownLeft } from 'lucide-react';
 
 const colophonLines = [
   { before: 'Type set in ', links: [{ label: 'Dreamer TM', href: 'https://typemania.eu/products/dreamer-tm' }, { label: 'Alegreya Sans', href: 'https://fonts.google.com/specimen/Alegreya+Sans' }], join: ' and ' },
@@ -67,37 +68,41 @@ export default function LeftPanel() {
             href="/"
             className="hover:opacity-70 transition-opacity duration-150"
             style={{
-              fontSize: '20px',
-              fontFamily: "'Alegreya Sans', sans-serif",
-              fontWeight: 600,
+              fontSize: '28px',
+              fontFamily: "'Dreamer TM', serif",
+              fontWeight: 400,
+              fontFeatureSettings: '"ss01"',
+              letterSpacing: '0.045em',
               marginBottom: '32px',
               textDecoration: 'none',
               lineHeight: 1,
             }}
             onClick={() => play('close', { theme: 'bubble', emphasis: 'subtle' })}
           >
-            ← Back to projects
+            <ArrowLeft size={20} strokeWidth={1.5} style={{ display: 'inline', marginRight: '6px', verticalAlign: 'middle', position: 'relative', top: '-1px' }} />Back to projects
           </Link>
 
           {/* Case study section nav */}
-          <div style={{ marginBottom: '32px', paddingLeft: '22px' }}>
+          <div style={{ marginBottom: '32px' }}>
             <CaseStudyNav />
           </div>
         </>
       ) : (
         <>
           {/* Bio */}
-          <p className="leading-normal mb-3" style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
+          <div style={{ opacity: 0.8 }}>
+          <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '8px' }}>
             Hi! I&rsquo;m a product designer with a background in content. I&rsquo;ve worked with agency clients at{' '}
             <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="underline decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px]">Toss the Coin</a>,{' '}
             <span style={{ whiteSpace: 'nowrap' }}>in&#8209;house</span> teams at <a href="https://ankogcc.com/" target="_blank" rel="noopener noreferrer" className="underline decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px]">Anko</a>, and <Link href="/resume" className="underline decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px]">more</Link>.
           </p>
-          <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '16px' }}>
-            This site is a record of my product design work + a few explorations.<br />If anything resonates with you,<br />feel free to reach out ↴
+          <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '18px', marginBottom: '12px' }}>
+            This site is a record of my product design work + a few explorations.<br />If anything resonates with you,<br />feel free to reach out. <CornerDownLeft size={14} strokeWidth={1.5} style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', transform: 'rotate(-90deg)' }} />
           </p>
+          </div>
 
           {/* Contact */}
-          <div className="flex gap-5" style={{ marginBottom: '32px' }}>
+          <div className="flex gap-5" style={{ marginBottom: '64px' }}>
             <ContactLinks />
           </div>
 
@@ -141,21 +146,21 @@ export default function LeftPanel() {
           {/* Sound toggle + clock */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25px' }}>
-              <div style={{ opacity: 0.7 }}><LiveClock /></div>
+              <div style={{ opacity: 0.8 }}><LiveClock /></div>
               <div style={{ color: 'var(--text-muted)', fontSize: '18px', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <span style={{ opacity: 0.7 }}>2027</span>
-                <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="18" height="18" style={{ flexShrink: 0, opacity: 0.7 }} />
+                <span style={{ opacity: 0.8 }}>2027</span>
+                <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="18" height="18" style={{ flexShrink: 0, opacity: 0.8 }} />
                 <button
                   onClick={e => { e.stopPropagation(); setColophonOpen(true); play('open', { theme: 'bubble', emphasis: 'subtle' }); }}
                   className="underline decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px]"
-                  style={{ border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit', opacity: 0.7 }}
+                  style={{ border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit', opacity: 0.8 }}
                 >
                   Open colophon
                 </button>
               </div>
             </div>
             <div onMouseEnter={() => setSpeakerHovered(true)} onMouseLeave={() => setSpeakerHovered(false)}
-              style={{ background: '#ffffff', borderRadius: '50%', width: '34px', height: '34px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, border: `0.5px solid ${speakerHovered ? '#383636' : '#888888'}` }}>
+              style={{ background: '#ffffff', borderRadius: '50%', width: '34px', height: '34px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, border: `1px solid ${speakerHovered ? '#383636' : '#888888'}`, opacity: speakerHovered ? 1 : 0.8 }}>
               <SoundToggle />
             </div>
           </div>

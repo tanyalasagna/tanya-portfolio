@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { play } from 'cuelume';
-import SoundToggle from './SoundToggle';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
 import LiveClock from './LiveClock';
@@ -22,7 +21,6 @@ export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [colophonOpen, setColophonOpen] = useState(false);
   const [nameHovered, setNameHovered] = useState(false);
-  const [speakerHovered, setSpeakerHovered] = useState(false);
   const colophonRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   // Close menu on route change
@@ -95,7 +93,8 @@ export default function MobileNav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', pointerEvents: 'none' }}
+            style={{ backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)' }}
+            onClick={() => setIsOpen(false)}
           />
         )}
       </AnimatePresence>
@@ -109,28 +108,9 @@ export default function MobileNav() {
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="lg:hidden fixed top-0 left-0 right-0 z-40 flex flex-col px-4 pt-20 pb-10"
-            style={{ background: 'var(--bg)', height: 'fit-content', borderBottom: '0.5px solid var(--divider)' }}
+            style={{ background: 'var(--bg)', height: 'fit-content', borderBottom: '0.5px solid var(--divider)', borderBottomLeftRadius: '6px', borderBottomRightRadius: '6px' }}
             onClick={() => setColophonOpen(false)}
           >
-            {/* Bio */}
-            <div className="mb-8">
-              <p className="leading-normal mb-3 text-[16px] sm:text-[18px]" style={{ color: 'var(--text-muted)' }}>
-                Hi! I&rsquo;m a product designer with a background in content. I&rsquo;ve worked with agency clients at{' '}
-                <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="underline decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px]">Toss the Coin</a>,{' '}
-                in-house teams at <a href="https://ankogcc.com/" target="_blank" rel="noopener noreferrer" className="underline decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px]">Anko</a>, and <Link href="/resume" className="underline decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px]">more</Link>.
-              </p>
-              <p className="leading-normal text-[16px] sm:text-[18px]" style={{ color: 'var(--text-muted)' }}>
-                This site is a record of my product design work + a few explorations. If anything resonates with you, feel free to reach out ↴
-              </p>
-            </div>
-
-            {/* Contact */}
-            <div className="flex gap-6 mb-8">
-              <ContactLinks sizeCls="text-[16px] sm:text-[18px]" />
-            </div>
-
-            <div className="mb-8" style={{ height: '0.5px', background: 'var(--divider)' }} />
-
             {/* Nav */}
             <div className="mb-8">
               <HookSidebar />
@@ -138,14 +118,16 @@ export default function MobileNav() {
 
             <div className="mb-8" style={{ height: '0.5px', background: 'var(--divider)' }} />
 
-            {/* Sound toggle + clock */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-              {/* Clock + colophon */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25px' }}>
-                <LiveClock />
-                <div className="text-[16px] sm:text-[18px]" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
+            {/* Bottom row: two aligned columns */}
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+              {/* Left column: row1=clock+speaker, row2=colophon */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                {/* Row 1: clock */}
+                <LiveClock sizeCls="text-[15px] sm:text-[16px]" />
+                {/* Row 2: year + colophon */}
+                <div className="text-[15px] sm:text-[16px]" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
                   <span>2027</span>
-                  <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="18" height="18" style={{ flexShrink: 0, opacity: 0.7 }} />
+                  <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="18" height="18" style={{ flexShrink: 0, opacity: 0.8 }} />
                   <button
                     onClick={e => { e.stopPropagation(); setColophonOpen(true); play('open', { theme: 'bubble', emphasis: 'subtle' }); }}
                     className="underline decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px]"
@@ -155,10 +137,9 @@ export default function MobileNav() {
                   </button>
                 </div>
               </div>
-              {/* Speaker with bg */}
-              <div onMouseEnter={() => setSpeakerHovered(true)} onMouseLeave={() => setSpeakerHovered(false)}
-              style={{ background: '#ffffff', borderRadius: '50%', width: '34px', height: '34px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, border: `0.5px solid ${speakerHovered ? '#383636' : '#888888'}` }}>
-                <SoundToggle />
+              {/* Right column: Copy email (row 1) + LinkedIn (row 2), right-aligned */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', alignItems: 'flex-end' }}>
+                <ContactLinks sizeCls="text-[15px] sm:text-[16px]" />
               </div>
             </div>
 
@@ -174,7 +155,7 @@ export default function MobileNav() {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {colophonLines.map((line, i) => (
-                  <p key={i} className="text-[16px] sm:text-[18px]" style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontWeight: 300, fontStyle: 'normal', color: '#383636', lineHeight: 1.4 }}>
+                  <p key={i} className="text-[15px] sm:text-[16px]" style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontWeight: 300, fontStyle: 'normal', color: '#383636', lineHeight: 1.4 }}>
                     {line.before}
                     {line.links.map((lk, j) => (
                       <span key={j}>

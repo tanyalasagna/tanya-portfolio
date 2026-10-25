@@ -27,7 +27,7 @@ export default async function CaseStudyPage({ params }: Props) {
           <h1 className="leading-none mb-2 text-[18px] lg:text-[20px]" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontWeight: 500, fontStyle: 'normal' }}>
             {project.displayTitle ?? project.title}
             {project.tags.length > 0 && (
-              <span style={{ opacity: 0.7, fontWeight: 400, fontStyle: 'italic' }}>{' '}({project.tags.join(', ')})</span>
+              <span style={{ opacity: 0.8, fontWeight: 400, fontStyle: 'italic' }}>{' '}({project.tags.join(', ')})</span>
             )}
           </h1>
           {project.subtitle && (
@@ -49,8 +49,8 @@ export default async function CaseStudyPage({ params }: Props) {
               { label: project.toolsLabel ?? 'Tools', value: project.tools.join('\n') },
             ].map(({ label, value }) => (
               <div key={label} style={{ padding: '20px 18px', background: '#F0F0EE' }}>
-                <div className="mb-3 text-[16px] lg:text-[18px]" style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>{label}</div>
-                <div className="text-[16px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", lineHeight: 1.5, whiteSpace: 'pre-line' }}>{value}</div>
+                <div className="mb-3 text-[15px] sm:text-[16px] lg:text-[18px]" style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>{label}</div>
+                <div className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", lineHeight: 1.5, whiteSpace: 'pre-line' }}>{value}</div>
               </div>
             ))}
           </div>
