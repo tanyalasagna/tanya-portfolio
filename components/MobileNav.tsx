@@ -5,10 +5,26 @@ import { usePathname } from 'next/navigation';
 import { play } from 'cuelume';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
-import { Menu, X } from 'lucide-react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
+
+const externalIcon = <ArrowUpRight size={12} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '2px' }} aria-hidden />;
 import LiveClock from './LiveClock';
 import ContactLinks from './ContactLinks';
 import HookSidebar from './HookSidebar';
+
+const wordmarkLetters: { ch: string; set: 'ss01' | 'ss02' }[] = [
+  { ch: 'T', set: 'ss02' },
+  { ch: 'a', set: 'ss01' },
+  { ch: 'n', set: 'ss02' },
+  { ch: 'y', set: 'ss01' },
+  { ch: 'a', set: 'ss02' },
+  { ch: ' ', set: 'ss01' },
+  { ch: 'S', set: 'ss02' },
+  { ch: 'i', set: 'ss01' },
+  { ch: 'n', set: 'ss02' },
+  { ch: 'g', set: 'ss01' },
+  { ch: 'h', set: 'ss02' },
+];
 
 const colophonLines = [
   { before: 'Type set in ', links: [{ label: 'Dreamer TM', href: 'https://typemania.eu/products/dreamer-tm' }, { label: 'Alegreya Sans', href: 'https://fonts.google.com/specimen/Alegreya+Sans' }], join: ' and ' },
@@ -57,11 +73,13 @@ export default function MobileNav() {
         <Link
           href="/"
           className="text-[28px] sm:text-[32px]"
-          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: nameHovered ? '"ss02"' : '"ss01"', letterSpacing: nameHovered ? '0.025em' : '0.045em', paddingTop: '4px' }}
+          style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', letterSpacing: nameHovered ? '0.0385em' : '0.045em', paddingTop: '4px' }}
           onMouseEnter={() => { setNameHovered(true); play('select', { theme: 'bubble', emphasis: 'subtle' }); }}
           onMouseLeave={() => setNameHovered(false)}
         >
-          Tanya Singh
+          {wordmarkLetters.map((l, i) => (
+            <span key={i} style={{ fontFeatureSettings: nameHovered ? `"${l.set}"` : '"ss01"' }}>{l.ch}</span>
+          ))}
         </Link>
         <button
           onClick={() => setIsOpen((v) => !v)}
@@ -124,7 +142,7 @@ export default function MobileNav() {
                   <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="20" height="20" style={{ flexShrink: 0, opacity: 0.8 }} />
                   <button
                     onClick={e => { e.stopPropagation(); setColophonOpen(true); play('open', { theme: 'bubble', emphasis: 'subtle' }); }}
-                    className="underline decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px]"
+                    className="underline decoration-[1.5px] decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px]"
                     style={{ border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
                   >
                     Open colophon
@@ -144,19 +162,19 @@ export default function MobileNav() {
               style={{ position: 'absolute', left: '16px', right: '16px', bottom: '40px', background: '#FFFFFF', borderRadius: '6px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none', border: '0.5px solid #888888' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <span style={{ fontFamily: "'Alegreya Sans', sans-serif", fontSize: '16px', color: '#383636', fontWeight: 600 }}>Colophon</span>
+                <span style={{ fontFamily: "'Alegreya Sans', sans-serif", fontSize: '17px', color: '#383636', fontWeight: 600 }}>Colophon</span>
                 <button onClick={() => { setColophonOpen(false); play('close', { theme: 'bubble', emphasis: 'subtle' }); }} aria-label="Close colophon" style={{ color: '#383636', background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center' }}>
                   <X size={20} strokeWidth={1.5} aria-hidden />
                 </button>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {colophonLines.map((line, i) => (
-                  <p key={i} className="text-[15px] sm:text-[16px]" style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontWeight: 300, fontStyle: 'normal', color: '#383636', lineHeight: 1.4 }}>
+                  <p key={i} className="text-[16px]" style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontWeight: 300, fontStyle: 'normal', color: 'var(--text-muted)', lineHeight: 1.4 }}>
                     {line.before}
                     {line.links.map((lk, j) => (
                       <span key={j}>
                         {j > 0 && (line.join ?? ' and ')}
-                        <a href={lk.href} target="_blank" rel="noopener noreferrer" className="underline decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px]">{lk.label}</a>
+                        <a href={lk.href} target="_blank" rel="noopener noreferrer" className="decoration-[1.5px] decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 underline decoration-dashed hover:decoration-solid px-[2px] -mx-[2px] rounded-[2px]">{lk.label}{externalIcon}</a>
                       </span>
                     ))}
                   </p>

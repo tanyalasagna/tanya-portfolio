@@ -133,7 +133,7 @@ export default function HookSidebar() {
               data-cuelume-emphasis="subtle"
               onFocus={() => { setHoverIndex(index); setFocusInside(true); }}
               onBlur={() => setFocusInside(false)}
-              className="text-[15px] sm:text-[16px] lg:text-[18px]"
+              className="text-[15px] sm:text-[16px] lg:text-[17px]"
               style={{
                 color: isActive ? 'var(--text)' : 'var(--text-muted)',
                 fontFamily: 'var(--font-dm-sans)',

@@ -1,19 +1,21 @@
+import { ArrowUpRight } from 'lucide-react';
+
+const externalIcon = <ArrowUpRight size={12} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '2px' }} aria-hidden />;
+
 export default function ColophonPage() {
   const linkStyle: React.CSSProperties = {
     color: 'var(--text-muted)',
-    textDecoration: 'underline',
-    textDecorationStyle: 'dotted',
-    textUnderlineOffset: '3px',
   };
+  const linkCls = 'underline decoration-dashed hover:decoration-solid decoration-[1.5px] underline-offset-[3px]';
 
   const items = [
     {
       text: (
         <>
           Type is set in{' '}
-          <a href="https://houseoftype.co/products/dreamer" target="_blank" rel="noopener noreferrer" style={linkStyle}>Dreamer TM</a>
+          <a href="https://houseoftype.co/products/dreamer" target="_blank" rel="noopener noreferrer" className={linkCls} style={linkStyle}>Dreamer TM{externalIcon}</a>
           {' '}and{' '}
-          <a href="https://fonts.google.com/specimen/Alegreya" target="_blank" rel="noopener noreferrer" style={linkStyle}>Alegreya</a>
+          <a href="https://fonts.google.com/specimen/Alegreya" target="_blank" rel="noopener noreferrer" className={linkCls} style={linkStyle}>Alegreya{externalIcon}</a>
         </>
       ),
     },
@@ -21,9 +23,9 @@ export default function ColophonPage() {
       text: (
         <>
           Built with{' '}
-          <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer" style={linkStyle}>Next.js</a>
+          <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer" className={linkCls} style={linkStyle}>Next.js{externalIcon}</a>
           {' '}and{' '}
-          <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" style={linkStyle}>Tailwind CSS</a>
+          <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" className={linkCls} style={linkStyle}>Tailwind CSS{externalIcon}</a>
         </>
       ),
     },
@@ -31,9 +33,9 @@ export default function ColophonPage() {
       text: (
         <>
           Animations run on{' '}
-          <a href="https://gsap.com" target="_blank" rel="noopener noreferrer" style={linkStyle}>GSAP</a>
+          <a href="https://gsap.com" target="_blank" rel="noopener noreferrer" className={linkCls} style={linkStyle}>GSAP{externalIcon}</a>
           {' '}and{' '}
-          <a href="https://motion.dev" target="_blank" rel="noopener noreferrer" style={linkStyle}>Framer Motion</a>
+          <a href="https://motion.dev" target="_blank" rel="noopener noreferrer" className={linkCls} style={linkStyle}>Framer Motion{externalIcon}</a>
         </>
       ),
     },
@@ -41,7 +43,7 @@ export default function ColophonPage() {
       text: (
         <>
           Sounds by{' '}
-          <a href="https://cuelume.dev" target="_blank" rel="noopener noreferrer" style={linkStyle}>Cuelume</a>
+          <a href="https://cuelume.dev" target="_blank" rel="noopener noreferrer" className={linkCls} style={linkStyle}>Cuelume{externalIcon}</a>
         </>
       ),
     },
@@ -49,7 +51,7 @@ export default function ColophonPage() {
       text: (
         <>
           Hosting and deployment on{' '}
-          <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" style={linkStyle}>Vercel</a>
+          <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className={linkCls} style={linkStyle}>Vercel{externalIcon}</a>
         </>
       ),
     },
@@ -57,7 +59,7 @@ export default function ColophonPage() {
       text: (
         <>
           Coded with{' '}
-          <a href="https://claude.ai/code" target="_blank" rel="noopener noreferrer" style={linkStyle}>Claude Code</a>
+          <a href="https://claude.ai/code" target="_blank" rel="noopener noreferrer" className={linkCls} style={linkStyle}>Claude Code{externalIcon}</a>
         </>
       ),
     },

@@ -136,7 +136,7 @@ export default function CaseStudyNav() {
               onBlur={() => setFocusInside(false)}
               style={{
                 color: isActive ? 'var(--text)' : 'var(--text-muted)',
-                fontSize: '18px',
+                fontSize: '17px',
                 fontFamily: 'var(--font-dm-sans)',
                 fontWeight: isActive ? 600 : 300,
                 transition: 'color 180ms ease',
