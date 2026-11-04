@@ -11,7 +11,7 @@ export default function MobileBio() {
   if (pathname !== '/') return null;
 
   return (
-    <div className="lg:hidden pt-8 pb-6 px-4">
+    <div className="lg:hidden pt-12 pb-0 px-4">
       <p className="leading-normal text-[15px] sm:text-[16px]" style={{ color: 'var(--text-muted)', marginBottom: '8px' }}>
         Hi! I&rsquo;m a product designer with a background in content. I&rsquo;ve worked with agency clients at{' '}
         <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="decoration-[1.5px] decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 underline decoration-dashed hover:decoration-solid px-[2px] -mx-[2px] rounded-[2px]">Toss the Coin{externalIcon}</a>,{' '}
