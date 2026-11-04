@@ -48,7 +48,7 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
   const mediaStyle: React.CSSProperties = {
     transition: 'transform 3000ms cubic-bezier(0.19, 1, 0.22, 1), opacity 600ms ease',
     transform: hovered ? 'scale(1.008)' : 'scale(1)',
-    opacity: hovered ? 0.93 : 1,
+    opacity: hovered ? 0.9 : 1,
   };
 
   const thumbnailMedia = project.thumbnail ? (
