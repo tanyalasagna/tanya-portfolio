@@ -10,6 +10,7 @@ import SoundToggle from './SoundToggle';
 import { gsap } from 'gsap';
 import { usePathname } from 'next/navigation';
 import { ArrowLeft, ArrowUpRight, X } from 'lucide-react';
+import { siftNavSections } from './SiftCaseStudyContent';
 
 const externalIcon = <ArrowUpRight size={12} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '2px' }} aria-hidden />;
 
@@ -38,6 +39,7 @@ const colophonLines = [
 export default function LeftPanel() {
   const pathname = usePathname();
   const isCaseStudy = pathname.startsWith('/work/');
+  const slug = isCaseStudy ? pathname.split('/')[2] : null;
   const [nameHovered, setNameHovered] = useState(false);
   const [colophonOpen, setColophonOpen] = useState(false);
   const [speakerHovered, setSpeakerHovered] = useState(false);
@@ -102,26 +104,37 @@ export default function LeftPanel() {
 
           {/* Case study section nav */}
           <div style={{ marginBottom: '32px' }}>
-            <CaseStudyNav />
+            <CaseStudyNav sections={slug === 'sift' ? siftNavSections : undefined} />
           </div>
         </>
       ) : (
         <>
           {/* Bio */}
           <div style={{ opacity: 0.8 }}>
-          <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '17px', marginBottom: '8px' }}>
+          <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '17px', marginBottom: '32px' }}>
             Hi! I&rsquo;m a product designer with a background in content. I&rsquo;ve worked with agency clients at{' '}
-            <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="decoration-[1.5px] decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 underline decoration-dashed hover:decoration-solid px-[2px] -mx-[2px] rounded-[2px]">Toss the Coin{externalIcon}</a>,{' '}
-            <span style={{ whiteSpace: 'nowrap' }}>in&#8209;house</span> teams at <a href="https://ankogcc.com/" target="_blank" rel="noopener noreferrer" className="decoration-[1.5px] decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 underline decoration-dashed hover:decoration-solid px-[2px] -mx-[2px] rounded-[2px]">Anko{externalIcon}</a>, and <Link href="/resume" className="underline decoration-[1.5px] decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px]">more</Link>.
-          </p>
-          <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '17px', marginBottom: '12px' }}>
-            This site is a record of my product design work + a few explorations.<br />If anything resonates with you,<br />feel free to reach out.
+            <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" className="decoration-[1.5px] decoration-[var(--text)] underline-offset-[4px] text-inherit transition-colors duration-150 underline decoration-dashed hover:decoration-solid px-[2px] -mx-[2px] rounded-[2px]">Toss the Coin{externalIcon}</a>,{' '}
+            <span style={{ whiteSpace: 'nowrap' }}>in&#8209;house</span> teams at <a href="https://ankogcc.com/" target="_blank" rel="noopener noreferrer" className="decoration-[1.5px] decoration-[var(--text)] underline-offset-[4px] text-inherit transition-colors duration-150 underline decoration-dashed hover:decoration-solid px-[2px] -mx-[2px] rounded-[2px]">Anko{externalIcon}</a>, and <Link href="/resume" className="underline decoration-[1.5px] decoration-[var(--text)] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(56,54,54,0.08),rgba(56,54,54,0.08))_0_0/100%_calc(100%_-_2px)_no-repeat] px-[2px] -mx-[2px] rounded-[2px]">more</Link>.
           </p>
           </div>
 
           {/* Contact */}
-          <div className="flex gap-5" style={{ marginBottom: '64px' }}>
-            <ContactLinks sizeCls="text-[17px]" />
+          <div style={{ marginBottom: '64px' }}>
+            <span className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{
+              display: 'block',
+              color: 'var(--text)',
+              fontFamily: 'var(--font-dm-sans)',
+              fontStyle: 'italic',
+              fontWeight: 400,
+              letterSpacing: '0.08em',
+              paddingBottom: '4px',
+              paddingLeft: '2px',
+            }}>
+              Say hi!
+            </span>
+            <div className="flex gap-5">
+              <ContactLinks sizeCls="text-[17px]" />
+            </div>
           </div>
 
           {/* Main nav */}
@@ -140,10 +153,10 @@ export default function LeftPanel() {
           <div
             ref={colophonRef}
             onClick={e => e.stopPropagation()}
-            style={{ position: 'absolute', left: '20px', right: '20px', bottom: '28px', background: '#FFFFFF', borderRadius: '6px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none', border: '0.5px solid #888888' }}
+            style={{ position: 'absolute', left: '20px', right: '20px', bottom: '28px', background: '#F0F0EE', borderRadius: '6px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none' }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span style={{ fontFamily: "'Alegreya Sans', sans-serif", fontSize: '17px', color: '#383636', fontWeight: 600 }}>Colophon</span>
+              <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: '17px', color: 'var(--text)', fontStyle: 'italic', fontWeight: 400, letterSpacing: '0.08em' }}>Colophon</span>
               <button onClick={() => { setColophonOpen(false); play('close', { theme: 'bubble', emphasis: 'subtle' }); }} aria-label="Close colophon" style={{ color: '#383636', background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center' }}>
                 <X size={20} strokeWidth={1.5} aria-hidden />
               </button>
@@ -155,7 +168,7 @@ export default function LeftPanel() {
                   {line.links.map((lk, j) => (
                     <span key={j}>
                       {j > 0 && (line.join ?? ' and ')}
-                      <a href={lk.href} target="_blank" rel="noopener noreferrer" className="decoration-[1.5px] decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 underline decoration-dashed hover:decoration-solid px-[2px] -mx-[2px] rounded-[2px]">{lk.label}{externalIcon}</a>
+                      <a href={lk.href} target="_blank" rel="noopener noreferrer" className="decoration-[1.5px] decoration-[var(--text)] underline-offset-[4px] text-inherit transition-colors duration-150 underline decoration-dashed hover:decoration-solid px-[2px] -mx-[2px] rounded-[2px]">{lk.label}{externalIcon}</a>
                     </span>
                   ))}
                 </p>
@@ -169,11 +182,11 @@ export default function LeftPanel() {
               <div style={{ opacity: 0.8 }}><LiveClock fontSize="17px" /></div>
               <div style={{ color: 'var(--text-muted)', fontSize: '17px', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
                 <span style={{ opacity: 0.8 }}>2027</span>
-                <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="20" height="20" style={{ flexShrink: 0, opacity: 0.8 }} />
+                <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="20" height="20" style={{ flexShrink: 0 }} />
                 <button
                   onClick={e => { e.stopPropagation(); setColophonOpen(true); play('open', { theme: 'bubble', emphasis: 'subtle' }); }}
-                  className="underline decoration-[1.5px] decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px]"
-                  style={{ border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit', opacity: 0.8 }}
+                  className="underline decoration-[1.5px] decoration-[var(--text)] underline-offset-[4px] text-inherit opacity-80 transition-colors duration-150 hover:[background:linear-gradient(rgba(56,54,54,0.08),rgba(56,54,54,0.08))_0_0/100%_calc(100%_-_2px)_no-repeat] px-[2px] -mx-[2px] rounded-[2px]"
+                  style={{ border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
                 >
                   Open colophon
                 </button>

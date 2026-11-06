@@ -2,6 +2,7 @@ import { projects } from '@/data/projects';
 import { notFound } from 'next/navigation';
 import CaseStudyCover from '@/components/CaseStudyCover';
 import CaseStudyContent from '@/components/CaseStudyContent';
+import SiftCaseStudyContent from '@/components/SiftCaseStudyContent';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -56,32 +57,38 @@ export default async function CaseStudyPage({ params }: Props) {
           </div>
         </section>
 
-        {/* Research */}
-        <div>
-          <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
-          <section id="research" className="scroll-mt-8 mb-16">
-            <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)' }}>Research</h2>
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>Research findings and process coming soon.</p>
-          </section>
-        </div>
+        {project.slug === 'sift' ? (
+          <SiftCaseStudyContent />
+        ) : (
+          <>
+            {/* Research */}
+            <div>
+              <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
+              <section id="research" className="scroll-mt-8 mb-16">
+                <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)' }}>Research</h2>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>Research findings and process coming soon.</p>
+              </section>
+            </div>
 
-        {/* Designs */}
-        <div>
-          <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
-          <section id="designs" className="scroll-mt-8 mb-16">
-            <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)' }}>Designs</h2>
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>Final designs coming soon.</p>
-          </section>
-        </div>
+            {/* Designs */}
+            <div>
+              <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
+              <section id="designs" className="scroll-mt-8 mb-16">
+                <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)' }}>Designs</h2>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>Final designs coming soon.</p>
+              </section>
+            </div>
 
-        {/* Reflections */}
-        <div>
-          <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
-          <section id="reflections" className="scroll-mt-8 mb-16">
-            <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)' }}>Reflections</h2>
-            <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>Reflections coming soon.</p>
-          </section>
-        </div>
+            {/* Reflections */}
+            <div>
+              <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
+              <section id="reflections" className="scroll-mt-8 mb-16">
+                <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)' }}>Reflections</h2>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>Reflections coming soon.</p>
+              </section>
+            </div>
+          </>
+        )}
       </CaseStudyContent>
     </div>
   );

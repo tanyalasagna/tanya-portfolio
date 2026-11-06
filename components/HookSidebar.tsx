@@ -137,10 +137,10 @@ export default function HookSidebar() {
               style={{
                 color: isActive ? 'var(--text)' : 'var(--text-muted)',
                 fontFamily: 'var(--font-dm-sans)',
-                fontWeight: isActive ? 600 : 300,
+                fontWeight: isActive ? 700 : 300,
                 transition: 'color 180ms ease',
                 display: 'block',
-                paddingLeft: '20px',
+                paddingLeft: '30px',
                 paddingTop: '5px',
                 paddingBottom: '5px',
                 pointerEvents: 'none',
@@ -149,7 +149,18 @@ export default function HookSidebar() {
               <span
                 onMouseEnter={() => { setHoverIndex(index); setPointerInside(true); }}
                 onMouseLeave={() => setPointerInside(false)}
-                style={{ display: 'inline-block', pointerEvents: 'auto', cursor: 'pointer' }}
+                className="hover:font-bold"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  pointerEvents: 'auto',
+                  cursor: 'pointer',
+                  padding: isActive ? '2px 10px' : '2px 0',
+                  margin: isActive ? '-2px -10px' : '-2px 0',
+                  borderRadius: '999px',
+                  background: isActive ? 'rgba(56,54,54,0.08)' : 'transparent',
+                  transition: 'background-color 180ms ease, padding 180ms ease, margin 180ms ease',
+                }}
               >
                 {item.label}
               </span>

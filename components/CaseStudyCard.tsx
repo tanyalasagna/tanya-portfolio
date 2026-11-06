@@ -189,7 +189,24 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
                   <span key={i} style={{ color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
                     {part}
                     {i < arr.length - 1 && (
-                      <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="20" height="20" style={{ flexShrink: 0 }} />
+                      <span
+                        aria-hidden
+                        style={{
+                          display: 'inline-block',
+                          width: 20,
+                          height: 20,
+                          flexShrink: 0,
+                          backgroundColor: 'currentColor',
+                          WebkitMaskImage: 'url("/images/Chunky Black Pixel Sparkle Icon (1).png")',
+                          maskImage: 'url("/images/Chunky Black Pixel Sparkle Icon (1).png")',
+                          WebkitMaskSize: 'contain',
+                          maskSize: 'contain',
+                          WebkitMaskRepeat: 'no-repeat',
+                          maskRepeat: 'no-repeat',
+                          WebkitMaskPosition: 'center',
+                          maskPosition: 'center',
+                        }}
+                      />
                     )}
                   </span>
                 ))}

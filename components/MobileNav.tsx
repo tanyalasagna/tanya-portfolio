@@ -139,10 +139,10 @@ export default function MobileNav() {
                 {/* Row 2: year + colophon */}
                 <div className="text-[15px] sm:text-[16px]" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
                   <span>2027</span>
-                  <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="20" height="20" style={{ flexShrink: 0, opacity: 0.8 }} />
+                  <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="20" height="20" style={{ flexShrink: 0 }} />
                   <button
                     onClick={e => { e.stopPropagation(); setColophonOpen(true); play('open', { theme: 'bubble', emphasis: 'subtle' }); }}
-                    className="underline decoration-[1.5px] decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(172,57,212,0.12),rgba(172,57,212,0.12))_0_0/100%_calc(100%_-_2px)_no-repeat] hover:text-[#47122e] px-[2px] -mx-[2px] rounded-[2px]"
+                    className="underline decoration-[1.5px] decoration-[var(--text)] underline-offset-[4px] text-inherit transition-colors duration-150 hover:[background:linear-gradient(rgba(56,54,54,0.08),rgba(56,54,54,0.08))_0_0/100%_calc(100%_-_2px)_no-repeat] px-[2px] -mx-[2px] rounded-[2px]"
                     style={{ border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
                   >
                     Open colophon
@@ -159,22 +159,22 @@ export default function MobileNav() {
             <div
               ref={colophonRef}
               onClick={e => e.stopPropagation()}
-              style={{ position: 'absolute', left: '16px', right: '16px', bottom: '40px', background: '#FFFFFF', borderRadius: '6px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none', border: '0.5px solid #888888' }}
+              style={{ position: 'absolute', left: '16px', right: '16px', bottom: '40px', background: '#F0F0EE', borderRadius: '6px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <span style={{ fontFamily: "'Alegreya Sans', sans-serif", fontSize: '17px', color: '#383636', fontWeight: 600 }}>Colophon</span>
+                <span className="text-[16px] sm:text-[17px]" style={{ fontFamily: 'var(--font-dm-sans)', color: 'var(--text)', fontStyle: 'italic', fontWeight: 400, letterSpacing: '0.08em' }}>Colophon</span>
                 <button onClick={() => { setColophonOpen(false); play('close', { theme: 'bubble', emphasis: 'subtle' }); }} aria-label="Close colophon" style={{ color: '#383636', background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center' }}>
                   <X size={20} strokeWidth={1.5} aria-hidden />
                 </button>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {colophonLines.map((line, i) => (
-                  <p key={i} className="text-[16px]" style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontWeight: 300, fontStyle: 'normal', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                  <p key={i} className="text-[15px] sm:text-[16px]" style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontWeight: 300, fontStyle: 'normal', color: 'var(--text-muted)', lineHeight: 1.4 }}>
                     {line.before}
                     {line.links.map((lk, j) => (
                       <span key={j}>
                         {j > 0 && (line.join ?? ' and ')}
-                        <a href={lk.href} target="_blank" rel="noopener noreferrer" className="decoration-[1.5px] decoration-[#AC39D4] underline-offset-[4px] text-inherit transition-colors duration-150 underline decoration-dashed hover:decoration-solid px-[2px] -mx-[2px] rounded-[2px]">{lk.label}{externalIcon}</a>
+                        <a href={lk.href} target="_blank" rel="noopener noreferrer" className="decoration-[1.5px] decoration-[var(--text)] underline-offset-[4px] text-inherit transition-colors duration-150 underline decoration-dashed hover:decoration-solid px-[2px] -mx-[2px] rounded-[2px]">{lk.label}{externalIcon}</a>
                       </span>
                     ))}
                   </p>

@@ -5,7 +5,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 const CORNER = 6;
 const DASH = 'linear-gradient(to top, currentColor, currentColor)';
 
-const sections = [
+const defaultSections = [
   { id: 'intro',       label: 'Intro' },
   { id: 'research',    label: 'Research' },
   { id: 'designs',     label: 'Designs' },
@@ -50,7 +50,7 @@ function Rail({ from = 0, y, visible, color }: { from?: number; y: number | null
   );
 }
 
-export default function CaseStudyNav() {
+export default function CaseStudyNav({ sections = defaultSections }: { sections?: { id: string; label: string }[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [pointerInside, setPointerInside] = useState(false);
@@ -68,7 +68,7 @@ export default function CaseStudyNav() {
     const observer = new ResizeObserver(measure);
     observer.observe(list);
     return () => observer.disconnect();
-  }, []);
+  }, [sections]);
 
   // IntersectionObserver for active section
   useEffect(() => {
@@ -83,7 +83,7 @@ export default function CaseStudyNav() {
       return obs;
     });
     return () => observers.forEach(obs => obs?.disconnect());
-  }, []);
+  }, [sections]);
 
   const activeY = centers[activeIndex] ?? null;
   const hoverY  = hoverIndex === null ? null : (centers[hoverIndex] ?? null);

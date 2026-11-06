@@ -80,11 +80,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-::selection {
-  background: rgba(200, 155, 255, 0.18);
-  color: #47122e;
-}
-
 * {
   transition: border-color 0.3s ease;
 }
