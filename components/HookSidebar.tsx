@@ -98,7 +98,6 @@ export default function HookSidebar() {
         fontFamily: 'var(--font-dm-sans)',
         fontStyle: 'italic',
         fontWeight: 400,
-        letterSpacing: '0.08em',
         paddingBottom: '8px',
         paddingLeft: '2px',
       }}>

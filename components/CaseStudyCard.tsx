@@ -167,11 +167,7 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
         <div className="flex flex-col" style={{ paddingTop: `${padTop}px` }}>
           {thumbnailWrapper({ width: '100%', aspectRatio: project.thumbnailAspect ?? '4/3', background: 'var(--divider)' })}
           <div className="pt-4 md:pt-[10px]" style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            {/* Line 1: tag */}
-            <p className="text-[16px] lg:text-[17.5px]" style={{ fontStyle: 'italic', color: 'var(--text)', lineHeight: 1.2, opacity: 0.8 }}>
-              {project.tags.join(', ')}
-            </p>
-            {/* Line 2: title */}
+            {/* Line 1: title */}
             <Link href={href} data-cuelume-open="" data-cuelume-emphasis="subtle">
               <h2 className="leading-tight text-[18px] lg:text-[20px]" style={{ ...titleStyle }}>
                 {project.mobileTitle ? (
@@ -182,36 +178,34 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
                 ) : project.title}
               </h2>
             </Link>
-            {/* Line 3: descriptors */}
-            {project.description ? (
-              <p className="text-[16px] lg:text-[17.5px]" style={{ lineHeight: 1.2, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
-                {project.description.split(' \\ ').map((part, i, arr) => (
-                  <span key={i} style={{ color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                    {part}
-                    {i < arr.length - 1 && (
-                      <span
-                        aria-hidden
-                        style={{
-                          display: 'inline-block',
-                          width: 20,
-                          height: 20,
-                          flexShrink: 0,
-                          backgroundColor: 'currentColor',
-                          WebkitMaskImage: 'url("/images/Chunky Black Pixel Sparkle Icon (1).png")',
-                          maskImage: 'url("/images/Chunky Black Pixel Sparkle Icon (1).png")',
-                          WebkitMaskSize: 'contain',
-                          maskSize: 'contain',
-                          WebkitMaskRepeat: 'no-repeat',
-                          maskRepeat: 'no-repeat',
-                          WebkitMaskPosition: 'center',
-                          maskPosition: 'center',
-                        }}
-                      />
-                    )}
-                  </span>
-                ))}
-              </p>
-            ) : null}
+            {/* Line 2: tag + descriptors */}
+            <p className="text-[16px] lg:text-[17.5px]" style={{ lineHeight: 1.2, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
+              {[project.tags.join(', '), ...(project.description ? project.description.split(' \\ ') : [])].map((part, i, arr) => (
+                <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                  <span style={{ color: i === 0 ? 'var(--text)' : 'var(--text-muted)', fontStyle: i === 0 ? 'italic' : 'normal', opacity: 0.8 }}>{part}</span>
+                  {i < arr.length - 1 && (
+                    <span
+                      aria-hidden
+                      style={{
+                        display: 'inline-block',
+                        width: 20,
+                        height: 20,
+                        flexShrink: 0,
+                        backgroundColor: 'var(--text)',
+                        WebkitMaskImage: 'url("/images/Chunky Black Pixel Sparkle Icon (1).png")',
+                        maskImage: 'url("/images/Chunky Black Pixel Sparkle Icon (1).png")',
+                        WebkitMaskSize: 'contain',
+                        maskSize: 'contain',
+                        WebkitMaskRepeat: 'no-repeat',
+                        maskRepeat: 'no-repeat',
+                        WebkitMaskPosition: 'center',
+                        maskPosition: 'center',
+                      }}
+                    />
+                  )}
+                </span>
+              ))}
+            </p>
           </div>
         </div>
       </div>

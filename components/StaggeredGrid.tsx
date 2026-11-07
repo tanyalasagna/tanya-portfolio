@@ -107,10 +107,7 @@ function Thumbnail({ project }: { project: Project }) {
           }} />
         </div>
         <div style={{ paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <p className="text-[14px] sm:text-[15px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', lineHeight: 1.2, opacity: 0.8 }}>
-            {project.tags.join(', ')}
-          </p>
-          <p className="text-[17px] sm:text-[18px] lg:text-[21px] leading-tight" style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", fontWeight: 600, lineHeight: 1.2, opacity: hovered ? 0.8 : 1, transition: 'opacity 400ms ease' }}>
+          <p className="text-[18px] sm:text-[19px] lg:text-[22px] leading-tight" style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", fontWeight: 600, lineHeight: 1.2, opacity: hovered ? 0.8 : 1, transition: 'opacity 400ms ease' }}>
             {project.mobileTitle ? (
               <>
                 <span className="lg:hidden">{project.mobileTitle}</span>
@@ -118,35 +115,33 @@ function Thumbnail({ project }: { project: Project }) {
               </>
             ) : project.title}
           </p>
-          {project.description && (
-            <p className="text-[14px] sm:text-[15px] lg:text-[18px]" style={{ lineHeight: 1.2, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px', opacity: 0.8 }}>
-              {project.description.split(' \\ ').map((part, i, arr) => (
-                <span key={i} style={{ color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                  {part}
-                  {i < arr.length - 1 && (
-                    <span
-                      aria-hidden
-                      style={{
-                        display: 'inline-block',
-                        width: 20,
-                        height: 20,
-                        flexShrink: 0,
-                        backgroundColor: 'currentColor',
-                        WebkitMaskImage: 'url("/images/Chunky Black Pixel Sparkle Icon (1).png")',
-                        maskImage: 'url("/images/Chunky Black Pixel Sparkle Icon (1).png")',
-                        WebkitMaskSize: 'contain',
-                        maskSize: 'contain',
-                        WebkitMaskRepeat: 'no-repeat',
-                        maskRepeat: 'no-repeat',
-                        WebkitMaskPosition: 'center',
-                        maskPosition: 'center',
-                      }}
-                    />
-                  )}
-                </span>
-              ))}
-            </p>
-          )}
+          <p className="text-[14px] sm:text-[15px] lg:text-[18px]" style={{ lineHeight: 1.2, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
+            {[project.tags.join(', '), ...(project.description ? project.description.split(' \\ ') : [])].map((part, i, arr) => (
+              <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                <span style={{ color: i === 0 ? 'var(--text)' : 'var(--text-muted)', fontStyle: i === 0 ? 'italic' : 'normal', fontFamily: i === 0 ? 'var(--font-dm-sans)' : undefined, opacity: 0.8 }}>{part}</span>
+                {i < arr.length - 1 && (
+                  <span
+                    aria-hidden
+                    style={{
+                      display: 'inline-block',
+                      width: 20,
+                      height: 20,
+                      flexShrink: 0,
+                      backgroundColor: 'var(--text)',
+                      WebkitMaskImage: 'url("/images/Chunky Black Pixel Sparkle Icon (1).png")',
+                      maskImage: 'url("/images/Chunky Black Pixel Sparkle Icon (1).png")',
+                      WebkitMaskSize: 'contain',
+                      maskSize: 'contain',
+                      WebkitMaskRepeat: 'no-repeat',
+                      maskRepeat: 'no-repeat',
+                      WebkitMaskPosition: 'center',
+                      maskPosition: 'center',
+                    }}
+                  />
+                )}
+              </span>
+            ))}
+          </p>
         </div>
       </Link>
       </div>
@@ -220,8 +215,8 @@ export default function StaggeredGrid() {
       </div>
 
       {/* lg only: single column (thumbnails too small for two columns at this width) */}
-      <div className="hidden lg:block xl:hidden pb-20" style={{ paddingLeft: '40px', paddingRight: '24px', paddingTop: '88px' }}>
-        <div ref={desktopSingle} style={{ display: 'flex', flexDirection: 'column', gap: '64px', maxWidth: '680px' }}>
+      <div className="hidden lg:block xl:hidden pb-20" style={{ paddingLeft: '56px', paddingRight: '24px', paddingTop: '88px' }}>
+        <div ref={desktopSingle} style={{ display: 'flex', flexDirection: 'column', gap: '64px', maxWidth: '660px' }}>
           {projects.map((p) => (
             <div key={p.slug} style={{ opacity: 0 }}>
               <Thumbnail project={p} />
@@ -231,7 +226,7 @@ export default function StaggeredGrid() {
       </div>
 
       {/* xl+: staggered two columns */}
-      <div className="hidden xl:block pb-20" style={{ paddingLeft: 'max(40px, 3vw)', paddingRight: '32px', paddingTop: '88px' }}>
+      <div className="hidden xl:block pb-20" style={{ paddingLeft: 'max(56px, 4vw)', paddingRight: '32px', paddingTop: '88px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', alignItems: 'start' }}>
           <div ref={desktopL} style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
             {leftCol.map((p) => (

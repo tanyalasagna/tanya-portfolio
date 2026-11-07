@@ -6,7 +6,7 @@ export default function ColophonPage() {
   const linkStyle: React.CSSProperties = {
     color: 'var(--text-muted)',
   };
-  const linkCls = 'underline decoration-dashed hover:decoration-solid decoration-[1.5px] underline-offset-[3px]';
+  const linkCls = 'underline decoration-[1.5px] underline-offset-[3px] hover:no-underline';
 
   const items = [
     {
