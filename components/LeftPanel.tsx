@@ -9,8 +9,10 @@ import { play } from 'cuelume';
 import SoundToggle from './SoundToggle';
 import { gsap } from 'gsap';
 import { usePathname } from 'next/navigation';
-import { ArrowLeft, ArrowUpRight, X } from 'lucide-react';
+import { ArrowUpRight, X } from 'lucide-react';
 import { siftNavSections } from './SiftCaseStudyContent';
+import CaseStudyCarousel from './CaseStudyCarousel';
+import BackToWork from './BackToWork';
 
 const externalIcon = <ArrowUpRight size={12} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '2px' }} aria-hidden />;
 
@@ -84,27 +86,13 @@ export default function LeftPanel() {
       {isCaseStudy ? (
         <>
           {/* Back link */}
-          <Link
-            href="/"
-            className="hover:opacity-70 transition-opacity duration-150"
-            style={{
-              fontSize: '28px',
-              fontFamily: "'Dreamer TM', serif",
-              fontWeight: 400,
-              fontFeatureSettings: '"ss01"',
-              letterSpacing: '0.045em',
-              marginBottom: '32px',
-              textDecoration: 'none',
-              lineHeight: 1,
-            }}
-            onClick={() => play('close', { theme: 'bubble', emphasis: 'subtle' })}
-          >
-            <ArrowLeft size={20} strokeWidth={1.5} style={{ display: 'inline', marginRight: '6px', verticalAlign: 'middle', position: 'relative', top: '-1px' }} />Back to projects
-          </Link>
+          <BackToWork className="mb-8" />
+
+          <div className="flex-1" />
 
           {/* Case study section nav */}
           <div style={{ marginBottom: '32px' }}>
-            <CaseStudyNav sections={slug === 'sift' ? siftNavSections : undefined} />
+            <CaseStudyNav key={slug} sections={slug === 'sift' ? siftNavSections : undefined} />
           </div>
         </>
       ) : (
@@ -141,6 +129,8 @@ export default function LeftPanel() {
 
       {/* Spacer */}
       <div className="flex-1" />
+
+      {isCaseStudy && <CaseStudyCarousel currentSlug={slug!} />}
 
       {!isCaseStudy && (
         <>

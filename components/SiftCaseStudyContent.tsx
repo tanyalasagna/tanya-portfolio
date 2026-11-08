@@ -6,7 +6,6 @@ const h3Style = { color: 'var(--text)' };
 const pStyle = { color: 'var(--text-muted)' };
 
 export const siftNavSections = [
-  { id: 'intro', label: 'Intro' },
   { id: 'problem', label: 'Problem' },
   { id: 'solution', label: 'Solution' },
   { id: 'process', label: 'Process' },
@@ -14,7 +13,6 @@ export const siftNavSections = [
   { id: 'design-details', label: 'Design Details' },
   { id: 'impact', label: 'Potential Impact' },
   { id: 'reflection', label: 'Reflection' },
-  { id: 'whats-next', label: "What's Next" },
 ];
 
 function Video({ src }: { src: string }) {

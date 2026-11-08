@@ -6,11 +6,45 @@ const CORNER = 6;
 const DASH = 'linear-gradient(to top, currentColor, currentColor)';
 
 const defaultSections = [
-  { id: 'intro',       label: 'Intro' },
   { id: 'research',    label: 'Research' },
   { id: 'designs',     label: 'Designs' },
   { id: 'reflections', label: 'Reflections' },
 ];
+
+let cancelScroll: (() => void) | null = null;
+
+function smoothScrollTo(el: HTMLElement) {
+  cancelScroll?.();
+  const margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+  const start = window.scrollY;
+  const end = el.getBoundingClientRect().top + start - margin;
+  const distance = end - start;
+  const duration = Math.min(1800, Math.max(900, Math.abs(distance) * 0.35));
+  const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  let frame = 0;
+  const t0 = performance.now();
+
+  const stop = () => {
+    cancelAnimationFrame(frame);
+    window.removeEventListener('wheel', stop);
+    window.removeEventListener('touchstart', stop);
+    window.removeEventListener('keydown', stop);
+    cancelScroll = null;
+  };
+  // Let the visitor take over mid-animation
+  window.addEventListener('wheel', stop, { passive: true });
+  window.addEventListener('touchstart', stop, { passive: true });
+  window.addEventListener('keydown', stop);
+  cancelScroll = stop;
+
+  const step = (now: number) => {
+    const t = Math.min(1, (now - t0) / duration);
+    window.scrollTo(0, start + distance * ease(t));
+    if (t < 1) frame = requestAnimationFrame(step);
+    else stop();
+  };
+  frame = requestAnimationFrame(step);
+}
 
 function Rail({ from = 0, y, visible, color }: { from?: number; y: number | null; visible: boolean; color: string }) {
   const reduced = useReducedMotion();
@@ -51,6 +85,7 @@ function Rail({ from = 0, y, visible, color }: { from?: number; y: number | null
 }
 
 export default function CaseStudyNav({ sections = defaultSections }: { sections?: { id: string; label: string }[] }) {
+  const [indexVisible, setIndexVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [pointerInside, setPointerInside] = useState(false);
@@ -68,21 +103,29 @@ export default function CaseStudyNav({ sections = defaultSections }: { sections?
     const observer = new ResizeObserver(measure);
     observer.observe(list);
     return () => observer.disconnect();
-  }, [sections]);
+  }, [sections, indexVisible]);
 
-  // IntersectionObserver for active section
+  // Elements are looked up on every check because this nav can mount before the page content does (client-side navigation)
   useEffect(() => {
-    const observers = sections.map(({ id }, i) => {
-      const el = document.getElementById(id);
-      if (!el) return null;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveIndex(i); },
-        { rootMargin: '-15% 0px -60% 0px', threshold: 0 }
-      );
-      obs.observe(el);
-      return obs;
-    });
-    return () => observers.forEach(obs => obs?.disconnect());
+    const update = () => {
+      const vh = window.innerHeight;
+      const first = sections[0] && document.getElementById(sections[0].id);
+      if (first && first.getBoundingClientRect().top < vh * 0.6) setIndexVisible(true);
+
+      let current = -1;
+      sections.forEach(({ id }, i) => {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top < vh * 0.4) current = i;
+      });
+      if (current >= 0) setActiveIndex(current);
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
   }, [sections]);
 
   const activeY = centers[activeIndex] ?? null;
@@ -93,6 +136,8 @@ export default function CaseStudyNav({ sections = defaultSections }: { sections?
       ? Math.max(0, hoverY - CORNER)
       : (activeY ?? 0);
 
+  if (!indexVisible) return null;
+
   return (
     <nav aria-label="Case study sections" className="flex flex-col">
       <span style={{
@@ -101,11 +146,10 @@ export default function CaseStudyNav({ sections = defaultSections }: { sections?
         fontFamily: 'var(--font-dm-sans)',
         fontStyle: 'italic',
         fontWeight: 400,
-        letterSpacing: '0.08em',
         paddingBottom: '8px',
         paddingLeft: '2px',
       }}>
-        Navigate case study
+        Index
       </span>
 
       <div
@@ -132,11 +176,19 @@ export default function CaseStudyNav({ sections = defaultSections }: { sections?
               key={id}
               href={`#${id}`}
               ref={el => { itemRefs.current[index] = el; }}
+              onClick={(e) => {
+                const target = document.getElementById(id);
+                if (!target) return;
+                e.preventDefault();
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) target.scrollIntoView({ block: 'start' });
+                else smoothScrollTo(target);
+                history.replaceState(null, '', `#${id}`);
+              }}
               onFocus={() => { setHoverIndex(index); setFocusInside(true); }}
               onBlur={() => setFocusInside(false)}
               style={{
                 color: isActive ? 'var(--text)' : 'var(--text-muted)',
-                fontSize: '17px',
+                fontSize: '18px',
                 fontFamily: 'var(--font-dm-sans)',
                 fontWeight: isActive ? 600 : 300,
                 transition: 'color 180ms ease',

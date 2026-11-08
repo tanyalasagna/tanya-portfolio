@@ -68,7 +68,7 @@ export default function MobileNav() {
       {/* Top bar */}
       <div
         className="lg:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 h-14"
-        style={{ background: 'var(--bg)', borderBottom: '0.5px solid var(--divider)' }}
+        style={{ background: 'var(--bg)', borderBottom: '0.5px solid var(--divider)', borderBottomLeftRadius: '6px', borderBottomRightRadius: '6px' }}
       >
         <Link
           href="/"

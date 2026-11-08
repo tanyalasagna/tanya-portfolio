@@ -16,6 +16,7 @@ import PageTransition from '@/components/PageTransition';
 import ThemeTransition from '@/components/ThemeTransition';
 import CuelumeProvider from '@/components/CuelumeProvider';
 import MobileBio from '@/components/MobileBio';
+import CaseStudyFooter from '@/components/CaseStudyFooter';
 
 export const metadata: Metadata = {
   title: 'Tanya Singh — Product Designer',
@@ -38,6 +39,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           {/* === Mobile nav (header + overlay menu) === */}
           <MobileNav />
+
+          {/* Mobile/tablet fixed footer on case study pages — outside PageTransition so its transform can't move it */}
+          <CaseStudyFooter />
 
           {/* Left panel — fixed, hidden below lg */}
           <div className="hidden lg:block">

@@ -18,7 +18,7 @@ export default async function CaseStudyPage({ params }: Props) {
   if (!project) notFound();
 
   return (
-    <div className="px-4 lg:px-8 lg:w-3/4 lg:mx-auto" style={{ paddingTop: '40px', paddingBottom: '80px' }}>
+    <div className="px-4 lg:px-5 xl:px-8 lg:w-[max(75%,min(100%,760px))] lg:mx-auto pb-32 lg:pb-20" style={{ paddingTop: '40px' }}>
       <CaseStudyContent>
         {/* Cover */}
         <div><CaseStudyCover project={project} /></div>
