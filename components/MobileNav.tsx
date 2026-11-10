@@ -128,7 +128,7 @@ export default function MobileNav() {
               <HookSidebar />
             </div>
 
-            <div className="mb-8" style={{ height: '0.5px', background: 'var(--divider)' }} />
+            <div className="mb-8" style={{ borderTop: '1px dashed rgba(56, 54, 54, 0.22)' }} />
 
             {/* Bottom row: two aligned columns */}
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>

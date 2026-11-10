@@ -38,7 +38,7 @@ export default function CaseStudyCarousel({ currentSlug, className = '', showLab
             href={`/work/${p.slug}`}
             onClick={() => play('open', { theme: 'bubble', emphasis: 'subtle' })}
             className="text-[15px] sm:text-[16px] lg:text-[17px] underline decoration-[1.5px] decoration-current underline-offset-[4px] hover:no-underline px-[2px] -mx-[2px] rounded-[2px]"
-            style={{ fontFamily: 'var(--font-dm-sans)', fontWeight: 400, color: 'var(--text-muted)', opacity: 0.6, lineHeight: 1, display: 'inline-block', width: 'fit-content' }}
+            style={{ fontFamily: 'var(--font-dm-sans)', fontWeight: 400, fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6, lineHeight: 1, display: 'inline-block', width: 'fit-content' }}
           >
             {p.displayTitle ?? p.title}<ArrowRight size={16} strokeWidth={1.5} style={{ display: 'inline', marginLeft: '6px', verticalAlign: 'middle', position: 'relative', top: '-1px' }} />
           </Link>

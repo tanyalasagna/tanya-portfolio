@@ -113,7 +113,7 @@ export default function LeftPanel() {
 
           {/* Contact */}
           <div className="flex items-center flex-wrap gap-2" style={{ marginBottom: '32px' }}>
-            <span className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{
+            <span className="text-[15px] sm:text-[16px] lg:text-[17px]" style={{
               color: 'var(--text)',
               fontFamily: 'var(--font-dm-sans)',
               fontStyle: 'italic',
