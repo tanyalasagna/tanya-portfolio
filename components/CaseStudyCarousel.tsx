@@ -19,7 +19,7 @@ export default function CaseStudyCarousel({ currentSlug, className = '', showLab
 
   return (
     <div className={className} style={{ marginBottom: '8px', minHeight: showLabel ? '78px' : '48px' }}>
-      {showLabel && <span className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{
+      {showLabel && <span className="text-[15px] sm:text-[16px] lg:text-[17px]" style={{
         display: 'block',
         color: 'var(--text-muted)',
         opacity: 0.6,
@@ -29,7 +29,7 @@ export default function CaseStudyCarousel({ currentSlug, className = '', showLab
         paddingBottom: '8px',
         paddingLeft: '2px',
       }}>
-        More case studies:
+        More work:
       </span>}
       <div className={`flex flex-col ${align === 'end' ? 'items-end' : ''}`} style={{ gap: '6px' }}>
         {picks.map((p) => (

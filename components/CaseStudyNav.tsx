@@ -142,7 +142,7 @@ export default function CaseStudyNav({ sections = defaultSections }: { sections?
     <nav aria-label="Case study sections" className="flex flex-col">
       <span style={{
         color: 'var(--text-muted)',
-        fontSize: '18px',
+        fontSize: '17px',
         fontFamily: 'var(--font-dm-sans)',
         fontStyle: 'italic',
         fontWeight: 400,
@@ -171,6 +171,7 @@ export default function CaseStudyNav({ sections = defaultSections }: { sections?
 
         {sections.map(({ id, label }, index) => {
           const isActive = index === activeIndex;
+          const isDark = isActive || (pointerInside && hoverIndex === index);
           return (
             <a
               key={id}
@@ -187,11 +188,12 @@ export default function CaseStudyNav({ sections = defaultSections }: { sections?
               onFocus={() => { setHoverIndex(index); setFocusInside(true); }}
               onBlur={() => setFocusInside(false)}
               style={{
-                color: isActive ? 'var(--text)' : 'var(--text-muted)',
-                fontSize: '18px',
+                color: isDark ? 'var(--text)' : 'var(--text-muted)',
+                opacity: isDark ? 1 : 0.6,
+                fontSize: '17px',
                 fontFamily: 'var(--font-dm-sans)',
-                fontWeight: isActive ? 600 : 300,
-                transition: 'color 180ms ease',
+                fontWeight: 300,
+                transition: 'color 180ms ease, opacity 180ms ease',
                 paddingLeft: '20px',
                 paddingTop: '5px',
                 paddingBottom: '5px',

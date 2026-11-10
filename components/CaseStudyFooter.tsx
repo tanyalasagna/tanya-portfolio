@@ -71,7 +71,7 @@ export default function CaseStudyFooter() {
           gap: '4px',
         }}
       >
-        More case studies
+        More work
         <ChevronUp
           size={16}
           strokeWidth={1.5}
