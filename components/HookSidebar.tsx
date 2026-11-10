@@ -93,7 +93,7 @@ export default function HookSidebar() {
 
   return (
     <nav aria-label="Navigation" className="flex flex-col">
-      <span className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{
+      <span className="text-[15px] sm:text-[16px] lg:text-[17px]" style={{
         color: 'var(--text)',
         fontFamily: 'var(--font-dm-sans)',
         fontStyle: 'italic',

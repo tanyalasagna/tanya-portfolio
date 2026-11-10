@@ -87,6 +87,14 @@ function Thumbnail({ project }: { project: Project }) {
             /* eslint-disable-next-line @next/next/no-img-element */
             <img src={project.thumbnail} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hovered ? 'scale(1.008)' : 'scale(1)', opacity: hovered ? 0.9 : 1, transition: 'transform 3000ms cubic-bezier(0.19, 1, 0.22, 1), opacity 600ms ease' }} />
           )}
+          {/* Slight dark tint over the whole thumbnail */}
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: 'rgba(0, 0, 0, 0.06)',
+            opacity: hovered ? 1 : 0,
+            transition: 'opacity 1800ms cubic-bezier(0.19, 1, 0.22, 1)',
+            pointerEvents: 'none',
+          }} />
           {/* Dark gradient shadow overlay */}
           <div style={{
             position: 'absolute', bottom: 0, left: 0, right: 0, height: '60%',
@@ -97,7 +105,7 @@ function Thumbnail({ project }: { project: Project }) {
           }} />
           {/* Bottom blur overlay */}
           <div style={{
-            position: 'absolute', bottom: 0, left: 0, right: 0, height: '30%',
+            position: 'absolute', bottom: 0, left: 0, right: 0, height: '36%',
             backdropFilter: 'blur(3px)', WebkitBackdropFilter: 'blur(3px)',
             maskImage: 'linear-gradient(to top, black 0%, transparent 100%)',
             WebkitMaskImage: 'linear-gradient(to top, black 0%, transparent 100%)',
@@ -107,7 +115,7 @@ function Thumbnail({ project }: { project: Project }) {
           }} />
         </div>
         <div style={{ paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <p className="text-[18px] sm:text-[19px] lg:text-[22px] leading-tight" style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", fontWeight: 600, lineHeight: 1.2, opacity: hovered ? 0.8 : 1, transition: 'opacity 400ms ease' }}>
+          <p className="text-[18px] sm:text-[19px] lg:text-[22px] leading-tight" style={{ color: hovered ? 'var(--text-muted)' : 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", fontWeight: 600, lineHeight: 1.2, opacity: hovered ? 0.6 : 1, transition: 'color 400ms ease, opacity 400ms ease' }}>
             {project.mobileTitle ? (
               <>
                 <span className="lg:hidden">{project.mobileTitle}</span>
@@ -215,8 +223,8 @@ export default function StaggeredGrid() {
       </div>
 
       {/* lg only: single column (thumbnails too small for two columns at this width) */}
-      <div className="hidden lg:block xl:hidden pb-20" style={{ paddingLeft: '56px', paddingRight: '24px', paddingTop: '88px' }}>
-        <div ref={desktopSingle} style={{ display: 'flex', flexDirection: 'column', gap: '64px', maxWidth: '660px' }}>
+      <div className="hidden lg:block xl:hidden pb-20" style={{ paddingLeft: '76px', paddingRight: '24px', paddingTop: '88px' }}>
+        <div ref={desktopSingle} style={{ display: 'flex', flexDirection: 'column', gap: '64px', maxWidth: '640px' }}>
           {projects.map((p) => (
             <div key={p.slug} style={{ opacity: 0 }}>
               <Thumbnail project={p} />
@@ -226,7 +234,7 @@ export default function StaggeredGrid() {
       </div>
 
       {/* xl+: staggered two columns */}
-      <div className="hidden xl:block pb-20" style={{ paddingLeft: 'max(56px, 4vw)', paddingRight: '32px', paddingTop: '88px' }}>
+      <div className="hidden xl:block pb-20" style={{ paddingLeft: 'max(76px, 5.5vw)', paddingRight: '32px', paddingTop: '88px' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', alignItems: 'start' }}>
           <div ref={desktopL} style={{ display: 'flex', flexDirection: 'column', gap: '64px' }}>
             {leftCol.map((p) => (

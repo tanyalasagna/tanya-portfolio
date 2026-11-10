@@ -9,7 +9,7 @@ import { play } from 'cuelume';
 import SoundToggle from './SoundToggle';
 import { gsap } from 'gsap';
 import { usePathname } from 'next/navigation';
-import { ArrowUpRight, X } from 'lucide-react';
+import { ArrowUpRight, ChevronUp } from 'lucide-react';
 import { siftNavSections } from './SiftCaseStudyContent';
 import CaseStudyCarousel from './CaseStudyCarousel';
 import BackToWork from './BackToWork';
@@ -32,10 +32,10 @@ const wordmarkLetters: { ch: string; set: 'ss01' | 'ss02' }[] = [
 
 const colophonLines = [
   { before: 'Type set in ', links: [{ label: 'Dreamer TM', href: 'https://typemania.eu/products/dreamer-tm' }, { label: 'Alegreya Sans', href: 'https://fonts.google.com/specimen/Alegreya+Sans' }], join: ' and ' },
-  { before: 'Sound by ', links: [{ label: 'Cuelume', href: 'https://cuelume.dev/' }] },
+  { before: 'Sounds via ', links: [{ label: 'Cuelume', href: 'https://cuelume.dev/' }] },
   { before: 'Hosted on ', links: [{ label: 'Vercel', href: 'https://vercel.com/' }] },
   { before: 'Source on ', links: [{ label: 'Github', href: 'https://github.com/tanyalasagna/tanya-portfolio' }] },
-  { before: 'Created with ', links: [{ label: 'Claude Code', href: 'https://claude.ai/code' }] },
+  { before: 'Coded with ', links: [{ label: 'Claude', href: 'https://claude.ai/code' }] },
 ];
 
 export default function LeftPanel() {
@@ -138,22 +138,19 @@ export default function LeftPanel() {
           <div
             ref={colophonRef}
             onClick={e => e.stopPropagation()}
-            style={{ position: 'absolute', left: '20px', right: '20px', bottom: '28px', background: '#F0F0EE', borderRadius: '6px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none' }}
+            style={{ position: 'absolute', left: '20px', bottom: '95px', width: 'fit-content', background: '#F0F0EE', borderRadius: '20px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none' }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-              <span className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{ fontFamily: 'var(--font-dm-sans)', color: 'var(--text)', fontStyle: 'italic', fontWeight: 400 }}>Colophon</span>
-              <button onClick={() => { setColophonOpen(false); play('close', { theme: 'bubble', emphasis: 'subtle' }); }} aria-label="Close colophon" style={{ color: '#383636', background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center' }}>
-                <X size={18} strokeWidth={1.5} aria-hidden />
-              </button>
+              <span className="text-[15px] sm:text-[16px] lg:text-[17px]" style={{ fontFamily: 'var(--font-dm-sans)', color: 'var(--text)', fontStyle: 'italic', fontWeight: 400 }}>Colophon</span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {colophonLines.map((line, i) => (
-                <p key={i} style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontSize: '16px', fontWeight: 300, fontStyle: 'normal', color: 'var(--text-muted)', opacity: 0.8, lineHeight: 1.4 }}>
+                <p key={i} style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontSize: '17px', fontWeight: 300, fontStyle: 'normal', color: 'var(--text-muted)', opacity: 0.8, lineHeight: 1.4 }}>
                   {line.before}
                   {line.links.map((lk, j) => (
                     <span key={j}>
-                      {j > 0 && (line.join ?? ' and ')}
-                      <a href={lk.href} target="_blank" rel="noopener noreferrer" className="decoration-[1.5px] decoration-current underline-offset-[4px] text-inherit underline hover:no-underline px-[2px] -mx-[2px] rounded-[2px]">{lk.label}{externalIcon}</a>
+                      {j > 0 && <><br />{(line.join ?? ' and ').trimStart()}</>}
+                      <a href={lk.href} target="_blank" rel="noopener noreferrer" className="decoration-[1.5px] decoration-current underline-offset-[4px] text-inherit no-underline hover:underline px-[2px] -mx-[2px] rounded-[2px]">{lk.label}{externalIcon}</a>
                     </span>
                   ))}
                 </p>
@@ -180,11 +177,13 @@ export default function LeftPanel() {
                   }}
                 />
                 <button
-                  onClick={e => { e.stopPropagation(); setColophonOpen(true); play('open', { theme: 'bubble', emphasis: 'subtle' }); }}
+                  onClick={e => { e.stopPropagation(); play(colophonOpen ? 'close' : 'open', { theme: 'bubble', emphasis: 'subtle' }); setColophonOpen(v => !v); }}
+                  aria-expanded={colophonOpen}
                   className="underline decoration-[1.5px] decoration-current underline-offset-[4px] text-inherit hover:no-underline px-[2px] -mx-[2px] rounded-[2px]"
                   style={{ border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit', opacity: 0.6 }}
                 >
                   View colophon
+                  <ChevronUp size={15} strokeWidth={1.5} aria-hidden style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '3px', transform: colophonOpen ? 'rotate(180deg)' : 'none', transition: 'transform 200ms ease' }} />
                 </button>
               </div>
             </div>

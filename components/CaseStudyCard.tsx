@@ -115,8 +115,9 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
             transition: 'opacity 500ms ease',
           }}
         />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'rgba(0, 0, 0, 0.06)', ...overlayStyle }} />
         <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: '60%', background: 'linear-gradient(to top, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.05) 50%, transparent 100%)', ...overlayStyle }} />
-        <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: '30%', backdropFilter: 'blur(3px)', WebkitBackdropFilter: 'blur(3px)', maskImage: 'linear-gradient(to top, black 0%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to top, black 0%, transparent 100%)', ...overlayStyle }} />
+        <div className="absolute bottom-0 left-0 right-0 pointer-events-none" style={{ height: '36%', backdropFilter: 'blur(3px)', WebkitBackdropFilter: 'blur(3px)', maskImage: 'linear-gradient(to top, black 0%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to top, black 0%, transparent 100%)', ...overlayStyle }} />
       </div>
     </Link>
   );

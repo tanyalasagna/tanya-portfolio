@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { play } from 'cuelume';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight, ChevronUp, Menu, X } from 'lucide-react';
 
 const externalIcon = <ArrowUpRight size={12} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '2px' }} aria-hidden />;
 import LiveClock from './LiveClock';
@@ -28,10 +28,10 @@ const wordmarkLetters: { ch: string; set: 'ss01' | 'ss02' }[] = [
 
 const colophonLines = [
   { before: 'Type set in ', links: [{ label: 'Dreamer TM', href: 'https://typemania.eu/products/dreamer-tm' }, { label: 'Alegreya Sans', href: 'https://fonts.google.com/specimen/Alegreya+Sans' }], join: ' and ' },
-  { before: 'Sound by ', links: [{ label: 'Cuelume', href: 'https://cuelume.dev/' }] },
+  { before: 'Sounds via ', links: [{ label: 'Cuelume', href: 'https://cuelume.dev/' }] },
   { before: 'Hosted on ', links: [{ label: 'Vercel', href: 'https://vercel.com/' }] },
   { before: 'Source on ', links: [{ label: 'Github', href: 'https://github.com/tanyalasagna/tanya-portfolio' }] },
-  { before: 'Created with ', links: [{ label: 'Claude Code', href: 'https://claude.ai/code' }] },
+  { before: 'Coded with ', links: [{ label: 'Claude', href: 'https://claude.ai/code' }] },
 ];
 
 export default function MobileNav() {
@@ -124,7 +124,7 @@ export default function MobileNav() {
             onClick={() => setColophonOpen(false)}
           >
             {/* Nav */}
-            <div className="mb-8">
+            <div className="mb-8" style={{ opacity: colophonOpen ? 0 : 1, transition: 'opacity 200ms ease' }}>
               <HookSidebar />
             </div>
 
@@ -135,17 +135,22 @@ export default function MobileNav() {
               {/* Left column: row1=clock+speaker, row2=colophon */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 {/* Row 1: clock */}
-                <LiveClock sizeCls="text-[15px] sm:text-[16px]" />
+                {/* The colophon pop-up covers this row; fade it so nothing shows through the pop-up's rounded corners */}
+                <div style={{ opacity: colophonOpen ? 0 : 1, transition: 'opacity 200ms ease' }}>
+                  <LiveClock sizeCls="text-[15px] sm:text-[16px]" />
+                </div>
                 {/* Row 2: year + colophon */}
                 <div className="text-[15px] sm:text-[16px]" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
                   <span>2027</span>
                   <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="20" height="20" style={{ flexShrink: 0 }} />
                   <button
-                    onClick={e => { e.stopPropagation(); setColophonOpen(true); play('open', { theme: 'bubble', emphasis: 'subtle' }); }}
+                    onClick={e => { e.stopPropagation(); play(colophonOpen ? 'close' : 'open', { theme: 'bubble', emphasis: 'subtle' }); setColophonOpen(v => !v); }}
+                    aria-expanded={colophonOpen}
                     className="underline decoration-[1.5px] decoration-current underline-offset-[4px] text-inherit hover:no-underline px-[2px] -mx-[2px] rounded-[2px]"
                     style={{ border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
                   >
                     View colophon
+                    <ChevronUp size={15} strokeWidth={1.5} aria-hidden style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '3px', transform: colophonOpen ? 'rotate(180deg)' : 'none', transition: 'transform 200ms ease' }} />
                   </button>
                 </div>
               </div>
@@ -159,22 +164,19 @@ export default function MobileNav() {
             <div
               ref={colophonRef}
               onClick={e => e.stopPropagation()}
-              style={{ position: 'absolute', left: '16px', bottom: '40px', width: 'fit-content', maxWidth: 'calc(100% - 32px)', background: '#F0F0EE', borderRadius: '6px', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none' }}
+              style={{ position: 'absolute', left: '16px', bottom: '70px', width: 'fit-content', maxWidth: 'calc(100% - 32px)', background: '#F0F0EE', borderRadius: '20px', padding: '16px 20px', zIndex: 20, opacity: 0, pointerEvents: 'none' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                 <span className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{ fontFamily: 'var(--font-dm-sans)', color: 'var(--text)', fontStyle: 'italic', fontWeight: 400 }}>Colophon</span>
-                <button onClick={() => { setColophonOpen(false); play('close', { theme: 'bubble', emphasis: 'subtle' }); }} aria-label="Close colophon" style={{ color: '#383636', background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center' }}>
-                  <X size={18} strokeWidth={1.5} aria-hidden />
-                </button>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 {colophonLines.map((line, i) => (
                   <p key={i} className="text-[15px] sm:text-[16px]" style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontWeight: 300, fontStyle: 'normal', color: 'var(--text-muted)', lineHeight: 1.4 }}>
                     {line.before}
                     {line.links.map((lk, j) => (
                       <span key={j}>
-                        {j > 0 && (line.join ?? ' and ')}
-                        <a href={lk.href} target="_blank" rel="noopener noreferrer" className="decoration-[1.5px] decoration-current underline-offset-[4px] text-inherit underline hover:no-underline px-[2px] -mx-[2px] rounded-[2px]">{lk.label}{externalIcon}</a>
+                        {j > 0 && <><br />{(line.join ?? ' and ').trimStart()}</>}
+                        <a href={lk.href} target="_blank" rel="noopener noreferrer" className="decoration-[1.5px] decoration-current underline-offset-[4px] text-inherit no-underline hover:underline px-[2px] -mx-[2px] rounded-[2px]">{lk.label}{externalIcon}</a>
                       </span>
                     ))}
                   </p>
