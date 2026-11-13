@@ -7,10 +7,6 @@ import { useEffect, useRef, useState } from 'react';
 
 export const PIXEL_STEP = 4;
 
-// The selected-nav pill's look, shared so other pills (e.g. the colophon heading) match exactly.
-// Fill is a solid stand-in for an 8% tint, so it looks the same on the page background.
-export const PILL_FILL = 'color-mix(in srgb, var(--text) 8%, var(--bg))';
-export const PILL_OUTLINE_COLOR = 'var(--text)';
 const LINE = '0.5px solid var(--divider)';
 
 export function pixelNotchClip(edge: 'top' | 'bottom', s = PIXEL_STEP) {

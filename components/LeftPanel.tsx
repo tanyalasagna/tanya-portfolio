@@ -9,10 +9,9 @@ import { play } from 'cuelume';
 import SoundToggle from './SoundToggle';
 import { gsap } from 'gsap';
 import { usePathname } from 'next/navigation';
-import { ArrowUpRight, ChevronUp, X } from 'lucide-react';
+import { ArrowUpRight, ChevronUp } from 'lucide-react';
 import { siftNavSections } from './SiftCaseStudyContent';
 import CaseStudyCarousel from './CaseStudyCarousel';
-import { PixelPill } from './PixelEdge';
 import BackToWork from './BackToWork';
 
 const externalIcon = <ArrowUpRight size={12} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '2px' }} aria-hidden />;
@@ -143,15 +142,6 @@ export default function LeftPanel() {
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
               <span className="text-[15px] sm:text-[16px] lg:text-[17px]" style={{ fontFamily: 'var(--font-dm-sans)', color: 'var(--text)', fontStyle: 'italic', fontWeight: 400 }}>Colophon</span>
-              {/* Close: ✕ on a pixel pill in a slightly darker gray than the block */}
-              <button
-                onClick={e => { e.stopPropagation(); play('close', { theme: 'bubble', emphasis: 'subtle' }); setColophonOpen(false); }}
-                aria-label="Close colophon"
-                style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '4px 9px', margin: '-6px -10px 0 0', color: 'var(--text)', background: 'none', border: 'none', cursor: 'pointer' }}
-              >
-                <PixelPill fill="#E3E2DD" stroke="none" strokeWidth={0} />
-                <X size={14} strokeWidth={1.5} aria-hidden style={{ position: 'relative' }} />
-              </button>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {colophonLines.map((line, i) => (
