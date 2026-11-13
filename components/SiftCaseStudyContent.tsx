@@ -95,7 +95,7 @@ export default function SiftCaseStudyContent() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[14px] sm:text-[15px] lg:text-[16px] hover:underline underline-offset-[3px]"
-                  style={{ fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.8 }}
+                  style={{ fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}
                 >
                   (UNEP, 2025<ArrowUpRight size={13} strokeWidth={1.75} aria-hidden style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '1px' }} />)
                 </a>
@@ -105,7 +105,7 @@ export default function SiftCaseStudyContent() {
             <div className="lg:w-[36%] lg:flex-none min-w-0">
               {/* Cropped: 1/8 off each side and 1/5 off the bottom, leaving the middle 75% x top 80% (5:3) */}
               <div style={{ aspectRatio: '5 / 3', overflow: 'hidden' }}>
-              <SlowVideo src="/images/sift/vid-loop.mp4" rate={0.75} style={{ display: 'block', width: '133.333%', maxWidth: 'none', marginLeft: '-16.667%' }} />
+              <SlowVideo src="/images/sift/vid-loop.mp4" rate={0.75} style={{ display: 'block', width: '133.333%', maxWidth: 'none', marginLeft: '-16.667%', filter: 'grayscale(1)' }} />
               </div>
             </div>
           </div>
