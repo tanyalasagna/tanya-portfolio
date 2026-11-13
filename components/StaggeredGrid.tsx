@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { play } from 'cuelume';
 import { projects } from '@/data/projects';
 import type { Project } from '@/data/projects';
+import { PixelPill } from './PixelEdge';
 
 function Tooltip({ x, y }: { x: number; y: number }) {
   const [revealed, setRevealed] = useState(false);
@@ -22,19 +23,19 @@ function Tooltip({ x, y }: { x: number; y: number }) {
       pointerEvents: 'none',
       zIndex: 9999,
       whiteSpace: 'nowrap',
-      clipPath: revealed ? 'inset(0 0% 0 0 round 999px)' : 'inset(0 100% 0 0 round 999px)',
+      clipPath: revealed ? 'inset(0 0% 0 0)' : 'inset(0 100% 0 0)',
       filter: revealed ? 'blur(0px)' : 'blur(5px)',
       transition: 'clip-path 600ms cubic-bezier(0.16, 1, 0.3, 1), filter 500ms cubic-bezier(0.16, 1, 0.3, 1)',
     }}>
       <span style={{
-        background: '#383636', color: '#FFFFFF', fontSize: '15px',
+        color: '#FFFFFF', fontSize: '15px',
         fontFamily: 'var(--font-dm-sans)', fontWeight: 400,
-        padding: '8px 12px', borderRadius: '999px',
-        border: '0.5px solid rgba(255,255,255,0.65)',
+        padding: '8px 12px', position: 'relative',
         letterSpacing: '0.02em', display: 'inline-flex',
         alignItems: 'center', gap: '6px',
       }}>
-        Read case study
+        <PixelPill fill="#383636" stroke="#FFFFFC" strokeWidth={0.3} />
+        <span style={{ position: 'relative' }}>Read case study</span>
       </span>
     </div>,
     document.body
@@ -74,7 +75,7 @@ function Thumbnail({ project }: { project: Project }) {
         style={{ display: 'block', textDecoration: 'none' }}
         onClick={() => play('open', { theme: 'bubble', emphasis: 'subtle' })}
       >
-        <div style={{ aspectRatio: project.thumbnailAspect ?? '4/3', overflow: 'hidden', borderRadius: '6px', position: 'relative' }}>
+        <div style={{ aspectRatio: project.thumbnailAspect ?? '4/3', overflow: 'hidden', position: 'relative' }}>
           {isVideo ? (
             <video
               ref={videoRef}
@@ -113,6 +114,8 @@ function Thumbnail({ project }: { project: Project }) {
             transition: 'opacity 1800ms cubic-bezier(0.19, 1, 0.22, 1)',
             pointerEvents: 'none',
           }} />
+          {/* Hairline outline drawn on top: a 0.5px CSS border gets rounded up to 1px, an inset shadow keeps it as thin as the nav pill's */}
+          <div style={{ position: 'absolute', inset: 0, boxShadow: 'inset 0 0 0 0.5px var(--text)', pointerEvents: 'none' }} />
         </div>
         <div style={{ paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
           <p className="text-[18px] sm:text-[19px] lg:text-[22px] leading-tight" style={{ color: hovered ? 'var(--text-muted)' : 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", fontWeight: 600, lineHeight: 1.2, opacity: hovered ? 0.6 : 1, transition: 'color 400ms ease, opacity 400ms ease' }}>

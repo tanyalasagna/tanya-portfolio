@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import type { Project } from '@/data/projects';
+import { PixelPill } from './PixelEdge';
 
 export default function CaseStudyCard({ project, padTop = 26 }: { project: Project; padTop?: number }) {
   const [hovered, setHovered] = useState(false);
@@ -88,7 +89,7 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
     pointerEvents: 'none',
     zIndex: 9999,
     whiteSpace: 'nowrap',
-    clipPath: hovered ? 'inset(0 0% 0 0 round 999px)' : 'inset(0 100% 0 0 round 999px)',
+    clipPath: hovered ? 'inset(0 0% 0 0)' : 'inset(0 100% 0 0)',
     filter: hovered ? 'blur(0px)' : 'blur(5px)',
     transition: hovered
       ? 'clip-path 600ms cubic-bezier(0.16, 1, 0.3, 1), filter 500ms cubic-bezier(0.16, 1, 0.3, 1)'
@@ -135,21 +136,20 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
   const tooltipEl = (
     <div style={tooltipStyle}>
       <span style={{
-        background: '#383636',
         color: '#FFFFFF',
         fontSize: '15px',
         fontStyle: 'normal',
         fontFamily: 'var(--font-dm-sans)',
         fontWeight: 400,
         padding: '8px 12px',
-        borderRadius: '999px',
-        border: '0.5px solid rgba(255,255,255,0.65)',
+        position: 'relative',
         letterSpacing: '0.02em',
         display: 'inline-flex',
         alignItems: 'center',
         gap: '6px',
       }}>
-        Read case study
+        <PixelPill fill="#383636" stroke="#FFFFFC" strokeWidth={0.3} />
+        <span style={{ position: 'relative' }}>Read case study</span>
       </span>
     </div>
   );

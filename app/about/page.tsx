@@ -13,7 +13,7 @@ export default function AboutPage() {
       <div className="flex flex-col md:flex-row gap-10 items-start">
         {/* Photo placeholder */}
         <div
-          className="w-56 h-72 flex-shrink-0 rounded flex items-center justify-center font-mono text-xs"
+          className="w-56 h-72 flex-shrink-0 flex items-center justify-center font-mono text-xs"
           style={{
             border: '1px solid var(--divider)',
             background: 'var(--bg-hover)',

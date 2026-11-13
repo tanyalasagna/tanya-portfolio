@@ -25,7 +25,7 @@ function Video({ src }: { src: string }) {
       loop
       playsInline
       className="w-full mb-6"
-      style={{ display: 'block', borderRadius: '6px' }}
+      style={{ display: 'block' }}
     />
   );
 }
@@ -33,7 +33,7 @@ function Video({ src }: { src: string }) {
 function Img({ src, alt = '' }: { src: string; alt?: string }) {
   return (
     /* eslint-disable-next-line @next/next/no-img-element */
-    <img src={src} alt={alt} className="w-full mb-6" style={{ display: 'block', borderRadius: '6px' }} />
+    <img src={src} alt={alt} className="w-full mb-6" style={{ display: 'block' }} />
   );
 }
 

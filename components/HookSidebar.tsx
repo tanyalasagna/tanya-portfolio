@@ -4,9 +4,11 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, useReducedMotion } from 'framer-motion';
+import { PixelPill, PILL_FILL, PILL_OUTLINE_COLOR } from './PixelEdge';
 
 const CORNER = 6;
-const DASH = 'linear-gradient(to top, currentColor, currentColor)';
+const DASH = 'repeating-linear-gradient(to top, transparent 0 2px, currentColor 2px 4px)';
+
 
 const navItems = [
   { label: 'Work',   href: '/',        matches: (p: string) => p === '/' || p.startsWith('/work') },
@@ -56,7 +58,7 @@ function Rail({
         fill="none"
         className="absolute left-0.5"
       >
-        <path d="M0.5 0a6 6 0 0 0 6 6H12" stroke="currentColor" strokeWidth="1" />
+        <path d="M0.5 0a6 6 0 0 0 6 6H12" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" />
       </motion.svg>
     </motion.span>
   );
@@ -156,12 +158,12 @@ export default function HookSidebar() {
                   cursor: 'pointer',
                   padding: isActive ? '2px 10px' : '2px 0',
                   margin: isActive ? '-2px -10px' : '-2px 0',
-                  borderRadius: '999px',
-                  background: isActive ? 'rgba(56,54,54,0.08)' : 'transparent',
-                  transition: 'background-color 180ms ease, padding 180ms ease, margin 180ms ease',
+                  position: 'relative',
+                  transition: 'padding 180ms ease, margin 180ms ease',
                 }}
               >
-                {item.label}
+                <PixelPill fill={PILL_FILL} stroke={PILL_OUTLINE_COLOR} visible={isActive} />
+                <span style={{ position: 'relative' }}>{item.label}</span>
               </span>
             </Link>
           );

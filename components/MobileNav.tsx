@@ -11,6 +11,7 @@ const externalIcon = <ArrowUpRight size={12} strokeWidth={1.75} style={{ display
 import LiveClock from './LiveClock';
 import ContactLinks from './ContactLinks';
 import HookSidebar from './HookSidebar';
+import { pixelNotchClip, PixelEdgeLine, PixelPill } from './PixelEdge';
 
 const wordmarkLetters: { ch: string; set: 'ss01' | 'ss02' }[] = [
   { ch: 'T', set: 'ss02' },
@@ -68,8 +69,9 @@ export default function MobileNav() {
       {/* Top bar */}
       <div
         className="lg:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 h-14"
-        style={{ background: 'var(--bg)', borderBottom: '0.5px solid var(--divider)', borderBottomLeftRadius: '6px', borderBottomRightRadius: '6px' }}
+        style={{ background: 'var(--bg)', clipPath: pixelNotchClip('bottom') }}
       >
+        <PixelEdgeLine edge="bottom" />
         <Link
           href="/"
           className="text-[28px] sm:text-[32px]"
@@ -120,9 +122,11 @@ export default function MobileNav() {
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="lg:hidden fixed top-0 left-0 right-0 z-40 flex flex-col px-4 pt-20 pb-10"
-            style={{ background: 'var(--bg)', height: 'fit-content', borderBottom: '0.5px solid var(--divider)', borderBottomLeftRadius: '6px', borderBottomRightRadius: '6px' }}
+            style={{ background: 'var(--bg)', height: 'fit-content', clipPath: pixelNotchClip('bottom') }}
             onClick={() => setColophonOpen(false)}
           >
+            <PixelEdgeLine edge="bottom" />
+
             {/* Nav */}
             <div className="mb-8" style={{ opacity: colophonOpen ? 0 : 1, transition: 'opacity 200ms ease' }}>
               <HookSidebar />
@@ -135,7 +139,7 @@ export default function MobileNav() {
               {/* Left column: row1=clock+speaker, row2=colophon */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 {/* Row 1: clock */}
-                {/* The colophon pop-up covers this row; fade it so nothing shows through the pop-up's rounded corners */}
+                {/* The colophon pop-up covers this row; fade it so nothing peeks out around the pop-up */}
                 <div style={{ opacity: colophonOpen ? 0 : 1, transition: 'opacity 200ms ease' }}>
                   <LiveClock sizeCls="text-[15px] sm:text-[16px]" />
                 </div>
@@ -164,10 +168,19 @@ export default function MobileNav() {
             <div
               ref={colophonRef}
               onClick={e => e.stopPropagation()}
-              style={{ position: 'absolute', left: '16px', bottom: '70px', width: 'fit-content', maxWidth: 'calc(100% - 32px)', background: '#F0F0EE', borderRadius: '20px', padding: '16px 20px', zIndex: 20, opacity: 0, pointerEvents: 'none' }}
+              style={{ position: 'absolute', left: '16px', bottom: '70px', width: 'fit-content', maxWidth: 'calc(100% - 32px)', background: '#F0F0EE', padding: '16px 20px', zIndex: 20, opacity: 0, pointerEvents: 'none' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                 <span className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{ fontFamily: 'var(--font-dm-sans)', color: 'var(--text)', fontStyle: 'italic', fontWeight: 400 }}>Colophon</span>
+                {/* Close: ✕ on a pixel pill in a slightly darker gray than the block */}
+                <button
+                  onClick={e => { e.stopPropagation(); play('close', { theme: 'bubble', emphasis: 'subtle' }); setColophonOpen(false); }}
+                  aria-label="Close colophon"
+                  style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '4px 9px', margin: '-6px -10px 0 0', color: 'var(--text)', background: 'none', border: 'none', cursor: 'pointer' }}
+                >
+                  <PixelPill fill="#E3E2DD" stroke="none" strokeWidth={0} />
+                  <X size={14} strokeWidth={1.5} aria-hidden style={{ position: 'relative' }} />
+                </button>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 {colophonLines.map((line, i) => (

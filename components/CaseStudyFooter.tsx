@@ -5,6 +5,7 @@ import { ChevronUp } from 'lucide-react';
 import { play } from 'cuelume';
 import BackToWork from './BackToWork';
 import CaseStudyCarousel from './CaseStudyCarousel';
+import { pixelNotchClip, PixelEdgeLine } from './PixelEdge';
 
 export const CASE_STUDY_FOOTER_HEIGHT = 52;
 
@@ -35,16 +36,19 @@ export default function CaseStudyFooter() {
   return (
     <div
       ref={ref}
-      className="lg:hidden fixed left-0 right-0 bottom-0 z-40 flex flex-col px-4"
+      className="lg:hidden fixed left-0 right-0 bottom-0 z-40"
+      // drop-shadow (not box-shadow) so the shadow follows the notched corners instead of being clipped
+      style={{ filter: 'drop-shadow(0 -4px 9px rgba(0, 0, 0, 0.07))' }}
+    >
+    <div
+      className="relative flex flex-col px-4"
       style={{
         paddingBottom: 'env(safe-area-inset-bottom)',
         background: 'var(--bg)',
-        borderTop: '0.5px solid var(--divider)',
-        borderTopLeftRadius: '6px',
-        borderTopRightRadius: '6px',
-        boxShadow: '0 -4px 18px rgba(0, 0, 0, 0.07)',
+        clipPath: pixelNotchClip('top'),
       }}
     >
+      <PixelEdgeLine edge="top" />
       <div className="flex items-center justify-between" style={{ height: CASE_STUDY_FOOTER_HEIGHT }}>
       <BackToWork />
 
@@ -97,6 +101,7 @@ export default function CaseStudyFooter() {
           <CaseStudyCarousel currentSlug={slug} showLabel={false} align="end" className="pb-3" />
         </div>
       </div>
+    </div>
     </div>
   );
 }

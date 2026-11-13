@@ -16,7 +16,7 @@ export default function CaseStudyCover({ project }: { project: Project }) {
   return (
     <div
       className="w-full overflow-hidden mb-10"
-      style={{ aspectRatio: project.thumbnailAspect ?? '16/9', background: 'var(--bg-hover)', borderRadius: '6px', position: 'relative' }}
+      style={{ aspectRatio: project.thumbnailAspect ?? '16/9', background: 'var(--bg-hover)', position: 'relative' }}
       onMouseEnter={handleEnter}
     >
       {project.thumbnail ? (
