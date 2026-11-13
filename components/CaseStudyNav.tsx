@@ -110,7 +110,8 @@ export default function CaseStudyNav({ sections = defaultSections }: { sections?
     const update = () => {
       const vh = window.innerHeight;
       const first = sections[0] && document.getElementById(sections[0].id);
-      if (first && first.getBoundingClientRect().top < vh * 0.6) setIndexVisible(true);
+      // Shown once the first chapter is reached, hidden again when scrolled back above it
+      if (first) setIndexVisible(first.getBoundingClientRect().top < vh * 0.6);
 
       let current = -1;
       sections.forEach(({ id }, i) => {

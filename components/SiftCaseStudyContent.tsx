@@ -1,4 +1,7 @@
-const h2Cls = 'text-[22px] lg:text-[28px] font-bold mb-4';
+import { ArrowUpRight } from 'lucide-react';
+import SlowVideo from './SlowVideo';
+
+const h2Cls ='text-[22px] lg:text-[28px] font-bold mb-4';
 const h3Cls = 'text-[18px] lg:text-[22px] font-semibold mb-4 leading-snug';
 const pCls = 'text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed mb-4';
 const h2Style = { color: 'var(--text)' };
@@ -56,39 +59,62 @@ function Finding({ finding, impact }: { finding: string[]; impact: string[] }) {
   );
 }
 
-function Divider() {
-  return <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />;
+// Invisible stand-in for the old divider line: keeps the same vertical space between sections
+function SectionGap() {
+  return <div aria-hidden className="h-px mb-16" />;
 }
 
 export default function SiftCaseStudyContent() {
   return (
     <>
-      {/* Hero video */}
-      <div className="mb-16">
-        <Video src="https://framerusercontent.com/assets/myRy2uVlBrOcEPAgy5NpPZPKoo.mp4" />
-      </div>
-
       {/* Problem */}
       <div>
-        <Divider />
+        <SectionGap />
         <section id="problem" className="scroll-mt-8 mb-16">
-          <h2 className={h2Cls} style={h2Style}>Problem</h2>
-          <h3 className={h3Cls} style={h3Style}>We know we buy too much. We buy it anyway.</h3>
-          <p className={pCls} style={pStyle}>
-            I stared at a closet full of clothes I no longer liked. I upcycled what I could, donated the rest, and felt immense relief.
-          </p>
-          <p className={pCls} style={pStyle}>
-            That closet is a small piece of a big problem. Every year, the world produces 92 million tonnes of textile waste, and 85% of it ends up in landfills.
-          </p>
-          <p className={pCls} style={pStyle}>
-            The irony? Most shoppers already see their own patterns. They aren&rsquo;t unaware, they&rsquo;re outwilled. Checkout flows are built to remove every second of doubt, and in that moment, the urge wins over the regret.
-          </p>
+          <h2
+            className="text-[15px] sm:text-[16px] lg:text-[18px] mb-3"
+            style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, color: 'var(--text-muted)', opacity: 0.8 }}
+          >
+            Problem
+          </h2>
+          <h3
+            className="text-[24px] sm:text-[28px] lg:text-[32px] mb-4"
+            style={{ fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', letterSpacing: '0.045em', lineHeight: 1.15, color: 'var(--text)' }}
+          >
+            We know we buy too much.<br />We buy it anyway.
+          </h3>
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 lg:gap-10">
+            <div className="lg:w-[52%] lg:flex-none min-w-0">
+              <p
+                className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed"
+                style={{ fontFamily: 'var(--font-dm-sans)', color: 'var(--text)' }}
+              >
+                Every year, the world produces 92 million tonnes of textile waste, and 85% of it ends up in landfills.{' '}
+                <a
+                  href="https://www.unep.org/en/news-and-stories/press-release/unsustainable-fashion-and-textiles-focus-international-day-zero"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[14px] sm:text-[15px] lg:text-[16px] hover:underline underline-offset-[3px]"
+                  style={{ fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.8 }}
+                >
+                  (UNEP, 2025<ArrowUpRight size={13} strokeWidth={1.75} aria-hidden style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '1px' }} />)
+                </a>
+                <br /><br />Most shoppers already see their own patterns. But, checkout flows are built to remove every second of doubt.
+              </p>
+            </div>
+            <div className="lg:w-[36%] lg:flex-none min-w-0">
+              {/* Cropped: 1/8 off each side and 1/5 off the bottom, leaving the middle 75% x top 80% (5:3) */}
+              <div style={{ aspectRatio: '5 / 3', overflow: 'hidden' }}>
+              <SlowVideo src="/images/sift/vid-loop.mp4" rate={0.75} style={{ display: 'block', width: '133.333%', maxWidth: 'none', marginLeft: '-16.667%' }} />
+              </div>
+            </div>
+          </div>
         </section>
       </div>
 
       {/* Solution */}
       <div>
-        <Divider />
+        <SectionGap />
         <section id="solution" className="scroll-mt-8 mb-16">
           <h2 className={h2Cls} style={h2Style}>Solution</h2>
           <h3 className={h3Cls} style={h3Style}>A deck of reflection cards, right before you buy.</h3>
@@ -115,7 +141,7 @@ export default function SiftCaseStudyContent() {
 
       {/* Process */}
       <div>
-        <Divider />
+        <SectionGap />
         <section id="process" className="scroll-mt-8 mb-16">
           <h2 className={h2Cls} style={h2Style}>Process</h2>
           <h3 className={h3Cls} style={h3Style}>Understanding why we keep buying things we don&rsquo;t need&hellip;</h3>
@@ -159,7 +185,7 @@ export default function SiftCaseStudyContent() {
 
       {/* Testing */}
       <div>
-        <Divider />
+        <SectionGap />
         <section id="testing" className="scroll-mt-8 mb-16">
           <h2 className={h2Cls} style={h2Style}>Testing</h2>
           <h3 className={h3Cls} style={h3Style}>Would a pause actually change anything?</h3>
@@ -187,7 +213,7 @@ export default function SiftCaseStudyContent() {
 
       {/* Design Details */}
       <div>
-        <Divider />
+        <SectionGap />
         <section id="design-details" className="scroll-mt-8 mb-16">
           <h2 className={h2Cls} style={h2Style}>Design Details</h2>
           <h3 className={h3Cls} style={h3Style}>Making a pause feel calm and grounded</h3>
@@ -206,7 +232,7 @@ export default function SiftCaseStudyContent() {
 
       {/* Potential Impact */}
       <div>
-        <Divider />
+        <SectionGap />
         <section id="impact" className="scroll-mt-8 mb-16">
           <h2 className={h2Cls} style={h2Style}>Potential Impact</h2>
           <h3 className={h3Cls} style={h3Style}>What one pause can add up to</h3>
@@ -219,7 +245,7 @@ export default function SiftCaseStudyContent() {
 
       {/* Reflection */}
       <div>
-        <Divider />
+        <SectionGap />
         <section id="reflection" className="scroll-mt-8 mb-16">
           <h2 className={h2Cls} style={h2Style}>Reflection</h2>
 
@@ -237,7 +263,7 @@ export default function SiftCaseStudyContent() {
 
       {/* What's Next */}
       <div>
-        <Divider />
+        <SectionGap />
         <section id="whats-next" className="scroll-mt-8 mb-16">
           <h2 className={h2Cls} style={h2Style}>What&rsquo;s Next</h2>
           <h3 className={h3Cls} style={h3Style}>From prototype to production</h3>

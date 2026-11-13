@@ -63,7 +63,7 @@ export default async function CaseStudyPage({ params }: Props) {
           <>
             {/* Research */}
             <div>
-              <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
+              <div aria-hidden className="h-px mb-16" />
               <section id="research" className="scroll-mt-8 mb-16">
                 <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)' }}>Research</h2>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>Research findings and process coming soon.</p>
@@ -72,7 +72,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
             {/* Designs */}
             <div>
-              <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
+              <div aria-hidden className="h-px mb-16" />
               <section id="designs" className="scroll-mt-8 mb-16">
                 <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)' }}>Designs</h2>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>Final designs coming soon.</p>
@@ -81,7 +81,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
             {/* Reflections */}
             <div>
-              <div className="h-px mb-16" style={{ background: 'var(--divider)' }} />
+              <div aria-hidden className="h-px mb-16" />
               <section id="reflections" className="scroll-mt-8 mb-16">
                 <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--text)' }}>Reflections</h2>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>Reflections coming soon.</p>
