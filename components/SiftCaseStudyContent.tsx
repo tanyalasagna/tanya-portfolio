@@ -289,6 +289,7 @@ export default function SiftCaseStudyContent() {
               prompt={null}
               captionHint="(Click to expand)"
               border="1px solid #A9A6A0"
+              expandedSize={85}
               images={[
                 { src: '/images/sift/reflect-deck.png', alt: 'The deck view: cards stacked on top of each other', caption: 'Deck view' },
                 { src: '/images/sift/reflect-flat.png', alt: 'The laid-out view: all the cards spread flat in a row', caption: 'Laid-out view' },

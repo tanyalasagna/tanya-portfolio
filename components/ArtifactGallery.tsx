@@ -11,9 +11,9 @@ const BORDER = '0.5px solid var(--text)';
 // Clicking any of them opens it full screen over a blurred page with a "Close" pill at the top right.
 type Item = string | { src: string; alt?: string; caption?: string };
 
-// `border` overrides the thumbnail border (e.g. a lighter one for dark screenshots). `captionHint` puts a small hint at the bottom right of each image (use it instead of `prompt`).
+// `expandedSize` is how much of the screen (in %) the opened image may fill. `border` overrides the thumbnail border (e.g. a lighter one for dark screenshots). `captionHint` puts a small hint at the bottom right of each image (use it instead of `prompt`).
 // `images` can be plain URLs or { src, alt, caption }; `columns` is how many sit side by side from tablet up; `prompt` sets or hides the hint line.
-export default function ArtifactGallery({ images, columns = 3, prompt = 'Click artifacts to expand', captionHint, border = BORDER }: { images: Item[]; columns?: 2 | 3; prompt?: string | null; captionHint?: string; border?: string }) {
+export default function ArtifactGallery({ images, columns = 3, prompt = 'Click artifacts to expand', captionHint, border = BORDER, expandedSize = 100 }: { images: Item[]; columns?: 2 | 3; prompt?: string | null; captionHint?: string; border?: string; expandedSize?: number }) {
   const [open, setOpen] = useState<string | null>(null);
   const [shown, setShown] = useState(false); // drives the fade, set a frame after mounting
 
@@ -102,7 +102,7 @@ export default function ArtifactGallery({ images, columns = 3, prompt = 'Click a
             src={open}
             alt=""
             onClick={e => e.stopPropagation()}
-            style={{ display: 'block', maxWidth: '100vw', maxHeight: '100vh', background: '#FFFFFF', border: BORDER }}
+            style={{ display: 'block', maxWidth: `${expandedSize}vw`, maxHeight: `${expandedSize}vh`, background: '#FFFFFF', border: BORDER }}
           />
         </div>,
         document.body,
