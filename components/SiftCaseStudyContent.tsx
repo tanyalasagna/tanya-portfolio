@@ -335,7 +335,8 @@ export default function SiftCaseStudyContent() {
             <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed mb-4 lg:mb-0" style={pDark}>
               I started in Figma, experimenting with warm colours, soft accents, and card interactions. I also used Claude with Figma MCP during this stage to help develop and refine the designs.
             </p>
-            <ClickToExpand label="Expand the Sift design system" bordered hint="(Click to expand)">
+            <ClickToExpand label="Expand the Sift design system" bordered hint="(Click to expand)" expanded={<>{/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/sift/figma-design-system.png" alt="" style={{ display: 'block', margin: '0 auto', maxWidth: '100%', maxHeight: '85vh', width: 'auto' }} /></>}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/sift/figma-design-system.png" alt="The Sift design system in Figma: tooltip, card and modal components, colour swatches and text styles" className="w-full" style={{ display: 'block' }} />
             </ClickToExpand>

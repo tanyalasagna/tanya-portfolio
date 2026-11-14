@@ -73,8 +73,8 @@ export default function ClickToExpand({ children, expanded, label = 'Expand', hi
             <span style={{ position: 'relative' }}>Close</span>
             <X size={16} strokeWidth={1.5} aria-hidden style={{ position: 'relative' }} />
           </button>
-          <div onClick={e => e.stopPropagation()} style={{ width: 'min(1400px, 96vw)', maxHeight: '92vh', overflow: 'auto', cursor: 'default' }}>
-            {expanded ?? children}
+          <div onClick={e => e.stopPropagation()} style={{ width: '85vw', maxHeight: '85vh', overflow: 'auto', cursor: 'default', display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: '100%' }}>{expanded ?? children}</div>
           </div>
         </div>,
         document.body,
