@@ -7,6 +7,7 @@ import PixelNumber from './PixelNumber';
 import ExpandBlock from './ExpandBlock';
 import ToolsComparison from './ToolsComparison';
 import WorkflowDiagram from './WorkflowDiagram';
+import ClickToExpand from './ClickToExpand';
 import ImpactDiagram from './ImpactDiagram';
 import Reveal from './Reveal';
 import SlowVideo from './SlowVideo';
@@ -282,19 +283,16 @@ export default function SiftCaseStudyContent() {
             When I began designing the digital version of Sift, I started with a stacked deck of reflection cards that shoppers could flip through one at a time.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
-            {[
-              { src: '/images/sift/reflect-deck.png', alt: 'The deck view: cards stacked on top of each other', caption: 'Deck view' },
-              { src: '/images/sift/reflect-flat.png', alt: 'The laid-out view: all the cards spread flat in a row', caption: 'Laid-out view' },
-            ].map(img => (
-              <figure key={img.src} className="m-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={img.src} alt={img.alt} className="w-full" style={{ display: 'block', border: '0.5px solid var(--text)' }} />
-                <figcaption className="mt-2 text-[14px] sm:text-[15px] lg:text-[16px]" style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}>
-                  {img.caption}
-                </figcaption>
-              </figure>
-            ))}
+          <div className="mb-2">
+            <ArtifactGallery
+              columns={2}
+              prompt={null}
+              captionHint="(Click to expand)"
+              images={[
+                { src: '/images/sift/reflect-deck.png', alt: 'The deck view: cards stacked on top of each other', caption: 'Deck view' },
+                { src: '/images/sift/reflect-flat.png', alt: 'The laid-out view: all the cards spread flat in a row', caption: 'Laid-out view' },
+              ]}
+            />
           </div>
 
           {/* "What I learned" and "What changed" side by side in gray boxes (same heading style as the expandable blocks above, but always open) */}
@@ -336,15 +334,17 @@ export default function SiftCaseStudyContent() {
             <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed mb-4 lg:mb-0" style={pDark}>
               I started in Figma, experimenting with warm colours, soft accents, and card interactions. I also used Claude with Figma MCP during this stage to help develop and refine the designs.
             </p>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/sift/figma-design-system.png" alt="The Sift design system in Figma: tooltip, card and modal components, colour swatches and text styles" className="w-full" style={{ display: 'block' }} />
+            <ClickToExpand label="Expand the Sift design system" hint="(Click to expand)">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/sift/figma-design-system.png" alt="The Sift design system in Figma: tooltip, card and modal components, colour swatches and text styles" className="w-full" style={{ display: 'block' }} />
+            </ClickToExpand>
           </div>
           {/* The second paragraph and the workflow diagram side by side on desktop, in the same columns as the row above */}
           <div className="lg:grid lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-8 lg:items-start mb-6">
             <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed mb-4 lg:mb-0" style={pDark}>
               From there, I moved to Claude Code to bring Sift into the browser. This became an iterative process of designing, building, reviewing, and refining, with AI assisting throughout.
             </p>
-            <WorkflowDiagram />
+            <ClickToExpand label="Expand the workflow diagram" hint="(Click to expand)"><WorkflowDiagram /></ClickToExpand>
           </div>
 
           {/* The third paragraph and the three motion studies side by side on desktop, in the same columns as the rows above.

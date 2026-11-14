@@ -9,7 +9,11 @@ const BORDER = '0.5px solid var(--text)';
 
 // The research artifacts in a row under the paragraph.
 // Clicking any of them opens it full screen over a blurred page with a "Close" pill at the top right.
-export default function ArtifactGallery({ images }: { images: string[] }) {
+type Item = string | { src: string; alt?: string; caption?: string };
+
+// `captionHint` puts a small hint at the bottom right of each image (use it instead of `prompt`).
+// `images` can be plain URLs or { src, alt, caption }; `columns` is how many sit side by side from tablet up; `prompt` sets or hides the hint line.
+export default function ArtifactGallery({ images, columns = 3, prompt = 'Click artifacts to expand', captionHint }: { images: Item[]; columns?: 2 | 3; prompt?: string | null; captionHint?: string }) {
   const [open, setOpen] = useState<string | null>(null);
   const [shown, setShown] = useState(false); // drives the fade, set a frame after mounting
 
@@ -27,26 +31,40 @@ export default function ArtifactGallery({ images }: { images: string[] }) {
     };
   }, [open]);
 
-  const thumb = (src: string) => (
-    <button
-      type="button"
-      key={src}
-      onClick={() => setOpen(src)}
-      aria-label="Expand artifact"
-      className="block w-full p-0 bg-transparent"
-      style={{ cursor: 'zoom-in', border: 'none' }}
-      data-cuelume-open=""
-      data-cuelume-emphasis="subtle"
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt="" className="w-full" style={{ display: 'block', border: BORDER }} />
-    </button>
-  );
+  const thumb = (item: Item) => {
+    const { src, alt = '', caption } = typeof item === 'string' ? { src: item } as { src: string; alt?: string; caption?: string } : item;
+    return (
+      <figure key={src} className="m-0">
+        {caption && (
+          <figcaption className="mb-2 text-[14px] sm:text-[15px] lg:text-[16px]" style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}>
+            {caption}
+          </figcaption>
+        )}
+        <button
+          type="button"
+          onClick={() => setOpen(src)}
+          aria-label={alt ? `Expand: ${alt}` : 'Expand artifact'}
+          className="block w-full p-0 bg-transparent"
+          style={{ cursor: 'zoom-in', border: 'none' }}
+          data-cuelume-open=""
+          data-cuelume-emphasis="subtle"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={src} alt={alt} className="w-full" style={{ display: 'block', border: BORDER }} />
+        </button>
+        {captionHint && (
+          <div className="mt-2 text-right text-[14px] sm:text-[15px] lg:text-[16px]" style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}>
+            {captionHint}
+          </div>
+        )}
+      </figure>
+    );
+  };
 
   return (
     <>
-      <SparklePrompt className="mb-4">Click artifacts to expand</SparklePrompt>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-start">
+      {prompt && <SparklePrompt className="mb-4">{prompt}</SparklePrompt>}
+      <div className={`grid grid-cols-1 ${columns === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-3'} gap-3 items-start`}>
         {images.map(thumb)}
       </div>
 
