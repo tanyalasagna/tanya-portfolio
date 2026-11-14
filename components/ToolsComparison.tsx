@@ -40,44 +40,43 @@ const rows: { label: string; cells: [string, string] }[] = [
   },
 ];
 
-const cellText = 'text-[15px] sm:text-[16px] leading-relaxed';
+// The table keeps its desktop layout on every screen; on phones the type and padding just shrink, like a scaled-down picture of it
+const cellText = 'text-[11px] min-[420px]:text-[12px] sm:text-[16px] leading-[1.45] sm:leading-relaxed';
 const font = { fontFamily: 'var(--font-dm-sans)' };
 
 export default function ToolsComparison() {
   return (
     <div>
       <div style={{ border: FRAME }}>
-        <table className="block md:table w-full" style={{ borderCollapse: 'collapse', ...font, color: 'var(--text)' }}>
+        <table className="w-full table-fixed" style={{ borderCollapse: 'collapse', ...font, color: 'var(--text)' }}>
           <caption className="sr-only">Comparison of The Impulse Judge and Think Twice, Buy Once</caption>
-          <thead className="hidden md:table-header-group">
+          <thead>
             <tr>
-              <th scope="col" className="text-left align-top p-4 w-[20%]" style={{ background: '#F0F0EE' }} />
+              <th scope="col" className="text-left align-top p-2 sm:p-4 w-[20%]" style={{ background: '#F0F0EE' }} />
               {tools.map((t, i) => (
-                <th key={t.name} scope="col" className="text-left align-top p-4 w-[40%]" style={{ background: '#F0F0EE', borderLeft: i === 0 ? undefined : RULE }}>
+                <th key={t.name} scope="col" className="text-left align-top p-2 sm:p-4 w-[40%]" style={{ background: '#F0F0EE', borderLeft: i === 0 ? undefined : RULE }}>
                   {/* The tool's own logo lockup (cut from its screenshot) stands in for its name; the label is centred under it */}
                   <div style={{ maxWidth: 220 }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={t.logo} alt={t.name} className="block w-full" style={{ borderRadius: 8 }} />
-                    <div className="mt-2 text-center text-[15px] sm:text-[16px]" style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--text-muted)', opacity: 0.8 }}>({t.kind})</div>
+                    <div className="mt-1 sm:mt-2 text-center text-[10px] min-[420px]:text-[11px] sm:text-[16px] leading-tight" style={{ fontStyle: 'italic', fontWeight: 400, color: 'var(--text-muted)', opacity: 0.8 }}>({t.kind})</div>
                   </div>
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="block md:table-row-group">
+          <tbody>
             {rows.map(row => (
-              <tr key={row.label} className="block md:table-row">
+              <tr key={row.label}>
                 <th
                   scope="row"
-                  className={`block md:table-cell text-left align-top px-4 pt-4 pb-1 md:p-4 ${cellText}`}
+                  className={`text-left align-top p-2 sm:p-4 ${cellText}`}
                   style={{ borderTop: RULE, fontStyle: 'italic', fontWeight: 400, color: 'var(--text-muted)' }}
                 >
                   {row.label}
                 </th>
                 {row.cells.map((text, i) => (
-                  <td key={i} className={`block md:table-cell align-top px-4 pb-4 pt-1 md:p-4 ${cellText}`} style={{ borderTop: RULE }}>
-                    {/* Without columns on phones, each answer says whose it is */}
-                    <span className="md:hidden block text-[14px] sm:text-[15px] font-bold mb-0.5" style={{ opacity: 0.7 }}>{tools[i].name}</span>
+                  <td key={i} className={`align-top p-2 sm:p-4 ${cellText}`} style={{ borderTop: RULE }}>
                     {text}
                   </td>
                 ))}

@@ -1,10 +1,13 @@
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import FeatureTabs from './FeatureTabs';
 import ArtifactGallery from './ArtifactGallery';
 import Persona from './Persona';
 import FindingAccordion from './FindingAccordion';
 import PixelNumber from './PixelNumber';
+import ExpandBlock from './ExpandBlock';
 import ToolsComparison from './ToolsComparison';
+import WorkflowDiagram from './WorkflowDiagram';
+import ImpactDiagram from './ImpactDiagram';
 import Reveal from './Reveal';
 import SlowVideo from './SlowVideo';
 
@@ -21,7 +24,7 @@ export const siftNavSections = [
   { id: 'solution', label: 'Solution' },
   { id: 'process', label: 'Process' },
   { id: 'testing', label: 'Testing' },
-  { id: 'design-details', label: 'Design Details' },
+  { id: 'design-details', label: 'Building with AI' },
   { id: 'impact', label: 'Potential Impact' },
   { id: 'reflection', label: 'Reflection' },
 ];
@@ -48,22 +51,13 @@ function Img({ src, alt = '' }: { src: string; alt?: string }) {
   );
 }
 
-function Finding({ finding, impact }: { finding: string[]; impact: string[] }) {
+// A paragraph with an arrow bullet that hangs in the margin, so wrapped lines line up under the first word
+function ArrowBullet({ children, last = false }: { children: React.ReactNode; last?: boolean }) {
   return (
-    <div className="mb-4" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-      <div>
-        <div className={`${pCls} mb-1`} style={{ ...pStyle, fontStyle: 'italic', fontWeight: 600, marginBottom: '4px' }}>FINDING</div>
-        {finding.map((line, i) => (
-          <p key={i} className={pCls} style={{ ...pStyle, marginBottom: '2px' }}>→ {line}</p>
-        ))}
-      </div>
-      <div>
-        <div className={`${pCls} mb-1`} style={{ ...pStyle, fontStyle: 'italic', fontWeight: 600, marginBottom: '4px' }}>IMPACT</div>
-        {impact.map((line, i) => (
-          <p key={i} className={pCls} style={{ ...pStyle, marginBottom: '2px' }}>→ {line}</p>
-        ))}
-      </div>
-    </div>
+    <p className="flex items-start gap-3" style={{ margin: last ? 0 : '0 0 16px' }}>
+      <ArrowRight size={18} strokeWidth={1.5} aria-hidden className="flex-none" style={{ marginTop: '0.32em' }} />
+      <span>{children}</span>
+    </p>
   );
 }
 
@@ -186,7 +180,7 @@ export default function SiftCaseStudyContent() {
             What happens between wanting something and buying it?
           </h3>
 
-          <p className={`${pCls} lg:w-[288px]`} style={pDark}>
+          <p className={`${pCls} lg:w-[42%]`} style={pDark}>
             I reviewed research on purchase habits and the behavior behind them. Then I ran a netnography: I posted probes on online forums, collected responses, and interviewed a few participants.
           </p>
           <ArtifactGallery images={[
@@ -244,48 +238,135 @@ export default function SiftCaseStudyContent() {
         <SectionGap />
         <Reveal>
         <section id="testing" className="scroll-mt-8 mb-16">
-          <h2 className={h2Cls} style={h2Style}>Testing</h2>
-          <h3 className={h3Cls} style={h3Style}>Would a pause actually change anything?</h3>
+          <h2
+            className="text-[15px] sm:text-[16px] lg:text-[18px] mb-[2px]"
+            style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, color: 'var(--text-muted)', opacity: 0.8 }}
+          >
+            Testing
+          </h2>
+          {/* The paragraphs are exactly as wide as the subline above them: they add no width of their own (w-0), so the wrapper is sized by the subline */}
+          <div className="w-fit max-w-full">
+          <h3
+            className="text-[26px] sm:text-[30px] lg:text-[36px] mb-6"
+            style={{ fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', letterSpacing: '0.045em', lineHeight: 1.15, color: 'var(--text)' }}
+          >
+            What would it take to make a pause meaningful?
+          </h3>
 
-          <p className="mb-2" style={{ color: 'var(--text)', fontWeight: 600, fontSize: '17px' }}>1. Going analog: a card kit in real shopping sessions</p>
-          <p className={pCls} style={pStyle}>
-            I started from one question: what would a good friend say to someone about to impulse buy? A friend who cares enough to ask, but never guilts you about the answer.
+          <p className={`${pCls} w-0 min-w-full`} style={pDark}>
+            I started with a question: what could help someone think through an impulse purchase without telling them what to do?
           </p>
-          <p className={pCls} style={pStyle}>
-            I turned that into three lenses, <span style={{ fontStyle: 'italic' }}>money &middot; space &middot; need</span>, printed them as card packets, and gave them to about 70 people to use whenever they shopped. I wanted real stakes in real shopping sessions, not a simulation.
+          <p className={`${pCls} w-0 min-w-full`} style={pDark}>
+            I turned that into three lenses, <span style={{ fontStyle: 'italic' }}>money &middot; space &middot; need</span>, printed them as card packets, and distributed them to about 70 people to use during their shopping session, in real-time.
           </p>
+          </div>
           <Img src="https://framerusercontent.com/images/FFAYYAT4tDW7dR2hFUNvsjA85Uw.png" />
-          <Finding
-            finding={['22 people wrote back.', 'About 45% still bought the item, but every one of them paused, and all said they’d cherish it more because of that.']}
-            impact={['The responses sharpened the copy and tuned the tone.', 'The card metaphor and visuals moved straight from the physical kit into the extension.']}
-          />
 
-          <p className="mb-2 mt-[72px]" style={{ color: 'var(--text)', fontWeight: 600, fontSize: '17px' }}>2. Reflections were hard to see all at once</p>
-          <Finding
-            finding={['In the deck view, people couldn’t see all their notes together.']}
-            impact={['I added a laid-out view that spreads the deck flat, so every reflection is visible in one place.']}
-          />
+          {/* Two collapsible blocks side by side (stacked on phones), styled like the findings: heading + "+" until opened. items-start so each opens to its own height. */}
+          <div className="mt-8 flex flex-col gap-3 lg:grid lg:grid-cols-2 lg:items-start">
+            <ExpandBlock title="What I learned">
+              <ArrowBullet>22 of approximately 70 people responded. Their feedback formed the basis of my findings.</ArrowBullet>
+              <ArrowBullet>About half of the respondents still bought the item. However, all 22 reported making more intentional purchasing decisions during the exercise.</ArrowBullet>
+              <ArrowBullet>All 22 said they would reflect more on future purchases after using the cards.</ArrowBullet>
+              <p className="text-[14px] sm:text-[15px] lg:text-[16px]" style={{ margin: 0, fontStyle: 'italic' }}>Note: These findings reflect participants&rsquo; self-reported experiences, rather than independently measured changes in purchasing behavior.</p>
+            </ExpandBlock>
+            <ExpandBlock title="How it shaped Sift">
+              <ArrowBullet>The feedback reinforced an important distinction: a successful pause didn&rsquo;t have to end in an abandoned purchase.</ArrowBullet>
+              <ArrowBullet>I carried that principle into the extension, keeping both purchasing and walking away equally valid outcomes. Participants&rsquo; responses also helped me refine the wording and tone of the prompts.</ArrowBullet>
+              <ArrowBullet last>The physical card metaphor worked well enough to carry into the digital experience, becoming the foundation for Sift&rsquo;s interface and interactions.</ArrowBullet>
+            </ExpandBlock>
+          </div>
+
+          {/* The deck view and the laid-out view, side by side (frames taken from the "Reflect your way" video) */}
+          <p className={`mt-[72px] mb-8 ${pCls} lg:w-[556px] lg:max-w-full`} style={pDark}>
+            When I began designing the digital version of Sift, I started with a stacked deck of reflection cards that shoppers could flip through one at a time.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
+            {[
+              { src: '/images/sift/reflect-deck.png', alt: 'The deck view: cards stacked on top of each other', caption: 'Deck view' },
+              { src: '/images/sift/reflect-flat.png', alt: 'The laid-out view: all the cards spread flat in a row', caption: 'Laid-out view' },
+            ].map(img => (
+              <figure key={img.src} className="m-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={img.src} alt={img.alt} className="w-full" style={{ display: 'block', border: '0.5px solid var(--text)' }} />
+                <figcaption className="mt-2 text-[14px] sm:text-[15px] lg:text-[16px]" style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}>
+                  {img.caption}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          {/* "What I learned" and "What changed" side by side in gray boxes (same heading style as the expandable blocks above, but always open) */}
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {[
+              { title: 'What I learned', body: 'During testing, feedback on the digital deck revealed a limitation: people couldn\u2019t easily review their reflections across different cards.' },
+              { title: 'What changed', body: 'I added a laid-out view that spreads the cards flat, allowing shoppers to see their reflections together without flipping back and forth.' },
+            ].map(b => (
+              <div key={b.title} className="p-5 sm:p-6" style={{ background: '#F0F0EE', fontFamily: 'var(--font-dm-sans)', color: 'var(--text)' }}>
+                <p className="mb-4 text-[16px] sm:text-[17px] lg:text-[18px] font-bold leading-snug" style={{ margin: 0, marginBottom: 16 }}>{b.title}</p>
+                <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed" style={{ margin: 0 }}>{b.body}</p>
+              </div>
+            ))}
+          </div>
         </section>
         </Reveal>
       </div>
 
-      {/* Design Details */}
+      {/* Building with AI */}
       <div>
         <SectionGap />
         <Reveal>
         <section id="design-details" className="scroll-mt-8 mb-16">
-          <h2 className={h2Cls} style={h2Style}>Design Details</h2>
-          <h3 className={h3Cls} style={h3Style}>Making a pause feel calm and grounded</h3>
-          <p className={pCls} style={pStyle}>
-            I designed everything in Figma first. I kept it simple, with warm colours and soft accents.
-          </p>
-          <Img src="https://framerusercontent.com/images/umwedXpF8GhKsMPhI46mciBl03E.png" />
-          <p className={pCls} style={pStyle}>
-            Then I moved to Claude Code to prototype the designs end to end.
-          </p>
-          <Video src="https://framerusercontent.com/assets/X3Sv70gLQhJMUKTx0eT1vd2d2vw.mp4" />
-          <Video src="https://framerusercontent.com/assets/tONZdXFJWttXDsyKuBuCaOSsw.mp4" />
-          <Video src="https://framerusercontent.com/assets/kON8tynrgW1RYeXQjVdhFtmYdo.mp4" />
+          <h2
+            className="text-[15px] sm:text-[16px] lg:text-[18px] mb-[2px]"
+            style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, color: 'var(--text-muted)', opacity: 0.8 }}
+          >
+            Building with AI
+          </h2>
+          <h3
+            className="text-[26px] sm:text-[30px] lg:text-[36px] mb-6"
+            style={{ fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', letterSpacing: '0.045em', lineHeight: 1.15, color: 'var(--text)' }}
+          >
+            Making friction feel like an invitation<span style={{ fontFamily: 'var(--font-dm-sans)', fontWeight: 700, letterSpacing: 0 }}>,</span> not an obstacle.
+          </h3>
+
+          {/* The first paragraph and the Figma design-system image side by side on desktop (stacked on phones and tablets) */}
+          <div className="lg:grid lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-8 lg:items-start mb-4">
+            <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed mb-4 lg:mb-0" style={pDark}>
+              I started in Figma, experimenting with warm colours, soft accents, and card interactions. I also used Claude with Figma MCP during this stage to help develop and refine the designs.
+            </p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/sift/figma-design-system.png" alt="The Sift design system in Figma: tooltip, card and modal components, colour swatches and text styles" className="w-full" style={{ display: 'block' }} />
+          </div>
+          {/* The second paragraph and the workflow diagram side by side on desktop, in the same columns as the row above */}
+          <div className="lg:grid lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-8 lg:items-start mb-6">
+            <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed mb-4 lg:mb-0" style={pDark}>
+              From there, I moved to Claude Code to bring Sift into the browser. This became an iterative process of designing, building, reviewing, and refining, with AI assisting throughout.
+            </p>
+            <WorkflowDiagram />
+          </div>
+
+          {/* The third paragraph and the three motion studies side by side on desktop, in the same columns as the rows above.
+              Phones and tablets stack everything. */}
+          <div className="lg:grid lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-8 lg:items-start">
+            <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed mb-6 lg:mb-0" style={pDark}>
+              Seeing the designs in motion helped me catch awkward transitions, adjust timings, and fine-tune the interactions. AI made these iterations much faster, but deciding what felt right for Sift remained my responsibility.
+            </p>
+            {/* One gray box: two columns. Left: the first tall video with the wide one under it (same width as the first). Right: the second tall video, in a column 0.954x as wide so it comes out exactly as tall as the first (their heights differ by that ratio). */}
+            <div className="p-4 sm:p-5 lg:p-6" style={{ background: '#F0F0EE' }}>
+              <div className="grid grid-cols-[1fr_0.954fr] gap-3 items-start">
+                <div className="flex flex-col gap-3">
+                  {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                  <video src="https://framerusercontent.com/assets/X3Sv70gLQhJMUKTx0eT1vd2d2vw.mp4" autoPlay muted loop playsInline className="w-full" style={{ display: 'block' }} />
+                  {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                  <video src="https://framerusercontent.com/assets/kON8tynrgW1RYeXQjVdhFtmYdo.mp4" autoPlay muted loop playsInline className="w-full" style={{ display: 'block' }} />
+                </div>
+                {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                <video src="https://framerusercontent.com/assets/tONZdXFJWttXDsyKuBuCaOSsw.mp4" autoPlay muted loop playsInline className="w-full" style={{ display: 'block' }} />
+              </div>
+            </div>
+          </div>
         </section>
         </Reveal>
       </div>
@@ -295,11 +376,23 @@ export default function SiftCaseStudyContent() {
         <SectionGap />
         <Reveal>
         <section id="impact" className="scroll-mt-8 mb-16">
-          <h2 className={h2Cls} style={h2Style}>Potential Impact</h2>
-          <h3 className={h3Cls} style={h3Style}>What one pause can add up to</h3>
-          <Img src="https://framerusercontent.com/images/PLpMMm7YSH3ppRd5reAuPi0k.png" />
-          <p className={pCls} style={pStyle}>
-            A pause becomes a deliberate choice. Choices become a habit. The habit becomes a wardrobe you actually wear. Across enough people, that chips away at the cycle that fills landfills.
+          <h2
+            className="text-[15px] sm:text-[16px] lg:text-[18px] mb-[2px]"
+            style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, color: 'var(--text-muted)', opacity: 0.8 }}
+          >
+            Potential Impact
+          </h2>
+          <h3
+            className="text-[26px] sm:text-[30px] lg:text-[36px] mb-6"
+            style={{ fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', letterSpacing: '0.045em', lineHeight: 1.15, color: 'var(--text)' }}
+          >
+            What if sifting became part of shopping?
+          </h3>
+
+          <ImpactDiagram />
+
+          <p className={`${pCls} lg:w-[58%]`} style={pDark}>
+            A pause can become a deliberate choice. Over time, those choices could become a habit, and that habit could mean a wardrobe you actually wear. Across enough people, small changes like these could help chip away at the cycle that fills landfills.
           </p>
         </section>
         </Reveal>
@@ -310,38 +403,28 @@ export default function SiftCaseStudyContent() {
         <SectionGap />
         <Reveal>
         <section id="reflection" className="scroll-mt-8 mb-16">
-          <h2 className={h2Cls} style={h2Style}>Reflection</h2>
+          <h2
+            className="text-[15px] sm:text-[16px] lg:text-[18px] mb-[2px]"
+            style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, color: 'var(--text-muted)', opacity: 0.8 }}
+          >
+            Reflection
+          </h2>
+          <h3
+            className="text-[26px] sm:text-[30px] lg:text-[36px] mb-6"
+            style={{ fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', letterSpacing: '0.045em', lineHeight: 1.15, color: 'var(--text)' }}
+          >
+            What speed made possible<span style={{ fontFamily: 'var(--font-dm-sans)', fontWeight: 700, letterSpacing: 0 }}>,</span> and what still needed time.
+          </h3>
 
-          <p className="mb-2" style={{ color: 'var(--text)', fontWeight: 600, fontSize: '17px' }}>1. Adding friction, kindly</p>
-          <p className={pCls} style={pStyle}>
-            Everything I knew about checkout flows was about removing friction. This project asked me to add it meaningfully. Getting the tone right was the hardest part. It felt like a real service to people who already see their patterns and just need help moving past them. It&rsquo;s a small push back against a very large machine, but small push backs add up at scale.
-          </p>
-
-          <p className="mb-2 mt-[72px]" style={{ color: 'var(--text)', fontWeight: 600, fontSize: '17px' }}>2. Building with AI moved my job toward judgment</p>
-          <p className={pCls} style={pStyle}>
-            With Claude Code and Figma MCP, I could fix a motion that felt too abrupt in minutes. Deciding what felt calm, and what felt like Sift, stayed with me. I want to keep exploring creative prototyping with tools like these.
-          </p>
-        </section>
-        </Reveal>
-      </div>
-
-      {/* What's Next */}
-      <div>
-        <SectionGap />
-        <Reveal>
-        <section id="whats-next" className="scroll-mt-8 mb-16">
-          <h2 className={h2Cls} style={h2Style}>What&rsquo;s Next</h2>
-          <h3 className={h3Cls} style={h3Style}>From prototype to production</h3>
-          <ul style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <li className={pCls} style={{ ...pStyle, display: 'flex', gap: '10px', marginBottom: 0 }}>
-              <span aria-hidden>&bull;</span>
-              <span>The concept is tested and the prototype works end to end. Next is shipping Sift as a public extension. I&rsquo;m not a coder, so I&rsquo;m working through how to run it cleanly on real retailer sites and how to keep people&rsquo;s reflections safe.</span>
-            </li>
-            <li className={pCls} style={{ ...pStyle, display: 'flex', gap: '10px', marginBottom: 0 }}>
-              <span aria-hidden>&bull;</span>
-              <span>Further out, I want to bring Sift to mobile, where targeted ads do their real work. Apps can&rsquo;t overlay each other the way an extension sits on a webpage, so I&rsquo;ll keep the heart of Sift and rethink the form.</span>
-            </li>
-          </ul>
+          {/* The four reflections, styled like the findings (number, bold title, +) but across the full width */}
+          <FindingAccordion
+            items={[
+              { title: 'Adding friction with purpose', body: 'Everything I knew about checkout was about removing friction. Sift challenged me to add it deliberately. The hardest part was finding a tone that encouraged reflection without making shoppers feel responsible for systems designed to encourage overconsumption.' },
+              { title: 'My first big project with AI', body: 'This was my first time using AI so extensively across design and development. I could build and refine interactions in minutes, but deciding what felt right still rested with me. Sift became a turning point in how I approach design and prototyping.' },
+              { title: 'What I\u2019d do differently', body: 'For future projects, I\u2019d give the early creative process more room: sketching on paper, experimenting with visual directions, and developing a distinct brand identity before moving into development. Working at this pace reminded me that some parts of design benefit from slowing down.' },
+              { title: 'Where Sift goes next', body: 'First, making Sift a public Chrome extension that works reliably across retailers and keeps reflections private. Eventually, I\u2019d like to rethink the experience for mobile, where the same idea of a pause might need an entirely different form.' },
+            ]}
+          />
         </section>
         </Reveal>
       </div>
