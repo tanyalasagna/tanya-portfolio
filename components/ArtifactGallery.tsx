@@ -11,9 +11,9 @@ const BORDER = '0.5px solid var(--text)';
 // Clicking any of them opens it full screen over a blurred page with a "Close" pill at the top right.
 type Item = string | { src: string; alt?: string; caption?: string };
 
-// `captionHint` puts a small hint at the bottom right of each image (use it instead of `prompt`).
+// `border` overrides the thumbnail border (e.g. a lighter one for dark screenshots). `captionHint` puts a small hint at the bottom right of each image (use it instead of `prompt`).
 // `images` can be plain URLs or { src, alt, caption }; `columns` is how many sit side by side from tablet up; `prompt` sets or hides the hint line.
-export default function ArtifactGallery({ images, columns = 3, prompt = 'Click artifacts to expand', captionHint }: { images: Item[]; columns?: 2 | 3; prompt?: string | null; captionHint?: string }) {
+export default function ArtifactGallery({ images, columns = 3, prompt = 'Click artifacts to expand', captionHint, border = BORDER }: { images: Item[]; columns?: 2 | 3; prompt?: string | null; captionHint?: string; border?: string }) {
   const [open, setOpen] = useState<string | null>(null);
   const [shown, setShown] = useState(false); // drives the fade, set a frame after mounting
 
@@ -50,7 +50,7 @@ export default function ArtifactGallery({ images, columns = 3, prompt = 'Click a
           data-cuelume-emphasis="subtle"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={src} alt={alt} className="w-full" style={{ display: 'block', border: BORDER }} />
+          <img src={src} alt={alt} className="w-full" style={{ display: 'block', border }} />
         </button>
         {captionHint && (
           <div className="mt-2 text-right text-[14px] sm:text-[15px] lg:text-[16px]" style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}>

@@ -288,6 +288,7 @@ export default function SiftCaseStudyContent() {
               columns={2}
               prompt={null}
               captionHint="(Click to expand)"
+              border="1px solid #A9A6A0"
               images={[
                 { src: '/images/sift/reflect-deck.png', alt: 'The deck view: cards stacked on top of each other', caption: 'Deck view' },
                 { src: '/images/sift/reflect-flat.png', alt: 'The laid-out view: all the cards spread flat in a row', caption: 'Laid-out view' },
@@ -334,7 +335,7 @@ export default function SiftCaseStudyContent() {
             <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed mb-4 lg:mb-0" style={pDark}>
               I started in Figma, experimenting with warm colours, soft accents, and card interactions. I also used Claude with Figma MCP during this stage to help develop and refine the designs.
             </p>
-            <ClickToExpand label="Expand the Sift design system" hint="(Click to expand)">
+            <ClickToExpand label="Expand the Sift design system" bordered hint="(Click to expand)">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/sift/figma-design-system.png" alt="The Sift design system in Figma: tooltip, card and modal components, colour swatches and text styles" className="w-full" style={{ display: 'block' }} />
             </ClickToExpand>
@@ -344,7 +345,7 @@ export default function SiftCaseStudyContent() {
             <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed mb-4 lg:mb-0" style={pDark}>
               From there, I moved to Claude Code to bring Sift into the browser. This became an iterative process of designing, building, reviewing, and refining, with AI assisting throughout.
             </p>
-            <ClickToExpand label="Expand the workflow diagram" hint="(Click to expand)"><WorkflowDiagram /></ClickToExpand>
+            <ClickToExpand label="Expand the workflow diagram" bordered hint="(Click to expand)"><WorkflowDiagram /></ClickToExpand>
           </div>
 
           {/* The third paragraph and the three motion studies side by side on desktop, in the same columns as the rows above.

@@ -6,7 +6,7 @@ import { PixelPill } from './PixelEdge';
 
 // Wraps anything (an image, a diagram) so clicking it opens a large version over a blurred page, with a "Close" pill at the top right.
 // `hint` is a small line at the bottom right of what sits on the page. `children` is what sits on the page; `expanded` is what the overlay shows (defaults to the same thing).
-export default function ClickToExpand({ children, expanded, label = 'Expand', hint }: { children: React.ReactNode; expanded?: React.ReactNode; label?: string; hint?: string }) {
+export default function ClickToExpand({ children, expanded, label = 'Expand', hint, bordered = false }: { children: React.ReactNode; expanded?: React.ReactNode; label?: string; hint?: string; bordered?: boolean }) {
   const [open, setOpen] = useState(false);
   const [shown, setShown] = useState(false);
 
@@ -36,7 +36,7 @@ export default function ClickToExpand({ children, expanded, label = 'Expand', hi
         data-cuelume-open=""
         data-cuelume-emphasis="subtle"
       >
-        {children}
+        {bordered ? <div style={{ border: '0.5px solid var(--text)' }}>{children}</div> : children}
         {hint && (
           <div className="mt-2 text-right text-[14px] sm:text-[15px] lg:text-[16px]" style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}>
             {hint}
