@@ -3,6 +3,7 @@ import FeatureTabs from './FeatureTabs';
 import ArtifactGallery from './ArtifactGallery';
 import Persona from './Persona';
 import FindingAccordion from './FindingAccordion';
+import PixelNumber from './PixelNumber';
 import ToolsComparison from './ToolsComparison';
 import Reveal from './Reveal';
 import SlowVideo from './SlowVideo';
@@ -224,8 +225,14 @@ export default function SiftCaseStudyContent() {
             </div>
             <div className="mt-6 lg:mt-6 lg:col-start-1 lg:row-start-2 lg:self-end text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed" style={pDark}>
               <p style={{ margin: 0, fontWeight: 700 }}>These tools helped me identify two priorities:</p>
-              <p style={{ margin: '0 0 4px' }}><span style={{ fontWeight: 700 }}>1)</span> Meet shoppers where the decision happens</p>
-              <p style={{ margin: 0 }}><span style={{ fontWeight: 700 }}>2)</span> Make reflection something they can return to without dreading it.</p>
+              <div className="mt-2 flex items-start gap-3">
+                <PixelNumber n={1} />
+                <p style={{ margin: 0 }}>Meet shoppers where the decision happens</p>
+              </div>
+              <div className="mt-2 flex items-start gap-3">
+                <PixelNumber n={2} />
+                <p style={{ margin: 0 }}>Make reflection something they can return to without dreading it.</p>
+              </div>
             </div>
           </div>
         </section>

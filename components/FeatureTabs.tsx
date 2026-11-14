@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import SparklePrompt from './SparklePrompt';
+import PixelNumber from './PixelNumber';
 import { Pause, Play } from 'lucide-react';
 
 type Feature = { label: string; lead?: string; body: string; src: string };
@@ -97,14 +98,11 @@ export default function FeatureTabs({ items }: { items: Feature[] }) {
                 transition: tr('background-color, color, box-shadow'),
               }}
             >
-              <span
-                className="block text-[20px] sm:text-[22px] lg:text-[24px]"
-                style={{ fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', letterSpacing: '0.12em', lineHeight: 1.15 }}
-              >
-                ({i + 1}/{items.length})
+              <span className="block">
+                <PixelNumber n={i + 1} fill={isActive ? '#F0F0EE' : '#383636'} color={isActive ? '#383636' : '#F0F0EE'} />
               </span>
               <span
-                className="hidden sm:block mt-1 text-[16px] lg:text-[18px] leading-snug"
+                className="hidden sm:block mt-2 text-[16px] lg:text-[18px] leading-snug"
                 style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400 }}
               >
                 {f.label}

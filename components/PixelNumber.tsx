@@ -1,16 +1,14 @@
-// A number inside a pixel-stepped black circle (an 11x11 grid of squares, so 22px gives crisp 2px pixels), with the number cut out in light gray
+// A number inside a pixel-stepped black circle (a 9x9 grid of squares, so 27px gives crisp 3px pixels), with the number cut out in light gray
 const CIRCLE = [
-  '00011111000',
-  '00111111100',
-  '01111111110',
-  '11111111111',
-  '11111111111',
-  '11111111111',
-  '11111111111',
-  '11111111111',
-  '01111111110',
-  '00111111100',
-  '00011111000',
+  '001111100',
+  '011111110',
+  '111111111',
+  '111111111',
+  '111111111',
+  '111111111',
+  '111111111',
+  '011111110',
+  '001111100',
 ];
 
 const runs = CIRCLE.flatMap((row, y) => {
@@ -24,13 +22,13 @@ const runs = CIRCLE.flatMap((row, y) => {
   return out;
 });
 
-export default function PixelNumber({ n, size = 22, color = '#F0F0EE' }: { n: number; size?: number; color?: string }) {
+export default function PixelNumber({ n, size = 27, color = '#F0F0EE', fill = '#383636' }: { n: number; size?: number; color?: string; fill?: string }) {
   return (
     <span aria-hidden className="relative inline-flex flex-none items-center justify-center" style={{ width: size, height: size }}>
-      <svg viewBox="0 0 11 11" width={size} height={size} shapeRendering="crispEdges" style={{ position: 'absolute', inset: 0 }}>
+      <svg viewBox="0 0 9 9" width={size} height={size} shapeRendering="crispEdges" style={{ position: 'absolute', inset: 0 }}>
         {runs.map((r, i) => (
           // height 1.04 overlaps the next row slightly so no hairline seams show at fractional sizes
-          <rect key={i} x={r.x} y={r.y} width={r.w} height={1.04} fill="#383636" />
+          <rect key={i} x={r.x} y={r.y} width={r.w} height={1.04} fill={fill} />
         ))}
       </svg>
       <span

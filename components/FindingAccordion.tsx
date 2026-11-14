@@ -57,9 +57,9 @@ export default function FindingAccordion({ items, className = '' }: { items: Fin
               }}
             >
               <div style={{ overflow: 'hidden' }}>
-                {/* Indented by the pill (22px) plus its gap (12px), so the sentence starts under the first word of the heading */}
+                {/* Indented by the pill (27px) plus its gap (12px), so the sentence starts under the first word of the heading */}
                 <p
-                  className="pr-5 sm:pr-6 pb-5 sm:pb-6 pl-[calc(1.25rem+34px)] sm:pl-[calc(1.5rem+34px)] text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed"
+                  className="pr-5 sm:pr-6 pb-5 sm:pb-6 pl-[calc(1.25rem+39px)] sm:pl-[calc(1.5rem+39px)] text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed"
                   style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', color: 'var(--text)' }}
                 >
                   {f.body}
