@@ -13,8 +13,8 @@
 
 /* === Theme tokens === */
 :root {
-  --bg: #fffffc;
-  --sidebar-bg: #fffffc;
+  --bg: #ffffff;
+  --sidebar-bg: #ffffff;
   --text: #383636;
   --text-muted: #3D3835;
   --accent: #3D3835;

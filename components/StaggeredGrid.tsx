@@ -34,7 +34,7 @@ function Tooltip({ x, y }: { x: number; y: number }) {
         letterSpacing: '0.02em', display: 'inline-flex',
         alignItems: 'center', gap: '6px',
       }}>
-        <PixelPill fill="#383636" stroke="#FFFFFC" strokeWidth={0.3} />
+        <PixelPill fill="#383636" stroke="#FFFFFF" strokeWidth={0.3} />
         <span style={{ position: 'relative' }}>Read case study</span>
       </span>
     </div>,

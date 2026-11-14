@@ -39,10 +39,27 @@ export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [colophonOpen, setColophonOpen] = useState(false);
   const [nameHovered, setNameHovered] = useState(false);
+  const [barHidden, setBarHidden] = useState(false);
   const colophonRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   // Close menu on route change
   useEffect(() => { setIsOpen(false); }, [pathname]);
+
+  // On case study pages the top bar slides away while scrolling down and returns on a small scroll up
+  useEffect(() => {
+    setBarHidden(false);
+    if (!pathname.startsWith('/work/')) return;
+    let last = Math.max(0, window.scrollY);
+    const onScroll = () => {
+      const y = Math.max(0, window.scrollY);
+      const d = y - last;
+      if (y < 80) { setBarHidden(false); last = y; return; }
+      if (d > 8) { setBarHidden(true); last = y; }
+      else if (d < -8) { setBarHidden(false); last = y; }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [pathname]);
 
   // Prevent body scroll when open
   useEffect(() => {
@@ -69,7 +86,7 @@ export default function MobileNav() {
       {/* Top bar */}
       <div
         className="lg:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 h-14"
-        style={{ background: 'var(--bg)', clipPath: pixelNotchClip('bottom') }}
+        style={{ background: 'var(--bg)', clipPath: pixelNotchClip('bottom'), transform: barHidden && !isOpen ? 'translateY(-100%)' : 'none', transition: 'transform 260ms ease-out' }}
       >
         <PixelEdgeLine edge="bottom" />
         <Link
