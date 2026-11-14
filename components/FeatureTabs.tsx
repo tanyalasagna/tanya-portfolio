@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import SparklePrompt from './SparklePrompt';
-import PixelNumber from './PixelNumber';
 import { Pause, Play } from 'lucide-react';
 
 type Feature = { label: string; lead?: string; body: string; src: string };
@@ -68,7 +67,7 @@ export default function FeatureTabs({ items }: { items: Feature[] }) {
       <div
         role="tablist"
         aria-label="Sift features"
-        className="relative grid grid-cols-4 gap-2 sm:gap-3 mb-[9px] [--g:8px] sm:[--g:12px]"
+        className="relative grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-[9px] [--g:8px] sm:[--g:12px]"
         style={{ ['--n' as string]: items.length, ['--i' as string]: active }}
       >
         {items.map((f, i) => {
@@ -98,11 +97,8 @@ export default function FeatureTabs({ items }: { items: Feature[] }) {
                 transition: tr('background-color, color, box-shadow'),
               }}
             >
-              <span className="block">
-                <PixelNumber n={i + 1} fill={isActive ? '#F0F0EE' : '#383636'} color={isActive ? '#383636' : '#F0F0EE'} />
-              </span>
               <span
-                className="hidden sm:block mt-2 text-[16px] lg:text-[18px] leading-snug"
+                className="block text-[16px] lg:text-[18px] leading-snug"
                 style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400 }}
               >
                 {f.label}
@@ -114,7 +110,7 @@ export default function FeatureTabs({ items }: { items: Feature[] }) {
         {/* Pixel pointer that slides from box to box and juts down into the gray block below (a 9px gap separates the tab row from the block; the 12px pointer crosses it and overlaps the block by 3px) (centre of column i: (100% - gaps) / n * (i + 0.5) + i * gap) */}
         <span
           aria-hidden
-          className="pointer-events-none absolute"
+          className="pointer-events-none absolute hidden sm:block"
           style={{
             transition: tr('left'),
             top: '100%',
@@ -138,11 +134,7 @@ export default function FeatureTabs({ items }: { items: Feature[] }) {
               className={`col-start-1 row-start-1 min-w-0 ${i === active ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1 pointer-events-none'}`}
               style={{ transition: tr('opacity, transform') }}
             >
-              {/* The tab box only has room for the title from tablet width up */}
-              <h4 className="sm:hidden mb-1 text-[16px]" style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, color: 'var(--text)' }}>
-                {f.label}
-              </h4>
-              {f.lead && (
+                  {f.lead && (
                 <p className="mb-2 text-[20px] sm:text-[22px] lg:text-[24px] leading-snug font-bold" style={{ fontFamily: 'var(--font-dm-sans)', color: 'var(--text)' }}>
                   {f.lead}
                 </p>
