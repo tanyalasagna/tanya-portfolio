@@ -34,7 +34,7 @@ const rows: { label: string; cells: [string, string] }[] = [
   {
     label: 'Where it falls short',
     cells: [
-      'Overwhelming layout. In testing, the humor wore thin fast: a novelty, not a habit.',
+      'Overwhelming layout. In testing, the humor wore thin fast.',
       'Every item is entered by hand, typed in or added by link.',
     ],
   },

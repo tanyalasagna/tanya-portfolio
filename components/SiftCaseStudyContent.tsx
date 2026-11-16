@@ -196,7 +196,7 @@ export default function SiftCaseStudyContent() {
               className="lg:flex-1 lg:min-w-0"
               items={[
                 { title: 'The cost is space, not just money.', body: 'This informed Sift’s three reflection pillars: money, space, and need, giving shoppers different ways to consider a purchase.' },
-                { title: 'The urge to buy is engineered.', body: 'Rather than add another layer of pressure, I made the prompts optional and kept the experience free of scores, warnings, or prescribed outcomes.' },
+                { title: 'The urge to buy is engineered.', body: 'Rather than adding another layer of pressure, I meet shoppers where they already are, keeping the experience free of scores, warnings, or prescribed outcomes.' },
                 { title: 'Regret is part of the loop.', body: 'Sift focuses on reflection before the decision, with an exit that doesn’t judge whether someone buys or walks away.' },
                 { title: 'People already pause.', body: 'I placed Sift directly at checkout, turning an existing moment of hesitation into an opportunity to reflect.' },
               ]}
@@ -354,7 +354,7 @@ export default function SiftCaseStudyContent() {
               Phones and tablets stack everything. */}
           <div className="lg:grid lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-8 lg:items-start">
             <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed mb-6 lg:mb-0" style={pDark}>
-              Seeing the designs in motion helped me catch awkward transitions, adjust timings, and fine-tune the interactions. AI made these iterations much faster, but deciding what felt right for Sift remained my responsibility.
+              Seeing the designs in motion helped me catch awkward transitions, adjust timings, and fine-tune the interactions.
             </p>
             {/* One gray box: two columns. Left: the first tall video with the wide one under it (same width as the first). Right: the second tall video, in a column 0.954x as wide so it comes out exactly as tall as the first (their heights differ by that ratio). */}
             <div className="p-4 sm:p-5 lg:p-6" style={{ background: '#F0F0EE' }}>
@@ -423,8 +423,8 @@ export default function SiftCaseStudyContent() {
           <FindingAccordion
             items={[
               { title: 'Adding friction with purpose', body: 'Everything I knew about checkout was about removing friction. Sift challenged me to add it deliberately. The hardest part was finding a tone that encouraged reflection without making shoppers feel responsible for systems designed to encourage overconsumption.' },
-              { title: 'My first big project with AI', body: 'This was my first time using AI so extensively across design and development. I could build and refine interactions in minutes, but deciding what felt right still rested with me. Sift became a turning point in how I approach design and prototyping.' },
-              { title: 'What I\u2019d do differently', body: 'For future projects, I\u2019d give the early creative process more room: sketching on paper, experimenting with visual directions, and developing a distinct brand identity before moving into development. Working at this pace reminded me that some parts of design benefit from slowing down.' },
+              { title: 'My first big project with AI', body: 'This was my first time using AI so extensively across design and development. I could build and refine interactions in minutes. Sift became a turning point in how I approach design and prototyping.' },
+              { title: 'What I\u2019d do differently', body: 'For future projects, I\u2019d give the early creative process more room: sketching on paper, experimenting with visual directions, and developing a distinct brand identity before moving into development.' },
               { title: 'Where Sift goes next', body: 'First, making Sift a public Chrome extension that works reliably across retailers and keeps reflections private. Eventually, I\u2019d like to rethink the experience for mobile, where the same idea of a pause might need an entirely different form.' },
             ]}
           />
