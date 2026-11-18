@@ -8,6 +8,8 @@ import { PixelPill } from './PixelEdge';
 
 // Solid stand-in for an 8% tint of the text color, so it looks the same on the page background
 const PILL_FILL = 'color-mix(in srgb, var(--text) 8%, var(--bg))';
+// Faint hairline outline for the pill: 30% of the text color over the page background
+const PILL_STROKE = 'color-mix(in srgb, var(--text) 30%, var(--bg))';
 
 const CORNER = 6;
 const DASH = 'repeating-linear-gradient(to top, transparent 0 2px, currentColor 2px 4px)';
@@ -165,7 +167,7 @@ export default function HookSidebar() {
                   transition: 'padding 180ms ease, margin 180ms ease',
                 }}
               >
-                <PixelPill fill={PILL_FILL} stroke="none" strokeWidth={0} visible={isActive} />
+                <PixelPill fill={PILL_FILL} stroke={PILL_STROKE} strokeWidth={0.5} visible={isActive} />
                 <span style={{ position: 'relative' }}>{item.label}</span>
               </span>
             </Link>

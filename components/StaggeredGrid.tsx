@@ -131,24 +131,7 @@ function Thumbnail({ project }: { project: Project }) {
               <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
                 <span style={{ color: i === 0 ? 'var(--text)' : 'var(--text-muted)', fontStyle: i === 0 ? 'italic' : 'normal', fontFamily: i === 0 ? 'var(--font-dm-sans)' : undefined, opacity: 0.8 }}>{part}</span>
                 {i < arr.length - 1 && (
-                  <span
-                    aria-hidden
-                    style={{
-                      display: 'inline-block',
-                      width: 20,
-                      height: 20,
-                      flexShrink: 0,
-                      backgroundColor: 'var(--text)',
-                      WebkitMaskImage: 'url("/images/Chunky Black Pixel Sparkle Icon (1).png")',
-                      maskImage: 'url("/images/Chunky Black Pixel Sparkle Icon (1).png")',
-                      WebkitMaskSize: 'contain',
-                      maskSize: 'contain',
-                      WebkitMaskRepeat: 'no-repeat',
-                      maskRepeat: 'no-repeat',
-                      WebkitMaskPosition: 'center',
-                      maskPosition: 'center',
-                    }}
-                  />
+                  <span aria-hidden style={{ color: 'var(--text-muted)', opacity: 0.8 }}>{'\\'}</span>
                 )}
               </span>
             ))}
