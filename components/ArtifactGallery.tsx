@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { PixelPill } from './PixelEdge';
 import SparklePrompt from './SparklePrompt';
+import LazyImg from './LazyImg';
 
 const BORDER = '0.5px solid var(--text)';
 
@@ -49,8 +50,7 @@ export default function ArtifactGallery({ images, columns = 3, prompt = 'Click a
           data-cuelume-open=""
           data-cuelume-emphasis="subtle"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={src} alt={alt} className="w-full" style={{ display: 'block', border }} />
+          <LazyImg src={src} alt={alt} className="w-full" style={{ border }} />
         </button>
         {captionHint && (
           <div className="mt-2 text-right text-[14px] sm:text-[15px] lg:text-[16px]" style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}>

@@ -11,6 +11,8 @@ import ClickToExpand from './ClickToExpand';
 import ImpactDiagram from './ImpactDiagram';
 import Reveal from './Reveal';
 import SlowVideo from './SlowVideo';
+import LazyVideo from './LazyVideo';
+import LazyImg from './LazyImg';
 
 const h2Cls ='text-[22px] lg:text-[28px] font-bold mb-4';
 const h3Cls = 'text-[18px] lg:text-[22px] font-semibold mb-4 leading-snug';
@@ -33,12 +35,8 @@ export const siftNavSections = [
 function Video({ src }: { src: string }) {
   return (
     // eslint-disable-next-line jsx-a11y/media-has-caption
-    <video
+    <LazyVideo
       src={src}
-      autoPlay
-      muted
-      loop
-      playsInline
       className="w-full mb-6"
       style={{ display: 'block' }}
     />
@@ -47,8 +45,7 @@ function Video({ src }: { src: string }) {
 
 function Img({ src, alt = '' }: { src: string; alt?: string }) {
   return (
-    /* eslint-disable-next-line @next/next/no-img-element */
-    <img src={src} alt={alt} className="w-full mb-6" style={{ display: 'block' }} />
+    <LazyImg src={src} alt={alt} className="w-full mb-6" />
   );
 }
 
@@ -148,7 +145,7 @@ export default function SiftCaseStudyContent() {
           </Reveal>
           <Reveal>
           <div className="mb-[72px] p-5 sm:p-6 lg:p-8" style={{ background: '#F0F0EE' }}>
-            <video src="/images/sift/sift-demo-14s.mp4" autoPlay muted loop playsInline className="w-full" style={{ display: 'block', borderRadius: '8px' }} />
+            <LazyVideo src="/images/sift/sift-demo-14s.mp4" className="w-full" style={{ display: 'block', borderRadius: '8px' }} />
           </div>
           </Reveal>
 
@@ -339,7 +336,7 @@ export default function SiftCaseStudyContent() {
             <ClickToExpand label="Expand the Sift design system" bordered hint="(Click to expand)" expanded={<>{/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/sift/figma-design-system.png" alt="" style={{ display: 'block', margin: '0 auto', maxWidth: '100%', maxHeight: '85vh', width: 'auto' }} /></>}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/sift/figma-design-system.png" alt="The Sift design system in Figma: tooltip, card and modal components, colour swatches and text styles" className="w-full" style={{ display: 'block' }} />
+              <LazyImg src="/images/sift/figma-design-system.png" alt="The Sift design system in Figma: tooltip, card and modal components, colour swatches and text styles" className="w-full" />
             </ClickToExpand>
           </div>
           {/* The second paragraph and the workflow diagram side by side on desktop, in the same columns as the row above */}
@@ -361,12 +358,12 @@ export default function SiftCaseStudyContent() {
               <div className="grid grid-cols-[1fr_0.954fr] gap-3 items-start">
                 <div className="flex flex-col gap-3">
                   {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                  <video src="https://framerusercontent.com/assets/X3Sv70gLQhJMUKTx0eT1vd2d2vw.mp4" autoPlay muted loop playsInline className="w-full" style={{ display: 'block' }} />
+                  <LazyVideo src="https://framerusercontent.com/assets/X3Sv70gLQhJMUKTx0eT1vd2d2vw.mp4" className="w-full" style={{ display: 'block' }} />
                   {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                  <video src="https://framerusercontent.com/assets/kON8tynrgW1RYeXQjVdhFtmYdo.mp4" autoPlay muted loop playsInline className="w-full" style={{ display: 'block' }} />
+                  <LazyVideo src="https://framerusercontent.com/assets/kON8tynrgW1RYeXQjVdhFtmYdo.mp4" className="w-full" style={{ display: 'block' }} />
                 </div>
                 {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                <video src="https://framerusercontent.com/assets/tONZdXFJWttXDsyKuBuCaOSsw.mp4" autoPlay muted loop playsInline className="w-full" style={{ display: 'block' }} />
+                <LazyVideo src="https://framerusercontent.com/assets/tONZdXFJWttXDsyKuBuCaOSsw.mp4" className="w-full" style={{ display: 'block' }} />
               </div>
             </div>
           </div>

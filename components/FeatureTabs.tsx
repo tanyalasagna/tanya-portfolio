@@ -155,7 +155,7 @@ export default function FeatureTabs({ items }: { items: Feature[] }) {
               muted
               loop
               playsInline
-              preload="auto"
+              preload={i === 0 ? 'auto' : 'metadata'}
               aria-hidden={i !== active}
               onClick={i === active ? toggle : undefined}
               onPlay={() => { if (i === active) setPlaying(true); }}

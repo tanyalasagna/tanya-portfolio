@@ -84,3 +84,23 @@ body {
   transition: border-color 0.3s ease;
 }
 
+
+/* === Media skeleton: faint tint + slow sweep shown while an image/video loads === */
+.media-skeleton {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+  transition: opacity 500ms ease;
+}
+.media-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, color-mix(in srgb, var(--bg) 60%, transparent) 50%, transparent 100%);
+  animation: shimmer-sweep 2s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .media-skeleton::after { animation: none; }
+}
