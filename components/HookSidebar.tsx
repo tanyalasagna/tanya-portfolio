@@ -8,8 +8,8 @@ import { PixelPill } from './PixelEdge';
 
 // Solid stand-in for an 8% tint of the text color, so it looks the same on the page background
 const PILL_FILL = 'color-mix(in srgb, var(--text) 8%, var(--bg))';
-// Faint hairline outline for the pill: 30% of the text color over the page background
-const PILL_STROKE = 'color-mix(in srgb, var(--text) 30%, var(--bg))';
+// Hairline outline for the pill, in the site's default text colour
+const PILL_STROKE = 'var(--text)';
 
 const CORNER = 6;
 const DASH = 'repeating-linear-gradient(to top, transparent 0 2px, currentColor 2px 4px)';

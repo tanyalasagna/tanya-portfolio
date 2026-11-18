@@ -45,7 +45,15 @@ function Tooltip({ x, y }: { x: number; y: number }) {
 function Thumbnail({ project }: { project: Project }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isVideo = /\.(mp4|webm|mov)$/i.test(project.thumbnail ?? '');
-  const [hovered, setHovered] = useState(false);
+  const [hovered, setHovered] = useState(false); // pointer is over the thumbnail image itself
+  const [titleHovered, setTitleHovered] = useState(false);
+  // After pointer leaves, the frost stays spread out and simply melts away, then resets (collapsing it would look abrupt)
+  const [clearing, setClearing] = useState(false);
+  useEffect(() => {
+    if (hovered) return;
+    const t = setTimeout(() => setClearing(false), 1400);
+    return () => clearTimeout(t);
+  }, [hovered]);
   const [cursor, setCursor] = useState<{ x: number; y: number } | null>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -54,6 +62,7 @@ function Thumbnail({ project }: { project: Project }) {
 
   const handleEnter = () => {
     setHovered(true);
+    setClearing(true);
     if (project.videoPlayOnce && videoRef.current) {
       videoRef.current.currentTime = 0;
       videoRef.current.play();
@@ -63,19 +72,19 @@ function Thumbnail({ project }: { project: Project }) {
   return (
     <>
       {hovered && cursor && <Tooltip x={cursor.x} y={cursor.y} />}
-      <div
-        style={{ position: 'relative', cursor: hovered ? 'none' : 'auto' }}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={handleEnter}
-        onMouseLeave={() => setHovered(false)}
-      >
+      <div style={{ position: 'relative' }}>
 
       <Link
         href={`/work/${project.slug}`}
         style={{ display: 'block', textDecoration: 'none' }}
         onClick={() => play('open', { theme: 'bubble', emphasis: 'subtle' })}
       >
-        <div style={{ aspectRatio: project.thumbnailAspect ?? '4/3', overflow: 'hidden', position: 'relative' }}>
+        <div
+          style={{ aspectRatio: project.thumbnailAspect ?? '4/3', overflow: 'hidden', position: 'relative', cursor: hovered ? 'none' : 'auto' }}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={handleEnter}
+          onMouseLeave={() => setHovered(false)}
+        >
           {isVideo ? (
             <video
               ref={videoRef}
@@ -88,12 +97,22 @@ function Thumbnail({ project }: { project: Project }) {
             /* eslint-disable-next-line @next/next/no-img-element */
             <img src={project.thumbnail} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hovered ? 'scale(1.008)' : 'scale(1)', opacity: hovered ? 0.9 : 1, transition: 'transform 3000ms cubic-bezier(0.19, 1, 0.22, 1), opacity 600ms ease' }} />
           )}
-          {/* Slight dark tint over the whole thumbnail */}
+          {/* Frost: a soft-edged patch of frosted glass, tinted with the site's dark, that spreads out from the centre of the
+              thumbnail (same every time, wherever the pointer enters) until it covers it. Blur and tint build up slower than they clear, so it feels like it settles on. */}
           <div style={{
             position: 'absolute', inset: 0,
-            background: 'rgba(0, 0, 0, 0.06)',
+            background: 'linear-gradient(160deg, rgba(255,255,255,0.16) 0%, rgba(56,54,54,0.28) 100%)',
+            backdropFilter: hovered ? 'blur(9px) saturate(1.08)' : 'blur(0px) saturate(1)',
+            WebkitBackdropFilter: hovered ? 'blur(9px) saturate(1.08)' : 'blur(0px) saturate(1)',
+            WebkitMaskImage: 'radial-gradient(circle at center, #000 0%, #000 45%, transparent 72%)',
+            maskImage: 'radial-gradient(circle at center, #000 0%, #000 45%, transparent 72%)',
+            WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat',
+            WebkitMaskPosition: 'center', maskPosition: 'center',
+            WebkitMaskSize: hovered || clearing ? '340% 340%' : '0% 0%', maskSize: hovered || clearing ? '340% 340%' : '0% 0%',
             opacity: hovered ? 1 : 0,
-            transition: 'opacity 1800ms cubic-bezier(0.19, 1, 0.22, 1)',
+            transition: hovered
+              ? 'mask-size 1600ms cubic-bezier(0.22, 1, 0.36, 1), -webkit-mask-size 1600ms cubic-bezier(0.22, 1, 0.36, 1), backdrop-filter 1400ms cubic-bezier(0.22, 1, 0.36, 1), -webkit-backdrop-filter 1400ms cubic-bezier(0.22, 1, 0.36, 1), opacity 900ms ease'
+              : 'backdrop-filter 1300ms cubic-bezier(0.33, 0, 0.2, 1), -webkit-backdrop-filter 1300ms cubic-bezier(0.33, 0, 0.2, 1), opacity 1300ms cubic-bezier(0.33, 0, 0.2, 1)',
             pointerEvents: 'none',
           }} />
           {/* Dark gradient shadow overlay */}
@@ -115,10 +134,19 @@ function Thumbnail({ project }: { project: Project }) {
             pointerEvents: 'none',
           }} />
           {/* Hairline outline drawn on top: a 0.5px CSS border gets rounded up to 1px, an inset shadow keeps it as thin as the nav pill's */}
-          <div style={{ position: 'absolute', inset: 0, boxShadow: 'inset 0 0 0 0.5px var(--text)', pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', inset: 0, boxShadow: 'inset 0 0 0 0.5px #F0F0EE', pointerEvents: 'none' }} />
         </div>
+      </Link>
+        {/* Only the thumbnail and the title are links; the tags below are plain text with the default pointer */}
         <div style={{ paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-          <p className="text-[18px] sm:text-[19px] lg:text-[22px] leading-tight" style={{ color: hovered ? 'var(--text-muted)' : 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", fontWeight: 600, lineHeight: 1.2, opacity: hovered ? 0.6 : 1, transition: 'color 400ms ease, opacity 400ms ease' }}>
+          <Link
+            href={`/work/${project.slug}`}
+            style={{ display: 'inline-block', alignSelf: 'flex-start', textDecoration: 'none' }}
+            onClick={() => play('open', { theme: 'bubble', emphasis: 'subtle' })}
+            onMouseEnter={() => setTitleHovered(true)}
+            onMouseLeave={() => setTitleHovered(false)}
+          >
+          <p className="text-[18px] sm:text-[19px] lg:text-[22px] leading-tight" style={{ color: hovered || titleHovered ? 'var(--text-muted)' : 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", fontWeight: 600, lineHeight: 1.2, opacity: hovered || titleHovered ? 0.85 : 1, transition: 'color 400ms ease, opacity 400ms ease' }}>
             {project.mobileTitle ? (
               <>
                 <span className="lg:hidden">{project.mobileTitle}</span>
@@ -126,6 +154,7 @@ function Thumbnail({ project }: { project: Project }) {
               </>
             ) : project.title}
           </p>
+          </Link>
           <p className="text-[14px] sm:text-[15px] lg:text-[18px]" style={{ lineHeight: 1.2, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
             {[project.tags.join(', '), ...(project.description ? project.description.split(' \\ ') : [])].map((part, i, arr) => (
               <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
@@ -137,7 +166,6 @@ function Thumbnail({ project }: { project: Project }) {
             ))}
           </p>
         </div>
-      </Link>
       </div>
     </>
   );

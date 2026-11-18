@@ -22,8 +22,8 @@ export default function ImpactDiagram() {
   const lastY = OY + outcomes[outcomes.length - 1].r;
   return (
     <div role="img" aria-label="Five outcomes in order, from a pause that takes a couple of minutes, to reflection that leads to a choice, habit formation over time, a wardrobe of items loved and kept for years, and less clothing waste in landfills. The first two are what testing showed; the last three are where it's headed." className="mb-6">
-      {/* Tablet and up: one picture, so it scales as a whole */}
-      <div className="hidden sm:block p-4 sm:p-6" style={{ background: '#F0F0EE' }}>
+      {/* One picture at every size, so it scales as a whole and looks the same on phones as on tablet and desktop */}
+      <div className="p-3 sm:p-6" style={{ background: '#F0F0EE' }}>
         <svg aria-hidden viewBox="0 0 1000 440" className="block w-full" style={{ fontFamily: 'var(--font-dm-sans)' }}>
           {/* the vertical line the outcomes sit on */}
           <line x1={OX} y1={OY} x2={OX} y2={lastY} stroke={INK} strokeWidth={2} opacity={0.3} />
@@ -46,22 +46,6 @@ export default function ImpactDiagram() {
           <line x1={OX + 330} y1={410} x2={OX + 366} y2={410} stroke={INK} strokeWidth={2.5} strokeDasharray={DASH} opacity={0.4} />
           <text x={OX + 378} y={417} fontSize={20} fontStyle="italic" fill={INK} opacity={0.75}>where it&rsquo;s headed</text>
         </svg>
-      </div>
-
-      {/* Phones: the same five outcomes as a list on the same vertical line, solid and dotted markers as in the legend */}
-      <div className="sm:hidden p-5" style={{ background: '#F0F0EE', fontFamily: 'var(--font-dm-sans)', color: INK }}>
-        <ul className="m-0 p-0 list-none">
-          {outcomes.map(o => (
-            <li key={o.label} className="flex items-start gap-3 py-2">
-              <span aria-hidden className="flex-none" style={{ width: 12, height: 12, marginTop: 6, borderRadius: '50%', background: INK, opacity: o.shown ? 1 : 0.4 }} />
-              <span className="text-[15px] leading-snug" style={{ opacity: o.shown ? 1 : 0.7 }}>{o.label}</span>
-            </li>
-          ))}
-        </ul>
-        <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-[13px]" style={{ fontStyle: 'italic', opacity: 0.75 }}>
-          <span className="inline-flex items-center gap-2"><span aria-hidden style={{ width: 10, height: 10, borderRadius: '50%', background: INK }} /> what testing showed</span>
-          <span className="inline-flex items-center gap-2"><span aria-hidden style={{ width: 10, height: 10, borderRadius: '50%', background: INK, opacity: 0.4 }} /> where it&rsquo;s headed</span>
-        </div>
       </div>
     </div>
   );
