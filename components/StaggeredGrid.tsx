@@ -60,6 +60,25 @@ function Thumbnail({ project }: { project: Project }) {
     setCursor({ x: e.clientX, y: e.clientY });
   };
 
+  // The grid renders a copy of every thumbnail per screen size (the ones that don't fit are hidden with CSS), so a video must
+  // only load and play while it is actually on screen. Hidden copies never intersect, so they stay idle and download nothing.
+  const startedOnce = useRef(false);
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        if (project.videoPlayOnce && startedOnce.current) return; // play-once videos only auto-play the first time
+        startedOnce.current = true;
+        v.play().catch(() => {});
+      } else if (!project.videoPlayOnce || v.ended) {
+        v.pause();
+      }
+    }, { rootMargin: '100px' });
+    io.observe(v);
+    return () => io.disconnect();
+  }, [project.videoPlayOnce]);
+
   const handleEnter = () => {
     setHovered(true);
     setClearing(true);
@@ -89,7 +108,7 @@ function Thumbnail({ project }: { project: Project }) {
             <video
               ref={videoRef}
               src={project.thumbnail}
-              autoPlay muted loop={!project.videoPlayOnce} playsInline
+              muted loop={!project.videoPlayOnce} playsInline preload="none"
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transform: hovered ? 'scale(1.008)' : 'scale(1)', opacity: hovered ? 0.9 : 1, transition: 'transform 3000ms cubic-bezier(0.19, 1, 0.22, 1), opacity 600ms ease' }}
               onEnded={project.videoEndOnFirstFrame ? () => { if (videoRef.current) videoRef.current.currentTime = 0; } : undefined}
             />

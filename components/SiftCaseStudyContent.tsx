@@ -182,7 +182,7 @@ export default function SiftCaseStudyContent() {
             I reviewed research on purchase habits and the behavior behind them. Then I ran a netnography: I posted probes on online forums, collected responses, and interviewed a few participants.
           </p>
           <ArtifactGallery images={[
-            '/images/sift/process-gallery-1.png',
+            '/images/sift/process-gallery-1.webp',
             // The long sticky-note strip, cut in half so each half is readable when expanded
             '/images/sift/process-notes-1.webp',
             '/images/sift/process-notes-2.webp',
