@@ -75,7 +75,7 @@ export default function FrogslayerCaseStudyContent() {
             </h3>
             <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 lg:gap-10">
               <div className="lg:w-[52%] lg:flex-initial min-w-0">
-                <p className={pColCls} style={pStyle}>
+                <p className={pColCls} style={{ ...pStyle, fontWeight: 600 }}>
                   <a
                     href="https://frogslayer.com/"
                     target="_blank"
