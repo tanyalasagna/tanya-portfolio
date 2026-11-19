@@ -42,7 +42,7 @@ export const projects: Project[] = [
     displayTitle: 'Frogslayer',
     subtitle: 'Rethinking touchscreen UX for self-service kiosks',
     mobileTitle: 'Rethinking touchscreen UX for self-service kiosks',
-    tags: ['Sponsored project, 2025'],
+    tags: ['Apprenticeship, 2025'],
     description: 'Design research \\ Usability testing',
     thumbnail: '/images/fs new pixel.png',
     thumbnailAspect: '4/3',

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import CaseStudyCover from '@/components/CaseStudyCover';
 import CaseStudyContent from '@/components/CaseStudyContent';
 import SiftCaseStudyContent from '@/components/SiftCaseStudyContent';
+import FrogslayerCaseStudyContent from '@/components/FrogslayerCaseStudyContent';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -59,6 +60,8 @@ export default async function CaseStudyPage({ params }: Props) {
 
         {project.slug === 'sift' ? (
           <SiftCaseStudyContent />
+        ) : project.slug === 'capstone' ? (
+          <FrogslayerCaseStudyContent />
         ) : (
           <>
             {/* Research */}

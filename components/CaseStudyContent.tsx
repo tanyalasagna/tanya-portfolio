@@ -7,13 +7,25 @@ export default function CaseStudyContent({ children }: { children: React.ReactNo
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      if (ref.current?.children.length) {
+      const kids = ref.current ? Array.from(ref.current.children) : [];
+      kids.forEach((el, i) => {
+        // A blur filter forces the browser to re-paint the whole element every frame. That's fine for the cover and the title,
+        // but the case study body is many screens tall and full of video, so it only fades (cheap, runs on the GPU).
+        const tall = (el as HTMLElement).offsetHeight > window.innerHeight * 1.5;
         gsap.fromTo(
-          ref.current.children,
-          { opacity: 0, filter: 'blur(6px)' },
-          { opacity: 1, filter: 'blur(0px)', duration: 0.65, ease: 'power2.out', stagger: 0.1, delay: 0.05 }
+          el,
+          tall ? { opacity: 0 } : { opacity: 0, filter: 'blur(6px)' },
+          {
+            opacity: 1,
+            ...(tall ? {} : { filter: 'blur(0px)' }),
+            duration: 0.65,
+            ease: 'power2.out',
+            delay: 0.05 + i * 0.1,
+            // Don't leave `filter: blur(0px)` behind: it keeps the element on its own layer for good
+            clearProps: 'filter,opacity',
+          }
         );
-      }
+      });
     });
     return () => ctx.revert();
   }, []);

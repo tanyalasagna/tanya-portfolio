@@ -151,10 +151,10 @@ export default function SiftCaseStudyContent() {
 
           <Reveal>
           <FeatureTabs items={[
-            { label: 'Pick your pillars', lead: 'There\u2019s more than one reason to pause. (Money, Space, Need, etc.)', body: 'Choose which prompts are active, change them mid-session, or skip at any time. Sift puts shoppers in control of their own reflection.', src: 'https://framerusercontent.com/assets/uVch2PINgNRRJrOdtnbdX2Bfjo.mp4' },
-            { label: 'Reflect your way', lead: 'And more than one way to think it through.', body: 'Flip through the deck one card at a time, or spread it flat to see every reflection at once.', src: 'https://framerusercontent.com/assets/JqoAgmBYimcINsPYNIYlaMvGCV4.mp4' },
-            { label: 'Look back', lead: 'Some thoughts are worth returning to.', body: 'Saved reflections land in a history page, showing which pillars you considered and what you told yourself.', src: 'https://framerusercontent.com/assets/znTwja23tExHZBxyATiqzMZZw.mp4' },
-            { label: 'Buy or walk away', lead: 'But the decision is always yours.', body: 'Whether you buy or walk away, Sift leaves that decision to you, without judgment.', src: 'https://framerusercontent.com/assets/tI21140KVmikva8TfieN0kEpo.mp4' },
+            { label: 'Pick your pillars', lead: 'There\u2019s more than one reason to pause. (Money, Space, Need, etc.)', body: 'Choose which prompts are active, change them mid-session, or skip at any time. Sift puts shoppers in control of their own reflection.', src: '/images/sift/feature-pick-pillars.mp4' },
+            { label: 'Reflect your way', lead: 'And more than one way to think it through.', body: 'Flip through the deck one card at a time, or spread it flat to see every reflection at once.', src: '/images/sift/feature-reflect.mp4' },
+            { label: 'Look back', lead: 'Some thoughts are worth returning to.', body: 'Saved reflections land in a history page, showing which pillars you considered and what you told yourself.', src: '/images/sift/feature-look-back.mp4' },
+            { label: 'Buy or walk away', lead: 'But the decision is always yours.', body: 'Whether you buy or walk away, Sift leaves that decision to you, without judgment.', src: '/images/sift/feature-buy-or-walk.mp4' },
           ]} />
           </Reveal>
         </section>
@@ -182,10 +182,10 @@ export default function SiftCaseStudyContent() {
             I reviewed research on purchase habits and the behavior behind them. Then I ran a netnography: I posted probes on online forums, collected responses, and interviewed a few participants.
           </p>
           <ArtifactGallery images={[
-            'https://framerusercontent.com/images/O8oBAC07tPsqjf60p8N9SOqw.png',
+            '/images/sift/process-gallery-1.png',
             // The long sticky-note strip, cut in half so each half is readable when expanded
-            '/images/sift/process-notes-1.png',
-            '/images/sift/process-notes-2.png',
+            '/images/sift/process-notes-1.webp',
+            '/images/sift/process-notes-2.webp',
           ]} />
           <div className="lg:flex lg:items-start lg:gap-8 mt-[72px] mb-6">
             <p className="mb-4 lg:mb-0 lg:w-[288px] lg:flex-none pl-4 text-[20px] sm:text-[22px] lg:text-[24px] leading-snug font-bold" style={{ ...pDark, borderLeft: '2px solid var(--text)' }}>Four findings shaped how I<br className="hidden lg:block" /> approached Sift:</p>
@@ -258,7 +258,7 @@ export default function SiftCaseStudyContent() {
             I turned that into three lenses, <span style={{ fontStyle: 'italic' }}>money &middot; space &middot; need</span>, printed them as card packets, and distributed them to about 70 people to use during their shopping session, in real-time.
           </p>
           </div>
-          <Img src="https://framerusercontent.com/images/FFAYYAT4tDW7dR2hFUNvsjA85Uw.png" />
+          <Img src="/images/sift/process-cards.webp" />
 
           {/* Two collapsible blocks side by side (stacked on phones), styled like the findings: heading + "+" until opened. items-start so each opens to its own height. */}
           <div className="mt-8 flex flex-col gap-3 lg:grid lg:grid-cols-2 lg:items-start">
@@ -288,8 +288,8 @@ export default function SiftCaseStudyContent() {
               border="1px solid #A9A6A0"
               expandedSize={85}
               images={[
-                { src: '/images/sift/reflect-deck.png', alt: 'The deck view: cards stacked on top of each other', caption: 'Deck view' },
-                { src: '/images/sift/reflect-flat.png', alt: 'The laid-out view: all the cards spread flat in a row', caption: 'Laid-out view' },
+                { src: '/images/sift/reflect-deck.webp', alt: 'The deck view: cards stacked on top of each other', caption: 'Deck view' },
+                { src: '/images/sift/reflect-flat.webp', alt: 'The laid-out view: all the cards spread flat in a row', caption: 'Laid-out view' },
               ]}
             />
           </div>
@@ -358,12 +358,12 @@ export default function SiftCaseStudyContent() {
               <div className="grid grid-cols-[1fr_0.954fr] gap-3 items-start">
                 <div className="flex flex-col gap-3">
                   {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                  <LazyVideo src="https://framerusercontent.com/assets/X3Sv70gLQhJMUKTx0eT1vd2d2vw.mp4" className="w-full" style={{ display: 'block' }} />
+                  <LazyVideo src="/images/sift/design-video-1.mp4" className="w-full" style={{ display: 'block' }} />
                   {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                  <LazyVideo src="https://framerusercontent.com/assets/kON8tynrgW1RYeXQjVdhFtmYdo.mp4" className="w-full" style={{ display: 'block' }} />
+                  <LazyVideo src="/images/sift/design-video-2.mp4" className="w-full" style={{ display: 'block' }} />
                 </div>
                 {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                <LazyVideo src="https://framerusercontent.com/assets/tONZdXFJWttXDsyKuBuCaOSsw.mp4" className="w-full" style={{ display: 'block' }} />
+                <LazyVideo src="/images/sift/design-video-3.mp4" className="w-full" style={{ display: 'block' }} />
               </div>
             </div>
           </div>

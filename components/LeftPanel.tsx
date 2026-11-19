@@ -11,6 +11,7 @@ import { gsap } from 'gsap';
 import { usePathname } from 'next/navigation';
 import { ArrowUpRight, ChevronUp } from 'lucide-react';
 import { siftNavSections } from './SiftCaseStudyContent';
+import { frogslayerNavSections } from './FrogslayerCaseStudyContent';
 import CaseStudyCarousel from './CaseStudyCarousel';
 import BackToWork from './BackToWork';
 
@@ -92,7 +93,7 @@ export default function LeftPanel() {
 
           {/* Case study section nav */}
           <div style={{ marginBottom: '32px' }}>
-            <CaseStudyNav key={slug} sections={slug === 'sift' ? siftNavSections : undefined} />
+            <CaseStudyNav key={slug} sections={slug === 'sift' ? siftNavSections : slug === 'capstone' ? frogslayerNavSections : undefined} />
           </div>
         </>
       ) : (

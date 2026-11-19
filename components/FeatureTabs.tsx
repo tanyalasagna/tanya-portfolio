@@ -13,14 +13,18 @@ export default function FeatureTabs({ items }: { items: Feature[] }) {
   const [hover, setHover] = useState<number | null>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-  const [playing, setPlaying] = useState(true);
+  const [playing, setPlaying] = useState(false); // flips on when the video actually starts (it waits until the panel is on screen)
   const [time, setTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const reduced = useReducedMotion();
   // Inline on purpose: globals.css sets `* { transition: border-color }`, which beats Tailwind's transition utilities
   const tr = (props: string) => (reduced ? 'none' : props.split(',').map(p => `${p.trim()} 300ms ease-out`).join(', '));
 
-  // Only the visible video plays; each one restarts from the top when it comes back
+  // Whether the panel is on screen
+  const panelRef = useRef<HTMLDivElement>(null);
+  const onScreen = useRef(false);
+
+  // Only the selected video plays; each one restarts from the top when it comes back
   useEffect(() => {
     videoRefs.current.forEach((v, i) => {
       if (!v) return;
@@ -28,11 +32,26 @@ export default function FeatureTabs({ items }: { items: Feature[] }) {
         v.currentTime = 0;
         setTime(0);
         setDuration(v.duration || 0);
-        v.play().catch(() => {});
+        if (onScreen.current) v.play().catch(() => {});
       } else {
         v.pause();
       }
     });
+  }, [active]);
+
+  // ...and only while the panel is on screen, so it doesn't download or decode until you scroll to it
+  useEffect(() => {
+    const panel = panelRef.current;
+    if (!panel) return;
+    const io = new IntersectionObserver(([entry]) => {
+      onScreen.current = entry.isIntersecting;
+      const v = videoRefs.current[active];
+      if (!v) return;
+      if (entry.isIntersecting) v.play().catch(() => {});
+      else v.pause();
+    }, { rootMargin: '300px' });
+    io.observe(panel);
+    return () => io.disconnect();
   }, [active]);
 
   const toggle = () => {
@@ -125,7 +144,7 @@ export default function FeatureTabs({ items }: { items: Feature[] }) {
       </div>
 
       {/* One gray block holds the description and the video, so it reads as the selected box's content */}
-      <div id="feature-panel" role="tabpanel" aria-labelledby={`feature-tab-${active}`} className="p-5 sm:p-6 lg:p-8" style={{ background: '#F0F0EE' }}>
+      <div ref={panelRef} id="feature-panel" role="tabpanel" aria-labelledby={`feature-tab-${active}`} className="p-5 sm:p-6 lg:p-8" style={{ background: '#F0F0EE' }}>
         <div className="grid mb-5 lg:mb-6">
           {items.map((f, i) => (
             <div
@@ -151,11 +170,10 @@ export default function FeatureTabs({ items }: { items: Feature[] }) {
               key={f.src}
               ref={el => { videoRefs.current[i] = el; }}
               src={f.src}
-              autoPlay={i === 0}
               muted
               loop
               playsInline
-              preload={i === 0 ? 'auto' : 'metadata'}
+              preload="metadata"
               aria-hidden={i !== active}
               onClick={i === active ? toggle : undefined}
               onPlay={() => { if (i === active) setPlaying(true); }}
