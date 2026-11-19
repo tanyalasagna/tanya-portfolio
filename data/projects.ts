@@ -49,7 +49,7 @@ export const projects: Project[] = [
     role: ['UX designer', 'Lead - Usability testing'],
     tools: ['UX design & research', 'Usability testing'],
     duration: 'Fall 2025\n4 months',
-    team: '(5 researchers and designers)\nChanseo, Kathleen, Nina, Raelee & Ryan',
+    team: '(5 designers)\nChanseo, Kathleen, Nina, Raelee & Ryan',
     impact: [],
     teamLabel: 'Collaborators',
     toolsLabel: 'Skills',

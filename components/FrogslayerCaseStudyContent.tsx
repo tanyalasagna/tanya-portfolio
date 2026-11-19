@@ -90,7 +90,7 @@ export default function FrogslayerCaseStudyContent() {
                   Frogslayer&rsquo;s research found that <span style={{ fontWeight: 600 }}>66% of users in their client base preferred self-service.</span> Yet their team was also hearing about difficulties from patrons who had chosen kiosks over staff-assisted service.
                 </p>
                 <p className={pColCls} style={pStyle}>
-                  Our team of six was brought in to investigate what makes a good kiosk experience and develop reusable UX guidelines grounded in research.
+                  Our team was brought in to investigate what makes a good kiosk experience and develop reusable UX guidelines grounded in research.
                 </p>
               </div>
               {/* Right-aligned: a two-photo collage from Frogslayer's site with their logo pill overlapping it, credited underneath */}
@@ -124,10 +124,10 @@ export default function FrogslayerCaseStudyContent() {
             </h3>
             <div className="lg:w-[58%]">
               <p className={pColCls} style={pStyle}>
-                Unlike personal devices, kiosks are used in busy, shared spaces. People navigate them while managing queues, distractions, unfamiliar hardware, and sometimes a group of friends or family.
+                Unlike personal devices, kiosks operate in busy, shared spaces. People navigate them while managing queues, distractions, unfamiliar hardware, and sometimes a group of friends or family.
               </p>
               <p className={pColCls} style={pStyle}>
-                We wanted to understand how these factors shaped the experience, and what designers could do about them.
+                The challenge was to understand how these factors shaped the experience and identify opportunities for better design.
               </p>
             </div>
             <div className="mt-8">
@@ -151,17 +151,17 @@ export default function FrogslayerCaseStudyContent() {
             </h3>
             <div className="lg:w-[52%]">
               <p className={pColCls} style={pStyle}>
-                We began with desk research and visits to local arcades, observing how people interacted with existing kiosks.
+                Initial research involved desk research and visits to local arcades to observe how people interacted with existing kiosks.
               </p>
-              <p className={pColCls} style={pStyle}>Across our visits, we noticed:</p>
+              <p className={pColCls} style={pStyle}>Three issues stood out:</p>
             </div>
             {/* The collage fills exactly the height of the list and closing lines beside it (top edge level with the first bullet,
                 bottom edge with the last line) on desktop; below that it flows under the text */}
             <div className="flex flex-col lg:flex-row lg:items-stretch lg:justify-between gap-8 lg:gap-10 lg:pb-[60px]">
               <div className="lg:w-[52%] lg:flex-initial min-w-0">
                 <div className={pColCls} style={pStyle}>
-                  <ArrowBullet><span style={{ fontWeight: 600 }}>Missed cues:</span> People concentrated on on-screen instructions while the card reader flashed unnoticed.</ArrowBullet>
-                  <ArrowBullet><span style={{ fontWeight: 600 }}>Added urgency:</span> Countdown timers put users under pressure, especially when queues formed.</ArrowBullet>
+                  <ArrowBullet><span style={{ fontWeight: 600 }}>Missed cues:</span> Users focused on on-screen instructions while card reader signals went unnoticed.</ArrowBullet>
+                  <ArrowBullet><span style={{ fontWeight: 600 }}>Added urgency:</span> Countdown timers heightened pressure, particularly when queues formed.</ArrowBullet>
                   <ArrowBullet last><span style={{ fontWeight: 600 }}>Interrupted flows:</span> Loyalty pop-ups repeatedly caused confusion and hesitation.</ArrowBullet>
                 </div>
                 <div className={pColCls} style={{ ...pStyle, marginBottom: 0 }}>
@@ -177,7 +177,7 @@ export default function FrogslayerCaseStudyContent() {
               {/* Two clips from the arcade visits, the second overlapping the first's lower right. On desktop both are sized by the
                   height of the row (84% each): the first is pinned to its top-left (top edge level with the first bullet), the second
                   hangs from 36% down at the right, so it ends a little below the text. The whole collage is lifted 45px (the height of the
-                  "Across our visits" line plus its gap) so its top edge is level with that line */}
+                  "Three issues stood out" line plus its gap) so its top edge is level with that line */}
               <div className="lg:w-[40%] lg:flex-none min-w-0 relative">
                 <div className="w-[64%] sm:w-[46%] relative mt-2 lg:mt-0 lg:absolute lg:inset-0 lg:w-auto lg:translate-x-5 lg:-translate-y-[45px]">
                   <LazyVideo src="/images/frogslayer/field-1.mp4" className="block w-[62%] lg:absolute lg:top-0 lg:left-0 lg:h-[84%] lg:w-auto" style={{ aspectRatio: '728 / 974', borderRadius: 10, boxShadow: '0 8px 24px rgba(0, 0, 0, 0.16)' }} />
@@ -200,10 +200,10 @@ export default function FrogslayerCaseStudyContent() {
             </h3>
             <div className="lg:w-[58%]">
               <p className={pColCls} style={pStyle}>
-                Our brief was to deliver a set of research-backed kiosk UX guidelines. Building a product wasn&rsquo;t part of the ask.
+                The brief called for research-backed kiosk UX guidelines, not a working product.
               </p>
               <p className={pColCls} style={pStyle}>
-                But observations alone could only take us so far. As a team, we decided that building and rigorously testing a working kiosk experience would give us stronger evidence for our recommendations.
+                The team and I decided to go beyond the brief and build a functional kiosk experience, allowing us to rigorously test design decisions before developing the final guidelines.
               </p>
             </div>
 
@@ -212,13 +212,10 @@ export default function FrogslayerCaseStudyContent() {
 
             <div className="lg:w-[58%]">
               <p className={pColCls} style={pStyle}>
-                We built interactive prototypes for full-size kiosk monitors, allowing us to experiment with layouts, feedback states, navigation, and loyalty flows.
+                Custom-built prototypes on full-size kiosk monitors allowed for experimentation with layouts, feedback states, navigation, and loyalty flows.
               </p>
               <p className={pColCls} style={pStyle}>
-                I contributed heavily to rapid prototyping, translating research insights into interface changes that could be tested and refined across multiple rounds.
-              </p>
-              <p className={pColCls} style={pStyle}>
-                The prototypes weren&rsquo;t the final deliverable. They were how we arrived at it.
+                I took the lead on rapid prototyping, translating research insights into interface changes that could be tested and refined across multiple rounds.
               </p>
             </div>
 
