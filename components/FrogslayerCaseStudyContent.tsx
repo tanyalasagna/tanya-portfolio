@@ -75,7 +75,7 @@ export default function FrogslayerCaseStudyContent() {
             </h3>
             <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 lg:gap-10">
               <div className="lg:w-[52%] lg:flex-initial min-w-0">
-                <p className={pColCls} style={{ ...pStyle, fontWeight: 600 }}>
+                <p className={pColCls} style={pStyle}>
                   <a
                     href="https://frogslayer.com/"
                     target="_blank"
@@ -90,7 +90,7 @@ export default function FrogslayerCaseStudyContent() {
                   Frogslayer&rsquo;s research found that <span style={{ fontWeight: 600 }}>66% of users in their client base preferred self-service.</span> Yet their team was also hearing about difficulties from patrons who had chosen kiosks over staff-assisted service.
                 </p>
                 <p className={pColCls} style={pStyle}>
-                  Our team was brought in to investigate what makes a good kiosk experience and develop reusable UX guidelines grounded in research.
+                  <span style={{ fontWeight: 600 }}>Expected final deliverable:</span> Reusable, research-backed UX guidelines for arcade kiosks, intended to inform Frogslayer&rsquo;s future projects.
                 </p>
               </div>
               {/* Right-aligned: a two-photo collage from Frogslayer's site with their logo pill overlapping it, credited underneath */}
