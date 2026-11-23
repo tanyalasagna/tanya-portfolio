@@ -1,11 +1,15 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
 import { circleRuns } from './PixelNumber';
 
 type Page = { src: string; alt: string };
 
-const TURN_MS = 950;
+const TURN_MS = 1000;
+// Each leaf is cut into thin vertical strips hinged to one another. While it turns, every strip tilts a few degrees further than the one before it,
+// so the page curls like paper (the free edge trails behind the spine) instead of swinging round as a flat board.
+const STRIPS = 20;
+const BEND_DEG = 1.8; // extra tilt per strip at the peak of a turn (19 strips ≈ 34° of curl at the free edge)
 const BUTTON_GREY = '#8C8A87'; // the buttons are a soft grey (the badges stay dark); the light chevron still reads clearly on it
 
 // A real-book flipbook. The cover sits alone, closed; opening it reveals two-page spreads; after the last spread the final page is
@@ -17,16 +21,20 @@ const BUTTON_GREY = '#8C8A87'; // the buttons are a soft grey (the badges stay d
 export default function FlipBook({ pages, ratio = '1000 / 1353' }: { pages: Page[]; ratio?: string }) {
   const leafCount = Math.ceil(pages.length / 2);
   const [turned, setTurned] = useState(0);
-  const [turning, setTurning] = useState<{ leaf: number; n: number } | null>(null);
+  const [turning, setTurning] = useState<{ leaf: number; n: number; dir: 'fwd' | 'back' } | null>(null);
   const reduced = useReducedMotion();
   const touchX = useRef<number | null>(null);
+  const turnTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  useEffect(() => () => clearTimeout(turnTimer.current), []);
 
   const turnTo = (t: number) => {
     const target = Math.max(0, Math.min(leafCount, t));
     if (target === turned) return;
     // Several steps at once (the dots) just move the book; a single step also animates the passing shadow on that leaf
-    if (Math.abs(target - turned) === 1) setTurning({ leaf: Math.min(target, turned), n: (turning?.n ?? 0) + 1 });
+    if (Math.abs(target - turned) === 1) setTurning({ leaf: Math.min(target, turned), n: (turning?.n ?? 0) + 1, dir: target > turned ? 'fwd' : 'back' });
     setTurned(target);
+    clearTimeout(turnTimer.current);
+    turnTimer.current = setTimeout(() => setTurning(null), TURN_MS + 60);
   };
   const next = () => turnTo(turned + 1);
   const prev = () => turnTo(turned - 1);
@@ -79,43 +87,65 @@ export default function FlipBook({ pages, ratio = '1000 / 1353' }: { pages: Page
   const gutterRight = 'linear-gradient(to right, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.06) 6%, rgba(0,0,0,0) 14%)';
   const gutterLeft = 'linear-gradient(to left, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.06) 6%, rgba(0,0,0,0) 14%)';
 
-  const face = (idx: number, side: 'front' | 'back', leaf: number) => {
+  // One vertical slice of one side of a page. Every slice shows its own part of the image, so the strips together read as the whole page.
+  const sliceFace = (idx: number, side: 'front' | 'back', k: number, leaf: number) => {
     const p = pages[idx];
     if (!p) return null;
     const isRight = side === 'front';
+    // Seen from behind, the back of a leaf is mirrored, so the strip k from the spine shows the image slice counted from the other end
+    const m = isRight ? k : STRIPS - 1 - k;
     const clickable = isRight ? leaf === turned : leaf === turned - 1; // the visible page of each side
+    const bending = !reduced && turning?.leaf === leaf;
+    // Shade over the slice that sweeps across while the leaf turns, darker towards the free edge
+    const shade = bending && turning ? `fb-shade-${turning.n % 2}` : undefined;
+    // Gutter shadow where the paper curves into the spine, spread over the two strips nearest it
+    const gutter = k === 0 ? [0.22, 0.12] : k === 1 ? [0.12, 0.06] : k === 2 ? [0.06, 0] : null;
+    const dirTo = isRight ? 'to right' : 'to left';
+    // The shade deepens smoothly towards the free edge: each strip fades from its own level to its neighbour's, so no strip edges show
+    const shadeAt = (j: number) => (0.04 + 0.2 * (j / STRIPS)).toFixed(3);
+    return (
+      <div
+        role={k === 0 ? 'img' : undefined}
+        aria-label={k === 0 ? p.alt : undefined}
+        aria-hidden={k === 0 ? undefined : true}
+        onClick={clickable ? (isRight ? next : prev) : undefined}
+        style={{
+          position: 'absolute', top: 0, bottom: 0, left: -0.5, right: -0.5, background: '#fff', overflow: 'hidden',
+          backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden',
+          transform: isRight ? 'none' : 'rotateY(180deg)',
+          backgroundImage: wanted(idx) ? `url(${p.src})` : undefined,
+          backgroundSize: `${STRIPS * 100}% 100%`,
+          backgroundPosition: `${(m / (STRIPS - 1)) * 100}% 0`,
+          backgroundRepeat: 'no-repeat',
+          cursor: clickable ? (isRight ? (turned === leafCount ? 'default' : 'e-resize') : 'w-resize') : undefined,
+        }}
+      >
+        {gutter && <div aria-hidden style={{ position: 'absolute', inset: 0, background: `linear-gradient(${dirTo}, rgba(0,0,0,${gutter[0]}), rgba(0,0,0,${gutter[1]}))`, pointerEvents: 'none' }} />}
+        {shade && (
+          <div
+            aria-hidden
+            style={{ position: 'absolute', inset: 0, background: `linear-gradient(to right, rgba(0,0,0,${isRight ? shadeAt(k) : shadeAt(k + 1)}), rgba(0,0,0,${isRight ? shadeAt(k + 1) : shadeAt(k)}))`, opacity: 0, pointerEvents: 'none', animation: `${shade} ${TURN_MS}ms ease-in-out` }}
+          />
+        )}
+      </div>
+    );
+  };
+
+  // The leaf as a chain of strips: each one sits at the right edge of the one before and is a child of it, so a tilt on one carries all the rest with it
+  const strip = (k: number, leaf: number): React.ReactNode => {
+    const bending = !reduced && turning?.leaf === leaf && k > 0;
     return (
       <div
         style={{
-          position: 'absolute', inset: 0, background: '#fff', overflow: 'hidden',
-          backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden',
-          transform: isRight ? 'none' : 'rotateY(180deg)',
+          position: 'absolute', top: 0, height: '100%',
+          left: k === 0 ? 0 : '100%', width: k === 0 ? `${100 / STRIPS}%` : '100%',
+          transformOrigin: 'left center', transformStyle: 'preserve-3d',
+          animation: bending && turning ? `fb-bend-${turning.dir}-${turning.n % 2} ${TURN_MS}ms ease-in-out` : undefined,
         }}
       >
-        {wanted(idx) && (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img src={p.src} alt={p.alt} decoding="async" draggable={false} style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }} />
-        )}
-        {/* Gutter shadow where the paper curves into the spine */}
-        <div aria-hidden style={{ position: 'absolute', inset: 0, background: isRight ? gutterRight : gutterLeft, pointerEvents: 'none' }} />
-        {/* Shadow that sweeps over the page while its leaf is turning */}
-        {!reduced && turning?.leaf === leaf && (
-          <div
-            key={turning.n}
-            aria-hidden
-            style={{ position: 'absolute', inset: 0, background: isRight ? 'linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.05))' : 'linear-gradient(to left, rgba(0,0,0,0.5), rgba(0,0,0,0.05))', opacity: 0, pointerEvents: 'none', animation: `fb-shade ${TURN_MS}ms ease-in-out` }}
-          />
-        )}
-        {clickable && (
-          <button
-            type="button"
-            tabIndex={-1}
-            aria-hidden
-            onClick={isRight ? next : prev}
-            className="absolute inset-0 w-full h-full border-0 bg-transparent p-0"
-            style={{ cursor: isRight ? (turned === leafCount ? 'default' : 'e-resize') : 'w-resize' }}
-          />
-        )}
+        {sliceFace(2 * leaf, 'front', k, leaf)}
+        {sliceFace(2 * leaf + 1, 'back', k, leaf)}
+        {k < STRIPS - 1 && strip(k + 1, leaf)}
       </div>
     );
   };
@@ -132,7 +162,14 @@ export default function FlipBook({ pages, ratio = '1000 / 1353' }: { pages: Page
       }}
       className="outline-none"
     >
-      <style>{'@keyframes fb-shade{0%{opacity:0}45%{opacity:1}100%{opacity:0}}'}</style>
+      <style>{`
+        @keyframes fb-shade-0{0%{opacity:0}45%{opacity:1}100%{opacity:0}}
+        @keyframes fb-shade-1{0%{opacity:0}45%{opacity:1}100%{opacity:0}}
+        @keyframes fb-bend-fwd-0{0%{transform:rotateY(0)}40%{transform:rotateY(${BEND_DEG}deg)}100%{transform:rotateY(0)}}
+        @keyframes fb-bend-fwd-1{0%{transform:rotateY(0)}40%{transform:rotateY(${BEND_DEG}deg)}100%{transform:rotateY(0)}}
+        @keyframes fb-bend-back-0{0%{transform:rotateY(0)}40%{transform:rotateY(-${BEND_DEG}deg)}100%{transform:rotateY(0)}}
+        @keyframes fb-bend-back-1{0%{transform:rotateY(0)}40%{transform:rotateY(-${BEND_DEG}deg)}100%{transform:rotateY(0)}}
+      `}</style>
 
       {/* Two pages wide; the book slides sideways so a closed cover or back page sits in the middle */}
       <div
@@ -160,12 +197,12 @@ export default function FlipBook({ pages, ratio = '1000 / 1353' }: { pages: Page
                   transform: isTurned ? 'rotateY(-180deg)' : 'rotateY(0deg)',
                   // Stack order flips halfway through the turn: unturned leaves pile up with the first on top, turned ones with the last on top
                   zIndex: isTurned ? i + 1 : leafCount - i,
-                  transition: move(`transform ${TURN_MS}ms ${ease}, z-index 0s linear ${TURN_MS / 2}ms`),
-                  boxShadow: '0 2px 12px rgba(0, 0, 0, 0.14)',
+                  transition: move(`transform ${TURN_MS}ms ${ease}, z-index 0s linear ${TURN_MS / 2}ms, box-shadow 200ms ease`),
+                  // A flat shadow would not follow a curling page, so it only shows while the leaf is at rest
+                  boxShadow: turning?.leaf === i && !reduced ? '0 2px 12px rgba(0, 0, 0, 0)' : '0 2px 12px rgba(0, 0, 0, 0.14)',
                 }}
               >
-                {face(2 * i, 'front', i)}
-                {face(2 * i + 1, 'back', i)}
+                {strip(0, i)}
               </div>
             );
           })}

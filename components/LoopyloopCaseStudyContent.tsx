@@ -334,13 +334,12 @@ export default function LoopyloopCaseStudyContent() {
         <Reveal>
           <section id="reflections" className="scroll-mt-8 mb-16">
             <h2 className={labelCls} style={labelStyle}>Reflections</h2>
-            <h3 className={`${headlineCls} !mb-6`} style={headlineStyle}>
-              Automating the tedious bits<span style={{ fontFamily: 'var(--font-dm-sans)', fontWeight: 700, letterSpacing: 0 }}>,</span> without losing the joy of making.
-            </h3>
-            <div className="md:max-w-[60%]">
+            <div className="mt-4 md:max-w-[85%]">
               <div className="mb-1 flex items-center gap-3"><PixelNumber n={1} /><h3 className="text-[17px] sm:text-[18px] lg:text-[20px] font-bold" style={{ ...pStyle, margin: 0, lineHeight: 1.25 }}>On designing from personal experience</h3></div>
-              <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed pl-[39px] mb-8" style={pStyle}>Being a crocheter helped me articulate the problem, but it also came with assumptions. Research and participatory workshops helped validate the frustrations I&rsquo;d observed and uncover experiences beyond my own.</p>
-              <div className="mb-1 flex items-center gap-3"><PixelNumber n={2} /><h3 className="text-[17px] sm:text-[18px] lg:text-[20px] font-bold" style={{ ...pStyle, margin: 0, lineHeight: 1.25 }}>If I revisited LoopyLoop today...</h3></div>
+              <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed pl-[39px] mb-8" style={pStyle}>Being a crocheter helped me articulate the problem, but it also came with assumptions. Research and participatory workshops helped validate the frustrations I&rsquo;d observed and learn about experiences beyond my own.</p>
+              <div className="mb-1 flex items-center gap-3"><PixelNumber n={2} /><h3 className="text-[17px] sm:text-[18px] lg:text-[20px] font-bold" style={{ ...pStyle, margin: 0, lineHeight: 1.25 }}>On balancing utility and delight</h3></div>
+              <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed pl-[39px] mb-8" style={pStyle}>It&rsquo;s tempting to keep adding tools and automating every step. But the messy parts of making are often part of the joy; it&rsquo;s the logistics that get in the way. LoopyLoop taught me to focus on easing those frustrations without taking away from the craft itself. I&rsquo;d love to keep working on projects that explore this balance.</p>
+              <div className="mb-1 flex items-center gap-3"><PixelNumber n={3} /><h3 className="text-[17px] sm:text-[18px] lg:text-[20px] font-bold" style={{ ...pStyle, margin: 0, lineHeight: 1.25 }}>If I revisited LoopyLoop today...</h3></div>
               <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed pl-[39px]" style={{ ...pStyle, margin: 0 }}>I&rsquo;d consider modernizing an existing platform like Ravelry instead of building from scratch. Its patterns, data, and established community offer a valuable foundation worth preserving.</p>
             </div>
           </section>

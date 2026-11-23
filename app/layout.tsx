@@ -1,14 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Alegreya_Sans } from 'next/font/google';
 import './globals.css';
 
-const alegreya = Alegreya_Sans({
-  variable: '--font-dm-sans',
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
-  style: ['normal', 'italic'],
-});
 import { ThemeProvider } from '@/components/ThemeProvider';
 import LeftPanel from '@/components/LeftPanel';
 import MobileNav from '@/components/MobileNav';
@@ -29,7 +22,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={alegreya.variable}
       suppressHydrationWarning
     >
       <body className="min-h-screen antialiased" suppressHydrationWarning>

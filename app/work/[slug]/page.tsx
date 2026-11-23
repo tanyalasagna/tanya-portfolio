@@ -8,7 +8,7 @@ import LoopyloopCaseStudyContent from '@/components/LoopyloopCaseStudyContent';
 import PixelNumber from '@/components/PixelNumber';
 import EbookCaseStudyContent from '@/components/EbookCaseStudyContent';
 import ReachOutLink from '@/components/ContactDialog';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -34,7 +34,7 @@ export default async function CaseStudyPage({ params }: Props) {
           <h1 className="leading-none mb-2 text-[18px] lg:text-[20px]" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans)', fontWeight: 500, fontStyle: 'normal' }}>
             {project.displayTitle ?? project.title}
             {project.tags.length > 0 && (
-              <span style={{ opacity: 0.8, fontWeight: 400, fontStyle: 'italic' }}>{' '}({project.tags.join(', ')})</span>
+              <span style={{ opacity: 0.8, fontWeight: 400, fontStyle: 'normal' }}>{' '}({project.tags.join(', ')})</span>
             )}
           </h1>
           {project.subtitle && (
@@ -57,7 +57,7 @@ export default async function CaseStudyPage({ params }: Props) {
             ].map(({ label, value }) => (
               <div key={label} style={{ padding: '20px 18px', background: '#F0F0EE' }}>
                 <div className="mb-3 text-[15px] sm:text-[16px] lg:text-[18px]" style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>{label}</div>
-                <div className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", lineHeight: 1.5, whiteSpace: 'pre-line' }}>{value}</div>
+                <div className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans), sans-serif', lineHeight: 1.5, whiteSpace: 'pre-line' }}>{value}</div>
               </div>
             ))}
           </div>
@@ -69,7 +69,7 @@ export default async function CaseStudyPage({ params }: Props) {
                 <PixelNumber n="!" size={18} />
                 Note
               </div>
-              <div className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", lineHeight: 1.5 }}>
+              <div className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans), sans-serif', lineHeight: 1.5 }}>
                 <p style={{ margin: '0 0 12px' }}>
                   LoopyLoop was designed as a complete marketplace where fiber artists could buy, sell, and manage their creative projects. <span style={{ fontWeight: 600 }}>This case study highlights two flagship features: the <em>Material Identifier</em> and <em>Pattern Writing Tool</em>.</span>
                 </p>
@@ -88,9 +88,12 @@ export default async function CaseStudyPage({ params }: Props) {
                 <PixelNumber n="!" size={18} />
                 Note
               </div>
-              <div className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", lineHeight: 1.5 }}>
+              <div className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: 'var(--font-dm-sans), sans-serif', lineHeight: 1.5 }}>
                 <p style={{ margin: '0 0 12px' }}>
-                  This project was completed for a client through a marketing agency. Identifying details have been omitted for confidentiality.
+                  This project was completed for a client during my time at{' '}
+                  <a href="https://www.tossthe.co.in/company/about-us/" target="_blank" rel="noopener noreferrer" data-cuelume-tap="" data-cuelume-emphasis="subtle" className="decoration-[1.5px] decoration-current underline-offset-[4px] text-inherit no-underline hover:underline px-[2px] -mx-[2px] rounded-[2px]">
+                    Toss the Coin<ArrowUpRight size={14} strokeWidth={1.75} aria-hidden style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '2px' }} />
+                  </a>, a marketing agency. Identifying details have been omitted for confidentiality.
                 </p>
                 <p style={{ margin: 0 }}>
                   To learn more, <ReachOutLink topic="Return on Imagination">feel free to reach out</ReachOutLink>

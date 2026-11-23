@@ -15,7 +15,7 @@ export default function ColophonPage() {
           Type is set in{' '}
           <a href="https://houseoftype.co/products/dreamer" target="_blank" rel="noopener noreferrer" className={linkCls} style={linkStyle}>Dreamer TM{externalIcon}</a>
           {' '}and{' '}
-          <a href="https://fonts.google.com/specimen/Alegreya" target="_blank" rel="noopener noreferrer" className={linkCls} style={linkStyle}>Alegreya{externalIcon}</a>
+          <a href="https://fonts.google.com/specimen/IBM+Plex+Sans?categoryFilters=Sans+Serif:%2FSans%2FNeo+Grotesque&preview.script=Latn&query=ibm+plex+sans" target="_blank" rel="noopener noreferrer" className={linkCls} style={linkStyle}>IBM Plex Sans{externalIcon}</a>
         </>
       ),
     },

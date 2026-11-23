@@ -28,7 +28,7 @@ const wordmarkLetters: { ch: string; set: 'ss01' | 'ss02' }[] = [
 ];
 
 const colophonLines = [
-  { before: 'Type set in ', links: [{ label: 'Dreamer TM', href: 'https://typemania.eu/products/dreamer-tm' }, { label: 'Alegreya Sans', href: 'https://fonts.google.com/specimen/Alegreya+Sans' }], join: ' and ' },
+  { before: 'Type set in ', links: [{ label: 'Dreamer TM', href: 'https://typemania.eu/products/dreamer-tm' }, { label: 'IBM Plex Sans', href: 'https://fonts.google.com/specimen/IBM+Plex+Sans?categoryFilters=Sans+Serif:%2FSans%2FNeo+Grotesque&preview.script=Latn&query=ibm+plex+sans' }], join: ' and ' },
   { before: 'Sounds via ', links: [{ label: 'Cuelume', href: 'https://cuelume.dev/' }] },
   { before: 'Hosted on ', links: [{ label: 'Vercel', href: 'https://vercel.com/' }] },
   { before: 'Source on ', links: [{ label: 'Github', href: 'https://github.com/tanyalasagna/tanya-portfolio' }] },
@@ -161,7 +161,7 @@ export default function MobileNav() {
                   <LiveClock sizeCls="text-[15px] sm:text-[16px]" />
                 </div>
                 {/* Row 2: year + colophon */}
-                <div className="text-[15px] sm:text-[16px]" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <div className="text-[15px] sm:text-[16px]" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-dm-sans)', fontStyle: 'normal', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
                   <span>2027</span>
                   <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="20" height="20" style={{ flexShrink: 0 }} />
                   <button

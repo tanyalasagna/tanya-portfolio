@@ -138,7 +138,7 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
       <span style={{
         color: '#FFFFFF',
         fontSize: '15px',
-        fontStyle: 'normal',
+        fontStyle: 'italic',
         fontFamily: 'var(--font-dm-sans)',
         fontWeight: 400,
         padding: '8px 12px',
@@ -183,7 +183,7 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
             <p className="text-[16px] lg:text-[17.5px]" style={{ lineHeight: 1.2, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
               {[project.tags.join(', '), ...(project.description ? project.description.split(' \\ ') : [])].map((part, i, arr) => (
                 <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                  <span style={{ color: i === 0 ? 'var(--text)' : 'var(--text-muted)', fontStyle: i === 0 ? 'italic' : 'normal', opacity: 0.8 }}>{part}</span>
+                  <span style={{ color: i === 0 ? 'var(--text)' : 'var(--text-muted)', fontStyle: 'normal', opacity: 0.8 }}>{part}</span>
                   {i < arr.length - 1 && (
                     <span
                       aria-hidden

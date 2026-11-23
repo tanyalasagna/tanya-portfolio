@@ -143,7 +143,7 @@ export default function HookSidebar() {
               style={{
                 color: isActive ? 'var(--text)' : 'var(--text-muted)',
                 fontFamily: 'var(--font-dm-sans)',
-                fontWeight: isActive ? 700 : 300,
+                fontWeight: isActive ? 700 : 400,
                 transition: 'color 180ms ease',
                 display: 'block',
                 paddingLeft: '30px',

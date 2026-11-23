@@ -23,7 +23,7 @@ export default function LiveClock({ fontSize = '18px', sizeCls }: { fontSize?: s
   }, []);
 
   return (
-    <div suppressHydrationWarning className={sizeCls} style={{ color: 'var(--text-muted)', ...(sizeCls ? {} : { fontSize }), fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400 }}>
+    <div suppressHydrationWarning className={sizeCls} style={{ color: 'var(--text-muted)', ...(sizeCls ? {} : { fontSize }), fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap', fontFamily: 'var(--font-dm-sans)', fontStyle: 'normal', fontWeight: 400 }}>
       Chicago, IL. {time}
     </div>
   );

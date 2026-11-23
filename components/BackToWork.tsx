@@ -38,7 +38,7 @@ export default function BackToWork({ className = '' }: { className?: string }) {
       style={{
         fontFamily: 'var(--font-dm-sans)',
         fontWeight: 400,
-        fontStyle: 'italic',
+        fontStyle: 'normal',
         color: 'var(--text-muted)',
         opacity: 0.6,
         lineHeight: 1,

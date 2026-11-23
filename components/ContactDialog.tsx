@@ -88,7 +88,7 @@ export default function ReachOutLink({ topic, children }: { topic: string; child
   const field: React.CSSProperties = {
     width: '100%', boxSizing: 'border-box', padding: '10px 12px', borderRadius: 0,
     border: '1px solid color-mix(in srgb, var(--bg) 32%, transparent)', background: 'color-mix(in srgb, var(--bg) 7%, transparent)', color: 'var(--bg)',
-    fontFamily: "'Alegreya Sans', sans-serif", fontSize: 17, lineHeight: 1.4, outline: 'none',
+    fontFamily: 'var(--font-dm-sans), sans-serif', fontSize: 17, lineHeight: 1.4, outline: 'none',
   };
 
   const fieldErrorStyle: React.CSSProperties = { margin: '6px 0 0', color: 'var(--bg)', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic' };
@@ -151,7 +151,7 @@ export default function ReachOutLink({ topic, children }: { topic: string; child
             </div>
 
             {status === 'sent' ? (
-              <div style={{ padding: '8px 0 12px', fontFamily: "'Alegreya Sans', sans-serif", color: 'var(--bg)' }}>
+              <div style={{ padding: '8px 0 12px', fontFamily: 'var(--font-dm-sans), sans-serif', color: 'var(--bg)' }}>
                 <p className="text-[20px] sm:text-[22px]" style={{ margin: '0 0 8px', fontWeight: 700 }}>Thanks, your message is on its way.</p>
                 <p className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{ margin: 0, lineHeight: 1.5 }}>I&rsquo;ll reply to the email address you gave.</p>
               </div>

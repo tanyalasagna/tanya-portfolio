@@ -125,10 +125,10 @@ export default function EbookCaseStudyContent() {
           <section id="reflections" className="scroll-mt-8 mb-16">
             <h2 className={labelCls} style={labelStyle}>Reflections</h2>
             <div className="mt-4 md:max-w-[85%]">
-              <div className="mb-1 flex items-center gap-3"><PixelNumber n={1} /><h3 className="text-[17px] sm:text-[18px] lg:text-[20px] font-bold" style={{ ...pStyle, margin: 0, lineHeight: 1.25 }}>Represent, don&rsquo;t rewrite.</h3></div>
-              <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed pl-[39px] mb-8" style={pStyle}>The students were the heart of this project. My job was to give their ideas a cohesive narrative without losing what made each one distinct.</p>
-              <div className="mb-1 flex items-center gap-3"><PixelNumber n={2} /><h3 className="text-[17px] sm:text-[18px] lg:text-[20px] font-bold" style={{ ...pStyle, margin: 0, lineHeight: 1.25 }}>Constraints leave room for experimentation.</h3></div>
-              <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed pl-[39px]" style={{ ...pStyle, margin: 0 }}>Working within existing brand guidelines didn&rsquo;t mean playing it safe. Several creative directions were presented, and the client chose the most experimental one. It reminded me of the value of putting unexpected ideas on the table.</p>
+              <div className="mb-1 flex items-center gap-3"><PixelNumber n={1} /><h3 className="text-[17px] sm:text-[18px] lg:text-[20px] font-bold" style={{ ...pStyle, margin: 0, lineHeight: 1.25 }}>Knowing when to step back.</h3></div>
+              <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed pl-[39px] mb-8" style={pStyle}>As a writer, it&rsquo;s tempting to put your own spin on everything. But telling the stories behind the students&rsquo; innovations reminded me that good storytelling sometimes means stepping back. My role was to bring their ideas together without losing what made each one unique.</p>
+              <div className="mb-1 flex items-center gap-3"><PixelNumber n={2} /><h3 className="text-[17px] sm:text-[18px] lg:text-[20px] font-bold" style={{ ...pStyle, margin: 0, lineHeight: 1.25 }}>Making room for experimentation.</h3></div>
+              <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed pl-[39px]" style={{ ...pStyle, margin: 0 }}>I enjoyed finding room to play within the client&rsquo;s brand guidelines. Of the creative directions presented, the client chose the most experimental one! It reminded me not to hold back an idea just because it feels a little unexpected.</p>
             </div>
           </section>
         </Reveal>

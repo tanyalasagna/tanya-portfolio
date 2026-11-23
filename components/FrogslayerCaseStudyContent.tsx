@@ -141,7 +141,7 @@ export default function FrogslayerCaseStudyContent() {
             <div className="mt-8">
               <KioskIssuesDiagram />
               <p className="mt-2 text-[14px] sm:text-[15px] lg:text-[16px]" style={{ fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}>
-                A visual summary I created of kiosk issues discussed during our discovery calls.
+                A visual summary I created of kiosk issues discussed during discovery calls.
               </p>
             </div>
           </section>
@@ -226,10 +226,10 @@ export default function FrogslayerCaseStudyContent() {
 
             <div className="lg:w-[58%]">
               <p className={pColCls} style={pStyle}>
-                The card purchase flow became our starting point. It brought together several interactions worth investigating: card selection, loading credits, loyalty prompts, and payment.
+                The card purchase flow became our starting point, bringing together card selection, credit loading, loyalty prompts, and payment.
               </p>
               <p className={pColCls} style={pStyle}>
-                I took the lead on rapid prototyping, translating research insights into interface changes that could be tested and refined across multiple rounds.
+                I led rapid prototyping, turning research insights into interface changes refined through multiple testing rounds.
               </p>
             </div>
 
@@ -343,7 +343,7 @@ export default function FrogslayerCaseStudyContent() {
               </p>
             </div>
 
-            <FindingAccordion
+            <FindingAccordion numberedPoints
               className="mb-6 lg:w-[58%]"
               items={[
                 { title: 'Interface design', body: ['Information hierarchy designed for quick scanning', 'Clear payment demonstrations', 'Visible system status and intuitive navigation'] },
@@ -442,7 +442,7 @@ export default function FrogslayerCaseStudyContent() {
                   items={[
                     { title: 'Prototypes as research tools', body: 'Building helped point to questions that observations didn\u2019t surface. Working on the loyalty flows, in particular, reinforced the value of testing competing ideas.' },
                     { title: 'What I\u2019d do differently', body: 'The student center provided a busy, distracting testing environment, but it also skewed the participant pool younger. Given another opportunity, I\u2019d recruit older participants directly to better represent the kiosk\u2019s intended audience.' },
-                    { title: 'On working with a team', body: 'Leading usability testing taught me when to step in, what to ask, and when to let a session meander. I was fortunate to work with a wonderful team, learning from their perspectives while finding opportunities to offer mentorship myself. That exchange meant just as much to me as the work itself.' },
+                    { title: 'On working with a team', body: 'Leading usability testing taught me when to step in, what to ask, and when to let a session meander. I was fortunate to work with a wonderful team, learning from their perspectives while finding opportunities to offer mentorship myself.' },
                   ]}
                 />
               </div>

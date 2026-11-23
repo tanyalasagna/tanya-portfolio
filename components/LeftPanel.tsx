@@ -34,7 +34,7 @@ const wordmarkLetters: { ch: string; set: 'ss01' | 'ss02' }[] = [
 ];
 
 const colophonLines = [
-  { before: 'Type set in ', links: [{ label: 'Dreamer TM', href: 'https://typemania.eu/products/dreamer-tm' }, { label: 'Alegreya Sans', href: 'https://fonts.google.com/specimen/Alegreya+Sans' }], join: ' and ' },
+  { before: 'Type set in ', links: [{ label: 'Dreamer TM', href: 'https://typemania.eu/products/dreamer-tm' }, { label: 'IBM Plex Sans', href: 'https://fonts.google.com/specimen/IBM+Plex+Sans?categoryFilters=Sans+Serif:%2FSans%2FNeo+Grotesque&preview.script=Latn&query=ibm+plex+sans' }], join: ' and ' },
   { before: 'Sounds via ', links: [{ label: 'Cuelume', href: 'https://cuelume.dev/' }] },
   { before: 'Hosted on ', links: [{ label: 'Vercel', href: 'https://vercel.com/' }] },
   { before: 'Source on ', links: [{ label: 'Github', href: 'https://github.com/tanyalasagna/tanya-portfolio' }] },
@@ -165,7 +165,7 @@ export default function LeftPanel() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25px' }}>
               <div style={{ opacity: 0.6 }}><LiveClock fontSize="17px" /></div>
-              <div style={{ color: 'var(--text-muted)', fontSize: '17px', fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <div style={{ color: 'var(--text-muted)', fontSize: '17px', fontFamily: 'var(--font-dm-sans)', fontStyle: 'normal', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
                 <span style={{ opacity: 0.6 }}>2027</span>
                 <span
                   aria-hidden
@@ -183,7 +183,7 @@ export default function LeftPanel() {
                   onClick={e => { e.stopPropagation(); play(colophonOpen ? 'close' : 'open', { theme: 'bubble', emphasis: 'subtle' }); setColophonOpen(v => !v); }}
                   aria-expanded={colophonOpen}
                   className="underline decoration-[1.5px] decoration-current underline-offset-[4px] text-inherit hover:no-underline px-[2px] -mx-[2px] rounded-[2px]"
-                  style={{ border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit', opacity: 0.6 }}
+                  style={{ border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontStyle: 'normal', fontWeight: 'inherit', opacity: 0.6 }}
                 >
                   View colophon
                   <ChevronUp size={15} strokeWidth={1.5} aria-hidden style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '3px', transform: colophonOpen ? 'rotate(180deg)' : 'none', transition: 'transform 200ms ease' }} />

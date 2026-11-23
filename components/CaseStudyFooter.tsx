@@ -61,8 +61,7 @@ export default function CaseStudyFooter() {
         style={{
           fontFamily: 'var(--font-dm-sans)',
           fontWeight: 400,
-          color: open ? 'var(--text)' : 'var(--text-muted)',
-          opacity: open ? 1 : 0.6,
+          color: 'var(--text)',
           fontStyle: 'italic',
           transition: 'color 200ms ease, opacity 200ms ease',
           lineHeight: 1,

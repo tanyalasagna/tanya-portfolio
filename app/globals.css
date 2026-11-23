@@ -11,8 +11,28 @@
 
 
 
+/* === IBM Plex Sans, the body font. These are variable fonts (one file covers every weight). size-adjust shrinks every glyph to 84%,
+   which takes about 3px off a typical 18px line of text everywhere it is used without touching each size. === */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/fonts/IBMPlexSans.woff2') format('woff2');
+  font-weight: 100 700;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 84%;
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('/fonts/IBMPlexSans-italic.woff2') format('woff2');
+  font-weight: 100 700;
+  font-style: italic;
+  font-display: swap;
+  size-adjust: 84%;
+}
+
 /* === Theme tokens === */
 :root {
+  --font-dm-sans: 'IBM Plex Sans', sans-serif;
   --bg: #FAF9F6; /* a soft, warm off-white, so the page is light without glaring */
   --sidebar-bg: #FAF9F6;
   --text: #383636;
@@ -86,7 +106,7 @@ body {
   min-height: 100%;
   background-color: var(--bg);
   color: var(--text);
-  font-family: var(--font-dm-sans, 'Alegreya Sans', sans-serif);
+  font-family: var(--font-dm-sans, 'IBM Plex Sans', sans-serif);
   font-weight: 400;
   transition: background-color 0.3s ease, color 0.3s ease;
 }

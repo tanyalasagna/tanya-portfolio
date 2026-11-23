@@ -30,7 +30,7 @@ function Tooltip({ x, y }: { x: number; y: number }) {
     }}>
       <span style={{
         color: '#FFFFFF', fontSize: '15px',
-        fontFamily: 'var(--font-dm-sans)', fontWeight: 400,
+        fontFamily: 'var(--font-dm-sans)', fontWeight: 400, fontStyle: 'italic',
         padding: '8px 12px', position: 'relative',
         letterSpacing: '0.02em', display: 'inline-flex',
         alignItems: 'center', gap: '6px',
@@ -40,6 +40,18 @@ function Tooltip({ x, y }: { x: number; y: number }) {
       </span>
     </div>,
     document.body
+  );
+}
+
+// Letters set in Dreamer TM's first stylistic set, as in the name wordmark (the letter shapes stay the same on hover)
+function WordmarkText({ text }: { text: string }) {
+  return (
+    <>
+      {[...text].map((ch, i) => (
+        // Dreamer's hyphen and comma look off, so they borrow Alegreya's, as in the headlines
+        <span key={i} style={ch === '-' || ch === ',' ? { fontFamily: 'var(--font-dm-sans)', fontWeight: 700, letterSpacing: 0 } : { fontFeatureSettings: '"ss01"' }}>{ch}</span>
+      ))}
+    </>
   );
 }
 
@@ -186,19 +198,20 @@ function Thumbnail({ project }: { project: Project }) {
             onMouseEnter={() => setTitleHovered(true)}
             onMouseLeave={() => setTitleHovered(false)}
           >
-          <p className="text-[18px] sm:text-[19px] lg:text-[22px] leading-tight" style={{ color: hovered || titleHovered ? 'var(--text-muted)' : 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", fontWeight: 600, lineHeight: 1.2, opacity: hovered || titleHovered ? 0.85 : 1, transition: 'color 400ms ease, opacity 400ms ease' }}>
+          {/* Set like the name wordmark: Dreamer TM with every letter in ss01 */}
+          <p className="text-[22px] sm:text-[25px] lg:text-[28px] leading-tight" style={{ color: hovered || titleHovered ? 'var(--text-muted)' : 'var(--text)', fontFamily: "'Dreamer TM', serif", fontWeight: 400, letterSpacing: '0.06em', lineHeight: 1.15, opacity: hovered || titleHovered ? 0.85 : 1, transition: 'color 400ms ease, opacity 400ms ease' }}>
             {project.mobileTitle ? (
               <>
-                <span className="lg:hidden">{project.mobileTitle}</span>
-                <span className="hidden lg:inline">{project.title}</span>
+                <span className="lg:hidden"><WordmarkText text={project.mobileTitle} /></span>
+                <span className="hidden lg:inline"><WordmarkText text={project.title} /></span>
               </>
-            ) : project.title}
+            ) : <WordmarkText text={project.title} />}
           </p>
           </Link>
           <p className="text-[14px] sm:text-[15px] lg:text-[18px]" style={{ lineHeight: 1.2, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
             {[project.tags.join(', '), ...(project.description ? project.description.split(' \\ ') : [])].map((part, i, arr) => (
               <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                <span style={{ color: i === 0 ? 'var(--text)' : 'var(--text-muted)', fontStyle: i === 0 ? 'italic' : 'normal', fontFamily: i === 0 ? 'var(--font-dm-sans)' : undefined, opacity: 0.8 }}>{part}</span>
+                <span style={{ color: i === 0 ? 'var(--text)' : 'var(--text-muted)', fontStyle: 'normal', fontFamily: i === 0 ? 'var(--font-dm-sans)' : undefined, opacity: 0.8 }}>{part}</span>
                 {i < arr.length - 1 && (
                   <span aria-hidden style={{ color: 'var(--text-muted)', opacity: 0.8 }}>{'\\'}</span>
                 )}
