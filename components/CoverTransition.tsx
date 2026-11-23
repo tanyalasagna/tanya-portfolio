@@ -8,7 +8,11 @@ import { useSyncExternalStore } from 'react';
 
 export type Rect = { left: number; top: number; width: number; height: number };
 // forward: a thumbnail growing into the case study's cover. back: the cover settling back into its thumbnail on the home page.
-export type CoverTransitionInfo = { slug: string; rect: Rect; src: string; isVideo: boolean; time: number; alt: string; direction?: 'forward' | 'back' };
+// How far the hover frost had got when the thumbnail was clicked (read from the live thumbnail, since it builds up over a second or so),
+// so the copy starts with exactly the same look and nothing pops.
+export type FrostState = { maskSize: string; blur: string; tintOpacity: string; shadowOpacity: string; bottomOpacity: string; mediaOpacity: string; mediaTransform: string };
+// frosted: set when the thumbnail was being hovered when clicked, so the copy starts with the same frost on it (and lets it clear as it grows)
+export type CoverTransitionInfo = { slug: string; rect: Rect; src: string; isVideo: boolean; time: number; alt: string; direction?: 'forward' | 'back'; frosted?: FrostState };
 
 const EXPAND_MS = 560;
 const EASE = 'cubic-bezier(0.32, 0.72, 0, 1)'; // quick to get going, then settles smoothly, so it reads as one flowing movement
@@ -70,6 +74,11 @@ export function landCoverTransition(target: Rect) {
   window.clearTimeout(safety);
   const px = (r: Rect) => ({ left: `${r.left}px`, top: `${r.top}px`, width: `${r.width}px`, height: `${r.height}px` });
   const anim = el.animate([px(info.rect), px(target)], { duration: EXPAND_MS, easing: EASE, fill: 'forwards' });
+  // The hover frost stays on the copy as it leaves the page, then clears gradually while it grows, so the full-size cover is clean
+  if (info.frosted) {
+    el.querySelectorAll<HTMLElement>('[data-frost]').forEach(f => f.animate([{ opacity: getComputedStyle(f).opacity }, { opacity: getComputedStyle(f).opacity, offset: 0.35 }, { opacity: 0 }], { duration: EXPAND_MS, easing: 'ease-out', fill: 'forwards' }));
+    el.querySelectorAll<HTMLElement>('[data-frost-media]').forEach(m => m.animate([{ opacity: info.frosted?.mediaOpacity ?? '0.9', transform: info.frosted?.mediaTransform ?? 'scale(1.008)' }, { opacity: 1, transform: 'scale(1)' }], { duration: EXPAND_MS, easing: 'ease-out', fill: 'forwards' }));
+  }
   const finish = () => {
     handoffTime = el.querySelector('video')?.currentTime ?? 0;
     handedOver = true;
@@ -90,6 +99,8 @@ export default function CoverTransitionOverlay() {
   const t = useSyncExternalStore(subscribe, () => current, () => null);
   if (!t) return null;
   const media: React.CSSProperties = { display: 'block', width: '100%', height: '100%', objectFit: 'cover' };
+  const f = t.frosted;
+  const frostedMedia: React.CSSProperties = f ? { ...media, opacity: f.mediaOpacity, transform: f.mediaTransform } : media;
   return (
     <div
       ref={el => { overlayEl = el; }}
@@ -97,10 +108,18 @@ export default function CoverTransitionOverlay() {
       style={{ position: 'fixed', left: t.rect.left, top: t.rect.top, width: t.rect.width, height: t.rect.height, zIndex: 45, overflow: 'hidden', pointerEvents: 'none', background: 'var(--bg-hover)' }}
     >
       {t.isVideo ? (
-        <video src={t.src} muted playsInline autoPlay style={media} onLoadedMetadata={e => { try { e.currentTarget.currentTime = t.time; } catch {} }} />
+        <video src={t.src} muted playsInline autoPlay data-frost-media="" style={frostedMedia} onLoadedMetadata={e => { try { e.currentTarget.currentTime = t.time; } catch {} }} />
       ) : (
         /* eslint-disable-next-line @next/next/no-img-element */
-        <img src={t.src} alt="" style={media} />
+        <img src={t.src} alt="" data-frost-media="" style={frostedMedia} />
+      )}
+      {/* The hover frost as it was at the moment of the click: tinted frosted glass spreading from the centre, a soft shadow and a little blur along the bottom */}
+      {f && (
+        <>
+          <div data-frost="" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, rgba(255,255,255,0.16) 0%, color-mix(in srgb, var(--ink) 28%, transparent) 100%)', backdropFilter: f.blur, WebkitBackdropFilter: f.blur, WebkitMaskImage: 'radial-gradient(circle at center, #000 0%, #000 45%, transparent 72%)', maskImage: 'radial-gradient(circle at center, #000 0%, #000 45%, transparent 72%)', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskPosition: 'center', maskPosition: 'center', WebkitMaskSize: f.maskSize, maskSize: f.maskSize, opacity: f.tintOpacity }} />
+          <div data-frost="" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '60%', background: 'linear-gradient(to top, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.05) 50%, transparent 100%)', opacity: f.shadowOpacity }} />
+          <div data-frost="" style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '36%', backdropFilter: 'blur(3px)', WebkitBackdropFilter: 'blur(3px)', maskImage: 'linear-gradient(to top, black 0%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to top, black 0%, transparent 100%)', opacity: f.bottomOpacity }} />
+        </>
       )}
     </div>
   );

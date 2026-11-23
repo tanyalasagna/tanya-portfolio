@@ -8,6 +8,7 @@ import { projects } from '@/data/projects';
 import type { Project } from '@/data/projects';
 import { PixelPill } from './PixelEdge';
 import { clearCoverTransition, getCoverTransition, landCoverTransition, startCoverTransition } from './CoverTransition';
+import type { FrostState } from './CoverTransition';
 
 function Tooltip({ x, y }: { x: number; y: number }) {
   const [revealed, setRevealed] = useState(false);
@@ -69,6 +70,25 @@ function Thumbnail({ project }: { project: Project }) {
   }, [hovered]);
   const [cursor, setCursor] = useState<{ x: number; y: number } | null>(null);
   const thumbRef = useRef<HTMLDivElement>(null);
+  const frostRef = useRef<HTMLDivElement>(null);
+  const shadowRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  // How far along the hover frost is right now (it builds up over a second or so), read from the live thumbnail
+  const readFrost = (): FrostState | undefined => {
+    const tint = frostRef.current, media = thumbRef.current?.querySelector<HTMLElement>('video, img');
+    if (!tint || !shadowRef.current || !bottomRef.current || !media) return undefined;
+    const ts = getComputedStyle(tint), ms = getComputedStyle(media);
+    return {
+      maskSize: ts.maskSize || ts.getPropertyValue('-webkit-mask-size') || '340% 340%',
+      blur: ts.backdropFilter || 'blur(9px) saturate(1.08)',
+      tintOpacity: ts.opacity,
+      shadowOpacity: getComputedStyle(shadowRef.current).opacity,
+      bottomOpacity: getComputedStyle(bottomRef.current).opacity,
+      mediaOpacity: ms.opacity,
+      mediaTransform: ms.transform === 'none' ? 'scale(1)' : ms.transform,
+    };
+  };
 
   // Clicking sends a copy of the thumbnail on ahead of the page, to grow into the case study's cover
   const beginTransition = (e: React.MouseEvent) => {
@@ -84,6 +104,7 @@ function Thumbnail({ project }: { project: Project }) {
       isVideo,
       time: videoRef.current?.currentTime ?? 0,
       alt: project.title,
+      frosted: hovered ? readFrost() : undefined, // clicked while hovering: the copy keeps the frost, exactly as far along as it was
     });
   };
 
@@ -151,7 +172,7 @@ function Thumbnail({ project }: { project: Project }) {
           )}
           {/* Frost: a soft-edged patch of frosted glass, tinted with the site's dark, that spreads out from the centre of the
               thumbnail (same every time, wherever the pointer enters) until it covers it. Blur and tint build up slower than they clear, so it feels like it settles on. */}
-          <div style={{
+          <div ref={frostRef} style={{
             position: 'absolute', inset: 0,
             background: 'linear-gradient(160deg, rgba(255,255,255,0.16) 0%, color-mix(in srgb, var(--ink) 28%, transparent) 100%)',
             backdropFilter: hovered ? 'blur(9px) saturate(1.08)' : 'blur(0px) saturate(1)',
@@ -168,7 +189,7 @@ function Thumbnail({ project }: { project: Project }) {
             pointerEvents: 'none',
           }} />
           {/* Dark gradient shadow overlay */}
-          <div style={{
+          <div ref={shadowRef} style={{
             position: 'absolute', bottom: 0, left: 0, right: 0, height: '60%',
             background: 'linear-gradient(to top, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.05) 50%, transparent 100%)',
             opacity: hovered ? 1 : 0,
@@ -176,7 +197,7 @@ function Thumbnail({ project }: { project: Project }) {
             pointerEvents: 'none',
           }} />
           {/* Bottom blur overlay */}
-          <div style={{
+          <div ref={bottomRef} style={{
             position: 'absolute', bottom: 0, left: 0, right: 0, height: '36%',
             backdropFilter: 'blur(3px)', WebkitBackdropFilter: 'blur(3px)',
             maskImage: 'linear-gradient(to top, black 0%, transparent 100%)',
@@ -190,7 +211,7 @@ function Thumbnail({ project }: { project: Project }) {
         </div>
       </Link>
         {/* Only the thumbnail and the title are links; the tags below are plain text with the default pointer */}
-        <div style={{ paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+        <div style={{ paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '2px' }}>
           <Link
             href={`/work/${project.slug}`}
             style={{ display: 'inline-block', alignSelf: 'flex-start', textDecoration: 'none' }}
@@ -199,7 +220,7 @@ function Thumbnail({ project }: { project: Project }) {
             onMouseLeave={() => setTitleHovered(false)}
           >
           {/* Set like the name wordmark: Dreamer TM with every letter in ss01 */}
-          <p className="text-[22px] sm:text-[25px] lg:text-[28px] leading-tight" style={{ color: hovered || titleHovered ? 'var(--text-muted)' : 'var(--text)', fontFamily: "'Dreamer TM', serif", fontWeight: 400, letterSpacing: '0.06em', lineHeight: 1.15, opacity: hovered || titleHovered ? 0.85 : 1, transition: 'color 400ms ease, opacity 400ms ease' }}>
+          <p className="text-[23px] lg:text-[28px] leading-tight" style={{ color: hovered || titleHovered ? 'var(--text-muted)' : 'var(--text)', fontFamily: "'Dreamer TM', serif", fontWeight: 400, letterSpacing: '0.06em', lineHeight: 1.15, opacity: hovered || titleHovered ? 0.85 : 1, transition: 'color 400ms ease, opacity 400ms ease' }}>
             {project.mobileTitle ? (
               <>
                 <span className="lg:hidden"><WordmarkText text={project.mobileTitle} /></span>
@@ -208,7 +229,7 @@ function Thumbnail({ project }: { project: Project }) {
             ) : <WordmarkText text={project.title} />}
           </p>
           </Link>
-          <p className="text-[14px] sm:text-[15px] lg:text-[18px]" style={{ lineHeight: 1.2, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
+          <p className="text-[15px] lg:text-[18px]" style={{ lineHeight: 1.2, display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px' }}>
             {[project.tags.join(', '), ...(project.description ? project.description.split(' \\ ') : [])].map((part, i, arr) => (
               <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
                 <span style={{ color: i === 0 ? 'var(--text)' : 'var(--text-muted)', fontStyle: 'normal', fontFamily: i === 0 ? 'var(--font-dm-sans)' : undefined, opacity: 0.8 }}>{part}</span>

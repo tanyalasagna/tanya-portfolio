@@ -91,7 +91,7 @@ export default function MobileNav() {
         <PixelEdgeLine edge="bottom" />
         <Link
           href="/"
-          className="text-[28px] sm:text-[32px]"
+          className="text-[30px] sm:text-[32px]"
           style={{ color: 'var(--text)', fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', letterSpacing: nameHovered ? '0.0385em' : '0.045em', paddingTop: '4px' }}
           onMouseEnter={() => { setNameHovered(true); play('select', { theme: 'bubble', emphasis: 'subtle' }); }}
           onMouseLeave={() => setNameHovered(false)}
