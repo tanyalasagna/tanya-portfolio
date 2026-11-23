@@ -22,9 +22,9 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: 'sift',
-    title: 'Designing for more intentional online shopping',
+    title: 'Designing for more intentional online purchases',
     displayTitle: 'Sift',
-    subtitle: 'Designing for more intentional online shopping',
+    subtitle: 'Designing for more intentional online purchases',
     tags: ['Graduate capstone, 2026'],
     description: 'Web extension \\ AI prototyping',
     thumbnail: '/images/Sift TN (1).mp4',

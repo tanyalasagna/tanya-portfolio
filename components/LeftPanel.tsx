@@ -4,7 +4,7 @@ import LiveClock from './LiveClock';
 import ContactLinks from './ContactLinks';
 import HookSidebar from './HookSidebar';
 import CaseStudyNav from './CaseStudyNav';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { play } from 'cuelume';
 import SoundToggle from './SoundToggle';
 import { gsap } from 'gsap';
@@ -49,6 +49,29 @@ export default function LeftPanel() {
   const [colophonOpen, setColophonOpen] = useState(false);
   const [speakerHovered, setSpeakerHovered] = useState(false);
   const colophonRef = useRef<HTMLDivElement>(null);
+  const sayHiRef = useRef<HTMLDivElement>(null);
+  // The gap above and below the navigation. It shrinks from the usual 48px just enough that the bottom of "Say hi" lines up with the bottom of the
+  // Sift thumbnail at the top of the page (never below 20px, never above 48px, so on very small or very large windows it simply stops short of lining up).
+  const [blockGap, setBlockGap] = useState(48);
+  useLayoutEffect(() => {
+    if (isCaseStudy) return;
+    const measure = () => {
+      // The grid renders a copy per layout, so take the one that is actually on screen
+      const thumb = [...document.querySelectorAll('[data-cover-thumb="sift"]')].find(el => el.getBoundingClientRect().width > 0);
+      const say = sayHiRef.current;
+      if (!say) return;
+      if (!thumb) { setBlockGap(48); return; } // pages without the Sift thumbnail keep the usual gap
+      const thumbBottom = thumb.getBoundingClientRect().bottom + window.scrollY;
+      const sayBottom = say.getBoundingClientRect().bottom;
+      setBlockGap(g => Math.round(Math.min(48, Math.max(20, g + (thumbBottom - sayBottom) / 2))));
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(document.body);
+    window.addEventListener('resize', measure);
+    document.fonts?.ready.then(measure);
+    return () => { ro.disconnect(); window.removeEventListener('resize', measure); };
+  }, [isCaseStudy, blockGap]);
 
   useEffect(() => {
     if (!colophonRef.current) return;
@@ -102,7 +125,7 @@ export default function LeftPanel() {
         <>
           {/* Bio */}
           <div style={{ opacity: 0.8 }}>
-          <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '17px', marginBottom: '48px' }}>
+          <p className="leading-normal" style={{ color: 'var(--text-muted)', fontSize: '17px', marginBottom: `${blockGap}px` }}>
             Hi! I&rsquo;m a product designer with a background in content. I&rsquo;ve worked with agency clients at{' '}
             <a href="https://www.tossthe.co.in/company/about-us/" data-cuelume-tap="" data-cuelume-emphasis="subtle" target="_blank" rel="noopener noreferrer" className="decoration-[1.5px] decoration-current underline-offset-[4px] text-inherit underline hover:no-underline px-[2px] -mx-[2px] rounded-[2px]">Toss the Coin{externalIcon}</a>,{' '}
             <span style={{ whiteSpace: 'nowrap' }}>in&#8209;house</span> teams at <a href="https://ankogcc.com/" data-cuelume-tap="" data-cuelume-emphasis="subtle" target="_blank" rel="noopener noreferrer" className="decoration-[1.5px] decoration-current underline-offset-[4px] text-inherit underline hover:no-underline px-[2px] -mx-[2px] rounded-[2px]">Anko{externalIcon}</a>, and <Link href="/resume" data-cuelume-navigate="" data-cuelume-emphasis="subtle" className="underline decoration-[1.5px] decoration-current underline-offset-[4px] text-inherit hover:no-underline px-[2px] -mx-[2px] rounded-[2px]">more</Link>.
@@ -110,12 +133,12 @@ export default function LeftPanel() {
           </div>
 
           {/* Main nav */}
-          <div style={{ marginBottom: '48px' }}>
+          <div style={{ marginBottom: `${blockGap}px` }}>
             <HookSidebar />
           </div>
 
           {/* Contact */}
-          <div className="flex items-center flex-wrap gap-2" style={{ marginBottom: '32px' }}>
+          <div ref={sayHiRef} className="flex items-center flex-wrap gap-2" style={{ marginBottom: '32px' }}>
             <span className="text-[15px] sm:text-[16px] lg:text-[17px]" style={{
               color: 'var(--text)',
               fontFamily: 'var(--font-dm-sans)',
