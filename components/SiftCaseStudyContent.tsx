@@ -325,7 +325,7 @@ export default function SiftCaseStudyContent() {
             className="text-[26px] sm:text-[30px] lg:text-[36px] mb-6"
             style={{ fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', letterSpacing: '0.045em', lineHeight: 1.15, color: 'var(--text)' }}
           >
-            Making friction feel like an invitation<span style={{ fontFamily: 'var(--font-dm-sans)', fontWeight: 700, letterSpacing: 0 }}>,</span> not an obstacle.
+            Making friction feel like an invitation<span style={{ fontFamily: 'var(--font-dm-sans)', fontWeight: 700, letterSpacing: 0 }}>,</span> rather than an obstacle.
           </h3>
 
           {/* The first paragraph and the Figma design-system image side by side on desktop (stacked on phones and tablets) */}
