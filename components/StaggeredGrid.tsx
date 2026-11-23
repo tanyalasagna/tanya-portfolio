@@ -7,6 +7,7 @@ import { play } from 'cuelume';
 import { projects } from '@/data/projects';
 import type { Project } from '@/data/projects';
 import { PixelPill } from './PixelEdge';
+import { startCoverTransition } from './CoverTransition';
 
 function Tooltip({ x, y }: { x: number; y: number }) {
   const [revealed, setRevealed] = useState(false);
@@ -55,6 +56,24 @@ function Thumbnail({ project }: { project: Project }) {
     return () => clearTimeout(t);
   }, [hovered]);
   const [cursor, setCursor] = useState<{ x: number; y: number } | null>(null);
+  const thumbRef = useRef<HTMLDivElement>(null);
+
+  // Clicking sends a copy of the thumbnail on ahead of the page, to grow into the case study's cover
+  const beginTransition = (e: React.MouseEvent) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const el = thumbRef.current;
+    if (!el || !project.thumbnail) return;
+    const r = el.getBoundingClientRect();
+    startCoverTransition({
+      slug: project.slug,
+      rect: { left: r.left, top: r.top, width: r.width, height: r.height },
+      src: project.thumbnail,
+      isVideo,
+      time: videoRef.current?.currentTime ?? 0,
+      alt: project.title,
+    });
+  };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     setCursor({ x: e.clientX, y: e.clientY });
@@ -96,9 +115,10 @@ function Thumbnail({ project }: { project: Project }) {
       <Link
         href={`/work/${project.slug}`}
         style={{ display: 'block', textDecoration: 'none' }}
-        onClick={() => play('open', { theme: 'bubble', emphasis: 'subtle' })}
+        onClick={e => { beginTransition(e); play('open', { theme: 'bubble', emphasis: 'subtle' }); }}
       >
         <div
+          ref={thumbRef}
           style={{ aspectRatio: project.thumbnailAspect ?? '4/3', overflow: 'hidden', position: 'relative', cursor: hovered ? 'none' : 'auto' }}
           onMouseMove={handleMouseMove}
           onMouseEnter={handleEnter}
@@ -161,7 +181,7 @@ function Thumbnail({ project }: { project: Project }) {
           <Link
             href={`/work/${project.slug}`}
             style={{ display: 'inline-block', alignSelf: 'flex-start', textDecoration: 'none' }}
-            onClick={() => play('open', { theme: 'bubble', emphasis: 'subtle' })}
+            onClick={e => { beginTransition(e); play('open', { theme: 'bubble', emphasis: 'subtle' }); }}
             onMouseEnter={() => setTitleHovered(true)}
             onMouseLeave={() => setTitleHovered(false)}
           >
