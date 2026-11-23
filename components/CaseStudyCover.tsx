@@ -7,7 +7,7 @@ export default function CaseStudyCover({ project }: { project: Project }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
   // Arrived by clicking this project's thumbnail: stay hidden until the thumbnail has grown into this spot
-  const [arriving] = useState(() => getCoverTransition(project.slug) !== null);
+  const [arriving] = useState(() => getCoverTransition(project.slug, 'forward') !== null);
   const pending = useCoverPending(project.slug);
   const isVideo = /\.(mp4|webm|mov)$/i.test(project.thumbnail ?? '');
 
@@ -38,6 +38,7 @@ export default function CaseStudyCover({ project }: { project: Project }) {
   return (
     <div
       ref={boxRef}
+      data-case-cover=""
       className="w-full overflow-hidden mb-10"
       style={{ aspectRatio: project.thumbnailAspect ?? '16/9', background: 'var(--bg-hover)', position: 'relative', visibility: pending ? 'hidden' : 'visible' }}
       onMouseEnter={handleEnter}

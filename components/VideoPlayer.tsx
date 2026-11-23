@@ -7,7 +7,8 @@ const CONTROLS_H = 36;
 // Looping muted video with the same controls as the Sift feature videos: play / pause (or click the video), a scrubber and a timer.
 // Plays only while on screen. Fills the height of its parent (minus the controls) and takes its width from the video's aspect ratio,
 // so the controls never make the parent any wider.
-export default function VideoPlayer({ src, aspectRatio }: { src: string; aspectRatio: string }) {
+// With `fill` the video instead takes the full width of its parent, at its own aspect ratio, with the controls underneath.
+export default function VideoPlayer({ src, aspectRatio, fill = false }: { src: string; aspectRatio: string; fill?: boolean }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
   const [time, setTime] = useState(0);
@@ -35,7 +36,7 @@ export default function VideoPlayer({ src, aspectRatio }: { src: string; aspectR
   const fmt = (t: number) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
 
   return (
-    <div style={{ height: '100%' }}>
+    <div style={fill ? undefined : { height: '100%' }}>
       <video
         ref={ref}
         src={src}
@@ -49,10 +50,10 @@ export default function VideoPlayer({ src, aspectRatio }: { src: string; aspectR
         onTimeUpdate={e => setTime(e.currentTarget.currentTime)}
         onLoadedMetadata={e => setDuration(e.currentTarget.duration)}
         onDurationChange={e => setDuration(e.currentTarget.duration || 0)}
-        style={{ display: 'block', height: `calc(100% - ${CONTROLS_H}px)`, width: 'auto', aspectRatio, cursor: 'pointer' }}
+        style={fill ? { display: 'block', width: '100%', aspectRatio, objectFit: 'cover', cursor: 'pointer' } : { display: 'block', height: `calc(100% - ${CONTROLS_H}px)`, width: 'auto', aspectRatio, cursor: 'pointer' }}
       />
       {/* width:0 + min-width:100% keeps the controls as wide as the video without ever widening it */}
-      <div className="flex items-center gap-2" style={{ height: `${CONTROLS_H}px`, width: 0, minWidth: '100%' }}>
+      <div className="flex items-center gap-2" style={{ height: `${CONTROLS_H}px`, ...(fill ? { marginTop: 8 } : { width: 0, minWidth: '100%' }) }}>
         <button
           type="button"
           onClick={toggle}

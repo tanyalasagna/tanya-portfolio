@@ -48,7 +48,7 @@ export default function ContactLinks({ sizeCls = 'text-[18px]', stacked = false 
         data-cuelume-tap=""
         data-cuelume-emphasis="subtle"
       >
-        {copied ? <span style={{ color: '#383636' }}>Copied :)</span> : 'Copy email'}
+        {copied ? <span style={{ color: 'var(--ink)' }}>Copied :)</span> : 'Copy email'}
       </button>
       {!stacked && sparkleIcon}
       <a

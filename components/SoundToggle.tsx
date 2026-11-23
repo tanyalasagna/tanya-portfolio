@@ -18,7 +18,7 @@ export default function SoundToggle({ hovered = false }: { hovered?: boolean }) 
       aria-label={on ? 'Mute sounds' : 'Unmute sounds'}
       title={on ? 'Mute sounds' : 'Unmute sounds'}
       style={{
-        color: hovered ? '#383636' : 'var(--text-muted)',
+        color: hovered ? 'var(--ink)' : 'var(--text-muted)',
         cursor: 'pointer',
         background: 'none',
         border: 'none',

@@ -405,12 +405,7 @@ export default function FrogslayerCaseStudyContent() {
             </div>
 
             <div className="my-8">
-              <div className="my-8">
-                <JourneyCompare />
-              </div>
-              <p className="-mt-6 text-[14px] sm:text-[15px] lg:text-[16px]" style={{ fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}>
-                Journey maps comparing user interactions and emotional responses across the original and redesigned kiosk experiences.
-              </p>
+              <JourneyCompare />
             </div>
 
             <div className="mt-16 lg:flex lg:items-start lg:gap-10">

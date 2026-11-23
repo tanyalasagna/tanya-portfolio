@@ -7,10 +7,11 @@ import { useSyncExternalStore } from 'react';
 // and the rest of the page fades in.
 
 export type Rect = { left: number; top: number; width: number; height: number };
-export type CoverTransitionInfo = { slug: string; rect: Rect; src: string; isVideo: boolean; time: number; alt: string };
+// forward: a thumbnail growing into the case study's cover. back: the cover settling back into its thumbnail on the home page.
+export type CoverTransitionInfo = { slug: string; rect: Rect; src: string; isVideo: boolean; time: number; alt: string; direction?: 'forward' | 'back' };
 
-const EXPAND_MS = 850;
-const EASE = 'cubic-bezier(0.65, 0, 0.2, 1)';
+const EXPAND_MS = 560;
+const EASE = 'cubic-bezier(0.32, 0.72, 0, 1)'; // quick to get going, then settles smoothly, so it reads as one flowing movement
 const SAFETY_MS = 6000; // if the new page never reports in, drop the copy instead of leaving it on top of everything
 
 let current: CoverTransitionInfo | null = null;
@@ -31,9 +32,16 @@ export function startCoverTransition(info: CoverTransitionInfo) {
 }
 
 // Is a transition waiting to land on this case study?
-export function getCoverTransition(slug?: string) {
+export function getCoverTransition(slug?: string, direction?: 'forward' | 'back') {
   if (!current) return null;
-  return slug === undefined || current.slug === slug ? current : null;
+  if (slug !== undefined && current.slug !== slug) return null;
+  if (direction && (current.direction ?? 'forward') !== direction) return null;
+  return current;
+}
+
+// True from the click until the copy has landed (the page uses it to leave the old page quickly)
+export function useCoverTransitionActive() {
+  return useSyncExternalStore(subscribe, () => current !== null, () => false);
 }
 
 export function clearCoverTransition() {
@@ -46,7 +54,7 @@ export function clearCoverTransition() {
 
 // True while a thumbnail is on its way to this case study's cover and the cover should stay hidden
 export function useCoverPending(slug: string) {
-  return useSyncExternalStore(subscribe, () => current !== null && current.slug === slug && !handedOver, () => false);
+  return useSyncExternalStore(subscribe, () => current !== null && current.slug === slug && (current.direction ?? 'forward') === 'forward' && !handedOver, () => false);
 }
 export function getCoverHandoffTime() { return handoffTime; }
 
@@ -66,7 +74,13 @@ export function landCoverTransition(target: Rect) {
     handoffTime = el.querySelector('video')?.currentTime ?? 0;
     handedOver = true;
     emit(); // the real cover appears in the same spot...
-    requestAnimationFrame(() => clearCoverTransition()); // ...then the copy goes
+    if (info.direction === 'back') {
+      // ...or, going back, the real thumbnail is already underneath (still fading in): let the copy melt away over it
+      const fade = el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 180, easing: 'ease-out', fill: 'forwards' });
+      fade.onfinish = () => clearCoverTransition();
+    } else {
+      requestAnimationFrame(() => clearCoverTransition()); // ...then the copy goes
+    }
   };
   anim.onfinish = finish;
   anim.oncancel = finish;

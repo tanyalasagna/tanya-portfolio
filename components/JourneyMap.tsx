@@ -19,7 +19,8 @@ const LANES: { mood: Mood; label: string }[] = [
 
 type Stage = { label: string; mood: Mood; note: string; tag?: string } | null; // null = this stage doesn't exist in this version
 
-const BEFORE: Stage[] = [
+// The original kiosk's flow: seven steps, with gaps where the final prototype adds steps
+const CONDENSED: Stage[] = [
   { label: 'Approaching the kiosk', mood: 'happy', note: 'Stood 1–2 feet from the display; basic visuals on screen' },
   { label: 'Tap screen to open menu', mood: 'neutral', note: 'Generic buttons depicting menu actions' },
   { label: 'Select new card option', mood: 'confused', note: 'Confused entering a zip code; asked for help' },
@@ -32,7 +33,8 @@ const BEFORE: Stage[] = [
   null,
 ];
 
-const AFTER: Stage[] = [
+// The final prototype's flow: ten steps, including the upsell pop-up, the member amount screen and the ending options
+const DETAILED: Stage[] = [
   { label: 'Start page', mood: 'neutral', note: 'Presses the screen as the start page instructs' },
   { label: 'Menu page', mood: 'neutral', note: 'First visit to the venue, so picks “Buy a new card”' },
   { label: 'Card selection', mood: 'pleasant', note: 'Amount already right, so taps next straight away' },
@@ -96,7 +98,7 @@ function PixelFace({ mood, size = FACE }: { mood: Mood; size?: number }) {
 const sans = 'var(--font-dm-sans)';
 
 export default function JourneyMap({ variant }: { variant: 'before' | 'after' }) {
-  const stages = variant === 'before' ? BEFORE : AFTER;
+  const stages = variant === 'before' ? CONDENSED : DETAILED;
     const points = stages.map((s, i) => (s ? { i, x: colX(i) + COL_W / 2, y: laneY(s.mood) } : null));
 
   // Line between faces: solid between neighbouring stages, dashed where it jumps over a missing step
@@ -146,7 +148,7 @@ export default function JourneyMap({ variant }: { variant: 'before' | 'after' })
         >
           {s ? (
             <>
-              <PixelNumber n={i + 1} size={18} />
+              <PixelNumber n={i + 1} size={i + 1 >= 10 ? 24 : 18} />
               <span style={{ fontWeight: 600, fontSize: 15, lineHeight: 1.1 }}>{s.label}</span>
             </>
           ) : null}

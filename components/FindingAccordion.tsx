@@ -9,7 +9,7 @@ type Finding = { title: string; body: string | string[] };
 
 // Gray boxes that show only "number, bold heading, +" until clicked. The + turns into an x as the box opens.
 // Boxes open and close independently of each other.
-export default function FindingAccordion({ items, className = '' }: { items: Finding[]; className?: string }) {
+export default function FindingAccordion({ items, className = '', columns = 1 }: { items: Finding[]; className?: string; columns?: 1 | 2 }) {
   const [open, setOpen] = useState<boolean[]>(() => items.map(() => false));
   const reduced = useReducedMotion();
   // Inline on purpose: globals.css sets `* { transition: border-color }`, which beats Tailwind's transition utilities
@@ -18,7 +18,8 @@ export default function FindingAccordion({ items, className = '' }: { items: Fin
   const toggle = (i: number) => setOpen(o => o.map((v, j) => (j === i ? !v : v)));
 
   return (
-    <div className={`flex flex-col gap-3 ${className}`}>
+    // With two columns the blocks sit side by side (stacked on a phone) and each one opens to its own height
+    <div className={`${columns === 2 ? 'grid grid-cols-1 md:grid-cols-2 items-start' : 'flex flex-col'} gap-3 ${className}`}>
       {items.map((f, i) => {
         const isOpen = open[i];
         return (

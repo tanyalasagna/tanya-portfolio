@@ -22,6 +22,11 @@ export const circleRuns = CIRCLE.flatMap((row, y) => {
   return out;
 });
 
+// Symbols drawn cell by cell on the same 9x9 grid as the circle, instead of set in type
+const GLYPHS: Record<string, [number, number][]> = {
+  '!': [[4, 2], [4, 3], [4, 4], [4, 6]],
+};
+
 export default function PixelNumber({ n, size = 27, color = '#F0F0EE', fill = '#383636' }: { n: number | string; size?: number; color?: string; fill?: string }) {
   return (
     <span aria-hidden className="relative inline-flex flex-none items-center justify-center" style={{ width: size, height: size }}>
@@ -30,7 +35,9 @@ export default function PixelNumber({ n, size = 27, color = '#F0F0EE', fill = '#
           // height 1.04 overlaps the next row slightly so no hairline seams show at fractional sizes
           <rect key={i} x={r.x} y={r.y} width={r.w} height={1.04} fill={fill} />
         ))}
+        {typeof n === 'string' && GLYPHS[n]?.map(([x, y]) => <rect key={`${x}-${y}`} x={x} y={y} width={1.02} height={1.02} fill={color} />)}
       </svg>
+      {typeof n === 'string' && GLYPHS[n] ? null : (
       <span
         style={{
           position: 'relative', color, fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"',
@@ -41,6 +48,7 @@ export default function PixelNumber({ n, size = 27, color = '#F0F0EE', fill = '#
       >
         {n}
       </span>
+      )}
     </span>
   );
 }

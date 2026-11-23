@@ -13,9 +13,10 @@
 
 /* === Theme tokens === */
 :root {
-  --bg: #ffffff;
-  --sidebar-bg: #ffffff;
+  --bg: #FAF9F6; /* a soft, warm off-white, so the page is light without glaring */
+  --sidebar-bg: #FAF9F6;
   --text: #383636;
+  --ink: #383636; /* the same dark, for the few places that can't use --text */
   --text-muted: #3D3835;
   --accent: #3D3835;
   --divider: #383636;
@@ -27,6 +28,16 @@
 }
 
 
+
+/* === Experiment: a warmer black on the landing page only ===
+   The landing page's grid carries data-landing; while it is on screen the dark tokens below are redefined for the whole page (side panel included),
+   and they snap back as soon as you open a case study. */
+body:has([data-landing]) {
+  --text: #36302B;
+  --text-muted: #3A332E;
+  --ink: #36302B;
+  --divider: #36302B;
+}
 
 /* === Tailwind theme tokens === */
 @theme inline {

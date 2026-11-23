@@ -4,6 +4,10 @@ import CaseStudyCover from '@/components/CaseStudyCover';
 import CaseStudyContent from '@/components/CaseStudyContent';
 import SiftCaseStudyContent from '@/components/SiftCaseStudyContent';
 import FrogslayerCaseStudyContent from '@/components/FrogslayerCaseStudyContent';
+import LoopyloopCaseStudyContent from '@/components/LoopyloopCaseStudyContent';
+import PixelNumber from '@/components/PixelNumber';
+import ReachOutLink from '@/components/ContactDialog';
+import { ArrowRight } from 'lucide-react';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -56,12 +60,33 @@ export default async function CaseStudyPage({ params }: Props) {
               </div>
             ))}
           </div>
+
+          {/* LoopyLoop only: what this write-up covers. A full-width block under the four above, the same 12px gap away and styled the same */}
+          {project.slug === 'project-three' && (
+            <div className="mt-3" style={{ padding: '20px 18px', background: '#F0F0EE' }}>
+              <div className="mb-3 flex items-center gap-2 text-[15px] sm:text-[16px] lg:text-[18px]" style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>
+                <PixelNumber n="!" size={18} />
+                Note
+              </div>
+              <div className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", lineHeight: 1.5 }}>
+                <p style={{ margin: '0 0 12px' }}>
+                  LoopyLoop was designed as a complete marketplace where fiber artists could buy, sell, and manage their creative projects. <span style={{ fontWeight: 600 }}>This case study highlights two flagship features: the <em>Material Identifier</em> and <em>Pattern Writing Tool</em>.</span>
+                </p>
+                <p style={{ margin: 0 }}>
+                  For a closer look at the rest of the platform, <ReachOutLink topic="LoopyLoop">feel free to reach out</ReachOutLink>
+                  <ArrowRight size={18} strokeWidth={1.75} aria-hidden style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '6px' }} />
+                </p>
+              </div>
+            </div>
+          )}
         </section>
 
         {project.slug === 'sift' ? (
           <SiftCaseStudyContent />
         ) : project.slug === 'capstone' ? (
           <FrogslayerCaseStudyContent />
+        ) : project.slug === 'project-three' ? (
+          <LoopyloopCaseStudyContent />
         ) : (
           <>
             {/* Research */}

@@ -149,7 +149,7 @@ export default function MobileNav() {
               <HookSidebar />
             </div>
 
-            <div className="mb-8" style={{ borderTop: '1px dashed rgba(56, 54, 54, 0.22)' }} />
+            <div className="mb-8" style={{ borderTop: '1px dashed color-mix(in srgb, var(--ink) 22%, transparent)' }} />
 
             {/* Bottom row: two aligned columns */}
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>

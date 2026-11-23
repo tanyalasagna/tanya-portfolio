@@ -5,8 +5,8 @@ import { getCoverTransition } from './CoverTransition';
 
 export default function CaseStudyContent({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
-  // Arrived from a thumbnail that is growing into the cover: leave the cover alone and start the rest a little later, as it lands
-  const arriving = useRef(getCoverTransition() !== null);
+  // Arrived from a thumbnail that is growing into the cover: leave the cover alone and let the rest of the page fade in while it is still on its way
+  const arriving = useRef(getCoverTransition(undefined, 'forward') !== null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -22,9 +22,9 @@ export default function CaseStudyContent({ children }: { children: React.ReactNo
           {
             opacity: 1,
             ...(tall ? {} : { filter: 'blur(0px)' }),
-            duration: 0.65,
+            duration: arriving.current ? 0.5 : 0.65,
             ease: 'power2.out',
-            delay: 0.05 + i * 0.1 + (arriving.current ? 0.55 : 0),
+            delay: 0.05 + i * 0.1 + (arriving.current ? 0.05 : 0),
             // Don't leave `filter: blur(0px)` behind: it keeps the element on its own layer for good
             clearProps: 'filter,opacity',
           }

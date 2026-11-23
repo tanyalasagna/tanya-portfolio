@@ -7,7 +7,7 @@ import { play } from 'cuelume';
 import { projects } from '@/data/projects';
 import type { Project } from '@/data/projects';
 import { PixelPill } from './PixelEdge';
-import { startCoverTransition } from './CoverTransition';
+import { clearCoverTransition, getCoverTransition, landCoverTransition, startCoverTransition } from './CoverTransition';
 
 function Tooltip({ x, y }: { x: number; y: number }) {
   const [revealed, setRevealed] = useState(false);
@@ -35,7 +35,7 @@ function Tooltip({ x, y }: { x: number; y: number }) {
         letterSpacing: '0.02em', display: 'inline-flex',
         alignItems: 'center', gap: '6px',
       }}>
-        <PixelPill fill="#383636" stroke="#FFFFFF" strokeWidth={0.3} />
+        <PixelPill fill="var(--ink)" stroke="#FFFFFF" strokeWidth={0.3} />
         <span style={{ position: 'relative' }}>Read case study</span>
       </span>
     </div>,
@@ -119,6 +119,7 @@ function Thumbnail({ project }: { project: Project }) {
       >
         <div
           ref={thumbRef}
+          data-cover-thumb={project.slug}
           style={{ aspectRatio: project.thumbnailAspect ?? '4/3', overflow: 'hidden', position: 'relative', cursor: hovered ? 'none' : 'auto' }}
           onMouseMove={handleMouseMove}
           onMouseEnter={handleEnter}
@@ -140,7 +141,7 @@ function Thumbnail({ project }: { project: Project }) {
               thumbnail (same every time, wherever the pointer enters) until it covers it. Blur and tint build up slower than they clear, so it feels like it settles on. */}
           <div style={{
             position: 'absolute', inset: 0,
-            background: 'linear-gradient(160deg, rgba(255,255,255,0.16) 0%, rgba(56,54,54,0.28) 100%)',
+            background: 'linear-gradient(160deg, rgba(255,255,255,0.16) 0%, color-mix(in srgb, var(--ink) 28%, transparent) 100%)',
             backdropFilter: hovered ? 'blur(9px) saturate(1.08)' : 'blur(0px) saturate(1)',
             WebkitBackdropFilter: hovered ? 'blur(9px) saturate(1.08)' : 'blur(0px) saturate(1)',
             WebkitMaskImage: 'radial-gradient(circle at center, #000 0%, #000 45%, transparent 72%)',
@@ -223,6 +224,17 @@ export default function StaggeredGrid() {
   const desktopSingle = useRef<HTMLDivElement>(null);
   const desktopL = useRef<HTMLDivElement>(null);
   const desktopR = useRef<HTMLDivElement>(null);
+
+  // Coming back from a case study: the cover settles into this project's thumbnail
+  useEffect(() => {
+    const t = getCoverTransition(undefined, 'back');
+    if (!t) return;
+    const el = Array.from(document.querySelectorAll<HTMLElement>(`[data-cover-thumb="${t.slug}"]`)).find(e => e.getBoundingClientRect().width > 0);
+    if (!el) { clearCoverTransition(); return; }
+    const r = el.getBoundingClientRect();
+    // Where it will sit once the page has been scrolled back to the top (that happens right after this effect)
+    landCoverTransition({ left: r.left, top: r.top + window.scrollY, width: r.width, height: r.height });
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {

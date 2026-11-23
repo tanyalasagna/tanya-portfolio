@@ -5,8 +5,9 @@ import { X } from 'lucide-react';
 import { PixelPill } from './PixelEdge';
 
 // Wraps anything (an image, a diagram) so clicking it opens a large version over a blurred page, with a "Close" pill at the top right.
+// `expandedSize` is how much of the screen the enlarged version may fill, in vw / vh (85 by default).
 // `hint` is a small line at the bottom right of what sits on the page. `children` is what sits on the page; `expanded` is what the overlay shows (defaults to the same thing).
-export default function ClickToExpand({ children, expanded, label = 'Expand', hint, bordered = false }: { children: React.ReactNode; expanded?: React.ReactNode; label?: string; hint?: string; bordered?: boolean }) {
+export default function ClickToExpand({ children, expanded, label = 'Expand', hint, bordered = false, expandedSize = 85 }: { children: React.ReactNode; expanded?: React.ReactNode; label?: string; hint?: string; bordered?: boolean; expandedSize?: number }) {
   const [open, setOpen] = useState(false);
   const [shown, setShown] = useState(false);
 
@@ -73,7 +74,7 @@ export default function ClickToExpand({ children, expanded, label = 'Expand', hi
             <span style={{ position: 'relative' }}>Close</span>
             <X size={16} strokeWidth={1.5} aria-hidden style={{ position: 'relative' }} />
           </button>
-          <div onClick={e => e.stopPropagation()} style={{ width: '85vw', maxHeight: '85vh', overflow: 'auto', cursor: 'default', display: 'flex', justifyContent: 'center' }}>
+          <div onClick={e => e.stopPropagation()} style={{ width: `${expandedSize}vw`, maxHeight: `${expandedSize}vh`, overflow: 'auto', cursor: 'default', display: 'flex', justifyContent: 'center' }}>
             <div style={{ width: '100%' }}>{expanded ?? children}</div>
           </div>
         </div>,

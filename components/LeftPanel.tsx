@@ -12,6 +12,7 @@ import { usePathname } from 'next/navigation';
 import { ArrowUpRight, ChevronUp } from 'lucide-react';
 import { siftNavSections } from './SiftCaseStudyContent';
 import { frogslayerNavSections } from './FrogslayerCaseStudyContent';
+import { loopyloopNavSections } from './LoopyloopCaseStudyContent';
 import CaseStudyCarousel from './CaseStudyCarousel';
 import BackToWork from './BackToWork';
 
@@ -93,7 +94,7 @@ export default function LeftPanel() {
 
           {/* Case study section nav */}
           <div style={{ marginBottom: '32px' }}>
-            <CaseStudyNav key={slug} sections={slug === 'sift' ? siftNavSections : slug === 'capstone' ? frogslayerNavSections : undefined} />
+            <CaseStudyNav key={slug} sections={slug === 'sift' ? siftNavSections : slug === 'capstone' ? frogslayerNavSections : slug === 'project-three' ? loopyloopNavSections : undefined} />
           </div>
         </>
       ) : (
@@ -189,7 +190,7 @@ export default function LeftPanel() {
               </div>
             </div>
             <div onMouseEnter={() => setSpeakerHovered(true)} onMouseLeave={() => setSpeakerHovered(false)}
-              style={{ background: '#ffffff', borderRadius: '50%', width: '34px', height: '34px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, border: `1px solid ${speakerHovered ? '#383636' : 'var(--text-muted)'}`, opacity: 0.6, transition: 'border-color 150ms ease' }}>
+              style={{ background: 'var(--bg)', borderRadius: '50%', width: '34px', height: '34px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, border: `1px solid ${speakerHovered ? 'var(--ink)' : 'var(--text-muted)'}`, opacity: 0.6, transition: 'border-color 150ms ease' }}>
               <SoundToggle hovered={speakerHovered} />
             </div>
           </div>
