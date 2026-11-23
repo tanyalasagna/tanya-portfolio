@@ -12,6 +12,7 @@ const headlineCls = 'text-[26px] sm:text-[30px] lg:text-[36px] mb-4';
 const headlineStyle = { fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', letterSpacing: '0.045em', lineHeight: 1.15, color: 'var(--text)' };
 const pColCls = 'text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed mb-4';
 const pStyle = { fontFamily: 'var(--font-dm-sans)', color: 'var(--text)' };
+const SCREEN_RADIUS = 8; // the slight rounding on every screen recording and screenshot
 
 export const loopyloopNavSections = [
   { id: 'features', label: 'Features' },
@@ -64,7 +65,7 @@ function DemoVideo({ src, label }: { src: string; label: string }) {
   return (
     <div className="my-8">
       <div className="p-4 sm:p-6 lg:p-8" style={{ background: '#F0F0EE' }}>
-        <VideoPlayer src={src} aspectRatio="16 / 9" fill />
+        <VideoPlayer src={src} aspectRatio="16 / 9" fill radius={SCREEN_RADIUS} />
       </div>
       <p className="mt-2 text-[14px] sm:text-[15px] lg:text-[16px]" style={{ margin: '8px 0 0', fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}>{label}</p>
     </div>
@@ -291,6 +292,7 @@ export default function LoopyloopCaseStudyContent() {
               <div className="my-8">
                 <JourneyCompare
                   padded
+                  radius={SCREEN_RADIUS}
                   noun="screen"
                   width={1000}
                   height={650}
@@ -314,6 +316,7 @@ export default function LoopyloopCaseStudyContent() {
               <div className="my-8">
                 <JourneyCompare
                   padded
+                  radius={SCREEN_RADIUS}
                   noun="screen"
                   width={1000}
                   height={569}

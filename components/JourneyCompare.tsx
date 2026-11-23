@@ -33,8 +33,8 @@ function Note({ pos, reduced, noun }: { pos: number; reduced: boolean | null; no
 // The two maps at a given scale with the draggable divider. The handle's position picks the map: all the way left shows the Before map, all the way
 // right shows the After map, and in between they sit side by side (After to the left of the handle, Before to the right).
 // Drag the handle, or press on the map itself with a mouse; focus the handle and use the arrow keys, Home and End.
-function CompareBox({ pos, setPos, scale, touched, onTap, layers }: {
-  pos: number; setPos: (p: number | ((p: number) => number)) => void; scale: number; touched: React.MutableRefObject<boolean>; onTap?: () => void; layers: Layers;
+function CompareBox({ pos, setPos, scale, touched, onTap, layers, radius = 0 }: {
+  pos: number; setPos: (p: number | ((p: number) => number)) => void; scale: number; touched: React.MutableRefObject<boolean>; onTap?: () => void; layers: Layers; radius?: number;
 }) {
   const boxRef = useRef<HTMLDivElement>(null);
   const [dragging, setDragging] = useState(false);
@@ -64,15 +64,19 @@ function CompareBox({ pos, setPos, scale, touched, onTap, layers }: {
       onPointerUp={() => setDragging(false)}
       onPointerCancel={() => setDragging(false)}
     >
-      {/* Before, underneath: it is what you see to the right of the handle, so it fills the map when the handle is all the way left */}
-      <div style={{ position: 'absolute', left: 0, top: 0, width: layers.w, height: layers.h, transform: `scale(${scale})`, transformOrigin: 'top left' }}>
-        {layers.before}
-      </div>
-      {/* After, on top and cut off at the handle: it is what you see to the left of it, so it fills the map when the handle is all the way right */}
-      <div style={{ position: 'absolute', inset: 0, clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
+      {/* The two pictures sit in a softly rounded frame; the handle is outside it so its knob can overhang the edges */}
+      <div style={{ position: 'absolute', inset: 0, borderRadius: radius, overflow: 'hidden' }}>
+        {/* Before, underneath: it is what you see to the right of the handle, so it fills the map when the handle is all the way left */}
         <div style={{ position: 'absolute', left: 0, top: 0, width: layers.w, height: layers.h, transform: `scale(${scale})`, transformOrigin: 'top left' }}>
-          {layers.after}
+          {layers.before}
         </div>
+        {/* After, on top and cut off at the handle: it is what you see to the left of it, so it fills the map when the handle is all the way right */}
+        <div style={{ position: 'absolute', inset: 0, clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
+          <div style={{ position: 'absolute', left: 0, top: 0, width: layers.w, height: layers.h, transform: `scale(${scale})`, transformOrigin: 'top left' }}>
+            {layers.after}
+          </div>
+        </div>
+
       </div>
 
       {/* Divider and its handle, running the full height */}
@@ -113,8 +117,8 @@ function CompareBox({ pos, setPos, scale, touched, onTap, layers }: {
 }
 
 // Before / after journey map slider. On a phone the map is shrunk to fit the screen, and tapping it opens a larger version (which scrolls sideways).
-export default function JourneyCompare({ initial = 50, before, after, width, height, noun, padded = false }: {
-  initial?: number; before?: React.ReactNode; after?: React.ReactNode; width?: number; height?: number; noun?: string; padded?: boolean;
+export default function JourneyCompare({ initial = 50, before, after, width, height, noun, padded = false, radius = 0 }: {
+  initial?: number; before?: React.ReactNode; after?: React.ReactNode; width?: number; height?: number; noun?: string; padded?: boolean; radius?: number;
 }) {
   // Journey maps unless something else (e.g. two screenshots) is passed in
   const layers: Layers = before && after && width && height
@@ -201,7 +205,7 @@ export default function JourneyCompare({ initial = 50, before, after, width, hei
       {/* `padded` sets the comparison in a light-grey block with even padding all round, like the other media on the site */}
       <div className={padded ? 'p-4 sm:p-6 lg:p-8' : undefined} style={padded ? { background: '#F0F0EE' } : undefined}>
         <div ref={wrapRef} style={{ width: '100%' }}>
-          <CompareBox pos={pos} setPos={setPos} scale={scale} touched={touched} onTap={small ? () => setOpen(true) : undefined} layers={layers} />
+          <CompareBox pos={pos} setPos={setPos} scale={scale} touched={touched} onTap={small ? () => setOpen(true) : undefined} layers={layers} radius={radius} />
         </div>
       </div>
       {small && (
@@ -247,7 +251,7 @@ export default function JourneyCompare({ initial = 50, before, after, width, hei
           </div>
           <div ref={scrollerRef} className="flex-1 min-h-0 flex items-center" style={{ overflowX: 'auto' }}>
             <div className="px-4 mx-auto flex-none" onClick={e => e.stopPropagation()}>
-              <CompareBox pos={pos} setPos={setPos} scale={EXPANDED_SCALE} touched={touched} layers={layers} />
+              <CompareBox pos={pos} setPos={setPos} scale={EXPANDED_SCALE} touched={touched} layers={layers} radius={radius} />
             </div>
           </div>
           <p className="px-4 pb-4 text-center text-[14px]" style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.7 }} onClick={e => e.stopPropagation()}>
