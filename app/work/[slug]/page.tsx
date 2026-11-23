@@ -6,6 +6,7 @@ import SiftCaseStudyContent from '@/components/SiftCaseStudyContent';
 import FrogslayerCaseStudyContent from '@/components/FrogslayerCaseStudyContent';
 import LoopyloopCaseStudyContent from '@/components/LoopyloopCaseStudyContent';
 import PixelNumber from '@/components/PixelNumber';
+import EbookCaseStudyContent from '@/components/EbookCaseStudyContent';
 import ReachOutLink from '@/components/ContactDialog';
 import { ArrowRight } from 'lucide-react';
 
@@ -79,6 +80,25 @@ export default async function CaseStudyPage({ params }: Props) {
               </div>
             </div>
           )}
+
+          {/* eBook only: confidentiality note, same block style as the LoopyLoop note */}
+          {project.slug === 'project-four' && (
+            <div className="mt-3" style={{ padding: '20px 18px', background: '#F0F0EE' }}>
+              <div className="mb-3 flex items-center gap-2 text-[15px] sm:text-[16px] lg:text-[18px]" style={{ color: 'var(--text-muted)', fontStyle: 'italic' }}>
+                <PixelNumber n="!" size={18} />
+                Note
+              </div>
+              <div className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{ color: 'var(--text)', fontFamily: "'Alegreya Sans', sans-serif", lineHeight: 1.5 }}>
+                <p style={{ margin: '0 0 12px' }}>
+                  This project was completed for a client through a marketing agency. Identifying details have been omitted for confidentiality.
+                </p>
+                <p style={{ margin: 0 }}>
+                  To learn more, <ReachOutLink topic="Return on Imagination">feel free to reach out</ReachOutLink>
+                  <ArrowRight size={18} strokeWidth={1.75} aria-hidden style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '6px' }} />
+                </p>
+              </div>
+            </div>
+          )}
         </section>
 
         {project.slug === 'sift' ? (
@@ -87,6 +107,8 @@ export default async function CaseStudyPage({ params }: Props) {
           <FrogslayerCaseStudyContent />
         ) : project.slug === 'project-three' ? (
           <LoopyloopCaseStudyContent />
+        ) : project.slug === 'project-four' ? (
+          <EbookCaseStudyContent />
         ) : (
           <>
             {/* Research */}

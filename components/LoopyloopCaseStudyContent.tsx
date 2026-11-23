@@ -3,7 +3,6 @@ import PixelNumber from './PixelNumber';
 import VideoPlayer from './VideoPlayer';
 import LazyImg from './LazyImg';
 import ClickToExpand from './ClickToExpand';
-import FindingAccordion from './FindingAccordion';
 import JourneyCompare from './JourneyCompare';
 
 const labelCls = 'text-[15px] sm:text-[16px] lg:text-[18px] mb-[2px]';
@@ -111,7 +110,7 @@ export default function LoopyloopCaseStudyContent() {
 
             <div className="mt-10">
               <FeatureHeading number={1} name="Material Identifier" />
-              <div className="lg:w-[58%]">
+              <div className="md:w-[85%]">
                 <p className={pColCls} style={pStyle}>
                   Finding an exciting project is easy. Knowing exactly what to buy to make it? Not so much.
                 </p>
@@ -127,7 +126,7 @@ export default function LoopyloopCaseStudyContent() {
 
             <div className="mt-16">
               <FeatureHeading number={2} name="Pattern Writing Tool" />
-              <div className="lg:w-[58%]">
+              <div className="md:w-[85%]">
                 <p className={pColCls} style={pStyle}>
                   Writing crochet and knitting patterns involves repetitive terminology and specialized stitch instructions.
                 </p>
@@ -151,7 +150,7 @@ export default function LoopyloopCaseStudyContent() {
               I watched friends give up on crafting before they even started.
             </h3>
             {/* The platform comparison sits beside the text, its bottom edge level with the last line of the last paragraph */}
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 lg:gap-10">
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-start gap-8 lg:gap-12">
               <div className="lg:w-[52%] min-w-0">
                 <p className={pColCls} style={pStyle}>
                   As an avid crocheter, I&rsquo;d seen friends struggle to turn inspiration into actual projects. Finding ideas was easy; sourcing materials, learning techniques, and navigating multiple platforms wasn&rsquo;t.
@@ -180,7 +179,7 @@ export default function LoopyloopCaseStudyContent() {
               Craft<span style={{ fontFamily: 'var(--font-dm-sans)' }}>-</span>store visits revealed the gap between inspiration and materials.
             </h3>
             {/* The paragraphs beside a photo from the visits (softly rounded, with a soft shadow), its bottom edge level with the last line */}
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 lg:gap-10">
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-start gap-8 lg:gap-12">
               <div className="lg:w-[52%] min-w-0">
                 <p className={pColCls} style={pStyle}>
                   The team visited JOANN and Michaels to observe shoppers and interview employees about how people sourced materials.
@@ -272,14 +271,14 @@ export default function LoopyloopCaseStudyContent() {
             <h3 className={headlineCls} style={headlineStyle}>
               Think<span style={{ fontFamily: 'var(--font-dm-sans)' }}>-</span>aloud testing revealed what both tools were missing.
             </h3>
-            <div className="lg:w-[58%]">
+            <div className="md:w-[85%]">
               <p className={pColCls} style={pStyle}>
                 Several rounds of usability testing helped refine the features shown earlier.
               </p>
             </div>
 
             <div className="mt-10">
-              <div className="lg:w-[58%] pl-4" style={{ borderLeft: '2px solid var(--text)' }}>
+              <div className="md:w-[85%] pl-4" style={{ borderLeft: '2px solid var(--text)' }}>
                 <IterationTitle>Nowhere to save the results</IterationTitle>
                 <p className={pColCls} style={pStyle}>
                   Testers liked the Material Identifier but had no way to keep the lists it generated.
@@ -303,7 +302,7 @@ export default function LoopyloopCaseStudyContent() {
             </div>
 
             <div className="mt-16">
-              <div className="lg:w-[58%] pl-4" style={{ borderLeft: '2px solid var(--text)' }}>
+              <div className="md:w-[85%] pl-4" style={{ borderLeft: '2px solid var(--text)' }}>
                 <IterationTitle>The blank-page problem</IterationTitle>
                 <p className={pColCls} style={pStyle}>
                   The Pattern Writing Tool initially left testers unsure where to begin or how to use its shortcuts.
@@ -338,13 +337,12 @@ export default function LoopyloopCaseStudyContent() {
             <h3 className={`${headlineCls} !mb-6`} style={headlineStyle}>
               Automating the tedious bits<span style={{ fontFamily: 'var(--font-dm-sans)', fontWeight: 700, letterSpacing: 0 }}>,</span> without losing the joy of making.
             </h3>
-            <FindingAccordion
-              columns={2}
-              items={[
-                { title: 'On designing from personal experience', body: 'Being a crocheter helped me articulate the problem, but it also came with assumptions. Research and participatory workshops helped validate the frustrations I\u2019d observed and uncover experiences beyond my own.' },
-                { title: 'If I revisited LoopyLoop today...', body: 'I\u2019d consider modernizing an existing platform like Ravelry instead of building from scratch. Its patterns, data, and established community offer a valuable foundation worth preserving.' },
-              ]}
-            />
+            <div className="md:max-w-[60%]">
+              <div className="mb-1 flex items-center gap-3"><PixelNumber n={1} /><h3 className="text-[17px] sm:text-[18px] lg:text-[20px] font-bold" style={{ ...pStyle, margin: 0, lineHeight: 1.25 }}>On designing from personal experience</h3></div>
+              <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed pl-[39px] mb-8" style={pStyle}>Being a crocheter helped me articulate the problem, but it also came with assumptions. Research and participatory workshops helped validate the frustrations I&rsquo;d observed and uncover experiences beyond my own.</p>
+              <div className="mb-1 flex items-center gap-3"><PixelNumber n={2} /><h3 className="text-[17px] sm:text-[18px] lg:text-[20px] font-bold" style={{ ...pStyle, margin: 0, lineHeight: 1.25 }}>If I revisited LoopyLoop today...</h3></div>
+              <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed pl-[39px]" style={{ ...pStyle, margin: 0 }}>I&rsquo;d consider modernizing an existing platform like Ravelry instead of building from scratch. Its patterns, data, and established community offer a valuable foundation worth preserving.</p>
+            </div>
           </section>
         </Reveal>
       </div>

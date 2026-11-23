@@ -13,6 +13,7 @@ import { ArrowUpRight, ChevronUp } from 'lucide-react';
 import { siftNavSections } from './SiftCaseStudyContent';
 import { frogslayerNavSections } from './FrogslayerCaseStudyContent';
 import { loopyloopNavSections } from './LoopyloopCaseStudyContent';
+import { ebookNavSections } from './EbookCaseStudyContent';
 import CaseStudyCarousel from './CaseStudyCarousel';
 import BackToWork from './BackToWork';
 
@@ -94,7 +95,7 @@ export default function LeftPanel() {
 
           {/* Case study section nav */}
           <div style={{ marginBottom: '32px' }}>
-            <CaseStudyNav key={slug} sections={slug === 'sift' ? siftNavSections : slug === 'capstone' ? frogslayerNavSections : slug === 'project-three' ? loopyloopNavSections : undefined} />
+            <CaseStudyNav key={slug} sections={slug === 'sift' ? siftNavSections : slug === 'capstone' ? frogslayerNavSections : slug === 'project-three' ? loopyloopNavSections : slug === 'project-four' ? ebookNavSections : undefined} />
           </div>
         </>
       ) : (
