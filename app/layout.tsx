@@ -17,6 +17,7 @@ import ThemeTransition from '@/components/ThemeTransition';
 import CuelumeProvider from '@/components/CuelumeProvider';
 import MobileBio from '@/components/MobileBio';
 import CaseStudyFooter from '@/components/CaseStudyFooter';
+import CoverTransitionOverlay from '@/components/CoverTransition';
 
 export const metadata: Metadata = {
   title: 'Tanya Singh — Product Designer',
@@ -42,6 +43,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           {/* Mobile/tablet fixed footer on case study pages — outside PageTransition so its transform can't move it */}
           <CaseStudyFooter />
+
+          {/* The clicked thumbnail, carried across to the case study cover */}
+          <CoverTransitionOverlay />
 
           {/* Left panel — fixed, hidden below lg */}
           <div className="hidden lg:block">
