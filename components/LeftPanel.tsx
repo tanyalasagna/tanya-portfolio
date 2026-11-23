@@ -16,6 +16,7 @@ import { loopyloopNavSections } from './LoopyloopCaseStudyContent';
 import { ebookNavSections } from './EbookCaseStudyContent';
 import CaseStudyCarousel from './CaseStudyCarousel';
 import BackToWork from './BackToWork';
+import { projects } from '@/data/projects';
 
 const externalIcon = <ArrowUpRight size={12} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '2px' }} aria-hidden />;
 
@@ -41,6 +42,19 @@ const colophonLines = [
   { before: 'Coded with ', links: [{ label: 'Claude', href: 'https://claude.ai/code' }] },
 ];
 
+// Where the bottom edge of the first thumbnail on the home page sits (in px from the top of the window), worked out from the grid's layout in
+// StaggeredGrid: one column up to 1279px wide, two columns from there. It uses the first project in the list, so a new first case study is followed automatically.
+function firstThumbnailBottom(): number | null {
+  const [w, h] = (projects[0]?.thumbnailAspect ?? '4/3').split('/').map(Number);
+  if (!w || !h) return null;
+  const vw = document.documentElement.clientWidth;
+  const available = vw - 316; // the main column sits right of the 316px panel
+  const width = vw >= 1280
+    ? (available - Math.max(76, 0.055 * vw) - 32 - 30) / 2 // two columns: left padding, right padding, 30px between
+    : Math.min(640, available - 76 - 24); // single column
+  return 88 + (width * h) / w; // 88px of top padding
+}
+
 export default function LeftPanel() {
   const pathname = usePathname();
   const isCaseStudy = pathname.startsWith('/work/');
@@ -51,17 +65,16 @@ export default function LeftPanel() {
   const colophonRef = useRef<HTMLDivElement>(null);
   const sayHiRef = useRef<HTMLDivElement>(null);
   // The gap above and below the navigation. It shrinks from the usual 48px just enough that the bottom of "Say hi" lines up with the bottom of the
-  // Sift thumbnail at the top of the page (never below 20px, never above 48px, so on very small or very large windows it simply stops short of lining up).
+  // first thumbnail at the top of the home page (never below 20px, never above 48px, so on very small or very large windows it simply stops short of lining up).
+  // The thumbnail's position is worked out from the grid's own layout rules, not measured, so the gap is the same on every page (Work, About, CV) and never jumps.
   const [blockGap, setBlockGap] = useState(48);
   useLayoutEffect(() => {
     if (isCaseStudy) return;
     const measure = () => {
-      // The grid renders a copy per layout, so take the one that is actually on screen
-      const thumb = [...document.querySelectorAll('[data-cover-thumb="sift"]')].find(el => el.getBoundingClientRect().width > 0);
       const say = sayHiRef.current;
       if (!say) return;
-      if (!thumb) { setBlockGap(48); return; } // pages without the Sift thumbnail keep the usual gap
-      const thumbBottom = thumb.getBoundingClientRect().bottom + window.scrollY;
+      const thumbBottom = firstThumbnailBottom();
+      if (thumbBottom === null) return;
       const sayBottom = say.getBoundingClientRect().bottom;
       setBlockGap(g => Math.round(Math.min(48, Math.max(20, g + (thumbBottom - sayBottom) / 2))));
     };
@@ -206,7 +219,7 @@ export default function LeftPanel() {
                   onClick={e => { e.stopPropagation(); play(colophonOpen ? 'close' : 'open', { theme: 'bubble', emphasis: 'subtle' }); setColophonOpen(v => !v); }}
                   aria-expanded={colophonOpen}
                   className="underline decoration-[1.5px] decoration-current underline-offset-[4px] text-inherit hover:no-underline px-[2px] -mx-[2px] rounded-[2px]"
-                  style={{ border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontStyle: 'normal', fontWeight: 'inherit', opacity: 0.6 }}
+                  style={{ border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontStyle: 'italic', fontWeight: 'inherit', opacity: 0.6 }}
                 >
                   View colophon
                   <ChevronUp size={15} strokeWidth={1.5} aria-hidden style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '3px', transform: colophonOpen ? 'rotate(180deg)' : 'none', transition: 'transform 200ms ease' }} />

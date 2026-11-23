@@ -168,7 +168,7 @@ export default function MobileNav() {
                     onClick={e => { e.stopPropagation(); play(colophonOpen ? 'close' : 'open', { theme: 'bubble', emphasis: 'subtle' }); setColophonOpen(v => !v); }}
                     aria-expanded={colophonOpen}
                     className="underline decoration-[1.5px] decoration-current underline-offset-[4px] text-inherit hover:no-underline px-[2px] -mx-[2px] rounded-[2px]"
-                    style={{ border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
+                    style={{ border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontStyle: 'italic', fontWeight: 'inherit' }}
                   >
                     View colophon
                     <ChevronUp size={15} strokeWidth={1.5} aria-hidden style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '3px', transform: colophonOpen ? 'rotate(180deg)' : 'none', transition: 'transform 200ms ease' }} />
