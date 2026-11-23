@@ -98,7 +98,7 @@ export default function SiftCaseStudyContent() {
                   className="text-[14px] sm:text-[15px] lg:text-[16px] hover:underline underline-offset-[3px]"
                   style={{ fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}
                 >
-                  (UNEP, 2025<ArrowUpRight size={13} strokeWidth={1.75} aria-hidden style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '1px' }} />)
+                  (UNEP, 2024<ArrowUpRight size={13} strokeWidth={1.75} aria-hidden style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '1px' }} />)
                 </a>
                 <br /><br />Most shoppers already see their own patterns. But, checkout flows are built to remove every second of doubt.
               </p>
@@ -416,15 +416,25 @@ export default function SiftCaseStudyContent() {
             What speed made possible<span style={{ fontFamily: 'var(--font-dm-sans)', fontWeight: 700, letterSpacing: 0 }}>,</span> and what still needed time.
           </h3>
 
-          {/* The four reflections, styled like the findings (number, bold title, +) but across the full width */}
-          <FindingAccordion
-            items={[
-              { title: 'Adding friction with purpose', body: 'Everything I knew about checkout was about removing friction. Sift challenged me to add it deliberately. The hardest part was finding a tone that encouraged reflection without making shoppers feel responsible for systems designed to encourage overconsumption.' },
-              { title: 'My first big project with AI', body: 'This was my first time using AI so extensively across design and development. I could build and refine interactions in minutes. Sift became a turning point in how I approach design and prototyping.' },
-              { title: 'What I\u2019d do differently', body: 'For future projects, I\u2019d give the early creative process more room: sketching on paper, experimenting with visual directions, and developing a distinct brand identity before moving into development.' },
-              { title: 'Where Sift goes next', body: 'First, making Sift a public Chrome extension that works reliably across retailers and keeps reflections private. Eventually, I\u2019d like to rethink the experience for mobile, where the same idea of a pause might need an entirely different form.' },
-            ]}
-          />
+          {/* The four reflections, styled like the findings (number, bold title, +), beside a photo from the final jury (its bottom edge level with the last block, the caption hanging below) */}
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 lg:gap-10">
+            <div className="lg:w-[58%] min-w-0">
+              <FindingAccordion
+                items={[
+                  { title: 'Adding friction with purpose', body: 'Everything I knew about checkout was about removing friction. Sift challenged me to add it deliberately. The hardest part was finding a tone that encouraged reflection without making shoppers feel responsible for systems designed to encourage overconsumption.' },
+                  { title: 'My first big project with AI', body: 'This was my first time using AI so extensively across design and development. I could build and refine interactions in minutes. Sift became a turning point in how I approach design and prototyping.' },
+                  { title: 'What I\u2019d do differently', body: 'For future projects, I\u2019d give the early creative process more room: sketching on paper, experimenting with visual directions, and developing a distinct brand identity before moving into development.' },
+                  { title: 'Where Sift goes next', body: 'First, making Sift a public Chrome extension that works reliably across retailers and keeps reflections private. Eventually, I\u2019d like to rethink the experience for mobile, where the same idea of a pause might need an entirely different form.' },
+                ]}
+              />
+            </div>
+            <figure className="m-0 w-[64%] sm:w-[46%] lg:w-[36%] lg:flex-none min-w-0 lg:relative lg:self-end">
+              <LazyImg src="/images/sift/final-jury.webp" alt="Tanya presenting at her final jury, standing in front of a slide about textile waste" style={{ display: 'block', width: '100%', height: 'auto' }} />
+              <figcaption className="mt-2 lg:absolute lg:left-0 lg:top-full lg:w-full text-[14px] sm:text-[15px] lg:text-[16px]" style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}>
+                me @ my final jury :)
+              </figcaption>
+            </figure>
+          </div>
         </section>
         </Reveal>
       </div>

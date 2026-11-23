@@ -1,10 +1,11 @@
 'use client';
 import { useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
-import { Plus } from 'lucide-react';
+import { ArrowRight, Plus } from 'lucide-react';
 import PixelNumber from './PixelNumber';
 
-type Finding = { title: string; body: string };
+// `body` is a sentence, or a list of short points shown with arrow bullets
+type Finding = { title: string; body: string | string[] };
 
 // Gray boxes that show only "number, bold heading, +" until clicked. The + turns into an x as the box opens.
 // Boxes open and close independently of each other.
@@ -58,12 +59,26 @@ export default function FindingAccordion({ items, className = '' }: { items: Fin
             >
               <div style={{ overflow: 'hidden' }}>
                 {/* Indented by the pill (27px) plus its gap (12px), so the sentence starts under the first word of the heading */}
-                <p
-                  className="pr-5 sm:pr-6 pb-5 sm:pb-6 pl-[calc(1.25rem+39px)] sm:pl-[calc(1.5rem+39px)] text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed"
-                  style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', color: 'var(--text)' }}
-                >
-                  {f.body}
-                </p>
+                {typeof f.body === 'string' ? (
+                  <p
+                    className="pr-5 sm:pr-6 pb-5 sm:pb-6 pl-[calc(1.25rem+39px)] sm:pl-[calc(1.5rem+39px)] text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed"
+                    style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', color: 'var(--text)' }}
+                  >
+                    {f.body}
+                  </p>
+                ) : (
+                  <div
+                    className="pr-5 sm:pr-6 pb-5 sm:pb-6 pl-[calc(1.25rem+39px)] sm:pl-[calc(1.5rem+39px)] text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed flex flex-col gap-3"
+                    style={{ fontFamily: 'var(--font-dm-sans)', color: 'var(--text)' }}
+                  >
+                    {f.body.map(point => (
+                      <p key={point} className="flex items-start gap-3" style={{ margin: 0 }}>
+                        <ArrowRight size={18} strokeWidth={1.5} aria-hidden className="flex-none" style={{ marginTop: '0.32em' }} />
+                        <span>{point}</span>
+                      </p>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>

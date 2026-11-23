@@ -11,7 +11,7 @@ const CIRCLE = [
   '001111100',
 ];
 
-const runs = CIRCLE.flatMap((row, y) => {
+export const circleRuns = CIRCLE.flatMap((row, y) => {
   const out: { x: number; y: number; w: number }[] = [];
   let start: number | null = null;
   for (let x = 0; x <= row.length; x++) {
@@ -22,11 +22,11 @@ const runs = CIRCLE.flatMap((row, y) => {
   return out;
 });
 
-export default function PixelNumber({ n, size = 27, color = '#F0F0EE', fill = '#383636' }: { n: number; size?: number; color?: string; fill?: string }) {
+export default function PixelNumber({ n, size = 27, color = '#F0F0EE', fill = '#383636' }: { n: number | string; size?: number; color?: string; fill?: string }) {
   return (
     <span aria-hidden className="relative inline-flex flex-none items-center justify-center" style={{ width: size, height: size }}>
       <svg viewBox="0 0 9 9" width={size} height={size} shapeRendering="crispEdges" style={{ position: 'absolute', inset: 0 }}>
-        {runs.map((r, i) => (
+        {circleRuns.map((r, i) => (
           // height 1.04 overlaps the next row slightly so no hairline seams show at fractional sizes
           <rect key={i} x={r.x} y={r.y} width={r.w} height={1.04} fill={fill} />
         ))}
