@@ -4,7 +4,7 @@ import PolaroidStack from '@/components/PolaroidStack';
 
 const headlineCls = 'text-[26px] sm:text-[30px] lg:text-[36px]';
 const headlineStyle = { fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', letterSpacing: '0.045em', lineHeight: 1.15, color: 'var(--text)' };
-const pCls = 'text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed mb-4 md:max-w-[85%]';
+const pCls = 'text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed mb-4 md:max-w-[70%]';
 const pStyle = { fontFamily: 'var(--font-dm-sans)', color: 'var(--text)' };
 
 // Small line icons in the site's style, in place of emojis, set in the line of text
@@ -34,7 +34,10 @@ export default function AboutPage() {
         Growing up, I was always tinkering with clay, fabric, and scraps. I filled dozens of journals and designed little web blogs along the way.
       </p>
       <p className={pCls} style={pStyle}>
-        Writing was something I kept coming back to. I studied English literature, psychology, and communication before working as a content writer. Inspired by the designers around me, I began taking on design projects of my own. Before I knew it, I was doing quite a bit of both.
+        Writing was something I kept coming back to. I studied English literature, psychology, and communication before working as a content writer.
+      </p>
+      <p className={pCls} style={pStyle}>
+        Inspired by the designers around me, I began taking on design projects of my own. Before I knew it, I was doing quite a bit of both.
       </p>
       <p className={pCls} style={pStyle}>
         I&rsquo;ve never liked being confined to one discipline, and I wanted to explore design beyond what I&rsquo;d learned on the job. That led me to pursue a master&rsquo;s in Human-Computer Interaction at Purdue, where I could dive deeper into design research, methods, and practice.
