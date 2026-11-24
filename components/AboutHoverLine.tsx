@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 
 const INSTAGRAM = 'https://www.instagram.com/loopieloopcrochet/';
 
@@ -12,7 +13,6 @@ const CROCHET = [
 
 const FILM = [
   { src: '/images/about/film-1.webp', alt: 'A film photo of the sun setting over the sea, with people on the rocks and wet sand' },
-  { src: '/images/about/film-2.webp', alt: 'A film photo of a beach with colourful buildings on a hill' },
   { src: '/images/about/film-3.webp', alt: 'A film photo of a palace on a lake shore, seen from the water' },
   { src: '/images/about/film-4.webp', alt: 'A film photo of a lake below a hill with a long wall, and a white pavilion' },
 ];
@@ -60,9 +60,9 @@ export default function AboutHoverLine() {
     return () => document.removeEventListener('pointerdown', away);
   }, [open]);
 
-  // On a phone the tapped phrase is highlighted while its pictures are showing
+  // The phrase is highlighted while its pictures are showing (hovered with a mouse, tapped on a phone)
   const marked = (w: Exclude<Which, null>): React.CSSProperties => ({
-    background: isTouch && open === w ? 'color-mix(in srgb, var(--ink) 13%, transparent)' : 'transparent',
+    background: open === w ? 'color-mix(in srgb, var(--ink) 13%, transparent)' : 'transparent',
     transition: 'background-color 200ms ease',
     padding: '1px 3px', margin: '-1px -3px', borderRadius: 3,
     WebkitBoxDecorationBreak: 'clone', boxDecorationBreak: 'clone',
@@ -84,8 +84,8 @@ export default function AboutHoverLine() {
     ? { opacity: 1, filter: 'blur(0px)', visibility: 'visible', pointerEvents: 'auto' }
     : { opacity: 0, filter: 'blur(6px)', visibility: 'hidden', pointerEvents: 'none' };
 
-  // Beside the text from tablet up, just underneath it on a phone
-  const place = 'top-full mt-3 left-0 md:top-1/2 md:mt-0 md:-translate-y-1/2 md:left-[calc(100%+32px)]';
+  // Beside the text on wide screens (xl and up, where there is room), just underneath it on anything narrower
+  const place = 'top-full mt-3 left-0 xl:top-1/2 xl:mt-0 xl:-translate-y-1/2 xl:left-[calc(100%+32px)]';
 
   return (
     <div ref={wrapRef} className="relative mb-4 md:max-w-[70%]">
@@ -93,16 +93,21 @@ export default function AboutHoverLine() {
         I still enjoy making things in different ways, whether that&rsquo;s designing digital experiences,{' '}
         <a
           href={INSTAGRAM} target="_blank" rel="noopener noreferrer"
-          // The underline goes away while its pictures are showing (the film phrase keeps it with a mouse, but loses it on a phone while it is highlighted)
+          // The underline goes away while the phrase is highlighted and its pictures are showing
           className={open === 'crochet' ? underline.replace('underline ', 'no-underline ') : underline}
           style={{ color: 'inherit', ...marked('crochet') }}
           onClick={e => { if (touched.current) { e.preventDefault(); if (wasOpen.current) setOpen(null); else show('crochet'); } }}
           {...trigger('crochet')}
-        >crocheting gifts for friends</a>,
+        >
+          crocheting gifts for friends
+          {/* With a mouse, a small diagonal arrow appears after "friends" while it is highlighted: this one is a link to another site */}
+          {open === 'crochet' && !isTouch && <ArrowUpRight size={12} strokeWidth={1.75} aria-hidden style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '3px' }} />}
+        </a>,
         or{' '}
         <span
-          tabIndex={0} role="button" aria-expanded={open === 'film'}
-          className={open === 'film' && isTouch ? underline.replace('underline ', 'no-underline ') : underline}
+          tabIndex={0}
+          // Not a link, so it keeps the ordinary arrow pointer on a mouse, so people can tell it can't be clicked
+          className={(open === 'film' ? underline.replace('underline ', 'no-underline ') : underline).replace('cursor-pointer', 'cursor-default')}
           style={marked('film')}
           onClick={() => { if (touched.current) { if (wasOpen.current) setOpen(null); else show('film'); } }}
           {...trigger('film')}
@@ -144,7 +149,7 @@ export default function AboutHoverLine() {
       </div>
 
       {/* The film photos, taking turns in one small print */}
-      <div className={`${place} w-[230px]`} style={{ ...popoverBase, ...shown('film') }}>
+      <div className={`${place} w-[230px] md:w-[255px]`} style={{ ...popoverBase, ...shown('film') }}>
         <div className="relative" style={{ background: '#fff', padding: 5, boxShadow: '0 2px 8px rgba(56, 54, 54, 0.14)' }}>
           <div className="relative" style={{ aspectRatio: '3 / 2' }}>
             {FILM.map((f, i) => (
