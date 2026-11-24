@@ -60,6 +60,14 @@ export default function AboutHoverLine() {
     return () => document.removeEventListener('pointerdown', away);
   }, [open]);
 
+  // On a phone the tapped phrase is highlighted while its pictures are showing
+  const marked = (w: Exclude<Which, null>): React.CSSProperties => ({
+    background: isTouch && open === w ? 'color-mix(in srgb, var(--ink) 13%, transparent)' : 'transparent',
+    transition: 'background-color 200ms ease',
+    padding: '1px 3px', margin: '-1px -3px', borderRadius: 3,
+    WebkitBoxDecorationBreak: 'clone', boxDecorationBreak: 'clone',
+  });
+
   const trigger = (w: Exclude<Which, null>) => ({
     onPointerDown: (e: React.PointerEvent) => { touched.current = e.pointerType !== 'mouse'; wasOpen.current = open === w; setIsTouch(touched.current); },
     onPointerEnter: (e: React.PointerEvent) => { if (e.pointerType === 'mouse') show(w); },
@@ -87,7 +95,7 @@ export default function AboutHoverLine() {
           href={INSTAGRAM} target="_blank" rel="noopener noreferrer"
           // With a mouse the underline goes away while its pictures are showing (the film phrase keeps its underline); on a phone it stays, as there is no hover
           className={open === 'crochet' && !isTouch ? underline.replace('underline ', 'no-underline ') : underline}
-          style={{ color: 'inherit' }}
+          style={{ color: 'inherit', ...marked('crochet') }}
           onClick={e => { if (touched.current) { e.preventDefault(); if (wasOpen.current) setOpen(null); else show('crochet'); } }}
           {...trigger('crochet')}
         >crocheting gifts for friends</a>,
@@ -95,6 +103,7 @@ export default function AboutHoverLine() {
         <span
           tabIndex={0} role="button" aria-expanded={open === 'film'}
           className={underline}
+          style={marked('film')}
           onClick={() => { if (touched.current) { if (wasOpen.current) setOpen(null); else show('film'); } }}
           {...trigger('film')}
         >capturing places I &lt;3 on film</span>.
