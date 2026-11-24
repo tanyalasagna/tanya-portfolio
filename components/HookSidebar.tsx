@@ -4,15 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, useReducedMotion } from 'framer-motion';
-import { PixelPill } from './PixelEdge';
-
-// Solid stand-in for an 8% tint of the text color, so it looks the same on the page background
-const PILL_FILL = 'color-mix(in srgb, var(--text) 8%, var(--bg))';
-// Hairline outline for the pill, in the site's default text colour
-const PILL_STROKE = 'var(--text)';
 
 const CORNER = 6;
 const DASH = 'repeating-linear-gradient(to top, transparent 0 2px, currentColor 2px 4px)';
+const SOLID = 'linear-gradient(currentColor, currentColor)';
 
 
 const navItems = [
@@ -26,11 +21,14 @@ function Rail({
   y,
   visible,
   color,
+  solid = false,
 }: {
   from?: number;
   y: number | null;
   visible: boolean;
   color: string;
+  // The line for the page you are on is solid; the one that follows the pointer is dotted
+  solid?: boolean;
 }) {
   const reduced = useReducedMotion();
   const travel = reduced
@@ -50,7 +48,7 @@ function Rail({
         initial={false}
         animate={{ top: from, height: Math.max(0, (y ?? 0) - CORNER - from) }}
         transition={travel}
-        style={{ backgroundImage: DASH }}
+        style={{ backgroundImage: solid ? SOLID : DASH }}
         className="absolute left-0.5 w-px"
       />
       <motion.svg
@@ -63,7 +61,7 @@ function Rail({
         fill="none"
         className="absolute left-0.5"
       >
-        <path d="M0.5 0a6 6 0 0 0 6 6H12" stroke="currentColor" strokeWidth="1" strokeDasharray="2 2" />
+        <path d="M0.5 0a6 6 0 0 0 6 6H12" stroke="currentColor" strokeWidth="1" strokeDasharray={solid ? undefined : '2 2'} />
       </motion.svg>
     </motion.span>
   );
@@ -93,10 +91,12 @@ export default function HookSidebar() {
   const activeY = activeIndex < 0 ? null : (centers[activeIndex] ?? null);
   const hoverY  = hoverIndex === null ? null : (centers[hoverIndex] ?? null);
 
-  const hoverFrom =
-    activeY !== null && hoverY !== null && hoverY <= activeY
-      ? Math.max(0, hoverY - CORNER)
-      : (activeY ?? 0);
+  const hoverVisible = (pointerInside || focusInside) && hoverIndex !== activeIndex;
+  // Hovering an item above the current page: the dotted line runs the whole way down from the top to that item,
+  // and the solid line of the current page only carries on from there. Hovering one below: the dotted line continues on from the solid one.
+  const hoverAbove = hoverVisible && activeY !== null && hoverY !== null && hoverY < activeY;
+  const hoverFrom = hoverAbove ? 0 : (activeY ?? 0);
+  const activeFrom = hoverAbove && hoverY !== null ? hoverY : 0;
 
   return (
     <nav aria-label="Navigation" className="flex flex-col">
@@ -118,13 +118,15 @@ export default function HookSidebar() {
         <Rail
           from={hoverFrom}
           y={hoverY}
-          visible={(pointerInside || focusInside) && hoverIndex !== activeIndex}
+          visible={hoverVisible}
           color="var(--text-muted)"
         />
         <Rail
+          from={activeFrom}
           y={activeY}
           visible={activeY !== null}
           color="var(--text)"
+          solid
         />
 
         {navItems.map((item, index) => {
@@ -161,13 +163,11 @@ export default function HookSidebar() {
                   alignItems: 'center',
                   pointerEvents: 'auto',
                   cursor: 'pointer',
-                  padding: isActive ? '2px 10px' : '2px 0',
-                  margin: isActive ? '-2px -10px' : '-2px 0',
+                  padding: '2px 0',
+                  margin: '-2px 0',
                   position: 'relative',
-                  transition: 'padding 180ms ease, margin 180ms ease',
                 }}
               >
-                <PixelPill fill={PILL_FILL} stroke={PILL_STROKE} strokeWidth={0.5} visible={isActive} />
                 <span style={{ position: 'relative' }}>{item.label}</span>
               </span>
             </Link>

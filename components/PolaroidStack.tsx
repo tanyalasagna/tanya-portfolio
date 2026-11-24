@@ -94,7 +94,7 @@ export default function PolaroidStack({ photos }: { photos: Photo[] }) {
 
       {/* Captions: the photo's number in a small pixel badge, then its caption in plain grey type. The one for the photo that is picked up appears to the right of the stack,
           in the empty space beside it (never on a photo), with its first line level with the bottom of the Polaroids. Every caption starts from the same point, so it is always
-          clear where to look. On a phone, where there is no room beside the stack, it sits centred under it instead. They take no room in the layout. */}
+          clear where to look. On a phone, where there is no room beside the stack, it sits under it instead, at the far right. They take no room in the layout. */}
       {photos.map((p, i) => {
         if (!p.caption) return null;
         const shown = hovered === i;
@@ -102,7 +102,7 @@ export default function PolaroidStack({ photos }: { photos: Photo[] }) {
           <div
             key={`caption-${p.src}`}
             aria-hidden={!shown}
-            className="pointer-events-none absolute left-0 right-0 top-full mt-3 flex justify-center md:left-[calc(58.5%+44px)] md:right-auto md:top-[calc(100%-24px)] md:mt-0 md:w-[min(260px,34%)] md:justify-start"
+            className="pointer-events-none absolute left-0 right-0 top-full mt-3 flex justify-end md:left-[calc(58.5%+44px)] md:right-auto md:top-[calc(100%-24px)] md:mt-0 md:w-[min(260px,34%)] md:justify-start"
           >
             <div
               className="flex items-start gap-2 text-[14px] sm:text-[15px] lg:text-[16px]"

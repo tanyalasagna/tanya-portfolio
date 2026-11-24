@@ -190,10 +190,11 @@ export default function CaseStudyNav({ sections = defaultSections }: { sections?
               onBlur={() => setFocusInside(false)}
               style={{
                 color: isDark ? 'var(--text)' : 'var(--text-muted)',
-                opacity: isDark ? 1 : 0.6,
                 fontSize: '17px',
                 fontFamily: 'var(--font-dm-sans)',
-                fontWeight: 300,
+                fontWeight: 400,
+                // the muted colour is nearly as dark as the text colour, so the unselected items are lightened to a visible grey
+                opacity: isDark ? 1 : 0.5,
                 transition: 'color 180ms ease, opacity 180ms ease',
                 paddingLeft: '20px',
                 paddingTop: '5px',

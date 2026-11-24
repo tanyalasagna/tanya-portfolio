@@ -195,7 +195,7 @@ export default function MobileNav() {
                 {colophonLines.map((line, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
                   <span aria-hidden style={{ flex: 'none', marginTop: '0px' }}><PixelNumber n={i + 1} size={20} /></span>
-                  <p className="text-[15px] sm:text-[16px]" style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontWeight: 300, fontStyle: 'normal', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                  <p className="text-[15px] sm:text-[16px]" style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontWeight: 400, fontStyle: 'normal', color: 'var(--text-muted)', opacity: 0.8, lineHeight: 1.4 }}>
                     {line.before}
                     {line.links.map((lk, j) => (
                       <span key={j}>
