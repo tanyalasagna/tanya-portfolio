@@ -149,7 +149,7 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
         gap: '6px',
       }}>
         <PixelPill fill="#383636" stroke="#FFFFFF" strokeWidth={0.3} />
-        <span style={{ position: 'relative' }}>Read case study</span>
+        <span style={{ position: 'relative' }}>View case study</span>
       </span>
     </div>
   );

@@ -37,7 +37,7 @@ function Tooltip({ x, y }: { x: number; y: number }) {
         alignItems: 'center', gap: '6px',
       }}>
         <PixelPill fill="var(--ink)" stroke="#FFFFFF" strokeWidth={0.3} />
-        <span style={{ position: 'relative' }}>Read case study</span>
+        <span style={{ position: 'relative' }}>View case study</span>
       </span>
     </div>,
     document.body
