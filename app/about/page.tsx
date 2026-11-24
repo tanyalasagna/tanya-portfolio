@@ -1,44 +1,48 @@
+import { Flower, GraduationCap, House } from 'lucide-react';
+import BlurInStagger from '@/components/BlurInStagger';
+import PolaroidStack from '@/components/PolaroidStack';
+
+const headlineCls = 'text-[26px] sm:text-[30px] lg:text-[36px]';
+const headlineStyle = { fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', letterSpacing: '0.045em', lineHeight: 1.15, color: 'var(--text)' };
+const pCls = 'text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed mb-4 md:max-w-[85%]';
+const pStyle = { fontFamily: 'var(--font-dm-sans)', color: 'var(--text)' };
+
+// Small line icons in the site's style, in place of emojis, set in the line of text
+const ICON = { size: 17, strokeWidth: 1.5, 'aria-hidden': true, style: { display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', margin: '0 1px' } } as const;
+
+const PHOTOS = [
+  { src: '/images/about/about-4.webp', alt: 'A film photo of a beach with colorful buildings on a hill', caption: <>Goa, India <House {...ICON} /></> },
+  { src: '/images/about/about-2.webp', alt: 'A hand holding a bouquet of crocheted daisies, tulips, and lavender', caption: <>Forever Flowers <Flower {...ICON} /></> },
+  { src: '/images/about/about-1.webp', alt: 'Smiling in a graduation gown with a clock tower and sunset sky behind', caption: <>Hi, it&rsquo;s me! <GraduationCap {...ICON} /></> },
+];
+
 export default function AboutPage() {
   return (
-    <div className="px-10 md:px-14 py-10 max-w-4xl">
-      {/* Headline */}
-      <h1
-        className="font-mono text-4xl md:text-5xl leading-tight mb-12"
-        style={{ color: 'var(--accent)' }}
-      >
-        Hi! Here&rsquo;s a little more<br />about me :)
+    // Centred in the right panel at the case-study width. The band beside the wordmark stays empty: the content starts level with the first line of the bio (88px down).
+    <div className="px-4 lg:px-5 xl:px-8 lg:w-[max(75%,min(100%,760px))] lg:mx-auto pb-32 lg:pb-20 pt-6 lg:pt-[88px]">
+      <BlurInStagger>
+      {/* Three Polaroid-style photos in a loose stack that fans out on hover */}
+      <PolaroidStack photos={PHOTOS} />
+
+      {/* Headline: Dreamer TM in ss01, with the m and e of "me" switched to ss02. No hover states. */}
+      <h1 className={`${headlineCls} mt-14 md:mt-10 mb-4`} style={{ ...headlineStyle, letterSpacing: '0.07em' }}>
+        A little about <span style={{ fontFeatureSettings: '"ss02"' }}>me</span>...
       </h1>
 
-      {/* Photo + description */}
-      <div className="flex flex-col md:flex-row gap-10 items-start">
-        {/* Photo placeholder */}
-        <div
-          className="w-56 h-72 flex-shrink-0 flex items-center justify-center font-mono text-xs"
-          style={{
-            border: '1px solid var(--divider)',
-            background: 'var(--bg-hover)',
-            color: 'var(--text-muted)',
-          }}
-        >
-          my photo
-        </div>
-
-        {/* Description */}
-        <div className="flex-1 space-y-4">
-          <p className="text-sm leading-relaxed font-mono" style={{ color: 'var(--accent)' }}>
-            description — this is a description of who I am and what I do, wooho
-          </p>
-          <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-            Hello! I&rsquo;m a designer, rooted in content strategy. I consider myself a creative
-            generalist, having moved between content and design roles, and translating across
-            disciplines.
-          </p>
-          <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-            Currently designing at daily journals, and previously in miscellaneous content and design
-            roles at Toss the Coin, Purdue UX Studios and more.
-          </p>
-        </div>
-      </div>
+      {/* Body text */}
+      <p className={pCls} style={pStyle}>
+        Growing up, I was always tinkering with clay, fabric, and scraps. I filled dozens of journals and designed little web blogs along the way.
+      </p>
+      <p className={pCls} style={pStyle}>
+        Writing was something I kept coming back to. I studied English literature, psychology, and communication before working as a content writer. Inspired by the designers around me, I began taking on design projects of my own. Before I knew it, I was doing quite a bit of both.
+      </p>
+      <p className={pCls} style={pStyle}>
+        I&rsquo;ve never liked being confined to one discipline, and I wanted to explore design beyond what I&rsquo;d learned on the job. That led me to pursue a master&rsquo;s in Human-Computer Interaction at Purdue, where I could dive deeper into design research, methods, and practice.
+      </p>
+      <p className={pCls} style={pStyle}>
+        I still enjoy making things in different ways, whether that&rsquo;s designing digital experiences, crocheting gifts for friends, or capturing places I &lt;3 on film.
+      </p>
+      </BlurInStagger>
     </div>
   );
 }

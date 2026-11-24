@@ -118,7 +118,7 @@ export default function FeatureTabs({ items }: { items: Feature[] }) {
             >
               <span
                 className="block text-[16px] lg:text-[18px] leading-snug"
-                style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'italic', fontWeight: 400 }}
+                style={{ fontFamily: 'var(--font-dm-sans)', fontStyle: 'normal', fontWeight: 400 }}
               >
                 {f.label}
               </span>

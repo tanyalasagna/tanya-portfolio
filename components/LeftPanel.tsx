@@ -8,6 +8,7 @@ import { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { play } from 'cuelume';
 import SoundToggle from './SoundToggle';
 import { gsap } from 'gsap';
+import PixelNumber from './PixelNumber';
 import { usePathname } from 'next/navigation';
 import { ArrowUpRight, ChevronUp } from 'lucide-react';
 import { siftNavSections } from './SiftCaseStudyContent';
@@ -179,12 +180,14 @@ export default function LeftPanel() {
             onClick={e => e.stopPropagation()}
             style={{ position: 'absolute', left: '20px', bottom: '95px', width: 'fit-content', background: '#F0F0EE', padding: '20px 22px', zIndex: 20, opacity: 0, pointerEvents: 'none' }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+            <div style={{ position: 'relative', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
               <span className="text-[15px] sm:text-[16px] lg:text-[17px]" style={{ fontFamily: 'var(--font-dm-sans)', color: 'var(--text)', fontStyle: 'italic', fontWeight: 400 }}>Colophon</span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {colophonLines.map((line, i) => (
-                <p key={i} style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontSize: '17px', fontWeight: 300, fontStyle: 'normal', color: 'var(--text-muted)', opacity: 0.8, lineHeight: 1.4 }}>
+                <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                  <span aria-hidden style={{ flex: 'none', marginTop: '-1px' }}><PixelNumber n={i + 1} size={20} /></span>
+                  <p style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontSize: '17px', fontWeight: 300, fontStyle: 'normal', color: 'var(--text-muted)', opacity: 0.8, lineHeight: 1.4 }}>
                   {line.before}
                   {line.links.map((lk, j) => (
                     <span key={j}>
@@ -193,6 +196,7 @@ export default function LeftPanel() {
                     </span>
                   ))}
                 </p>
+                </div>
               ))}
             </div>
           </div>

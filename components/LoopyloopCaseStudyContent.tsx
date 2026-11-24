@@ -191,7 +191,7 @@ export default function LoopyloopCaseStudyContent() {
                   <span style={{ fontWeight: 700 }}>These findings reinforced the need to bridge inspiration and material sourcing.</span> But what about the rest of the crafting journey?
                 </p>
               </div>
-              <div className="w-full max-w-[320px] lg:w-[30%] lg:max-w-none lg:flex-none min-w-0 lg:relative">
+              <div className="w-full max-w-[200px] sm:max-w-[320px] lg:w-[30%] lg:max-w-none lg:flex-none min-w-0 lg:relative">
                 <LazyImg src="/images/loopyloop/joann.webp" alt="The team smiling for a group selfie in the aisles of a JOANN craft store" style={{ display: 'block', width: '100%', height: 'auto', borderRadius: 10, boxShadow: '0 8px 24px rgba(0, 0, 0, 0.16)' }} />
                 <p className="lg:absolute lg:left-0 lg:top-full lg:w-full text-[14px] sm:text-[15px] lg:text-[16px]" style={{ margin: '8px 0 0', fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}>A visit to Joann Fabrics</p>
               </div>

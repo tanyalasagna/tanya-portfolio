@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { play } from 'cuelume';
 import { motion, AnimatePresence } from 'framer-motion';
 import { gsap } from 'gsap';
+import PixelNumber from './PixelNumber';
 import { ArrowUpRight, ChevronUp, Menu, X } from 'lucide-react';
 
 const externalIcon = <ArrowUpRight size={12} strokeWidth={1.75} style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '2px' }} aria-hidden />;
@@ -187,12 +188,14 @@ export default function MobileNav() {
               onClick={e => e.stopPropagation()}
               style={{ position: 'absolute', left: '16px', bottom: '70px', width: 'fit-content', maxWidth: 'calc(100% - 32px)', background: '#F0F0EE', padding: '16px 20px', zIndex: 20, opacity: 0, pointerEvents: 'none' }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+              <div style={{ position: 'relative', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                 <span className="text-[15px] sm:text-[16px] lg:text-[18px]" style={{ fontFamily: 'var(--font-dm-sans)', color: 'var(--text)', fontStyle: 'italic', fontWeight: 400 }}>Colophon</span>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 {colophonLines.map((line, i) => (
-                  <p key={i} className="text-[15px] sm:text-[16px]" style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontWeight: 300, fontStyle: 'normal', color: 'var(--text-muted)', lineHeight: 1.4 }}>
+                  <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                  <span aria-hidden style={{ flex: 'none', marginTop: '0px' }}><PixelNumber n={i + 1} size={20} /></span>
+                  <p className="text-[15px] sm:text-[16px]" style={{ margin: 0, fontFamily: 'var(--font-dm-sans)', fontWeight: 300, fontStyle: 'normal', color: 'var(--text-muted)', lineHeight: 1.4 }}>
                     {line.before}
                     {line.links.map((lk, j) => (
                       <span key={j}>
@@ -201,6 +204,7 @@ export default function MobileNav() {
                       </span>
                     ))}
                   </p>
+                </div>
                 ))}
               </div>
             </div>

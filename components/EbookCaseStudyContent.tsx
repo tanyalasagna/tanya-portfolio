@@ -19,9 +19,6 @@ export const ebookNavSections = [
   { id: 'reflections', label: 'Reflections' },
 ];
 
-// Dreamer has no good comma, so headlines borrow Alegreya's
-const Comma = () => <span style={{ fontFamily: 'var(--font-dm-sans)', fontWeight: 700, letterSpacing: 0 }}>,</span>;
-
 // Invisible stand-in for the divider line, so sections sit 148px apart like the other case studies
 function SectionGap() {
   return <div aria-hidden className="h-px mb-[83px]" />;
@@ -59,17 +56,26 @@ export default function EbookCaseStudyContent() {
           </section>
         </Reveal>
 
-        {/* The eBook cover on the left, the Concept text on the right (bottom-aligned with the last paragraph) */}
+        {/* The eBook cover on the left, the Concept text on the right (bottom-aligned with the last paragraph). On a phone the cover and the text sit side by side under the headline. */}
         <Reveal>
           <div className="grid grid-cols-1 md:grid-cols-[240px_calc(100%-304px)] md:gap-8 lg:grid-cols-[240px_calc(100%-368px)] lg:gap-16 items-end mb-16">
-            <div className="mb-6 md:mb-0 flex justify-start">
+            {/* Beside the text on larger screens (a phone gets its own copy, under the first sentence, below) */}
+            <div className="hidden md:flex justify-start">
               <LazyImg src="/images/ebook/cover.webp" alt="The Return on Imagination eBook cover" className="w-full max-w-[200px] sm:max-w-[240px]" style={{ height: 'auto' }} />
             </div>
             <section id="concept" className="scroll-mt-8">
               <h2 className={labelCls} style={labelStyle}>The Concept</h2>
               <h3 className={headlineCls} style={headlineStyle}>From Return on Investment to Return on Imagination.</h3>
-              <p className={pColCls} style={pStyle}>I built the eBook around a reinterpretation of ROI: Return on Imagination.</p>
-              <p className={`${pColCls} md:!mb-0`} style={pStyle}>The idea was to shift the focus from commercial returns to the possibilities that emerge when students are given room to experiment.</p>
+              {/* On a phone the cover and the body text sit side by side (the cover on the left, level with the bottom of the text); from tablet up the cover is in its own column beside the whole section */}
+              <div className="grid grid-cols-[38%_minmax(0,1fr)] gap-4 items-end md:block">
+                <div className="md:hidden">
+                  <LazyImg src="/images/ebook/cover.webp" alt="The Return on Imagination eBook cover" className="w-full" style={{ height: 'auto' }} />
+                </div>
+                <div>
+                  <p className={pColCls} style={pStyle}>I built the eBook around a reinterpretation of ROI: Return on Imagination.</p>
+                  <p className={`${pColCls} !mb-0`} style={pStyle}>The idea was to shift the focus from commercial returns to the possibilities that emerge when students are given room to experiment.</p>
+                </div>
+              </div>
             </section>
           </div>
         </Reveal>
@@ -80,7 +86,7 @@ export default function EbookCaseStudyContent() {
         <Reveal>
           <section id="work" className="scroll-mt-8 mb-16">
             <h2 className={labelCls} style={labelStyle}>The Work</h2>
-            <h3 className={headlineCls} style={headlineStyle}>Four student innovations<Comma /> one cohesive narrative.</h3>
+            <h3 className={headlineCls} style={headlineStyle}>Finding the story connecting four student innovations.</h3>
             <p className={pCls} style={pStyle}>The eBook brought together four student-led concepts spanning sustainability, metaverse experiences, check-in technology, and AI-powered housekeeping.</p>
             <p className={pCls} style={pStyle}>My challenge was to tell each story in a way that preserved the students&rsquo; original ideas while making them engaging and accessible to a wider hospitality audience.</p>
             <ImageSlot src="/images/ebook/innovations.webp" alt="Spreads from the eBook showing the four student innovations" />
