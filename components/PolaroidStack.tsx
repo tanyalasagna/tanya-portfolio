@@ -60,8 +60,9 @@ export default function PolaroidStack({ photos }: { photos: Photo[] }) {
         return (
           <div
             key={p.src}
-            className="w-[30%] md:w-[23.5%]"
-            style={{ flex: 'none', marginLeft: i === 0 ? 0 : '-6%', position: 'relative', zIndex: isHovered ? 10 : i + 1 }}
+            // On a phone the prints are bigger and overlap more (38% wide, 14% overlap), so the stack still fits; from tablet up they are 23.5% wide with a 6% overlap
+            className={`w-[38%] md:w-[23.5%] ${i === 0 ? 'ml-0' : 'ml-[-14%] md:ml-[-6%]'}`}
+            style={{ flex: 'none', position: 'relative', zIndex: isHovered ? 10 : i + 1 }}
             tabIndex={0}
             onPointerDown={e => { pointerType.current = e.pointerType; }}
             onPointerEnter={e => { if (e.pointerType === 'mouse') change(i); }}

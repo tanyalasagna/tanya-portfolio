@@ -35,6 +35,7 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
   const handleMediaReady = () => setMediaLoaded(true);
 
   const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return; // no tooltip on touch screens
     setCursor({ x: e.clientX, y: e.clientY });
   };
 
@@ -156,7 +157,7 @@ export default function CaseStudyCard({ project, padTop = 26 }: { project: Proje
 
   return (
     <>
-      {typeof document !== 'undefined' && createPortal(tooltipEl, document.body)}
+      {typeof document !== 'undefined' && (cursor.x || cursor.y) ? createPortal(tooltipEl, document.body) : null}
       <div
         style={{ position: 'relative', cursor: hovered ? 'none' : 'auto' }}
         onMouseMove={handleCardMouseMove}

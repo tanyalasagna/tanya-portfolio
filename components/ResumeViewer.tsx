@@ -62,14 +62,14 @@ export default function ResumeViewer({ src, alt, pages = 1, links = [] }: { src:
         </div>
       </div>
 
-      {/* The controls: a small pixel pill that floats at the bottom centre of the page while you scroll, and rests at its bottom edge at the end.
-          The zero-height sticky row takes no space; the pill is lifted into the page. */}
-      <div className="sticky z-10 flex items-start justify-center pointer-events-none" style={{ bottom: 24, height: 0 }}>
+      {/* The controls: a small pixel pill. On desktop (lg and up) it floats at the bottom centre of the page while you scroll, and rests at its bottom edge at the end;
+          the zero-height sticky row takes no space and the pill is lifted into the page. On a phone or tablet it does not float: it sits under the resume instead. */}
+      <div className="mt-5 flex justify-center lg:sticky lg:bottom-6 lg:z-10 lg:mt-0 lg:h-0 lg:items-start lg:pointer-events-none">
         <div
           role="group"
           aria-label="Resume viewer controls"
-          className="pointer-events-auto relative inline-flex items-center gap-1 text-[15px] sm:text-[16px]"
-          style={{ transform: 'translateY(-100%)', padding: '6px 14px', color: '#FFFFFF', fontFamily: 'var(--font-dm-sans)' }}
+          className="pointer-events-auto relative inline-flex items-center gap-1 text-[15px] sm:text-[16px] lg:-translate-y-full"
+          style={{ padding: '6px 14px', color: '#FFFFFF', fontFamily: 'var(--font-dm-sans)' }}
         >
           <PixelPill fill="#383636" stroke="#FFFFFF" strokeWidth={0.3} />
           <span className="relative px-1.5 whitespace-nowrap" style={{ opacity: 0.85 }}>{pages} {pages === 1 ? 'page' : 'pages'}</span>

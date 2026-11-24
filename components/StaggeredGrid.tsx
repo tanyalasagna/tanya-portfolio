@@ -109,6 +109,8 @@ function Thumbnail({ project }: { project: Project }) {
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    // A tap on a phone also fires mouse events, but there is no pointer to follow there, so no tooltip
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     setCursor({ x: e.clientX, y: e.clientY });
   };
 
