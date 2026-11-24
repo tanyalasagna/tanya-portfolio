@@ -34,10 +34,7 @@ export default function AboutPage() {
         Growing up, I was always tinkering with clay, fabric, and scraps. I filled dozens of journals and designed little web blogs along the way.
       </p>
       <p className={pCls} style={pStyle}>
-        Writing was something I kept coming back to. I studied English literature, psychology, and communication before working as a content writer.
-      </p>
-      <p className={pCls} style={pStyle}>
-        Inspired by the designers around me, I began taking on design projects of my own. Before I knew it, I was doing quite a bit of both.
+        I went on to study English literature, psychology, and communication before starting my career in content writing. Working alongside designers at a creative agency opened up a whole new area of interest. What began as curiosity gradually became part of my work, too.
       </p>
       <p className={pCls} style={pStyle}>
         I&rsquo;ve never liked being confined to one discipline, and I wanted to explore design beyond what I&rsquo;d learned on the job. That led me to pursue a master&rsquo;s in Human-Computer Interaction at Purdue, where I could dive deeper into design research, methods, and practice.
