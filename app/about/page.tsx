@@ -26,7 +26,7 @@ export default function AboutPage() {
       <PolaroidStack photos={PHOTOS} />
 
       {/* Headline: Dreamer TM in ss01, with the m and e of "me" switched to ss02. No hover states. */}
-      <h1 className={`${headlineCls} mt-20 md:mt-10 mb-4`} style={{ ...headlineStyle, letterSpacing: '0.07em' }}>
+      <h1 className={`${headlineCls} mt-14 md:mt-10 mb-4`} style={{ ...headlineStyle, letterSpacing: '0.07em' }}>
         A little about <span style={{ fontFeatureSettings: '"ss02"' }}>me</span>...
       </h1>
 

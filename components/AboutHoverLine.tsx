@@ -93,8 +93,8 @@ export default function AboutHoverLine() {
         I still enjoy making things in different ways, whether that&rsquo;s designing digital experiences,{' '}
         <a
           href={INSTAGRAM} target="_blank" rel="noopener noreferrer"
-          // With a mouse the underline goes away while its pictures are showing (the film phrase keeps its underline); on a phone it stays, as there is no hover
-          className={open === 'crochet' && !isTouch ? underline.replace('underline ', 'no-underline ') : underline}
+          // The underline goes away while its pictures are showing (the film phrase keeps it with a mouse, but loses it on a phone while it is highlighted)
+          className={open === 'crochet' ? underline.replace('underline ', 'no-underline ') : underline}
           style={{ color: 'inherit', ...marked('crochet') }}
           onClick={e => { if (touched.current) { e.preventDefault(); if (wasOpen.current) setOpen(null); else show('crochet'); } }}
           {...trigger('crochet')}
@@ -102,7 +102,7 @@ export default function AboutHoverLine() {
         or{' '}
         <span
           tabIndex={0} role="button" aria-expanded={open === 'film'}
-          className={underline}
+          className={open === 'film' && isTouch ? underline.replace('underline ', 'no-underline ') : underline}
           style={marked('film')}
           onClick={() => { if (touched.current) { if (wasOpen.current) setOpen(null); else show('film'); } }}
           {...trigger('film')}
