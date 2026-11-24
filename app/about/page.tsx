@@ -1,6 +1,7 @@
 import { Flower, GraduationCap, House } from 'lucide-react';
 import BlurInStagger from '@/components/BlurInStagger';
 import PolaroidStack from '@/components/PolaroidStack';
+import AboutHoverLine from '@/components/AboutHoverLine';
 
 const headlineCls = 'text-[26px] sm:text-[30px] lg:text-[36px]';
 const headlineStyle = { fontFamily: "'Dreamer TM', serif", fontFeatureSettings: '"ss01"', letterSpacing: '0.045em', lineHeight: 1.15, color: 'var(--text)' };
@@ -39,9 +40,8 @@ export default function AboutPage() {
       <p className={pCls} style={pStyle}>
         I&rsquo;ve never liked being confined to one discipline, and I wanted to explore design beyond what I&rsquo;d learned on the job. That led me to pursue a master&rsquo;s in Human-Computer Interaction at Purdue, where I could dive deeper into design research, methods, and practice.
       </p>
-      <p className={pCls} style={pStyle}>
-        I still enjoy making things in different ways, whether that&rsquo;s designing digital experiences, crocheting gifts for friends, or capturing places I &lt;3 on film.
-      </p>
+      {/* The last line: two of its phrases are underlined and reveal pictures beside the text on hover */}
+      <AboutHoverLine />
       </BlurInStagger>
     </div>
   );

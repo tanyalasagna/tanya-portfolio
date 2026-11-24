@@ -1,7 +1,7 @@
 import { ArrowUpRight, Download } from 'lucide-react';
 
 export const RESUME_PDF = '/Tanya_Singh_Resume.pdf';
-const linkCls = 'inline-flex items-center gap-1.5 text-[15px] sm:text-[16px] lg:text-[18px] underline decoration-[1.5px] decoration-current underline-offset-[4px] hover:no-underline px-[2px] -mx-[2px] rounded-[2px]';
+const linkCls = 'inline-flex items-center gap-1.5 text-[15px] sm:text-[16px] lg:text-[18px] underline decoration-dotted decoration-[1.5px] decoration-current underline-offset-[4px] hover:no-underline px-[2px] -mx-[2px] rounded-[2px]';
 const linkStyle = { color: 'var(--text)', fontFamily: 'var(--font-dm-sans)' };
 
 // The two options at the top of the CV: open the resume PDF in a new tab, or download it. The row is as wide as the page is at 100%, so they line up with its right edge.
