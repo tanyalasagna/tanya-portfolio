@@ -176,7 +176,7 @@ export default function LoopyloopCaseStudyContent() {
           <section id="research" className="scroll-mt-8 mb-16">
             <h2 className={labelCls} style={labelStyle}>Research</h2>
             <h3 className={headlineCls} style={headlineStyle}>
-              Craft<span style={{ fontFamily: 'var(--font-dm-sans)' }}>-</span>store visits revealed the gap between inspiration and materials.
+              Craft<span style={{ fontFamily: 'var(--font-dm-sans)' }}>-</span>store visits highlighted the gap between inspiration and materials.
             </h3>
             {/* The paragraphs beside a photo from the visits (softly rounded, with a soft shadow), its bottom edge level with the last line */}
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-start gap-8 lg:gap-12">
