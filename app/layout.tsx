@@ -12,10 +12,15 @@ import MobileBio from '@/components/MobileBio';
 import CaseStudyFooter from '@/components/CaseStudyFooter';
 import CoverTransitionOverlay from '@/components/CoverTransition';
 
+const TITLE = 'Tanya Singh, Product designer';
+
+// The same title in the browser tab and in the preview card when the link is shared. No preview image is set: a card that shows only this line
+// (the small favicon some apps add next to it is theirs to choose; see the note in the reply).
 export const metadata: Metadata = {
-  title: 'Tanya Singh — Product Designer',
-  description:
-    'Portfolio of Tanya Singh, product designer rooted in content strategy.',
+  title: TITLE,
+  // No description on purpose: apps that show a link card would print it under the title
+  openGraph: { type: 'website', title: TITLE },
+  twitter: { card: 'summary', title: TITLE },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
