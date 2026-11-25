@@ -163,7 +163,7 @@ export default function MobileNav() {
                 </div>
                 {/* Row 2: year + colophon */}
                 <div className="text-[15px] sm:text-[16px]" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-dm-sans)', fontStyle: 'normal', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
-                  <span>2027</span>
+                  <span>2026</span>
                   <img src="/images/Chunky Black Pixel Sparkle Icon (1).png" alt="" aria-hidden width="20" height="20" style={{ flexShrink: 0 }} />
                   <button
                     onClick={e => { e.stopPropagation(); play(colophonOpen ? 'close' : 'open', { theme: 'bubble', emphasis: 'subtle' }); setColophonOpen(v => !v); }}

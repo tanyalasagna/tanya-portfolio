@@ -206,7 +206,7 @@ export default function LeftPanel() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25px' }}>
               <div style={{ opacity: 0.6 }}><LiveClock fontSize="17px" /></div>
               <div style={{ color: 'var(--text-muted)', fontSize: '17px', fontFamily: 'var(--font-dm-sans)', fontStyle: 'normal', fontWeight: 400, display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <span style={{ opacity: 0.6 }}>2027</span>
+                <span style={{ opacity: 0.6 }}>2026</span>
                 <span
                   aria-hidden
                   style={{
