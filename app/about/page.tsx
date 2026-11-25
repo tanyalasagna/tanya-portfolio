@@ -12,9 +12,9 @@ const pStyle = { fontFamily: 'var(--font-dm-sans)', color: 'var(--text)' };
 const ICON = { size: 17, strokeWidth: 1.5, 'aria-hidden': true, style: { display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', margin: '0 1px' } } as const;
 
 const PHOTOS = [
-  { src: '/images/about/about-4.webp', alt: 'A film photo of a beach with colorful buildings on a hill', caption: <>Goa, India <House {...ICON} /></> },
-  { src: '/images/about/about-2.webp', alt: 'A hand holding a bouquet of crocheted daisies, tulips, and lavender', caption: <>Forever Flowers <Flower {...ICON} /></> },
-  { src: '/images/about/about-1.webp', alt: 'Smiling in a graduation gown with a clock tower and sunset sky behind', caption: <>Hi, it&rsquo;s me! <GraduationCap {...ICON} /></> },
+  { src: '/images/about/about-4.webp', alt: 'A film photo of a beach with colorful buildings on a hill', caption: <>Goa, India <House {...ICON} /></>, number: 3 },
+  { src: '/images/about/about-2.webp', alt: 'A hand holding a bouquet of crocheted daisies, tulips, and lavender', caption: <>Forever Flowers <Flower {...ICON} /></>, number: 2 },
+  { src: '/images/about/about-1.webp', alt: 'Smiling in a graduation gown with a clock tower and sunset sky behind', caption: <>Hi, it&rsquo;s me! <GraduationCap {...ICON} /></>, number: 1 },
 ];
 
 export default function AboutPage() {

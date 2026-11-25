@@ -5,7 +5,8 @@ import { play } from 'cuelume';
 import PixelNumber from './PixelNumber';
 
 // `caption` is optional: when a photo has one, it fades in below the photo while the photo is picked up
-type Photo = { src: string; alt: string; caption?: React.ReactNode };
+// `number` is the figure in the caption's badge; it defaults to the photo's position in the stack (1, 2, 3 from the left)
+type Photo = { src: string; alt: string; caption?: React.ReactNode; number?: number };
 
 // A slight tilt for each photo, in degrees
 const TILTS = [2, -2, 1.5];
@@ -115,7 +116,7 @@ export default function PolaroidStack({ photos }: { photos: Photo[] }) {
                 transition: shown ? 'opacity 120ms ease-out, filter 120ms ease-out' : 'opacity 80ms ease-in, filter 80ms ease-in',
               }}
             >
-              <span aria-hidden className="flex-none" style={{ marginTop: '-1px' }}><PixelNumber n={i + 1} size={20} /></span>
+              <span aria-hidden className="flex-none" style={{ marginTop: '-1px' }}><PixelNumber n={p.number ?? i + 1} size={20} /></span>
               {/* The site's black, italic. Only the text is italic; the icons are line drawings and stay upright. */}
               <span className="text-left" style={{ color: 'var(--text)', fontStyle: 'italic' }}>{p.caption}</span>
             </div>
