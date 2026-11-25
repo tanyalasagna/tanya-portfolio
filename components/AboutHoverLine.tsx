@@ -85,12 +85,13 @@ export default function AboutHoverLine() {
     : { opacity: 0, filter: 'blur(6px)', visibility: 'hidden', pointerEvents: 'none' };
 
   // Beside the text on wide screens (xl and up, where there is room), just underneath it on anything narrower
-  const place = 'top-full mt-3 left-0 xl:top-1/2 xl:mt-0 xl:-translate-y-1/2 xl:left-[calc(100%+32px)]';
+  // (beside it, the bottom of the pictures and their caption line up with the last line of the paragraph, so the caption is never pushed below the screen)
+const place = 'top-full mt-3 left-0 xl:top-auto xl:bottom-0 xl:mt-0 xl:left-[calc(100%+32px)]';
 
   return (
     <div ref={wrapRef} className="relative mb-4 md:max-w-[70%]">
       <p className="text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed" style={{ fontFamily: 'var(--font-dm-sans)', color: 'var(--text)', margin: 0 }}>
-        I still enjoy making things in different ways, whether that&rsquo;s designing digital experiences,{' '}
+        I still enjoy making things in different ways, from designing digital experiences to{' '}
         <a
           href={INSTAGRAM} target="_blank" rel="noopener noreferrer"
           // The underline goes away while the phrase is highlighted and its pictures are showing
@@ -102,8 +103,8 @@ export default function AboutHoverLine() {
           crocheting gifts for friends
           {/* With a mouse, a small diagonal arrow appears after "friends" while it is highlighted: this one is a link to another site */}
           {open === 'crochet' && !isTouch && <ArrowUpRight size={12} strokeWidth={1.75} aria-hidden style={{ display: 'inline', verticalAlign: 'middle', position: 'relative', top: '-1px', marginLeft: '3px' }} />}
-        </a>,
-        or{' '}
+        </a>{' '}
+        and{' '}
         <span
           tabIndex={0}
           // Not a link, so it keeps the ordinary arrow pointer on a mouse, so people can tell it can't be clicked
