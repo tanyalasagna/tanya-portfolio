@@ -12,9 +12,9 @@ const CROCHET = [
 ];
 
 const FILM = [
-  { src: '/images/about/film-1.webp', alt: 'A film photo of the sun setting over the sea, with people on the rocks and wet sand' },
-  { src: '/images/about/film-3.webp', alt: 'A film photo of a palace on a lake shore, seen from the water' },
-  { src: '/images/about/film-4.webp', alt: 'A film photo of a lake below a hill with a long wall, and a white pavilion' },
+  { src: '/images/about/film-clean-1.webp', alt: 'A film photo of the sun setting over the sea, with people on the rocks and wet sand' },
+  { src: '/images/about/film-clean-2.webp', alt: 'A film photo of a palace on a lake shore, seen from the water' },
+  { src: '/images/about/film-clean-3.webp', alt: 'A film photo of a lake below a hill with a long wall, and a white pavilion' },
 ];
 
 type Which = 'crochet' | 'film' | null;
