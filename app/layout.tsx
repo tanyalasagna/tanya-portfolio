@@ -14,13 +14,13 @@ import CoverTransitionOverlay from '@/components/CoverTransition';
 
 const TITLE = 'Tanya Singh, Product designer';
 
-// The same title in the browser tab and in the preview card when the link is shared. No preview image is set: a card that shows only this line
-// (the small favicon some apps add next to it is theirs to choose; see the note in the reply).
+// The same title in the browser tab and in the preview card when the link is shared. The preview image is a screenshot of the landing page
+// (app/opengraph-image.jpg and app/twitter-image.jpg, 1200x630); replace both files to update it.
 export const metadata: Metadata = {
   title: TITLE,
   // No description on purpose: apps that show a link card would print it under the title
   openGraph: { type: 'website', title: TITLE },
-  twitter: { card: 'summary', title: TITLE },
+  twitter: { card: 'summary_large_image', title: TITLE },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
