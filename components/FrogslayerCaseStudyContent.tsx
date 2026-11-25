@@ -233,7 +233,27 @@ export default function FrogslayerCaseStudyContent() {
               </p>
             </div>
 
-            <div className="mt-8 mb-6">
+            {/* On a phone the two pictures are stacked one under the other, each at the full width of the column (side by side they were far too wide for the screen) */}
+            <div className="mt-8 mb-6 flex flex-col gap-8 sm:hidden">
+              <div>
+                <div className="p-3" style={{ background: '#F0F0EE' }}>
+                  <VideoPlayer src="/images/frogslayer/card-purchase-flow.mp4" aspectRatio="1354 / 1530" fill />
+                </div>
+                <p className="mt-2 text-[14px]" style={{ margin: '8px 0 0', fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}>
+                  Interactive prototype of the card purchase flow.
+                </p>
+              </div>
+              <div>
+                <div className="p-3" style={{ background: '#F0F0EE' }}>
+                  <LazyImg src="/images/frogslayer/early-exploration.webp" alt="Early explorations" style={{ display: 'block', width: '100%', height: 'auto', aspectRatio: '1230 / 1528' }} />
+                </div>
+                <p className="mt-2 text-[14px]" style={{ margin: '8px 0 0', fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}>
+                  Exploring purchase flows and UI variations.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-8 mb-6 hidden sm:block">
               <div className="flex gap-1.5 sm:gap-2 lg:gap-3" style={{ aspectRatio: '16 / 9' }}>
                 <div className="flex-none relative p-3 sm:p-4 lg:p-6" style={{ background: '#F0F0EE' }}>
                   <p className="absolute left-0 top-full w-full mt-2 text-[14px] sm:text-[15px] lg:text-[16px]" style={{ fontStyle: 'italic', color: 'var(--text-muted)', opacity: 0.6 }}>
