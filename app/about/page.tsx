@@ -32,13 +32,13 @@ export default function AboutPage() {
 
       {/* Body text */}
       <p className={pCls} style={pStyle}>
-        Growing up, I was always tinkering with clay, fabric, and scraps. I filled dozens of journals and designed little web blogs along the way.
+        Growing up, I was always tinkering with clay, fabric, and scraps. I filled dozens of journals and designed little web blogs along the way ~
       </p>
       <p className={pCls} style={pStyle}>
-        I went on to study English literature, psychology, and communication before starting my career in content writing. Working alongside designers at a creative agency opened up a whole new area of interest. What began as curiosity gradually became part of my work, too.
+        I went on to study English literature, psychology, and communication before starting my career in content writing. Working alongside designers at a marketing agency gave me a closer look at how small, considered decisions came together to shape an experience. I grew curious about that process and gradually began taking on more design work myself.
       </p>
       <p className={pCls} style={pStyle}>
-        I&rsquo;ve never liked being confined to one discipline, and I wanted to explore design beyond what I&rsquo;d learned on the job. That led me to pursue a master&rsquo;s in Human-Computer Interaction at Purdue, where I could dive deeper into design research, methods, and practice.
+        I still love writing, and it continues to shape how I approach design. But the more design work I took on, the more I wanted to be involved in the thinking and decisions behind it. That led me to pursue a master&rsquo;s in Human-Computer Interaction at Purdue, where I could explore design research, methods, and practice more deeply.
       </p>
       {/* The last line: two of its phrases are underlined and reveal pictures beside the text on hover */}
       <AboutHoverLine />
